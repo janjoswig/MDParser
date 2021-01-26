@@ -1,0 +1,30 @@
+; Test topology containing one calcium atom
+
+#include "amber99sb-ildn.ff/forcefield.itp"
+
+[ moleculetype ]
+Ion    3
+
+[ atoms ]
+     1         C0      1     CA     CA      1     2.0000     40.080
+
+#ifdef POSRES
+#include "posres_ion.itp"
+#endif
+
+#include "amber99sb-ildn.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+#include "amber99sb-ildn.ff/ions.itp"
+
+[ system ]
+Ion not yet in water
+
+[ molecules ]
+Ion    1

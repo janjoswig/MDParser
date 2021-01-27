@@ -1,4 +1,6 @@
+from abc import ABC, abstractmethod
 from collections import OrderedDict
+from itertools import islice
 import pathlib
 import shlex
 import subprocess
@@ -68,23 +70,139 @@ class GromacsTop:
 
         return return_str
 
-    def __iter__(self):
-        for node in self._nodes.values():
-            yield node
+    def __repr__(self):
+        return f"{type(self).__name__}()"
 
-    def add(self, key, value):
+    def __iter__(self):
+        root = current = self._root
+        while current.next is not root:
+            current = current.next
+            yield current
+
+    def __reversed__(self):
+        root = current = self._root
+        while current.prev is not root:
+            current = current.prev
+            yield current
+
+    def __len__(self):
+        """Return number of nodes (may happen to be not all connected)"""
+        return self._nodes.__len__()
+
+    def __getitem__(self, query):
+        if isinstance(query, str):
+            return self._nodes.__getitem__(query)
+
+        if isinstance(query, slice):
+            return islice(self, query.start, query.stop, query.step)
+
+        if isinstance(query, int):
+            if query < 0:
+                query = (query * -1) - 1
+                iterable = reversed(self)
+            else:
+                iterable = iter(self)
+
+            try:
+                return next(islice(iterable, query, query + 1))
+            except StopIteration:
+                raise IndexError("index out of range")
+
+        raise ValueError(
+            f"items should be queried by 'str' (node key), "
+            f"or 'int' or 'slice' (node index), not {type(query).__name__!r}"
+            )
+
+    def __contains__(self, key):
+        if key in self._nodes:
+            return True
+        return False
+
+    def _check_key_and_add_new_node(self, key):
+        if key in self._nodes:
+            raise KeyError(f"node {key!r} does already exist")
+
         self._nodes[key] = node = Node()
+
+        return node
+
+    def add(self, key, value) -> None:
+
+        node = self._check_key_and_add_new_node(key)
+
         root = self._root
         last = root.prev
         node.prev, node.next, node.key, node.value = last, root, key, value
         last.next = node
         root.prev = weakref.proxy(node)
 
-    def remove(self, key):
-        node = self._nodes[key]
-        node.prev.next = node.next
-        node.next.prev = weakref.proxy(node.prev)
-        _ = self._nodes.pop(key)
+    def discard(self, key) -> None:
+        try:
+            node = self._nodes.pop(key)
+        except KeyError:
+            pass
+        else:
+            node.prev.next = node.next
+            node.next.prev = node.prev
+
+    def replace(self, key, value):
+        """Replace node with specific key while retaining key"""
+
+        old_node = self._nodes.pop(key)
+        self._nodes[key] = new_node = Node()
+        new_node.key, new_node.value = key, value
+        new_node.prev, new_node.next = old_node.prev, old_node.next
+        new_node.prev.next = new_node
+        new_node.next.prev = weakref.proxy(new_node)
+
+    def index(self, key, start=None, stop=None):
+        """Return index of node
+
+        Args:
+            key: Node key
+            start: Ignore nodes with lower index
+            stop: Ignore nodes with index greater or equal
+
+        Raises:
+            ValueError if the key is not present
+        """
+        if start is None:
+            start = AlwaysLess()
+
+        if stop is None:
+            stop = AlwayGreater()
+
+        for i, node in enumerate(self):
+            if i < start:
+                continue
+
+            if i >= stop:
+                break
+
+            if node.key == key:
+                return i
+
+        raise ValueError(f"node {key!r} is not in list")
+
+    def insert(self, index, key, value):
+        """Insert node before index"""
+
+        node = self._check_key_and_add_new_node(key)
+        prev = root = self._root
+        next_node = root.next
+
+        for i, next_node in enumerate(self):
+            if i == index:
+                prev = next_node.prev
+                break
+        else:
+            prev = root.prev
+            next_node = prev.next
+
+        node.prev, node.next = prev, next_node
+        node.key, node.value = key, value
+        prev.next = node
+        next_node.prev = weakref.proxy(node)
 
     @property
     def includes_resolved(self):
@@ -102,6 +220,24 @@ class GromacsTop:
         else:
             return True
 
+    def find_complement(self, node):
+        """Find complementary Condition node"""
+
+        root = self._root
+
+        if node.value.value is None:
+            goto = "prev"
+        else:
+            goto = "next"
+
+        current = getattr(node, goto)
+        while current is not root:
+            if isinstance(current.value, Condition):
+                if current.value.key == node.value.key:
+                    return current
+            current = getattr(current, goto)
+
+        return
 
 class GromacsTopParser:
     """Read and write GROMACS topology files"""
@@ -294,13 +430,15 @@ class GromacsTopParser:
             if line.startswith('#ifdef'):
                 line = line.lstrip('#ifdef').lstrip()
                 active_conditions[line] = True
-                top.add(f"_{len(top._nodes)}", Condition(line, True))
+                if not self.resolve_conditions:
+                    top.add(f"_{len(top._nodes)}", Condition(line, True))
                 continue
 
             if line.startswith('#ifndef'):
                 line = line.lstrip('#ifndef').lstrip()
                 active_conditions[line] = False
-                top.add(f"_{len(top._nodes)}", Condition(line, False))
+                if not self.resolve_conditions:
+                    top.add(f"_{len(top._nodes)}", Condition(line, False))
                 continue
 
             if line.startswith('#else'):
@@ -309,22 +447,31 @@ class GromacsTopParser:
                     )
                 active_conditions[last_condition] = not last_value
 
-                top.add(
-                    f"_{len(top._nodes)}",
-                    Condition(last_condition, None)
-                    )
-                top.add(
-                    f"_{len(top._nodes)}",
-                    Condition(last_condition, not last_value)
-                    )
-                continue
+                if not self.resolve_conditions:
+                    top.add(
+                        f"_{len(top._nodes)}",
+                        Condition(last_condition, None)
+                        )
+                    top.add(
+                        f"_{len(top._nodes)}",
+                        Condition(last_condition, not last_value)
+                        )
+                    continue
 
             if line.startswith('#endif'):
                 last_condition, _ = active_conditions.popitem(last=True)
-                top.add(
-                    f"_{len(top._nodes)}",
-                    Condition(last_condition, None)
-                    )
+                if not self.resolve_conditions:
+                    top.add(
+                        f"_{len(top._nodes)}",
+                        Condition(last_condition, None)
+                        )
+
+                    node = top[-1]
+                    complement = top.find_complement(node)
+                    if complement is not None:
+                        node.value.complement = ensure_proxy(complement)
+                        complement.value.complement = ensure_proxy(node)
+
                 continue
 
             if self.resolve_conditions:
@@ -380,7 +527,7 @@ class GromacsTopParser:
                 top.add(f"_{len(top._nodes)}", DefaultsEntry(*args))
                 continue
 
-            top.add(f"_{len(top._nodes)}", NodeValue(line))
+            top.add(f"_{len(top._nodes)}", GenericNodeValue(line))
 
         return top
 
@@ -388,8 +535,21 @@ class GromacsTopParser:
 class Node:
     __slots__ = ["prev", "next", "key", "value", '__weakref__']
 
+    def __repr__(self):
+        k = self.key if hasattr(self, "key") else None
+        v = self.value if hasattr(self, "value") else None
+        attr_str = f"(key={k!r}, value={v!r})"
+        return f"{type(self).__name__}{attr_str}"
 
-class NodeValue:
+
+class NodeValue(ABC):
+
+    @abstractmethod
+    def __str__(self):
+        """Return node content formatted for topology file"""
+
+
+class GenericNodeValue(NodeValue):
     """Generic fallback node value"""
     def __init__(self, value):
         self.value = value
@@ -397,8 +557,11 @@ class NodeValue:
     def __str__(self):
         return self.value.__str__()
 
+    def __repr__(self):
+        return f"{type(self).__name__}(value={self.value!r})"
 
-class Define:
+
+class Define(NodeValue):
     """#define or #undef directives"""
     def __init__(self, key, value):
         self.key = key
@@ -415,11 +578,12 @@ class Define:
             return f"#undef {self.key}"
 
 
-class Condition:
+class Condition(NodeValue):
     """#ifdef, #ifndef, #endif directives"""
-    def __init__(self, key, value):
+    def __init__(self, key, value, complement=None):
         self.key = key
         self.value = value
+        self.complement = complement
 
     def __str__(self):
         if self.value is True:
@@ -432,7 +596,7 @@ class Condition:
             return "#endif"
 
 
-class Section:
+class Section(NodeValue):
     """A regular section heading"""
     def __init__(self, title: str):
         self.title = title
@@ -441,7 +605,7 @@ class Section:
         return f"[ {self.title} ]"
 
 
-class Subsection:
+class Subsection(NodeValue):
     """A subsection heading"""
     def __init__(self, title: str):
         self.title = title
@@ -450,7 +614,7 @@ class Subsection:
         return f"[ {self.title} ]"
 
 
-class Comment:
+class Comment(NodeValue):
     """Standalone full-line comment"""
     def __init__(self, char: str, comment: str):
         self.char = char
@@ -460,7 +624,7 @@ class Comment:
         return f"{self.char} {self.comment.__str__()}"
 
 
-class Include:
+class Include(NodeValue):
     """#include directive"""
     def __init__(self, include: str):
         self.include = include
@@ -469,7 +633,7 @@ class Include:
         return f"#include {self.include.__str__()}"
 
 
-class DefaultsEntry:
+class DefaultsEntry(NodeValue):
     def __init__(
             self, nbfunc, comb_rule,
             gen_pairs="no", fudgeLJ=None, fudgeQQ=None, n=None):
@@ -494,7 +658,41 @@ class DefaultsEntry:
         return return_str
 
 
-class AtomtypesEntry:
+class AlwayGreater:
+    def __eq__(self, other):
+        return False
+
+    def __gt__(self, other):
+        return True
+
+    def __ge__(self, other):
+        return True
+
+    def __lt__(self, other):
+        return False
+
+    def __le__(self, other):
+        return False
+
+
+class AlwaysLess:
+    def __eq__(self, other):
+        return False
+
+    def __gt__(self, other):
+        return False
+
+    def __ge__(self, other):
+        return False
+
+    def __lt__(self, other):
+        return True
+
+    def __le__(self, other):
+        return True
+
+
+class AtomtypesEntry(NodeValue):
     pass
 
 
@@ -528,3 +726,13 @@ def get_gmx_dir():
             gmx_shared = pathlib.Path(line.split()[-1]) / 'share/gromacs/top'
 
     return gmx_exe, gmx_shared
+
+
+def ensure_proxy(obj):
+    """Return a proxy of an object avoiding proxy of proxy"""
+
+    if not isinstance(obj, (weakref.ProxyType, weakref.CallableProxyType)):
+        return weakref.proxy(obj)
+
+    return obj
+

@@ -3,7 +3,8 @@ import pytest
 import mdparser.topology as mdtop
 
 
-class TestGromacsTopParser:
+class TestParseTopologies:
+    """Regression tests for parsing of example topology files"""
 
     @pytest.mark.parametrize(
         "filename,parserkwargs",
@@ -16,9 +17,10 @@ class TestGromacsTopParser:
             ("ion.top", {}),
             ("ion.top", {"ignore_comments": False}),
             ("ion.top", {"include_shared": True}),
+            ("ion.top", {"include_shared": True, "resolve_conditions": False})
             ]
         )
-    def test_read(
+    def test_parse(
             self,
             datadir,
             file_regression,

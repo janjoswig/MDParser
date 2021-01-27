@@ -1236,131 +1236,115 @@ _617 [ atoms ]
 
 _618 1         C0      1     CA     CA      1     2.0000     40.080
 
-_619 #ifdef POSRES
+_619 [ moleculetype ]
 
-_620 #endif
+_620 SOL		2
 
-_621 [ moleculetype ]
+_621 [ atoms ]
 
-_622 SOL		2
+_622 1   OW          1       SOL       OW       1      -0.834    16.00000
 
-_623 [ atoms ]
+_623 2   HW          1       SOL       HW1      1       0.417     1.00800
 
-_624 1   OW          1       SOL       OW       1      -0.834    16.00000
+_624 3   HW          1       SOL       HW2      1       0.417     1.00800
 
-_625 2   HW          1       SOL       HW1      1       0.417     1.00800
+_625 [ settles ]
 
-_626 3   HW          1       SOL       HW2      1       0.417     1.00800
+_626 1       1       0.09572 0.15139
 
-_627 #ifndef FLEXIBLE
+_627 [ exclusions ]
 
-_628 [ settles ]
+_628 1	2	3
 
-_629 1       1       0.09572 0.15139
+_629 2	1	3
 
-_630 [ exclusions ]
+_630 3	1	2
 
-_631 1	2	3
+_631 [ moleculetype ]
 
-_632 2	1	3
+_632 IB+             1
 
-_633 3	1	2
+_633 [ atoms ]
 
-_634 #endif
+_634 1       IB              1       IB+             IB       1      1.00000
 
-_635 #ifdef FLEXIBLE
+_635 [ moleculetype ]
 
-_636 #endif
+_636 CA              1
 
-_637 #ifdef POSRES_WATER
+_637 [ atoms ]
 
-_638 #endif
+_638 1       C0              1       CA              CA       1      2.00000
 
 _639 [ moleculetype ]
 
-_640 IB+             1
+_640 CL              1
 
 _641 [ atoms ]
 
-_642 1       IB              1       IB+             IB       1      1.00000
+_642 1       Cl              1       CL              CL       1      -1.00000
 
 _643 [ moleculetype ]
 
-_644 CA              1
+_644 NA              1
 
 _645 [ atoms ]
 
-_646 1       C0              1       CA              CA       1      2.00000
+_646 1       Na              1       NA              NA       1      1.00000
 
 _647 [ moleculetype ]
 
-_648 CL              1
+_648 MG              1
 
 _649 [ atoms ]
 
-_650 1       Cl              1       CL              CL       1      -1.00000
+_650 1       MG              1       MG              MG       1      2.00000
 
 _651 [ moleculetype ]
 
-_652 NA              1
+_652 K               1
 
 _653 [ atoms ]
 
-_654 1       Na              1       NA              NA       1      1.00000
+_654 1       K               1       K               K        1      1.00000
 
 _655 [ moleculetype ]
 
-_656 MG              1
+_656 RB              1
 
 _657 [ atoms ]
 
-_658 1       MG              1       MG              MG       1      2.00000
+_658 1       Rb              1       RB              RB       1      1.00000
 
 _659 [ moleculetype ]
 
-_660 K               1
+_660 CS              1
 
 _661 [ atoms ]
 
-_662 1       K               1       K               K        1      1.00000
+_662 1       Cs              1       CS              CS       1      1.00000
 
 _663 [ moleculetype ]
 
-_664 RB              1
+_664 LI              1
 
 _665 [ atoms ]
 
-_666 1       Rb              1       RB              RB       1      1.00000
+_666 1       Li              1       LI              LI       1      1.00000
 
 _667 [ moleculetype ]
 
-_668 CS              1
+_668 ZN              1
 
 _669 [ atoms ]
 
-_670 1       Cs              1       CS              CS       1      1.00000
+_670 1       Zn              1       ZN              ZN       1      2.00000
 
-_671 [ moleculetype ]
+_671 [ system ]
 
-_672 LI              1
+_672 Ion not yet in water
 
-_673 [ atoms ]
+_673 [ molecules ]
 
-_674 1       Li              1       LI              LI       1      1.00000
-
-_675 [ moleculetype ]
-
-_676 ZN              1
-
-_677 [ atoms ]
-
-_678 1       Zn              1       ZN              ZN       1      2.00000
-
-_679 [ system ]
-
-_680 Ion not yet in water
-
-_681 [ molecules ]
-
-_682 Ion    1
+_674 Ion    1
 

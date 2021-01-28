@@ -376,6 +376,7 @@ class GromacsTopParser:
                 )
 
         active_section = None
+        active_supersection = None
         active_category = 0
 
         active_conditions = OrderedDict()
@@ -526,7 +527,7 @@ class GromacsTopParser:
                         "section", _new_section
                     )
                     top.add(node_key, node_value)
-                    active_section = node_value
+                    active_section = active_supersection = node_value
                     continue
 
                 if (node_type.category < active_category) and self.verbose:
@@ -540,11 +541,12 @@ class GromacsTopParser:
 
                 if issubsection:
                     node_value = node_type(
-                        section=weakref.proxy(active_section)
+                        section=weakref.proxy(active_supersection)
                         )
+                    active_section = node_value
                 else:
                     node_value = node_type()
-                    active_section = node_value
+                    active_section = active_supersection = node_value
 
                 node_key = node_value._make_node_key()
                 top.add(node_key, node_value)
@@ -557,7 +559,8 @@ class GromacsTopParser:
                 top.add(node_key, node_value)
                 continue
 
-            if active_section._node_key_name == "defaults":
+            expected_entry = f"{active_section._node_key_name}_entry"
+            if expected_entry in self.__node_value_types:
                 if not self.ignore_comments:
                     line, comment = self.split_comment(line)
                 else:
@@ -565,20 +568,7 @@ class GromacsTopParser:
 
                 args = line.split()
                 node_key, node_value = self._select_node_type(
-                    "defaults_entry", *args, comment=comment
-                )
-                top.add(node_key, node_value)
-                continue
-
-            if active_section._node_key_name == "atomtypes":
-                if not self.ignore_comments:
-                    line, comment = self.split_comment(line)
-                else:
-                    comment = None
-
-                args = line.split()
-                node_key, node_value = self._select_node_type(
-                    "atomtypes_entry", *args, comment=comment
+                    expected_entry, *args, comment=comment
                 )
                 top.add(node_key, node_value)
                 continue

@@ -1,3 +1,23 @@
+comment_1            ; ********************************************************************
+
+comment_2            ; * The original ffamber ports were written by Eric J. Sorin,        *
+
+comment_3            ; * CSU Long Beach, Dept. of Chem & Biochem, and have now been       *
+
+comment_4            ; * integrated with the standard gromacs distribution.               *
+
+comment_5            ; * (Please don't blame Eric for errors we might have introduced.)   *
+
+comment_6            ; * For the implementation/validation, please read/cite:             *
+
+comment_7            ; * Sorin & Pande (2005). Biophys. J. 88(4), 2472-2493.              *
+
+comment_8            ; * For related material and updates, please consult                 *
+
+comment_9            ; * http://chemistry.csulb.edu/ffamber/                              *
+
+comment_10           ; ********************************************************************
+
 define_1             #define _FF_AMBER
 
 define_2             #define _FF_AMBER99SBILDN
@@ -8,1167 +28,1167 @@ defaults_entry_1     1               2               yes             0.5     0.8
 
 atomtypes_1          [ atomtypes ]
 
-generic_1            Br          35      79.90    0.0000  A   3.95559e-01  1.33888e+00
+atomtypess_entry_1   Br        35  79.9     0.0    A 3.95559e-01  1.33888e+00 
 
-generic_2            C            6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_2   C         6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_3            CA           6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_3   CA        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_4            CB           6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_4   CB        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_5            CC           6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_5   CC        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_6            CK           6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_6   CK        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_7            CM           6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_7   CM        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_8            CN           6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_8   CN        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_9            CQ           6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_9   CQ        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_10           CR           6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_10  CR        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_11           CT           6      12.01    0.0000  A   3.39967e-01  4.57730e-01
+atomtypess_entry_11  CT        6   12.01    0.0    A 3.39967e-01  4.57730e-01 
 
-generic_12           CV           6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_12  CV        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_13           CW           6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_13  CW        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_14           C
+atomtypess_entry_14  C*        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_15           C0          20      40.08    0.0000  A   3.05240e-01  1.92376e+00
+atomtypess_entry_15  C0        20  40.08    0.0    A 3.05240e-01  1.92376e+00 
 
-generic_16           F            9      19.00    0.0000  A   3.11815e-01  2.55224e-01
+atomtypess_entry_16  F         9   19.0     0.0    A 3.11815e-01  2.55224e-01 
 
-generic_17           H            1       1.008   0.0000  A   1.06908e-01  6.56888e-02
+atomtypess_entry_17  H         1   1.008    0.0    A 1.06908e-01  6.56888e-02 
 
-generic_18           HC           1       1.008   0.0000  A   2.64953e-01  6.56888e-02
+atomtypess_entry_18  HC        1   1.008    0.0    A 2.64953e-01  6.56888e-02 
 
-generic_19           H1           1       1.008   0.0000  A   2.47135e-01  6.56888e-02
+atomtypess_entry_19  H1        1   1.008    0.0    A 2.47135e-01  6.56888e-02 
 
-generic_20           H2           1       1.008   0.0000  A   2.29317e-01  6.56888e-02
+atomtypess_entry_20  H2        1   1.008    0.0    A 2.29317e-01  6.56888e-02 
 
-generic_21           H3           1       1.008   0.0000  A   2.11499e-01  6.56888e-02
+atomtypess_entry_21  H3        1   1.008    0.0    A 2.11499e-01  6.56888e-02 
 
-generic_22           HA           1       1.008   0.0000  A   2.59964e-01  6.27600e-02
+atomtypess_entry_22  HA        1   1.008    0.0    A 2.59964e-01  6.27600e-02 
 
-generic_23           H4           1       1.008   0.0000  A   2.51055e-01  6.27600e-02
+atomtypess_entry_23  H4        1   1.008    0.0    A 2.51055e-01  6.27600e-02 
 
-generic_24           H5           1       1.008   0.0000  A   2.42146e-01  6.27600e-02
+atomtypess_entry_24  H5        1   1.008    0.0    A 2.42146e-01  6.27600e-02 
 
-generic_25           HO           1       1.008   0.0000  A   0.00000e+00  0.00000e+00
+atomtypess_entry_25  HO        1   1.008    0.0    A 0.00000e+00  0.00000e+00 
 
-generic_26           HS           1       1.008   0.0000  A   1.06908e-01  6.56888e-02
+atomtypess_entry_26  HS        1   1.008    0.0    A 1.06908e-01  6.56888e-02 
 
-generic_27           HW           1       1.008   0.0000  A   0.00000e+00  0.00000e+00
+atomtypess_entry_27  HW        1   1.008    0.0    A 0.00000e+00  0.00000e+00 
 
-generic_28           HP           1       1.008   0.0000  A   1.95998e-01  6.56888e-02
+atomtypess_entry_28  HP        1   1.008    0.0    A 1.95998e-01  6.56888e-02 
 
-generic_29           I           53     126.9     0.0000  A   4.18722e-01  1.67360e+00
+atomtypess_entry_29  I         53  126.9    0.0    A 4.18722e-01  1.67360e+00 
 
-generic_30           Cl          17      35.45    0.0000  A   4.40104e-01  4.18400e-01
+atomtypess_entry_30  Cl        17  35.45    0.0    A 4.40104e-01  4.18400e-01 
 
-generic_31           Na          11      22.99    0.0000  A   3.32840e-01  1.15897e-02
+atomtypess_entry_31  Na        11  22.99    0.0    A 3.32840e-01  1.15897e-02 
 
-generic_32           IB           0     131.0     0.0000  A   8.90899e-01  4.18400e-01
+atomtypess_entry_32  IB        0   131.0    0.0    A 8.90899e-01  4.18400e-01 
 
-generic_33           MG          12      24.305   0.0000  A   1.41225e-01  3.74342e+00
+atomtypess_entry_33  MG        12  24.305   0.0    A 1.41225e-01  3.74342e+00 
 
-generic_34           N            7      14.01    0.0000  A   3.25000e-01  7.11280e-01
+atomtypess_entry_34  N         7   14.01    0.0    A 3.25000e-01  7.11280e-01 
 
-generic_35           NA           7      14.01    0.0000  A   3.25000e-01  7.11280e-01
+atomtypess_entry_35  NA        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
 
-generic_36           NB           7      14.01    0.0000  A   3.25000e-01  7.11280e-01
+atomtypess_entry_36  NB        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
 
-generic_37           NC           7      14.01    0.0000  A   3.25000e-01  7.11280e-01
+atomtypess_entry_37  NC        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
 
-generic_38           N2           7      14.01    0.0000  A   3.25000e-01  7.11280e-01
+atomtypess_entry_38  N2        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
 
-generic_39           N3           7      14.01    0.0000  A   3.25000e-01  7.11280e-01
+atomtypess_entry_39  N3        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
 
-generic_40           N
+atomtypess_entry_40  N*        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
 
-generic_41           O            8      16.00    0.0000  A   2.95992e-01  8.78640e-01
+atomtypess_entry_41  O         8   16.0     0.0    A 2.95992e-01  8.78640e-01 
 
-generic_42           OW           8      16.00    0.0000  A   3.15061e-01  6.36386e-01
+atomtypess_entry_42  OW        8   16.0     0.0    A 3.15061e-01  6.36386e-01 
 
-generic_43           OH           8      16.00    0.0000  A   3.06647e-01  8.80314e-01
+atomtypess_entry_43  OH        8   16.0     0.0    A 3.06647e-01  8.80314e-01 
 
-generic_44           OS           8      16.00    0.0000  A   3.00001e-01  7.11280e-01
+atomtypess_entry_44  OS        8   16.0     0.0    A 3.00001e-01  7.11280e-01 
 
-generic_45           O2           8      16.00    0.0000  A   2.95992e-01  8.78640e-01
+atomtypess_entry_45  O2        8   16.0     0.0    A 2.95992e-01  8.78640e-01 
 
-generic_46           P           15      30.97    0.0000  A   3.74177e-01  8.36800e-01
+atomtypess_entry_46  P         15  30.97    0.0    A 3.74177e-01  8.36800e-01 
 
-generic_47           S           16      32.06    0.0000  A   3.56359e-01  1.04600e+00
+atomtypess_entry_47  S         16  32.06    0.0    A 3.56359e-01  1.04600e+00 
 
-generic_48           SH          16      32.06    0.0000  A   3.56359e-01  1.04600e+00
+atomtypess_entry_48  SH        16  32.06    0.0    A 3.56359e-01  1.04600e+00 
 
-generic_49           CU          29      63.55    0.0000  A   3.39967e-01  3.59824e-01
+atomtypess_entry_49  CU        29  63.55    0.0    A 3.39967e-01  3.59824e-01 
 
-generic_50           K           19      39.10    0.0000  A   4.73602e-01  1.37235e-03
+atomtypess_entry_50  K         19  39.1     0.0    A 4.73602e-01  1.37235e-03 
 
-generic_51           Rb          37      85.47    0.0000  A   5.26699e-01  7.11280e-04
+atomtypess_entry_51  Rb        37  85.47    0.0    A 5.26699e-01  7.11280e-04 
 
-generic_52           Cs          55     132.91    0.0000  A   6.04920e-01  3.37230e-04
+atomtypess_entry_52  Cs        55  132.91   0.0    A 6.04920e-01  3.37230e-04 
 
-generic_53           OW_spc       8      15.9994  0.0000  A   3.16557e-01  6.50629e-01
+atomtypess_entry_53  OW_spc    8   15.9994  0.0    A 3.16557e-01  6.50629e-01 
 
-generic_54           HW_spc       1       1.0080  0.0000  A   0.00000e+00  0.00000e+00
+atomtypess_entry_54  HW_spc    1   1.008    0.0    A 0.00000e+00  0.00000e+00 
 
-generic_55           Li           3       6.94    0.0000  A   2.02590e-01  7.65672e-02
+atomtypess_entry_55  Li        3   6.94     0.0    A 2.02590e-01  7.65672e-02 
 
-generic_56           Zn          30      65.4     0.0000  A   1.95998e-01  5.23000e-02
+atomtypess_entry_56  Zn        30  65.4     0.0    A 1.95998e-01  5.23000e-02 
 
-generic_57           HW_tip4pew   1       1.008   0.0000  A   0.00000e+00  0.00000e+00
+atomtypess_entry_57  HW_tip4pew 1   1.008    0.0    A 0.00000e+00  0.00000e+00 
 
-generic_58           OW_tip4pew   8      16.00    0.0000  A   3.16435e-01  6.80946e-01
+atomtypess_entry_58  OW_tip4pew 8   16.0     0.0    A 3.16435e-01  6.80946e-01 
 
-generic_59           HW_tip4p     1       1.008   0.0000  A   0.00000e+00  0.00000e+00
+atomtypess_entry_59  HW_tip4p  1   1.008    0.0    A 0.00000e+00  0.00000e+00 
 
-generic_60           OW_tip4p     8      16.00    0.0000  A   3.15365e-01  6.48520e-01
+atomtypess_entry_60  OW_tip4p  8   16.0     0.0    A 3.15365e-01  6.48520e-01 
 
-generic_61           HW_tip5p     1       1.008   0.0000  A   0.00000e+00  0.00000e+00
+atomtypess_entry_61  HW_tip5p  1   1.008    0.0    A 0.00000e+00  0.00000e+00 
 
-generic_62           OW_tip5p     8      16.00    0.0000  A   3.12000e-01  6.69440e-01
+atomtypess_entry_62  OW_tip5p  8   16.0     0.0    A 3.12000e-01  6.69440e-01 
 
-generic_63           MW           0       0.0000  0.0000  D   0.00000e+00  0.00000e+00
+atomtypess_entry_63  MW        0   0.0      0.0    D 0.00000e+00  0.00000e+00 
 
-generic_64           MCH3         0       0.0000  0.0000  A   0.00000e+00  0.00000e+00
+atomtypess_entry_64  MCH3      0   0.0      0.0    A 0.00000e+00  0.00000e+00 
 
-generic_65           MNH3         0       0.0000  0.0000  A   0.00000e+00  0.00000e+00
+atomtypess_entry_65  MNH3      0   0.0      0.0    A 0.00000e+00  0.00000e+00 
 
 bondtypes_1          [ bondtypes ]
 
-generic_66           C  C          1     0.1525   259408.0
+generic_1            C  C          1     0.1525   259408.0
 
-generic_67           C  OS         1     0.1323   376560.0
+generic_2            C  OS         1     0.1323   376560.0
 
-generic_68           C  H4         1     0.1080   307105.6
+generic_3            C  H4         1     0.1080   307105.6
 
-generic_69           C  H5         1     0.1080   307105.6
+generic_4            C  H5         1     0.1080   307105.6
 
-generic_70           CA OH         1     0.1364   376560.0
+generic_5            CA OH         1     0.1364   376560.0
 
-generic_71           CM OS         1     0.1240   401664.0
+generic_6            CM OS         1     0.1240   401664.0
 
-generic_72           Cl CT         1     0.1766   194137.6
+generic_7            Cl CT         1     0.1766   194137.6
 
-generic_73           Br CT         1     0.1944   133051.2
+generic_8            Br CT         1     0.1944   133051.2
 
-generic_74           I  CT         1     0.2166   123846.4
+generic_9            I  CT         1     0.2166   123846.4
 
-generic_75           F  CA         1     0.1359   323004.8
+generic_10           F  CA         1     0.1359   323004.8
 
-generic_76           Cl CA         1     0.1727   161502.4
+generic_11           Cl CA         1     0.1727   161502.4
 
-generic_77           I  CA         1     0.2075   143092.8
+generic_12           I  CA         1     0.2075   143092.8
 
-generic_78           Br CA         1     0.1890   143929.6
+generic_13           Br CA         1     0.1890   143929.6
 
-generic_79           OW HW         1    0.09572   462750.4
+generic_14           OW HW         1    0.09572   462750.4
 
-generic_80           HW HW         1    0.15136   462750.4
+generic_15           HW HW         1    0.15136   462750.4
 
-generic_81           C  CA         1    0.14090   392459.2
+generic_16           C  CA         1    0.14090   392459.2
 
-generic_82           C  CB         1    0.14190   374049.6
+generic_17           C  CB         1    0.14190   374049.6
 
-generic_83           C  CM         1    0.14440   343088.0
+generic_18           C  CM         1    0.14440   343088.0
 
-generic_84           C  CT         1    0.15220   265265.6
+generic_19           C  CT         1    0.15220   265265.6
 
-generic_85           C  N
+generic_20           C  N*         1    0.13830   354803.2
 
-generic_86           C  NA         1    0.13880   349782.4
+generic_21           C  NA         1    0.13880   349782.4
 
-generic_87           C  NC         1    0.13580   382417.6
+generic_22           C  NC         1    0.13580   382417.6
 
-generic_88           C  O          1    0.12290   476976.0
+generic_23           C  O          1    0.12290   476976.0
 
-generic_89           C  O2         1    0.12500   548940.8
+generic_24           C  O2         1    0.12500   548940.8
 
-generic_90           C  OH         1    0.13640   376560.0
+generic_25           C  OH         1    0.13640   376560.0
 
-generic_91           CA CA         1    0.14000   392459.2
+generic_26           CA CA         1    0.14000   392459.2
 
-generic_92           CA CB         1    0.14040   392459.2
+generic_27           CA CB         1    0.14040   392459.2
 
-generic_93           CA CM         1    0.14330   357313.6
+generic_28           CA CM         1    0.14330   357313.6
 
-generic_94           CA CT         1    0.15100   265265.6
+generic_29           CA CT         1    0.15100   265265.6
 
-generic_95           CA HA         1    0.10800   307105.6
+generic_30           CA HA         1    0.10800   307105.6
 
-generic_96           CA H4         1    0.10800   307105.6
+generic_31           CA H4         1    0.10800   307105.6
 
-generic_97           CA N2         1    0.13400   402500.8
+generic_32           CA N2         1    0.13400   402500.8
 
-generic_98           CA NA         1    0.13810   357313.6
+generic_33           CA NA         1    0.13810   357313.6
 
-generic_99           CA NC         1    0.13390   404174.4
+generic_34           CA NC         1    0.13390   404174.4
 
-generic_100          CB CB         1    0.13700   435136.0
+generic_35           CB CB         1    0.13700   435136.0
 
-generic_101          CB N
+generic_36           CB N*         1    0.13740   364844.8
 
-generic_102          CB NB         1    0.13910   346435.2
+generic_37           CB NB         1    0.13910   346435.2
 
-generic_103          CB NC         1    0.13540   385764.8
+generic_38           CB NC         1    0.13540   385764.8
 
-generic_104          CK H5         1    0.10800   307105.6
+generic_39           CK H5         1    0.10800   307105.6
 
-generic_105          CK N
+generic_40           CK N*         1    0.13710   368192.0
 
-generic_106          CK NB         1    0.13040   442667.2
+generic_41           CK NB         1    0.13040   442667.2
 
-generic_107          CM CM         1    0.13500   459403.2
+generic_42           CM CM         1    0.13500   459403.2
 
-generic_108          CM CT         1    0.15100   265265.6
+generic_43           CM CT         1    0.15100   265265.6
 
-generic_109          CM HA         1    0.10800   307105.6
+generic_44           CM HA         1    0.10800   307105.6
 
-generic_110          CM H4         1    0.10800   307105.6
+generic_45           CM H4         1    0.10800   307105.6
 
-generic_111          CM H5         1    0.10800   307105.6
+generic_46           CM H5         1    0.10800   307105.6
 
-generic_112          CM N
+generic_47           CM N*         1    0.13650   374886.4
 
-generic_113          CQ H5         1    0.10800   307105.6
+generic_48           CQ H5         1    0.10800   307105.6
 
-generic_114          CQ NC         1    0.13240   420073.6
+generic_49           CQ NC         1    0.13240   420073.6
 
-generic_115          CT CT         1    0.15260   259408.0
+generic_50           CT CT         1    0.15260   259408.0
 
-generic_116          CT HC         1    0.10900   284512.0
+generic_51           CT HC         1    0.10900   284512.0
 
-generic_117          CT H1         1    0.10900   284512.0
+generic_52           CT H1         1    0.10900   284512.0
 
-generic_118          CT H2         1    0.10900   284512.0
+generic_53           CT H2         1    0.10900   284512.0
 
-generic_119          CT H3         1    0.10900   284512.0
+generic_54           CT H3         1    0.10900   284512.0
 
-generic_120          CT HP         1    0.10900   284512.0
+generic_55           CT HP         1    0.10900   284512.0
 
-generic_121          CT N
+generic_56           CT N*         1    0.14750   282001.6
 
-generic_122          CT N2         1    0.14630   282001.6
+generic_57           CT N2         1    0.14630   282001.6
 
-generic_123          CT OH         1    0.14100   267776.0
+generic_58           CT OH         1    0.14100   267776.0
 
-generic_124          CT OS         1    0.14100   267776.0
+generic_59           CT OS         1    0.14100   267776.0
 
-generic_125          H  N2         1    0.10100   363171.2
+generic_60           H  N2         1    0.10100   363171.2
 
-generic_126          H  N
+generic_61           H  N*         1    0.10100   363171.2
 
-generic_127          H  NA         1    0.10100   363171.2
+generic_62           H  NA         1    0.10100   363171.2
 
-generic_128          HO OH         1    0.09600   462750.4
+generic_63           HO OH         1    0.09600   462750.4
 
-generic_129          HO OS         1    0.09600   462750.4
+generic_64           HO OS         1    0.09600   462750.4
 
-generic_130          O2 P          1    0.14800   439320.0
+generic_65           O2 P          1    0.14800   439320.0
 
-generic_131          OH P          1    0.16100   192464.0
+generic_66           OH P          1    0.16100   192464.0
 
-generic_132          OS P          1    0.16100   192464.0
+generic_67           OS P          1    0.16100   192464.0
 
-generic_133          C
+generic_68           C* HC         1    0.10800   307105.6
 
-generic_134          C  N          1    0.13350   410032.0
+generic_69           C  N          1    0.13350   410032.0
 
-generic_135          C
+generic_70           C* CB         1    0.14590   324678.4
 
-generic_136          C
+generic_71           C* CT         1    0.14950   265265.6
 
-generic_137          C
+generic_72           C* CW         1    0.13520   456892.8
 
-generic_138          CA CN         1    0.14000   392459.2
+generic_73           CA CN         1    0.14000   392459.2
 
-generic_139          CB CN         1    0.14190   374049.6
+generic_74           CB CN         1    0.14190   374049.6
 
-generic_140          CC CT         1    0.15040   265265.6
+generic_75           CC CT         1    0.15040   265265.6
 
-generic_141          CC CV         1    0.13750   428441.6
+generic_76           CC CV         1    0.13750   428441.6
 
-generic_142          CC CW         1    0.13710   433462.4
+generic_77           CC CW         1    0.13710   433462.4
 
-generic_143          CC NA         1    0.13850   353129.6
+generic_78           CC NA         1    0.13850   353129.6
 
-generic_144          CC NB         1    0.13940   343088.0
+generic_79           CC NB         1    0.13940   343088.0
 
-generic_145          CN NA         1    0.13800   358150.4
+generic_80           CN NA         1    0.13800   358150.4
 
-generic_146          CR H5         1    0.10800   307105.6
+generic_81           CR H5         1    0.10800   307105.6
 
-generic_147          CR NA         1    0.13430   399153.6
+generic_82           CR NA         1    0.13430   399153.6
 
-generic_148          CR NB         1    0.13350   408358.4
+generic_83           CR NB         1    0.13350   408358.4
 
-generic_149          CT N          1    0.14490   282001.6
+generic_84           CT N          1    0.14490   282001.6
 
-generic_150          CT N3         1    0.14710   307105.6
+generic_85           CT N3         1    0.14710   307105.6
 
-generic_151          CT S          1    0.18100   189953.6
+generic_86           CT S          1    0.18100   189953.6
 
-generic_152          CT SH         1    0.18100   198321.6
+generic_87           CT SH         1    0.18100   198321.6
 
-generic_153          CV H4         1    0.10800   307105.6
+generic_88           CV H4         1    0.10800   307105.6
 
-generic_154          CV NB         1    0.13940   343088.0
+generic_89           CV NB         1    0.13940   343088.0
 
-generic_155          CW H4         1    0.10800   307105.6
+generic_90           CW H4         1    0.10800   307105.6
 
-generic_156          CW NA         1    0.13810   357313.6
+generic_91           CW NA         1    0.13810   357313.6
 
-generic_157          H  N          1    0.10100   363171.2
+generic_92           H  N          1    0.10100   363171.2
 
-generic_158          H  N3         1    0.10100   363171.2
+generic_93           H  N3         1    0.10100   363171.2
 
-generic_159          HS SH         1    0.13360   229283.2
+generic_94           HS SH         1    0.13360   229283.2
 
-generic_160          S  S          1    0.20380   138908.8
+generic_95           S  S          1    0.20380   138908.8
 
-generic_161          CT F          1    0.13800   307105.6
+generic_96           CT F          1    0.13800   307105.6
 
 constrainttypes_1    [ constrainttypes ]
 
-generic_162          MCH3   CT      2    0.166426
+generic_97           MCH3   CT      2    0.166426
 
-generic_163          MCH3   S       2    0.193875
+generic_98           MCH3   S       2    0.193875
 
-generic_164          MCH3   MCH3    2    0.092163
+generic_99           MCH3   MCH3    2    0.092163
 
-generic_165          MNH3   CT      2    0.158254
+generic_100          MNH3   CT      2    0.158254
 
-generic_166          MNH3   MNH3    2    0.080229
+generic_101          MNH3   MNH3    2    0.080229
 
-generic_167          C     HO      2    0.195074
+generic_102          C     HO      2    0.195074
 
-generic_168          CA    HO      2    0.195074
+generic_103          CA    HO      2    0.195074
 
-generic_169          CT    HO      2    0.194132
+generic_104          CT    HO      2    0.194132
 
-generic_170          CT    HS      2    0.235935
+generic_105          CT    HS      2    0.235935
 
 angletypes_1         [ angletypes ]
 
-generic_171          HW  OW  HW           1   104.520    836.800
+generic_106          HW  OW  HW           1   104.520    836.800
 
-generic_172          HW  HW  OW           1   127.740      0.000
+generic_107          HW  HW  OW           1   127.740      0.000
 
-generic_173          C   C   O            1   120.000    669.440
+generic_108          C   C   O            1   120.000    669.440
 
-generic_174          C   C   OH           1   120.000    669.440
+generic_109          C   C   OH           1   120.000    669.440
 
-generic_175          CT  C   CT           1   117.000    527.184
+generic_110          CT  C   CT           1   117.000    527.184
 
-generic_176          CT  C   OS           1   115.000    669.440
+generic_111          CT  C   OS           1   115.000    669.440
 
-generic_177          O   C   OS           1   125.000    669.440
+generic_112          O   C   OS           1   125.000    669.440
 
-generic_178          H4  C   C            1   120.000    418.400
+generic_113          H4  C   C            1   120.000    418.400
 
-generic_179          H4  C   CM           1   115.000    418.400
+generic_114          H4  C   CM           1   115.000    418.400
 
-generic_180          H4  C   CT           1   115.000    418.400
+generic_115          H4  C   CT           1   115.000    418.400
 
-generic_181          H4  C   O            1   120.000    418.400
+generic_116          H4  C   O            1   120.000    418.400
 
-generic_182          H4  C   OH           1   120.000    418.400
+generic_117          H4  C   OH           1   120.000    418.400
 
-generic_183          H5  C   N            1   120.000    418.400
+generic_118          H5  C   N            1   120.000    418.400
 
-generic_184          H5  C   O            1   119.000    418.400
+generic_119          H5  C   O            1   119.000    418.400
 
-generic_185          H5  C   OH           1   107.000    418.400
+generic_120          H5  C   OH           1   107.000    418.400
 
-generic_186          H5  C   OS           1   107.000    418.400
+generic_121          H5  C   OS           1   107.000    418.400
 
-generic_187          CA  CA  OH           1   120.000    585.760
+generic_122          CA  CA  OH           1   120.000    585.760
 
-generic_188          CA  OH  HO           1   113.000    418.400
+generic_123          CA  OH  HO           1   113.000    418.400
 
-generic_189          F   CA  CA           1   121.000    585.760
+generic_124          F   CA  CA           1   121.000    585.760
 
-generic_190          Cl  CA  CA           1   118.800    585.760
+generic_125          Cl  CA  CA           1   118.800    585.760
 
-generic_191          Br  CA  CA           1   118.800    585.760
+generic_126          Br  CA  CA           1   118.800    585.760
 
-generic_192          I   CA  CA           1   118.800    585.760
+generic_127          I   CA  CA           1   118.800    585.760
 
-generic_193          CM  CM  OS           1   125.000    669.440
+generic_128          CM  CM  OS           1   125.000    669.440
 
-generic_194          H4  CM  OS           1   113.000    418.400
+generic_129          H4  CM  OS           1   113.000    418.400
 
-generic_195          HA  CM  HA           1   120.000    292.880
+generic_130          HA  CM  HA           1   120.000    292.880
 
-generic_196          HA  CM  CT           1   120.000    418.400
+generic_131          HA  CM  CT           1   120.000    418.400
 
-generic_197          H1  CT  CM           1   109.500    418.400
+generic_132          H1  CT  CM           1   109.500    418.400
 
-generic_198          HC  CT  CM           1   109.500    418.400
+generic_133          HC  CT  CM           1   109.500    418.400
 
-generic_199          C   CT  OS           1   109.500    502.080
+generic_134          C   CT  OS           1   109.500    502.080
 
-generic_200          CM  CT  CT           1   111.000    527.184
+generic_135          CM  CT  CT           1   111.000    527.184
 
-generic_201          CM  CT  OS           1   109.500    418.400
+generic_136          CM  CT  OS           1   109.500    418.400
 
-generic_202          CT  CT  CA           1   114.000    527.184
+generic_137          CT  CT  CA           1   114.000    527.184
 
-generic_203          OS  CT  OS           1   101.000    502.080
+generic_138          OS  CT  OS           1   101.000    502.080
 
-generic_204          F   CT  CT           1   109.000    418.400
+generic_139          F   CT  CT           1   109.000    418.400
 
-generic_205          F   CT  H2           1   109.500    418.400
+generic_140          F   CT  H2           1   109.500    418.400
 
-generic_206          Cl  CT  CT           1   108.500    418.400
+generic_141          Cl  CT  CT           1   108.500    418.400
 
-generic_207          Cl  CT  H1           1   108.500    418.400
+generic_142          Cl  CT  H1           1   108.500    418.400
 
-generic_208          Br  CT  CT           1   108.000    418.400
+generic_143          Br  CT  CT           1   108.000    418.400
 
-generic_209          Br  CT  H1           1   106.500    418.400
+generic_144          Br  CT  H1           1   106.500    418.400
 
-generic_210          I   CT  CT           1   106.000    418.400
+generic_145          I   CT  CT           1   106.000    418.400
 
-generic_211          CB  C   NA           1   111.300    585.760
+generic_146          CB  C   NA           1   111.300    585.760
 
-generic_212          CB  C   O            1   128.800    669.440
+generic_147          CB  C   O            1   128.800    669.440
 
-generic_213          CM  C   NA           1   114.100    585.760
+generic_148          CM  C   NA           1   114.100    585.760
 
-generic_214          CM  C   O            1   125.300    669.440
+generic_149          CM  C   O            1   125.300    669.440
 
-generic_215          CT  C   O            1   120.400    669.440
+generic_150          CT  C   O            1   120.400    669.440
 
-generic_216          CT  C   O2           1   117.000    585.760
+generic_151          CT  C   O2           1   117.000    585.760
 
-generic_217          CT  C   OH           1   110.000    669.440
+generic_152          CT  C   OH           1   110.000    669.440
 
-generic_218          N
+generic_153          N*  C   NA           1   115.400    585.760
 
-generic_219          N
+generic_154          N*  C   NC           1   118.600    585.760
 
-generic_220          N
+generic_155          N*  C   O            1   120.900    669.440
 
-generic_221          NA  C   O            1   120.600    669.440
+generic_156          NA  C   O            1   120.600    669.440
 
-generic_222          NC  C   O            1   122.500    669.440
+generic_157          NC  C   O            1   122.500    669.440
 
-generic_223          CT  C   N            1   116.600    585.760
+generic_158          CT  C   N            1   116.600    585.760
 
-generic_224          N   C   O            1   122.900    669.440
+generic_159          N   C   O            1   122.900    669.440
 
-generic_225          O   C   O            1   126.000    669.440
+generic_160          O   C   O            1   126.000    669.440
 
-generic_226          O2  C   O2           1   126.000    669.440
+generic_161          O2  C   O2           1   126.000    669.440
 
-generic_227          O   C   OH           1   120.000    669.440
+generic_162          O   C   OH           1   120.000    669.440
 
-generic_228          CA  C   CA           1   120.000    527.184
+generic_163          CA  C   CA           1   120.000    527.184
 
-generic_229          CA  C   OH           1   120.000    585.760
+generic_164          CA  C   OH           1   120.000    585.760
 
-generic_230          C   CA  CA           1   120.000    527.184
+generic_165          C   CA  CA           1   120.000    527.184
 
-generic_231          CA  CA  CA           1   120.000    527.184
+generic_166          CA  CA  CA           1   120.000    527.184
 
-generic_232          CA  CA  CB           1   120.000    527.184
+generic_167          CA  CA  CB           1   120.000    527.184
 
-generic_233          CA  CA  CT           1   120.000    585.760
+generic_168          CA  CA  CT           1   120.000    585.760
 
-generic_234          CA  CA  HA           1   120.000    418.400
+generic_169          CA  CA  HA           1   120.000    418.400
 
-generic_235          CA  CA  H4           1   120.000    418.400
+generic_170          CA  CA  H4           1   120.000    418.400
 
-generic_236          CB  CA  HA           1   120.000    418.400
+generic_171          CB  CA  HA           1   120.000    418.400
 
-generic_237          CB  CA  H4           1   120.000    418.400
+generic_172          CB  CA  H4           1   120.000    418.400
 
-generic_238          CB  CA  N2           1   123.500    585.760
+generic_173          CB  CA  N2           1   123.500    585.760
 
-generic_239          CB  CA  NC           1   117.300    585.760
+generic_174          CB  CA  NC           1   117.300    585.760
 
-generic_240          CM  CA  N2           1   120.100    585.760
+generic_175          CM  CA  N2           1   120.100    585.760
 
-generic_241          CM  CA  NC           1   121.500    585.760
+generic_176          CM  CA  NC           1   121.500    585.760
 
-generic_242          N2  CA  NA           1   116.000    585.760
+generic_177          N2  CA  NA           1   116.000    585.760
 
-generic_243          N2  CA  NC           1   119.300    585.760
+generic_178          N2  CA  NC           1   119.300    585.760
 
-generic_244          NA  CA  NC           1   123.300    585.760
+generic_179          NA  CA  NC           1   123.300    585.760
 
-generic_245          C   CA  HA           1   120.000    418.400
+generic_180          C   CA  HA           1   120.000    418.400
 
-generic_246          N2  CA  N2           1   120.000    585.760
+generic_181          N2  CA  N2           1   120.000    585.760
 
-generic_247          CN  CA  HA           1   120.000    418.400
+generic_182          CN  CA  HA           1   120.000    418.400
 
-generic_248          CA  CA  CN           1   120.000    527.184
+generic_183          CA  CA  CN           1   120.000    527.184
 
-generic_249          C   CB  CB           1   119.200    527.184
+generic_184          C   CB  CB           1   119.200    527.184
 
-generic_250          C   CB  NB           1   130.000    585.760
+generic_185          C   CB  NB           1   130.000    585.760
 
-generic_251          CA  CB  CB           1   117.300    527.184
+generic_186          CA  CB  CB           1   117.300    527.184
 
-generic_252          CA  CB  NB           1   132.400    585.760
+generic_187          CA  CB  NB           1   132.400    585.760
 
-generic_253          CB  CB  N
+generic_188          CB  CB  N*           1   106.200    585.760
 
-generic_254          CB  CB  NB           1   110.400    585.760
+generic_189          CB  CB  NB           1   110.400    585.760
 
-generic_255          CB  CB  NC           1   127.700    585.760
+generic_190          CB  CB  NC           1   127.700    585.760
 
-generic_256          N
+generic_191          N*  CB  NC           1   126.200    585.760
 
-generic_257          C
+generic_192          C*  CB  CA           1   134.900    527.184
 
-generic_258          C
+generic_193          C*  CB  CN           1   108.800    527.184
 
-generic_259          CA  CB  CN           1   116.200    527.184
+generic_194          CA  CB  CN           1   116.200    527.184
 
-generic_260          H5  CK  N
+generic_195          H5  CK  N*           1   123.050    418.400
 
-generic_261          H5  CK  NB           1   123.050    418.400
+generic_196          H5  CK  NB           1   123.050    418.400
 
-generic_262          N
+generic_197          N*  CK  NB           1   113.900    585.760
 
-generic_263          C   CM  CM           1   120.700    527.184
+generic_198          C   CM  CM           1   120.700    527.184
 
-generic_264          C   CM  CT           1   119.700    585.760
+generic_199          C   CM  CT           1   119.700    585.760
 
-generic_265          C   CM  HA           1   119.700    418.400
+generic_200          C   CM  HA           1   119.700    418.400
 
-generic_266          C   CM  H4           1   119.700    418.400
+generic_201          C   CM  H4           1   119.700    418.400
 
-generic_267          CA  CM  CM           1   117.000    527.184
+generic_202          CA  CM  CM           1   117.000    527.184
 
-generic_268          CA  CM  HA           1   123.300    418.400
+generic_203          CA  CM  HA           1   123.300    418.400
 
-generic_269          CA  CM  H4           1   123.300    418.400
+generic_204          CA  CM  H4           1   123.300    418.400
 
-generic_270          CM  CM  CT           1   119.700    585.760
+generic_205          CM  CM  CT           1   119.700    585.760
 
-generic_271          CM  CM  HA           1   119.700    418.400
+generic_206          CM  CM  HA           1   119.700    418.400
 
-generic_272          CM  CM  H4           1   119.700    418.400
+generic_207          CM  CM  H4           1   119.700    418.400
 
-generic_273          CM  CM  N
+generic_208          CM  CM  N*           1   121.200    585.760
 
-generic_274          H4  CM  N
+generic_209          H4  CM  N*           1   119.100    418.400
 
-generic_275          H5  CQ  NC           1   115.450    418.400
+generic_210          H5  CQ  NC           1   115.450    418.400
 
-generic_276          NC  CQ  NC           1   129.100    585.760
+generic_211          NC  CQ  NC           1   129.100    585.760
 
-generic_277          CM  CT  HC           1   109.500    418.400
+generic_212          CM  CT  HC           1   109.500    418.400
 
-generic_278          CT  CT  CT           1   109.500    334.720
+generic_213          CT  CT  CT           1   109.500    334.720
 
-generic_279          CT  CT  HC           1   109.500    418.400
+generic_214          CT  CT  HC           1   109.500    418.400
 
-generic_280          CT  CT  H1           1   109.500    418.400
+generic_215          CT  CT  H1           1   109.500    418.400
 
-generic_281          CT  CT  H2           1   109.500    418.400
+generic_216          CT  CT  H2           1   109.500    418.400
 
-generic_282          CT  CT  HP           1   109.500    418.400
+generic_217          CT  CT  HP           1   109.500    418.400
 
-generic_283          CT  CT  N
+generic_218          CT  CT  N*           1   109.500    418.400
 
-generic_284          CT  CT  OH           1   109.500    418.400
+generic_219          CT  CT  OH           1   109.500    418.400
 
-generic_285          CT  CT  OS           1   109.500    418.400
+generic_220          CT  CT  OS           1   109.500    418.400
 
-generic_286          HC  CT  HC           1   109.500    292.880
+generic_221          HC  CT  HC           1   109.500    292.880
 
-generic_287          H1  CT  H1           1   109.500    292.880
+generic_222          H1  CT  H1           1   109.500    292.880
 
-generic_288          HP  CT  HP           1   109.500    292.880
+generic_223          HP  CT  HP           1   109.500    292.880
 
-generic_289          H2  CT  N
+generic_224          H2  CT  N*           1   109.500    418.400
 
-generic_290          H1  CT  N
+generic_225          H1  CT  N*           1   109.500    418.400
 
-generic_291          H1  CT  OH           1   109.500    418.400
+generic_226          H1  CT  OH           1   109.500    418.400
 
-generic_292          H1  CT  OS           1   109.500    418.400
+generic_227          H1  CT  OS           1   109.500    418.400
 
-generic_293          H2  CT  OS           1   109.500    418.400
+generic_228          H2  CT  OS           1   109.500    418.400
 
-generic_294          N
+generic_229          N*  CT  OS           1   109.500    418.400
 
-generic_295          H1  CT  N            1   109.500    418.400
+generic_230          H1  CT  N            1   109.500    418.400
 
-generic_296          C   CT  H1           1   109.500    418.400
+generic_231          C   CT  H1           1   109.500    418.400
 
-generic_297          C   CT  HP           1   109.500    418.400
+generic_232          C   CT  HP           1   109.500    418.400
 
-generic_298          H1  CT  S            1   109.500    418.400
+generic_233          H1  CT  S            1   109.500    418.400
 
-generic_299          H1  CT  SH           1   109.500    418.400
+generic_234          H1  CT  SH           1   109.500    418.400
 
-generic_300          CT  CT  S            1   114.700    418.400
+generic_235          CT  CT  S            1   114.700    418.400
 
-generic_301          CT  CT  SH           1   108.600    418.400
+generic_236          CT  CT  SH           1   108.600    418.400
 
-generic_302          H2  CT  H2           1   109.500    292.880
+generic_237          H2  CT  H2           1   109.500    292.880
 
-generic_303          H1  CT  N2           1   109.500    418.400
+generic_238          H1  CT  N2           1   109.500    418.400
 
-generic_304          HP  CT  N3           1   109.500    418.400
+generic_239          HP  CT  N3           1   109.500    418.400
 
-generic_305          CA  CT  CT           1   114.000    527.184
+generic_240          CA  CT  CT           1   114.000    527.184
 
-generic_306          C   CT  HC           1   109.500    418.400
+generic_241          C   CT  HC           1   109.500    418.400
 
-generic_307          C   CT  N            1   110.100    527.184
+generic_242          C   CT  N            1   110.100    527.184
 
-generic_308          CT  CT  N2           1   111.200    669.440
+generic_243          CT  CT  N2           1   111.200    669.440
 
-generic_309          CT  CT  N            1   109.700    669.440
+generic_244          CT  CT  N            1   109.700    669.440
 
-generic_310          C   CT  CT           1   111.100    527.184
+generic_245          C   CT  CT           1   111.100    527.184
 
-generic_311          CA  CT  HC           1   109.500    418.400
+generic_246          CA  CT  HC           1   109.500    418.400
 
-generic_312          CT  CT  N3           1   111.200    669.440
+generic_247          CT  CT  N3           1   111.200    669.440
 
-generic_313          CC  CT  CT           1   113.100    527.184
+generic_248          CC  CT  CT           1   113.100    527.184
 
-generic_314          CC  CT  HC           1   109.500    418.400
+generic_249          CC  CT  HC           1   109.500    418.400
 
-generic_315          C   CT  N3           1   111.200    669.440
+generic_250          C   CT  N3           1   111.200    669.440
 
-generic_316          C
+generic_251          C*  CT  CT           1   115.600    527.184
 
-generic_317          C
+generic_252          C*  CT  HC           1   109.500    418.400
 
-generic_318          CT  CC  NA           1   120.000    585.760
+generic_253          CT  CC  NA           1   120.000    585.760
 
-generic_319          CT  CC  CV           1   120.000    585.760
+generic_254          CT  CC  CV           1   120.000    585.760
 
-generic_320          CT  CC  NB           1   120.000    585.760
+generic_255          CT  CC  NB           1   120.000    585.760
 
-generic_321          CV  CC  NA           1   120.000    585.760
+generic_256          CV  CC  NA           1   120.000    585.760
 
-generic_322          CW  CC  NA           1   120.000    585.760
+generic_257          CW  CC  NA           1   120.000    585.760
 
-generic_323          CW  CC  NB           1   120.000    585.760
+generic_258          CW  CC  NB           1   120.000    585.760
 
-generic_324          CT  CC  CW           1   120.000    585.760
+generic_259          CT  CC  CW           1   120.000    585.760
 
-generic_325          H5  CR  NA           1   120.000    418.400
+generic_260          H5  CR  NA           1   120.000    418.400
 
-generic_326          H5  CR  NB           1   120.000    418.400
+generic_261          H5  CR  NB           1   120.000    418.400
 
-generic_327          NA  CR  NA           1   120.000    585.760
+generic_262          NA  CR  NA           1   120.000    585.760
 
-generic_328          NA  CR  NB           1   120.000    585.760
+generic_263          NA  CR  NB           1   120.000    585.760
 
-generic_329          CC  CV  H4           1   120.000    418.400
+generic_264          CC  CV  H4           1   120.000    418.400
 
-generic_330          CC  CV  NB           1   120.000    585.760
+generic_265          CC  CV  NB           1   120.000    585.760
 
-generic_331          H4  CV  NB           1   120.000    418.400
+generic_266          H4  CV  NB           1   120.000    418.400
 
-generic_332          CC  CW  H4           1   120.000    418.400
+generic_267          CC  CW  H4           1   120.000    418.400
 
-generic_333          CC  CW  NA           1   120.000    585.760
+generic_268          CC  CW  NA           1   120.000    585.760
 
-generic_334          H4  CW  NA           1   120.000    418.400
+generic_269          H4  CW  NA           1   120.000    418.400
 
-generic_335          C
+generic_270          C*  CW  H4           1   120.000    418.400
 
-generic_336          C
+generic_271          C*  CW  NA           1   108.700    585.760
 
-generic_337          CT  C
+generic_272          CT  C*  CW           1   125.000    585.760
 
-generic_338          CB  C
+generic_273          CB  C*  CT           1   128.600    585.760
 
-generic_339          CB  C
+generic_274          CB  C*  CW           1   106.400    527.184
 
-generic_340          CA  CN  NA           1   132.800    585.760
+generic_275          CA  CN  NA           1   132.800    585.760
 
-generic_341          CB  CN  NA           1   104.400    585.760
+generic_276          CB  CN  NA           1   104.400    585.760
 
-generic_342          CA  CN  CB           1   122.700    527.184
+generic_277          CA  CN  CB           1   122.700    527.184
 
-generic_343          C   N   CT           1   121.900    418.400
+generic_278          C   N   CT           1   121.900    418.400
 
-generic_344          C   N   H            1   120.000    418.400
+generic_279          C   N   H            1   120.000    418.400
 
-generic_345          CT  N   H            1   118.040    418.400
+generic_280          CT  N   H            1   118.040    418.400
 
-generic_346          CT  N   CT           1   118.000    418.400
+generic_281          CT  N   CT           1   118.000    418.400
 
-generic_347          H   N   H            1   120.000    292.880
+generic_282          H   N   H            1   120.000    292.880
 
-generic_348          C   N
+generic_283          C   N*  CM           1   121.600    585.760
 
-generic_349          C   N
+generic_284          C   N*  CT           1   117.600    585.760
 
-generic_350          C   N
+generic_285          C   N*  H            1   119.200    418.400
 
-generic_351          CB  N
+generic_286          CB  N*  CK           1   105.400    585.760
 
-generic_352          CB  N
+generic_287          CB  N*  CT           1   125.800    585.760
 
-generic_353          CB  N
+generic_288          CB  N*  H            1   125.800    418.400
 
-generic_354          CK  N
+generic_289          CK  N*  CT           1   128.800    585.760
 
-generic_355          CK  N
+generic_290          CK  N*  H            1   128.800    418.400
 
-generic_356          CM  N
+generic_291          CM  N*  CT           1   121.200    585.760
 
-generic_357          CM  N
+generic_292          CM  N*  H            1   121.200    418.400
 
-generic_358          CA  N2  H            1   120.000    418.400
+generic_293          CA  N2  H            1   120.000    418.400
 
-generic_359          H   N2  H            1   120.000    292.880
+generic_294          H   N2  H            1   120.000    292.880
 
-generic_360          CT  N2  H            1   118.400    418.400
+generic_295          CT  N2  H            1   118.400    418.400
 
-generic_361          CA  N2  CT           1   123.200    418.400
+generic_296          CA  N2  CT           1   123.200    418.400
 
-generic_362          CT  N3  H            1   109.500    418.400
+generic_297          CT  N3  H            1   109.500    418.400
 
-generic_363          CT  N3  CT           1   109.500    418.400
+generic_298          CT  N3  CT           1   109.500    418.400
 
-generic_364          H   N3  H            1   109.500    292.880
+generic_299          H   N3  H            1   109.500    292.880
 
-generic_365          C   NA  C            1   126.400    585.760
+generic_300          C   NA  C            1   126.400    585.760
 
-generic_366          C   NA  CA           1   125.200    585.760
+generic_301          C   NA  CA           1   125.200    585.760
 
-generic_367          C   NA  H            1   116.800    418.400
+generic_302          C   NA  H            1   116.800    418.400
 
-generic_368          CA  NA  H            1   118.000    418.400
+generic_303          CA  NA  H            1   118.000    418.400
 
-generic_369          CC  NA  CR           1   120.000    585.760
+generic_304          CC  NA  CR           1   120.000    585.760
 
-generic_370          CC  NA  H            1   120.000    418.400
+generic_305          CC  NA  H            1   120.000    418.400
 
-generic_371          CR  NA  CW           1   120.000    585.760
+generic_306          CR  NA  CW           1   120.000    585.760
 
-generic_372          CR  NA  H            1   120.000    418.400
+generic_307          CR  NA  H            1   120.000    418.400
 
-generic_373          CW  NA  H            1   120.000    418.400
+generic_308          CW  NA  H            1   120.000    418.400
 
-generic_374          CN  NA  CW           1   111.600    585.760
+generic_309          CN  NA  CW           1   111.600    585.760
 
-generic_375          CN  NA  H            1   123.100    418.400
+generic_310          CN  NA  H            1   123.100    418.400
 
-generic_376          CB  NB  CK           1   103.800    585.760
+generic_311          CB  NB  CK           1   103.800    585.760
 
-generic_377          CC  NB  CR           1   117.000    585.760
+generic_312          CC  NB  CR           1   117.000    585.760
 
-generic_378          CR  NB  CV           1   117.000    585.760
+generic_313          CR  NB  CV           1   117.000    585.760
 
-generic_379          C   NC  CA           1   120.500    585.760
+generic_314          C   NC  CA           1   120.500    585.760
 
-generic_380          CA  NC  CB           1   112.200    585.760
+generic_315          CA  NC  CB           1   112.200    585.760
 
-generic_381          CA  NC  CQ           1   118.600    585.760
+generic_316          CA  NC  CQ           1   118.600    585.760
 
-generic_382          CB  NC  CQ           1   111.000    585.760
+generic_317          CB  NC  CQ           1   111.000    585.760
 
-generic_383          C   OH  HO           1   113.000    418.400
+generic_318          C   OH  HO           1   113.000    418.400
 
-generic_384          CT  OH  HO           1   108.500    460.240
+generic_319          CT  OH  HO           1   108.500    460.240
 
-generic_385          HO  OH  P            1   108.500    376.560
+generic_320          HO  OH  P            1   108.500    376.560
 
-generic_386          CT  OS  CT           1   109.500    502.080
+generic_321          CT  OS  CT           1   109.500    502.080
 
-generic_387          CT  OS  P            1   120.500    836.800
+generic_322          CT  OS  P            1   120.500    836.800
 
-generic_388          P   OS  P            1   120.500    836.800
+generic_323          P   OS  P            1   120.500    836.800
 
-generic_389          O2  P   OH           1   108.230    376.560
+generic_324          O2  P   OH           1   108.230    376.560
 
-generic_390          O2  P   O2           1   119.900   1171.520
+generic_325          O2  P   O2           1   119.900   1171.520
 
-generic_391          O2  P   OS           1   108.230    836.800
+generic_326          O2  P   OS           1   108.230    836.800
 
-generic_392          OH  P   OS           1   102.600    376.560
+generic_327          OH  P   OS           1   102.600    376.560
 
-generic_393          OS  P   OS           1   102.600    376.560
+generic_328          OS  P   OS           1   102.600    376.560
 
-generic_394          CT  S   CT           1    98.900    518.816
+generic_329          CT  S   CT           1    98.900    518.816
 
-generic_395          CT  S   S            1   103.700    569.024
+generic_330          CT  S   S            1   103.700    569.024
 
-generic_396          CT  SH  HS           1    96.000    359.824
+generic_331          CT  SH  HS           1    96.000    359.824
 
-generic_397          HS  SH  HS           1    92.070    292.880
+generic_332          HS  SH  HS           1    92.070    292.880
 
-generic_398          F   CT  F            1   109.100    644.336
+generic_333          F   CT  F            1   109.100    644.336
 
-generic_399          F   CT  H1           1   109.500    418.400
+generic_334          F   CT  H1           1   109.500    418.400
 
-generic_400          N   C   N            1   120.000    585.760
+generic_335          N   C   N            1   120.000    585.760
 
 dihedraltypes_1      [ dihedraltypes ]
 
-generic_401          CA  CA  CA  OH       4      180.00     4.60240     2
+generic_336          CA  CA  CA  OH       4      180.00     4.60240     2
 
-generic_402          H5  O   C   OH       4      180.00     4.60240     2
+generic_337          H5  O   C   OH       4      180.00     4.60240     2
 
-generic_403          H5  O   C   OS       4      180.00     4.60240     2
+generic_338          H5  O   C   OS       4      180.00     4.60240     2
 
-generic_404          CM  CT  CM  HA       4      180.00     4.60240     2
+generic_339          CM  CT  CM  HA       4      180.00     4.60240     2
 
-generic_405          CA  CA  CA  Br       4      180.00     4.60240     2
+generic_340          CA  CA  CA  Br       4      180.00     4.60240     2
 
-generic_406          CM  H4  C   O        4      180.00     4.60240     2
+generic_341          CM  H4  C   O        4      180.00     4.60240     2
 
-generic_407          C   CT  N   H        4      180.00     4.60240     2
+generic_342          C   CT  N   H        4      180.00     4.60240     2
 
-generic_408          C   CT  N   O        4      180.00     4.60240     2
+generic_343          C   CT  N   O        4      180.00     4.60240     2
 
-generic_409          CB  CK  N
+generic_344          CB  CK  N*  CT       4      180.00     4.18400     2
 
-generic_410          CK  CB	N
+generic_345          CK  CB	N*  CT	     4      180.00     4.18400     2
 
-generic_411          C   CM  N
+generic_346          C   CM  N*  CT       4      180.00     4.18400     2
 
-generic_412          CT  N
+generic_347          CT  N*  C   CM       4      180.00     4.18400     2
 
-generic_413          CM  C   CM  CT       4      180.00     4.60240     2
+generic_348          CM  C   CM  CT       4      180.00     4.60240     2
 
-generic_414          CT  O   C   OH       4      180.00    43.93200     2
+generic_349          CT  O   C   OH       4      180.00    43.93200     2
 
-generic_415          NA  CV  CC  CT       4      180.00     4.60240     2
+generic_350          NA  CV  CC  CT       4      180.00     4.60240     2
 
-generic_416          NB  CW  CC  CT       4      180.00     4.60240     2
+generic_351          NB  CW  CC  CT       4      180.00     4.60240     2
 
-generic_417          NA  CW  CC  CT       4      180.00     4.60240     2
+generic_352          NA  CW  CC  CT       4      180.00     4.60240     2
 
-generic_418          CW  CB  C
+generic_353          CW  CB  C*  CT       4      180.00     4.60240     2
 
-generic_419          CA  CA  CA  CT       4      180.00     4.60240     2
+generic_354          CA  CA  CA  CT       4      180.00     4.60240     2
 
-generic_420          C   CM  CM  CT       4      180.00     4.60240     2
+generic_355          C   CM  CM  CT       4      180.00     4.60240     2
 
-generic_421          NC  CM  CA  N2       4      180.00     4.60240     2
+generic_356          NC  CM  CA  N2       4      180.00     4.60240     2
 
-generic_422          CB  NC  CA  N2       4      180.00     4.60240     2
+generic_357          CB  NC  CA  N2       4      180.00     4.60240     2
 
-generic_423          NA  NC  CA  N2       4      180.00     4.60240     2
+generic_358          NA  NC  CA  N2       4      180.00     4.60240     2
 
-generic_424          CA  CA  C   OH       4      180.00     4.60240     2
+generic_359          CA  CA  C   OH       4      180.00     4.60240     2
 
-generic_425          CT  CV  CC  NA       4      180.00     4.60240     2
+generic_360          CT  CV  CC  NA       4      180.00     4.60240     2
 
-generic_426          CT  CW  CC  NB       4      180.00     4.60240     2
+generic_361          CT  CW  CC  NB       4      180.00     4.60240     2
 
-generic_427          CT  CW  CC  NA       4      180.00     4.60240     2
+generic_362          CT  CW  CC  NA       4      180.00     4.60240     2
 
-generic_428          CB  CT  C
+generic_363          CB  CT  C*  CW       4      180.00     4.60240     2
 
-generic_429          CM  N2  CA  NC       4      180.00     4.60240     2
+generic_364          CM  N2  CA  NC       4      180.00     4.60240     2
 
-generic_430          CB  N2  CA  NC       4      180.00     4.60240     2
+generic_365          CB  N2  CA  NC       4      180.00     4.60240     2
 
-generic_431          N2  NA  CA  NC       4      180.00     4.60240     2
+generic_366          N2  NA  CA  NC       4      180.00     4.60240     2
 
-generic_432          N   N   C   O        4      180.00    43.93200     2
+generic_367          N   N   C   O        4      180.00    43.93200     2
 
-generic_433          X   O2  C   O2       4      180.00    43.93200     2
+generic_368          X   O2  C   O2       4      180.00    43.93200     2
 
-generic_434          X   N2  CA  N2       4      180.00    43.93200     2
+generic_369          X   N2  CA  N2       4      180.00    43.93200     2
 
-generic_435          X   CT  N   CT       4      180.00     4.18400     2
+generic_370          X   CT  N   CT       4      180.00     4.18400     2
 
-generic_436          X   X   C   O        4      180.00    43.93200     2
+generic_371          X   X   C   O        4      180.00    43.93200     2
 
-generic_437          X   X   N   H        4      180.00     4.18400     2
+generic_372          X   X   N   H        4      180.00     4.18400     2
 
-generic_438          X   X   N2  H        4      180.00     4.18400     2
+generic_373          X   X   N2  H        4      180.00     4.18400     2
 
-generic_439          X   X   NA  H        4      180.00     4.18400     2
+generic_374          X   X   NA  H        4      180.00     4.18400     2
 
-generic_440          X   X   CA  HA       4      180.00     4.60240     2
+generic_375          X   X   CA  HA       4      180.00     4.60240     2
 
-generic_441          X   X   CW  H4       4      180.00     4.60240     2
+generic_376          X   X   CW  H4       4      180.00     4.60240     2
 
-generic_442          X   X   CR  H5       4      180.00     4.60240     2
+generic_377          X   X   CR  H5       4      180.00     4.60240     2
 
-generic_443          X   X   CV  H4       4      180.00     4.60240     2
+generic_378          X   X   CV  H4       4      180.00     4.60240     2
 
-generic_444          X   X   CQ  H5       4      180.00     4.60240     2
+generic_379          X   X   CQ  H5       4      180.00     4.60240     2
 
-generic_445          X   X   CK  H5       4      180.00     4.60240     2
+generic_380          X   X   CK  H5       4      180.00     4.60240     2
 
-generic_446          X   X   CM  H4       4      180.00     4.60240     2
+generic_381          X   X   CM  H4       4      180.00     4.60240     2
 
-generic_447          X   X   CM  HA       4      180.00     4.60240     2
+generic_382          X   X   CM  HA       4      180.00     4.60240     2
 
-generic_448          X   X   CA  H4       4      180.00     4.60240     2
+generic_383          X   X   CA  H4       4      180.00     4.60240     2
 
-generic_449          X   X   CA  H5       4      180.00     4.60240     2
+generic_384          X   X   CA  H5       4      180.00     4.60240     2
 
 dihedraltypes_2      [ dihedraltypes ]
 
-generic_450          CT  CT  OS  CT    9       0.0      1.60247     3
+generic_385          CT  CT  OS  CT    9       0.0      1.60247     3
 
-generic_451          CT  CT  OS  CT    9     180.0      0.41840     2
+generic_386          CT  CT  OS  CT    9     180.0      0.41840     2
 
-generic_452          C   N   CT  C     9       0.0      1.12968     2
+generic_387          C   N   CT  C     9       0.0      1.12968     2
 
-generic_453          C   N   CT  C     9       0.0      1.75728     3
+generic_388          C   N   CT  C     9       0.0      1.75728     3
 
-generic_454          N   CT  C   N     9     180.0      1.88280     1
+generic_389          N   CT  C   N     9     180.0      1.88280     1
 
-generic_455          N   CT  C   N     9     180.0      6.61072     2
+generic_390          N   CT  C   N     9     180.0      6.61072     2
 
-generic_456          N   CT  C   N     9     180.0      2.30120     3
+generic_391          N   CT  C   N     9     180.0      2.30120     3
 
-generic_457          CT  CT  N   C     9       0.0      8.36800     1
+generic_392          CT  CT  N   C     9       0.0      8.36800     1
 
-generic_458          CT  CT  N   C     9       0.0      8.36800     2
+generic_393          CT  CT  N   C     9       0.0      8.36800     2
 
-generic_459          CT  CT  N   C     9       0.0      1.67360     3
+generic_394          CT  CT  N   C     9       0.0      1.67360     3
 
-generic_460          CT  CT  C   N     9       0.0      0.83680     1
+generic_395          CT  CT  C   N     9       0.0      0.83680     1
 
-generic_461          CT  CT  C   N     9       0.0      0.83680     2
+generic_396          CT  CT  C   N     9       0.0      0.83680     2
 
-generic_462          CT  CT  C   N     9       0.0      1.67360     3
+generic_397          CT  CT  C   N     9       0.0      1.67360     3
 
-generic_463          H   N   C   O     9     180.0     10.46000     2
+generic_398          H   N   C   O     9     180.0     10.46000     2
 
-generic_464          H   N   C   O     9       0.0      8.36800     1
+generic_399          H   N   C   O     9       0.0      8.36800     1
 
-generic_465          CT  S   S   CT    9       0.0     14.64400     2
+generic_400          CT  S   S   CT    9       0.0     14.64400     2
 
-generic_466          CT  S   S   CT    9       0.0      2.51040     3
+generic_401          CT  S   S   CT    9       0.0      2.51040     3
 
-generic_467          OS  CT  CT  OS    9       0.0      0.60250     3
+generic_402          OS  CT  CT  OS    9       0.0      0.60250     3
 
-generic_468          OS  CT  CT  OS    9       0.0      4.91620     2
+generic_403          OS  CT  CT  OS    9       0.0      4.91620     2
 
-generic_469          OS  CT  CT  OH    9       0.0      0.60250     3
+generic_404          OS  CT  CT  OH    9       0.0      0.60250     3
 
-generic_470          OS  CT  CT  OH    9       0.0      4.91620     2
+generic_405          OS  CT  CT  OH    9       0.0      4.91620     2
 
-generic_471          OH  CT  CT  OH    9       0.0      0.60250     3
+generic_406          OH  CT  CT  OH    9       0.0      0.60250     3
 
-generic_472          OH  CT  CT  OH    9       0.0      4.91620     2
+generic_407          OH  CT  CT  OH    9       0.0      4.91620     2
 
-generic_473          OH  P   OS  CT    9       0.0      1.04600     3
+generic_408          OH  P   OS  CT    9       0.0      1.04600     3
 
-generic_474          OH  P   OS  CT    9       0.0      5.02080     2
+generic_409          OH  P   OS  CT    9       0.0      5.02080     2
 
-generic_475          OS  P   OS  CT    9       0.0      1.04600     3
+generic_410          OS  P   OS  CT    9       0.0      1.04600     3
 
-generic_476          OS  P   OS  CT    9       0.0      5.02080     2
+generic_411          OS  P   OS  CT    9       0.0      5.02080     2
 
-generic_477          OS  CT  N
+generic_412          OS  CT  N*  CK    9       0.0     10.46000     1
 
-generic_478          OS  CT  N
+generic_413          OS  CT  N*  CM    9       0.0     10.46000     1
 
-generic_479          H1  CT  C   O     9       0.0      3.34720     1
+generic_414          H1  CT  C   O     9       0.0      3.34720     1
 
-generic_480          H1  CT  C   O     9     180.0      0.33472     3
+generic_415          H1  CT  C   O     9     180.0      0.33472     3
 
-generic_481          HC  CT  C   O     9       0.0      3.34720     1
+generic_416          HC  CT  C   O     9       0.0      3.34720     1
 
-generic_482          HC  CT  C   O     9     180.0      0.33472     3
+generic_417          HC  CT  C   O     9     180.0      0.33472     3
 
-generic_483          HC  CT  CT  HC    9       0.0      0.62760     3
+generic_418          HC  CT  CT  HC    9       0.0      0.62760     3
 
-generic_484          HC  CT  CT  CT    9       0.0      0.66944     3
+generic_419          HC  CT  CT  CT    9       0.0      0.66944     3
 
-generic_485          HC  CT  CM  CM    9     180.0      1.58992     3
+generic_420          HC  CT  CM  CM    9     180.0      1.58992     3
 
-generic_486          HC  CT  CM  CM    9       0.0      4.81160     1
+generic_421          HC  CT  CM  CM    9       0.0      4.81160     1
 
-generic_487          HO  OH  CT  CT    9       0.0      0.66944     3
+generic_422          HO  OH  CT  CT    9       0.0      0.66944     3
 
-generic_488          HO  OH  CT  CT    9       0.0      1.04600     1
+generic_423          HO  OH  CT  CT    9       0.0      1.04600     1
 
-generic_489          HO  OH  C   O     9     180.0      9.62320     2
+generic_424          HO  OH  C   O     9     180.0      9.62320     2
 
-generic_490          HO  OH  C   O     9       0.0      7.94960     1
+generic_425          HO  OH  C   O     9       0.0      7.94960     1
 
-generic_491          CM  CM  C   O     9     180.0      9.10020     2
+generic_426          CM  CM  C   O     9     180.0      9.10020     2
 
-generic_492          CM  CM  C   O     9       0.0      1.25520     3
+generic_427          CM  CM  C   O     9       0.0      1.25520     3
 
-generic_493          CT  CM  CM  CT    9     180.0     27.82360     2
+generic_428          CT  CM  CM  CT    9     180.0     27.82360     2
 
-generic_494          CT  CM  CM  CT    9     180.0      7.94960     1
+generic_429          CT  CM  CM  CT    9     180.0      7.94960     1
 
-generic_495          CT  CT  CT  CT    9       0.0      0.75312     3
+generic_430          CT  CT  CT  CT    9       0.0      0.75312     3
 
-generic_496          CT  CT  CT  CT    9     180.0      1.04600     2
+generic_431          CT  CT  CT  CT    9     180.0      1.04600     2
 
-generic_497          CT  CT  CT  CT    9     180.0      0.83680     1
+generic_432          CT  CT  CT  CT    9     180.0      0.83680     1
 
-generic_498          CT  CT  OS  C     9       0.0      1.60247     3
+generic_433          CT  CT  OS  C     9       0.0      1.60247     3
 
-generic_499          CT  CT  OS  C     9     180.0      3.34720     1
+generic_434          CT  CT  OS  C     9     180.0      3.34720     1
 
-generic_500          CT  OS  CT  OS    9       0.0      0.41840     3
+generic_435          CT  OS  CT  OS    9       0.0      0.41840     3
 
-generic_501          CT  OS  CT  OS    9     180.0      3.55640     2
+generic_436          CT  OS  CT  OS    9     180.0      3.55640     2
 
-generic_502          CT  OS  CT  OS    9     180.0      5.64840     1
+generic_437          CT  OS  CT  OS    9     180.0      5.64840     1
 
-generic_503          O   C   OS  CT    9     180.0     11.29680     2
+generic_438          O   C   OS  CT    9     180.0     11.29680     2
 
-generic_504          O   C   OS  CT    9     180.0      5.85760     1
+generic_439          O   C   OS  CT    9     180.0      5.85760     1
 
-generic_505          F   CT  CT  F     9     180.0      5.02080     1
+generic_440          F   CT  CT  F     9     180.0      5.02080     1
 
-generic_506          Cl  CT  CT  Cl    9     180.0      1.88280     1
+generic_441          Cl  CT  CT  Cl    9     180.0      1.88280     1
 
-generic_507          Br  CT  CT  Br    9       0.0      0.00000     0
+generic_442          Br  CT  CT  Br    9       0.0      0.00000     0
 
-generic_508          H1  CT  CT  OS    9       0.0      1.04600     1
+generic_443          H1  CT  CT  OS    9       0.0      1.04600     1
 
-generic_509          H1  CT  CT  OH    9       0.0      1.04600     1
+generic_444          H1  CT  CT  OH    9       0.0      1.04600     1
 
-generic_510          H1  CT  CT  F     9       0.0      0.79496     1
+generic_445          H1  CT  CT  F     9       0.0      0.79496     1
 
-generic_511          H1  CT  CT  Cl    9       0.0      1.04600     1
+generic_446          H1  CT  CT  Cl    9       0.0      1.04600     1
 
-generic_512          H1  CT  CT  Br    9       0.0      2.30120     1
+generic_447          H1  CT  CT  Br    9       0.0      2.30120     1
 
-generic_513          HC  CT  CT  OS    9       0.0      1.04600     1
+generic_448          HC  CT  CT  OS    9       0.0      1.04600     1
 
-generic_514          HC  CT  CT  OH    9       0.0      1.04600     1
+generic_449          HC  CT  CT  OH    9       0.0      1.04600     1
 
-generic_515          HC  CT  CT  F     9       0.0      0.79496     1
+generic_450          HC  CT  CT  F     9       0.0      0.79496     1
 
-generic_516          HC  CT  CT  Cl    9       0.0      1.04600     1
+generic_451          HC  CT  CT  Cl    9       0.0      1.04600     1
 
-generic_517          HC  CT  CT  Br    9       0.0      2.30120     1
+generic_452          HC  CT  CT  Br    9       0.0      2.30120     1
 
-generic_518          CT  OS  CT  N
+generic_453          CT  OS  CT  N*    9       0.0      1.60247     3
 
-generic_519          CT  OS  CT  N
+generic_454          CT  OS  CT  N*    9       0.0      2.71960     2
 
-generic_520          X   C   C   X     9     180.0     15.16700     2
+generic_455          X   C   C   X     9     180.0     15.16700     2
 
-generic_521          X   C   O   X     9     180.0     11.71520     2
+generic_456          X   C   O   X     9     180.0     11.71520     2
 
-generic_522          X   C   OS  X     9     180.0     11.29680     2
+generic_457          X   C   OS  X     9     180.0     11.29680     2
 
-generic_523          X   CA  OH  X     9     180.0      3.76560     2
+generic_458          X   CA  OH  X     9     180.0      3.76560     2
 
-generic_524          X   CM  OS  X     9     180.0      4.39320     2
+generic_459          X   CM  OS  X     9     180.0      4.39320     2
 
-generic_525          X   C   CA  X     9     180.0     15.16700     2
+generic_460          X   C   CA  X     9     180.0     15.16700     2
 
-generic_526          X   C   CB  X     9     180.0     12.55200     2
+generic_461          X   C   CB  X     9     180.0     12.55200     2
 
-generic_527          X   C   CM  X     9     180.0      9.10020     2
+generic_462          X   C   CM  X     9     180.0      9.10020     2
 
-generic_528          X   C   N
+generic_463          X   C   N*  X     9     180.0      6.06680     2
 
-generic_529          X   C   NA  X     9     180.0      5.64840     2
+generic_464          X   C   NA  X     9     180.0      5.64840     2
 
-generic_530          X   C   NC  X     9     180.0     16.73600     2
+generic_465          X   C   NC  X     9     180.0     16.73600     2
 
-generic_531          X   C   OH  X     9     180.0      9.62320     2
+generic_466          X   C   OH  X     9     180.0      9.62320     2
 
-generic_532          X   C   CT  X     9       0.0      0.00000     0
+generic_467          X   C   CT  X     9       0.0      0.00000     0
 
-generic_533          X   CA  CA  X     9     180.0     15.16700     2
+generic_468          X   CA  CA  X     9     180.0     15.16700     2
 
-generic_534          X   CA  CB  X     9     180.0     14.64400     2
+generic_469          X   CA  CB  X     9     180.0     14.64400     2
 
-generic_535          X   CA  CM  X     9     180.0     10.66920     2
+generic_470          X   CA  CM  X     9     180.0     10.66920     2
 
-generic_536          X   CA  CT  X     9       0.0      0.00000     0
+generic_471          X   CA  CT  X     9       0.0      0.00000     0
 
-generic_537          X   CA  N2  X     9     180.0     10.04160     2
+generic_472          X   CA  N2  X     9     180.0     10.04160     2
 
-generic_538          X   CA  NA  X     9     180.0      6.27600     2
+generic_473          X   CA  NA  X     9     180.0      6.27600     2
 
-generic_539          X   CA  NC  X     9     180.0     20.08320     2
+generic_474          X   CA  NC  X     9     180.0     20.08320     2
 
-generic_540          X   CB  CB  X     9     180.0     22.80280     2
+generic_475          X   CB  CB  X     9     180.0     22.80280     2
 
-generic_541          X   CB  N
+generic_476          X   CB  N*  X     9     180.0      6.90360     2
 
-generic_542          X   CB  NB  X     9     180.0     10.66920     2
+generic_477          X   CB  NB  X     9     180.0     10.66920     2
 
-generic_543          X   CB  NC  X     9     180.0     17.36360     2
+generic_478          X   CB  NC  X     9     180.0     17.36360     2
 
-generic_544          X   CK  N
+generic_479          X   CK  N*  X     9     180.0      7.11280     2
 
-generic_545          X   CK  NB  X     9     180.0     41.84000     2
+generic_480          X   CK  NB  X     9     180.0     41.84000     2
 
-generic_546          X   CM  CM  X     9     180.0     27.82360     2
+generic_481          X   CM  CM  X     9     180.0     27.82360     2
 
-generic_547          X   CM  CT  X     9       0.0      0.00000     0
+generic_482          X   CM  CT  X     9       0.0      0.00000     0
 
-generic_548          X   CM  N
+generic_483          X   CM  N*  X     9     180.0      7.74040     2
 
-generic_549          X   CQ  NC  X     9     180.0     28.45120     2
+generic_484          X   CQ  NC  X     9     180.0     28.45120     2
 
-generic_550          X   CT  CT  X     9       0.0      0.65084     3
+generic_485          X   CT  CT  X     9       0.0      0.65084     3
 
-generic_551          X   CT  N   X     9       0.0      0.00000     0
+generic_486          X   CT  N   X     9       0.0      0.00000     0
 
-generic_552          X   CT  N
+generic_487          X   CT  N*  X     9       0.0      0.00000     0
 
-generic_553          X   CT  N2  X     9       0.0      0.00000     0
+generic_488          X   CT  N2  X     9       0.0      0.00000     0
 
-generic_554          X   CT  OH  X     9       0.0      0.69733     3
+generic_489          X   CT  OH  X     9       0.0      0.69733     3
 
-generic_555          X   CT  OS  X     9       0.0      1.60387     3
+generic_490          X   CT  OS  X     9       0.0      1.60387     3
 
-generic_556          X   OH  P   X     9       0.0      1.04600     3
+generic_491          X   OH  P   X     9       0.0      1.04600     3
 
-generic_557          X   OS  P   X     9       0.0      1.04600     3
+generic_492          X   OS  P   X     9       0.0      1.04600     3
 
-generic_558          X   C   N   X     9     180.0     10.46000     2
+generic_493          X   C   N   X     9     180.0     10.46000     2
 
-generic_559          X   CT  N3  X     9       0.0      0.65084     3
+generic_494          X   CT  N3  X     9       0.0      0.65084     3
 
-generic_560          X   CT  S   X     9       0.0      1.39467     3
+generic_495          X   CT  S   X     9       0.0      1.39467     3
 
-generic_561          X   CT  SH  X     9       0.0      1.04600     3
+generic_496          X   CT  SH  X     9       0.0      1.04600     3
 
-generic_562          X   C
+generic_497          X   C*  CB  X     9     180.0      7.00820     2
 
-generic_563          X   C
+generic_498          X   C*  CT  X     9       0.0      0.00000     0
 
-generic_564          X   C
+generic_499          X   C*  CW  X     9     180.0     27.30060     2
 
-generic_565          X   CA  CN  X     9     180.0     15.16700     2
+generic_500          X   CA  CN  X     9     180.0     15.16700     2
 
-generic_566          X   CB  CN  X     9     180.0     12.55200     2
+generic_501          X   CB  CN  X     9     180.0     12.55200     2
 
-generic_567          X   CC  CT  X     9       0.0      0.00000     0
+generic_502          X   CC  CT  X     9       0.0      0.00000     0
 
-generic_568          X   CC  CV  X     9     180.0     21.54760     2
+generic_503          X   CC  CV  X     9     180.0     21.54760     2
 
-generic_569          X   CC  CW  X     9     180.0     22.48900     2
+generic_504          X   CC  CW  X     9     180.0     22.48900     2
 
-generic_570          X   CC  NA  X     9     180.0      5.85760     2
+generic_505          X   CC  NA  X     9     180.0      5.85760     2
 
-generic_571          X   CC  NB  X     9     180.0     10.04160     2
+generic_506          X   CC  NB  X     9     180.0     10.04160     2
 
-generic_572          X   CN  NA  X     9     180.0      6.38060     2
+generic_507          X   CN  NA  X     9     180.0      6.38060     2
 
-generic_573          X   CR  NA  X     9     180.0      9.72780     2
+generic_508          X   CR  NA  X     9     180.0      9.72780     2
 
-generic_574          X   CR  NB  X     9     180.0     20.92000     2
+generic_509          X   CR  NB  X     9     180.0     20.92000     2
 
-generic_575          X   CV  NB  X     9     180.0     10.04160     2
+generic_510          X   CV  NB  X     9     180.0     10.04160     2
 
-generic_576          X   CW  NA  X     9     180.0      6.27600     2
+generic_511          X   CW  NA  X     9     180.0      6.27600     2
 
 define_3             #define torsion_ILE_N_CA_CB_CG2_mult1 0.0        0.8158800        1
 
@@ -1230,45 +1250,45 @@ define_31            #define torsion_ASN_CA_CB_CG_ND2_mult6 0.0        -0.443504
 
 moleculetype_1       [ moleculetype ]
 
-generic_577          Ion    3
+generic_512          Ion    3
 
 atoms_1              [ atoms ]
 
-generic_578          1         C0      1     CA     CA      1     2.0000     40.080
+generic_513          1         C0      1     CA     CA      1     2.0000     40.080
 
 condition_1          #ifdef POSRES
 
 position_restraints_1 [ position_restraints ]
 
-generic_579          1     1  1000  1000  1000
+generic_514          1     1  1000  1000  1000
 
 condition_2          #endif
 
 moleculetype_2       [ moleculetype ]
 
-generic_580          SOL		2
+generic_515          SOL		2
 
 atoms_2              [ atoms ]
 
-generic_581          1   OW          1       SOL       OW       1      -0.834    16.00000
+generic_516          1   OW          1       SOL       OW       1      -0.834    16.00000
 
-generic_582          2   HW          1       SOL       HW1      1       0.417     1.00800
+generic_517          2   HW          1       SOL       HW1      1       0.417     1.00800
 
-generic_583          3   HW          1       SOL       HW2      1       0.417     1.00800
+generic_518          3   HW          1       SOL       HW2      1       0.417     1.00800
 
 condition_3          #ifndef FLEXIBLE
 
 settles_1            [ settles ]
 
-generic_584          1       1       0.09572 0.15139
+generic_519          1       1       0.09572 0.15139
 
 exclusions_1         [ exclusions ]
 
-generic_585          1	2	3
+generic_520          1	2	3
 
-generic_586          2	1	3
+generic_521          2	1	3
 
-generic_587          3	1	2
+generic_522          3	1	2
 
 condition_4          #endif
 
@@ -1276,13 +1296,13 @@ condition_5          #ifdef FLEXIBLE
 
 bonds_1              [ bonds ]
 
-generic_588          1       2       1       0.09572 502416.0   0.09572        502416.0
+generic_523          1       2       1       0.09572 502416.0   0.09572        502416.0
 
-generic_589          1       3       1       0.09572 502416.0   0.09572        502416.0
+generic_524          1       3       1       0.09572 502416.0   0.09572        502416.0
 
 angles_1             [ angles ]
 
-generic_590          2       1       3       1       104.52  628.02      104.52  628.02
+generic_525          2       1       3       1       104.52  628.02      104.52  628.02
 
 condition_6          #endif
 
@@ -1290,95 +1310,95 @@ condition_7          #ifdef POSRES_WATER
 
 position_restraints_2 [ position_restraints ]
 
-generic_591          1    1       1000       1000       1000
+generic_526          1    1       1000       1000       1000
 
 condition_8          #endif
 
 moleculetype_3       [ moleculetype ]
 
-generic_592          IB+             1
+generic_527          IB+             1
 
 atoms_3              [ atoms ]
 
-generic_593          1       IB              1       IB+             IB       1      1.00000
+generic_528          1       IB              1       IB+             IB       1      1.00000
 
 moleculetype_4       [ moleculetype ]
 
-generic_594          CA              1
+generic_529          CA              1
 
 atoms_4              [ atoms ]
 
-generic_595          1       C0              1       CA              CA       1      2.00000
+generic_530          1       C0              1       CA              CA       1      2.00000
 
 moleculetype_5       [ moleculetype ]
 
-generic_596          CL              1
+generic_531          CL              1
 
 atoms_5              [ atoms ]
 
-generic_597          1       Cl              1       CL              CL       1      -1.00000
+generic_532          1       Cl              1       CL              CL       1      -1.00000
 
 moleculetype_6       [ moleculetype ]
 
-generic_598          NA              1
+generic_533          NA              1
 
 atoms_6              [ atoms ]
 
-generic_599          1       Na              1       NA              NA       1      1.00000
+generic_534          1       Na              1       NA              NA       1      1.00000
 
 moleculetype_7       [ moleculetype ]
 
-generic_600          MG              1
+generic_535          MG              1
 
 atoms_7              [ atoms ]
 
-generic_601          1       MG              1       MG              MG       1      2.00000
+generic_536          1       MG              1       MG              MG       1      2.00000
 
 moleculetype_8       [ moleculetype ]
 
-generic_602          K               1
+generic_537          K               1
 
 atoms_8              [ atoms ]
 
-generic_603          1       K               1       K               K        1      1.00000
+generic_538          1       K               1       K               K        1      1.00000
 
 moleculetype_9       [ moleculetype ]
 
-generic_604          RB              1
+generic_539          RB              1
 
 atoms_9              [ atoms ]
 
-generic_605          1       Rb              1       RB              RB       1      1.00000
+generic_540          1       Rb              1       RB              RB       1      1.00000
 
 moleculetype_10      [ moleculetype ]
 
-generic_606          CS              1
+generic_541          CS              1
 
 atoms_10             [ atoms ]
 
-generic_607          1       Cs              1       CS              CS       1      1.00000
+generic_542          1       Cs              1       CS              CS       1      1.00000
 
 moleculetype_11      [ moleculetype ]
 
-generic_608          LI              1
+generic_543          LI              1
 
 atoms_11             [ atoms ]
 
-generic_609          1       Li              1       LI              LI       1      1.00000
+generic_544          1       Li              1       LI              LI       1      1.00000
 
 moleculetype_12      [ moleculetype ]
 
-generic_610          ZN              1
+generic_545          ZN              1
 
 atoms_12             [ atoms ]
 
-generic_611          1       Zn              1       ZN              ZN       1      2.00000
+generic_546          1       Zn              1       ZN              ZN       1      2.00000
 
 system_1             [ system ]
 
-generic_612          Ion not yet in water
+generic_547          Ion not yet in water
 
 molecules_1          [ molecules ]
 
-generic_613          Ion    1
+generic_548          Ion    1
 

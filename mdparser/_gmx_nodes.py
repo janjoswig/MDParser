@@ -271,13 +271,12 @@ class Comment(NodeValue):
 
     _node_key_name = "comment"
 
-    def __init__(self, char: str, comment: str):
+    def __init__(self, comment: str):
         super().__init__()
-        self.char = char
         self.comment = comment
 
     def __str__(self):
-        return f"{self.char} {self.comment.__str__()}"
+        return f"; {self.comment.__str__()}"
 
 
 class Include(NodeValue):
@@ -324,14 +323,43 @@ class DefaultsEntry(NodeValue):
         if self.n is not None:
             return_str += f"{self.n:<7} "
         if self.comment is not None:
-            return_str += f"; {self.comment}"
+            return_str += self.comment
         return return_str
 
 
 class AtomtypesEntry(NodeValue):
 
-    _node_key_name = "atoms_entry"
+    _node_key_name = "atomtypess_entry"
 
     def __init__(
-            self, name, at_num, mass, charge, ptype, sigma, epsilon):
+            self, *args, comment=None):
         super().__init__()
+
+        self.name = args[0]
+        self.at_num = int(args[-6])
+        self.mass = float(args[-5])
+        self.charge = float(args[-4])
+        self.ptype = args[-3]
+        self.sigma = float(args[-2])
+        self.epsilon = float(args[-1])
+
+        if len(args) == 8:
+            self.bond_type = args[1]
+        else:
+            self.bond_type = None
+
+        self.comment = comment
+
+    def __str__(self):
+        return_str = f"{self.name:<9} "
+        if self.bond_type is not None:
+            return_str += f"{self.bond_type:<4} "
+        return_str += f"{self.at_num:<3} "
+        return_str += f"{self.mass:<8} "
+        return_str += f"{self.charge:<6} "
+        return_str += f"{self.ptype:<1} "
+        return_str += f"{self.sigma:1.5e}  "
+        return_str += f"{self.epsilon:1.5e} "
+        if self.comment is not None:
+            return_str += self.comment
+        return return_str

@@ -48,6 +48,7 @@ DEFAULT_NODE_VALUE_TYPES = {
         "angle_restraints": _gmx_nodes.AngleRestraintsSubsection,
         "angle_restraints_z": _gmx_nodes.AngleRestraintsZSubsection,
         "defaults_entry": _gmx_nodes.DefaultsEntry,
+        "atomtypes_entry": _gmx_nodes.AtomtypesEntry,
     }
 
 
@@ -247,7 +248,6 @@ class GromacsTopParser:
     def __init__(
             self,
             ignore_comments: bool = True,
-            comment_chars: Optional[Iterable[str]] = None,
             preprocess: bool = True,
             include_local: bool = True,
             include_shared: bool = False,
@@ -258,11 +258,6 @@ class GromacsTopParser:
             verbose: bool = True):
 
         self.ignore_comments = ignore_comments
-
-        if comment_chars is None:
-            comment_chars = [";", "*"]
-        self.comment_chars = [char for char in comment_chars]
-
         self.preprocess = preprocess
         self.include_local = include_local
 
@@ -380,8 +375,6 @@ class GromacsTopParser:
                 shared_paths=self.shared_paths
                 )
 
-        comment_chars = tuple(self.comment_chars)
-
         active_section = None
         active_category = 0
 
@@ -404,14 +397,10 @@ class GromacsTopParser:
             line = f"{previous}{line}"
             previous = ''
 
-            line = line.strip()
-
             if self.ignore_comments:
-                for char in comment_chars:
-                    if char not in line:
-                        continue
+                line, _ = self.split_comment(line)
 
-                    line = line[:line.index(char)].strip()
+            line = line.strip()
 
             if line in ['', '\n', '\n\r']:
                 continue
@@ -509,11 +498,10 @@ class GromacsTopParser:
                 if skip:
                     continue
 
-            if line.startswith(comment_chars):
-                char = line[0]
+            if line.startswith(";"):
                 comment = line[1:].strip()
                 node_key, node_value = self._select_node_type(
-                    "comment", char, comment
+                    "comment", comment
                 )
                 top.add(node_key, node_value)
                 continue
@@ -562,6 +550,13 @@ class GromacsTopParser:
                 top.add(node_key, node_value)
                 continue
 
+            if active_section is None:
+                node_key, node_value = self._select_node_type(
+                    "comment", line
+                )
+                top.add(node_key, node_value)
+                continue
+
             if active_section._node_key_name == "defaults":
                 if not self.ignore_comments:
                     line, comment = self.split_comment(line)
@@ -571,6 +566,19 @@ class GromacsTopParser:
                 args = line.split()
                 node_key, node_value = self._select_node_type(
                     "defaults_entry", *args, comment=comment
+                )
+                top.add(node_key, node_value)
+                continue
+
+            if active_section._node_key_name == "atomtypes":
+                if not self.ignore_comments:
+                    line, comment = self.split_comment(line)
+                else:
+                    comment = None
+
+                args = line.split()
+                node_key, node_value = self._select_node_type(
+                    "atomtypes_entry", *args, comment=comment
                 )
                 top.add(node_key, node_value)
                 continue
@@ -589,21 +597,10 @@ class GromacsTopParser:
         return node_key, node_value
 
     def split_comment(self, line):
-        split = False
-        split_at = len(line)
-        for char in self.comment_chars:
-            if char not in line:
-                continue
+        if ";" in line:
+            return tuple(line.split(";", maxsplit=1))
+        return line, None
 
-            split_at = min(split_at, line.index(char))
-
-        if split:
-            line = line[:split_at]
-            comment = line[split_at:]
-        else:
-            comment = None
-
-        return line, comment
 
 class Node:
     __slots__ = ["prev", "next", "key", "value", '__weakref__']

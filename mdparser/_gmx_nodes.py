@@ -299,27 +299,32 @@ class DefaultsEntry(NodeValue):
     _node_key_name = "defaults_entry"
 
     def __init__(
-            self, nbfunc, comb_rule,
-            gen_pairs="no", fudgeLJ=None, fudgeQQ=None, n=None):
+            self,
+            nbfunc, comb_rule,
+            gen_pairs="no", fudgeLJ=None, fudgeQQ=None, n=None,
+            comment=None):
 
         super().__init__()
-        self.nbfunc = nbfunc
-        self.comb_rule = comb_rule
+        self.nbfunc = int(nbfunc)
+        self.comb_rule = int(comb_rule)
         self.gen_pairs = gen_pairs
-        self.fudgeLJ = fudgeLJ
-        self.fudgeQQ = fudgeQQ
-        self.n = n
+        self.fudgeLJ = float(fudgeLJ) if fudgeLJ is not None else None
+        self.fudgeQQ = float(fudgeQQ) if fudgeQQ is not None else None
+        self.n = int(n) if n is not None else None
+        self.comment = comment
 
     def __str__(self):
-        return_str = f"{self.nbfunc:<16}{self.comb_rule:<16}"
+        return_str = f"{self.nbfunc:<15} {self.comb_rule:<15} "
         if self.gen_pairs is not None:
-            return_str += f"{self.gen_pairs:<16}"
+            return_str += f"{self.gen_pairs:<15} "
         if self.fudgeLJ is not None:
-            return_str += f"{self.fudgeLJ:<8}"
+            return_str += f"{self.fudgeLJ:<7} "
         if self.fudgeQQ is not None:
-            return_str += f"{self.fudgeQQ:<8}"
+            return_str += f"{self.fudgeQQ:<7} "
         if self.n is not None:
-            return_str += f"{self.n:<8}"
+            return_str += f"{self.n:<7} "
+        if self.comment is not None:
+            return_str += f"; {self.comment}"
         return return_str
 
 
@@ -327,5 +332,6 @@ class AtomtypesEntry(NodeValue):
 
     _node_key_name = "atoms_entry"
 
-    def __init__(self):
+    def __init__(
+            self, name, at_num, mass, charge, ptype, sigma, epsilon):
         super().__init__()

@@ -383,7 +383,6 @@ class GromacsTopParser:
         comment_chars = tuple(self.comment_chars)
 
         active_section = None
-        active_subsection = None
         active_category = 0
 
         active_conditions = OrderedDict()
@@ -563,10 +562,15 @@ class GromacsTopParser:
                 top.add(node_key, node_value)
                 continue
 
-            if active_section == "defaults":
+            if active_section._node_key_name == "defaults":
+                if not self.ignore_comments:
+                    line, comment = self.split_comment(line)
+                else:
+                    comment = None
+
                 args = line.split()
                 node_key, node_value = self._select_node_type(
-                    "defaults_entry", *args
+                    "defaults_entry", *args, comment=comment
                 )
                 top.add(node_key, node_value)
                 continue
@@ -584,6 +588,22 @@ class GromacsTopParser:
         node_key = node_value._make_node_key()
         return node_key, node_value
 
+    def split_comment(self, line):
+        split = False
+        split_at = len(line)
+        for char in self.comment_chars:
+            if char not in line:
+                continue
+
+            split_at = min(split_at, line.index(char))
+
+        if split:
+            line = line[:split_at]
+            comment = line[split_at:]
+        else:
+            comment = None
+
+        return line, comment
 
 class Node:
     __slots__ = ["prev", "next", "key", "value", '__weakref__']

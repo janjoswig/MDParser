@@ -16,7 +16,7 @@ class TestParseTopologies:
             ("comment_multiline.top", {"ignore_comments": False}),
             ("ion.top", {}),
             ("ion.top", {"ignore_comments": False}),
-            ("ion.top", {"include_shared": True}),
+            ("ion.top", {"include_shared": True, "ignore_comments": False}),
             ("ion.top", {"include_shared": True, "resolve_conditions": False})
             ]
         )

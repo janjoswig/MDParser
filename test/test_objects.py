@@ -1,6 +1,7 @@
 import pytest
 
 import mdparser.topology as mdtop
+from mdparser import _gmx_nodes
 
 
 class TestGromacsTop:
@@ -21,7 +22,7 @@ class TestGromacsTop:
         assert len(top) == 0
 
         for count, (k, v) in enumerate(node_list, 1):
-            top.add(k, mdtop.GenericNodeValue(v))
+            top.add(k, _gmx_nodes.GenericNodeValue(v))
             assert top[k].value.value == v
             assert len(top) == count
 
@@ -34,7 +35,7 @@ class TestGromacsTop:
         assert ("node2" in top) is True
 
         with pytest.raises(KeyError):
-            top.add("node2", mdtop.GenericNodeValue("garbage"))
+            top.add("node2", _gmx_nodes.GenericNodeValue("garbage"))
 
         top.discard("node2")
         assert len(top) == 3
@@ -50,11 +51,11 @@ class TestGromacsTop:
                 ["node4", "node3", "node1"]):
             assert node.key == expected_key
 
-        top.replace("node3", mdtop.GenericNodeValue("balthazar"))
+        top.replace("node3", _gmx_nodes.GenericNodeValue("balthazar"))
         assert top[1].value.value == "balthazar"
 
-        top.insert(1, "new", mdtop.GenericNodeValue("cato"))
-        top.insert(10, "other", mdtop.GenericNodeValue("brick"))
+        top.insert(1, "new", _gmx_nodes.GenericNodeValue("cato"))
+        top.insert(10, "other", _gmx_nodes.GenericNodeValue("brick"))
 
         with pytest.raises(IndexError):
             _ = top[10]
@@ -81,18 +82,18 @@ class TestGromacsTop:
         assert top.includes_resolved is True
         assert top.conditions_resolved is True
 
-        top.add("Include", mdtop.Include("amber/ffx.itp"))
-        top.add("check_POSRES", mdtop.Condition("POSRES", True))
-        top.add("end_POSRES", mdtop.Condition("POSRES", None))
+        top.add("Include", _gmx_nodes.Include("amber/ffx.itp"))
+        top.add("check_POSRES", _gmx_nodes.Condition("POSRES", True))
+        top.add("end_POSRES", _gmx_nodes.Condition("POSRES", None))
 
         assert top.includes_resolved is False
         assert top.conditions_resolved is False
 
     def test_find_complement(self):
         top = mdtop.GromacsTop()
-        top.add("if", mdtop.Condition("some", True))
-        top.add("entry", mdtop.GenericNodeValue("important"))
-        top.add("end", mdtop.Condition("some", None))
+        top.add("if", _gmx_nodes.Condition("some", True))
+        top.add("entry", _gmx_nodes.GenericNodeValue("important"))
+        top.add("end", _gmx_nodes.Condition("some", None))
 
         node = top[-1]
         complement = top.find_complement(node)

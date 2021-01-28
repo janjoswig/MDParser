@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from collections import OrderedDict
 from itertools import islice
 import pathlib
@@ -7,55 +6,55 @@ import subprocess
 from typing import Any, Iterable, Mapping, Optional, TextIO, Union
 import weakref
 
-"""Section hierarchy map
+from . import _gmx_nodes
 
-Format:
-{
-    section title: {
-        category (0: Parameter, 1: Molecule, 2: System),
-        rank (0: Main section, 1: Subsection),
-        occurrence (Allowed occurrene, 0: any, 1: only once)
-        }
-}
-"""
-SECTION_HIERARCHY = {
-    # Parameter sections
-    "defaults": {"category": 0, "rank": 0, "occurence": 1},
-    "atomtypes": {"category": 0, "rank": 0, "occurence": 0},
-    "bondtypes": {"category": 0, "rank": 0, "occurence": 0},
-    "pairtypes": {"category": 0, "rank": 0, "occurence": 0},
-    "angletypes": {"category": 0, "rank": 0, "occurence": 0},
-    "dihedraltypes": {"category": 0, "rank": 0, "occurence": 0},
-    "constrainttypes": {"category": 0, "rank": 0, "occurence": 0},
-    "nonbonded_params": {"category": 0, "rank": 0, "occurence": 0},
-    # Molecule sections
-    "moleculetype": {"category": 1, "rank": 0, "occurence": 0},
-    "atoms": {"category": 1, "rank": 1, "occurence": 0},
-    "bonds": {"category": 1, "rank": 1, "occurence": 0},
-    "pairs": {"category": 1, "rank": 1, "occurence": 0},
-    "pairs_nb": {"category": 1, "rank": 1, "occurence": 0},
-    "angles": {"category": 1, "rank": 1, "occurence": 0},
-    "dihedrals": {"category": 1, "rank": 1, "occurence": 0},
-    "exclusions": {"category": 1, "rank": 1, "occurence": 0},
-    "constraints": {"category": 1, "rank": 1, "occurence": 0},
-    "settles": {"category": 1, "rank": 1, "occurence": 0},
-    "virtual_sites2": {"category": 1, "rank": 1, "occurence": 0},
-    "virtual_sites3": {"category": 1, "rank": 1, "occurence": 0},
-    "virtual_sites4": {"category": 1, "rank": 1, "occurence": 0},
-    "virtual_sitesn": {"category": 1, "rank": 1, "occurence": 0},
-    "position_restraints": {"category": 1, "rank": 1, "occurence": 0},
-    "distance_restraints": {"category": 1, "rank": 1, "occurence": 0},
-    "dihedral_restraints": {"category": 1, "rank": 1, "occurence": 0},
-    "orientation_restraints": {"category": 1, "rank": 1, "occurence": 0},
-    "angle_restraints": {"category": 1, "rank": 1, "occurence": 0},
-    "angle_restraints_z": {"category": 1, "rank": 1, "occurence": 0},
-    # System sections
-    "system": {"category": 2, "rank": 0, "occurence": 1},
-    "molecules": {"category": 2, "rank": 0, "occurence": 1},
-}
+
+DEFAULT_NODE_VALUE_TYPES = {
+        "generic": _gmx_nodes.GenericNodeValue,
+        "comment": _gmx_nodes.Comment,
+        "define": _gmx_nodes.Define,
+        "include": _gmx_nodes.Include,
+        "condition": _gmx_nodes.Condition,
+        "section": _gmx_nodes.Section,
+        "defaults": _gmx_nodes.DefaultsSection,
+        "atomtypes": _gmx_nodes.AtomtypesSection,
+        "bondtypes": _gmx_nodes.BondtypesSection,
+        "angletypes": _gmx_nodes.AngletypesSection,
+        "pairtypes": _gmx_nodes.PairtypesSection,
+        "dihedraltypes": _gmx_nodes.DihedraltypesSection,
+        "constrainttypes": _gmx_nodes.ConstrainttypesSection,
+        "nonbonded_params": _gmx_nodes.NonbondedParamsSection,
+        "moleculetype": _gmx_nodes.MoleculetypeSection,
+        "system": _gmx_nodes.SystemSection,
+        "molecules": _gmx_nodes.MoleculesSection,
+        "subsection": _gmx_nodes.Subsection,
+        "atoms": _gmx_nodes.AtomsSubsection,
+        "bonds": _gmx_nodes.BondsSubsection,
+        "pairs": _gmx_nodes.PairsSubsection,
+        "pairs_nb": _gmx_nodes.PairsNBSubsection,
+        "angles": _gmx_nodes.AnglesSubsection,
+        "dihedrals": _gmx_nodes.DihedralsSubsection,
+        "exclusions": _gmx_nodes.ExclusionsSubsection,
+        "constraints": _gmx_nodes.ConstraintsSubsection,
+        "settles": _gmx_nodes.SettlesSubsection,
+        "virtual_sites2": _gmx_nodes.VirtualSites2Subsection,
+        "virtual_sites3": _gmx_nodes.VirtualSites3Subsection,
+        "virtual_sites4": _gmx_nodes.VirtualSites4Subsection,
+        "virtual_sitesn": _gmx_nodes.VirtualSitesNSubsection,
+        "position_restraints": _gmx_nodes.PositionRestraintsSubsection,
+        "distance_restraints": _gmx_nodes.DistanceRestraintsSubsection,
+        "dihedral_restraints": _gmx_nodes.DihedralRestraintsSubsection,
+        "orientation_restraints": _gmx_nodes.OrientationRestraintsSubsection,
+        "angle_restraints": _gmx_nodes.AngleRestraintsSubsection,
+        "angle_restraints_z": _gmx_nodes.AngleRestraintsZSubsection,
+        "defaults_entry": _gmx_nodes.DefaultsEntry,
+    }
 
 
 class GromacsTop:
+
+    __node_value_types = DEFAULT_NODE_VALUE_TYPES
+
     def __init__(self):
         self._nodes = dict()
         self._hardroot = Node()
@@ -66,7 +65,7 @@ class GromacsTop:
     def __str__(self):
         return_str = ""
         for node in self:
-            return_str += f"{node.key} {node.value!s}\n\n"
+            return_str += f"{node.key:<20} {node.value!s}\n\n"
 
         return return_str
 
@@ -207,7 +206,7 @@ class GromacsTop:
     @property
     def includes_resolved(self):
         for node in self:
-            if isinstance(node.value, Include):
+            if isinstance(node.value, _gmx_nodes.Include):
                 return False
         else:
             return True
@@ -215,7 +214,7 @@ class GromacsTop:
     @property
     def conditions_resolved(self):
         for node in self:
-            if isinstance(node.value, Condition):
+            if isinstance(node.value, _gmx_nodes.Condition):
                 return False
         else:
             return True
@@ -232,15 +231,18 @@ class GromacsTop:
 
         current = getattr(node, goto)
         while current is not root:
-            if isinstance(current.value, Condition):
+            if isinstance(current.value, _gmx_nodes.Condition):
                 if current.value.key == node.value.key:
                     return current
             current = getattr(current, goto)
 
         return
 
+
 class GromacsTopParser:
     """Read and write GROMACS topology files"""
+
+    __node_value_types = DEFAULT_NODE_VALUE_TYPES
 
     def __init__(
             self,
@@ -380,12 +382,16 @@ class GromacsTopParser:
 
         comment_chars = tuple(self.comment_chars)
 
-        active_section = "head"
+        active_section = None
+        active_subsection = None
         active_category = 0
 
         active_conditions = OrderedDict()
         active_definitions = {}
         active_definitions.update(self.definitions)
+
+        for node_value_type in self.__node_value_types.values():
+            node_value_type.reset_count()
 
         previous = ''
         for line in file:
@@ -414,16 +420,25 @@ class GromacsTopParser:
             if line.startswith('#define'):
                 line = line.lstrip("#define").lstrip().split(maxsplit=1)
                 if len(line) == 1:
-                    top.add(f"_{len(top._nodes)}", Define(line[0], True))
+                    node_key, node_value = self._select_node_type(
+                        "define", line[0], True
+                    )
+                    top.add(node_key, node_value)
                     active_definitions[line[0]] = True
                 else:
-                    top.add(f"_{len(top._nodes)}", Define(line[0], line[1]))
+                    node_key, node_value = self._select_node_type(
+                        "define", line[0], line[1]
+                    )
+                    top.add(node_key, node_value)
                     active_definitions[line[0]] = line[1]
                 continue
 
             if line.startswith('#undef'):
                 line = line.lstrip("#undef").lstrip()
-                top.add(f"_{len(top._nodes)}", Define(line, False))
+                node_key, node_value = self._select_node_type(
+                    "define", line, False
+                )
+                top.add(node_key, node_value)
                 _ = active_definitions.pop(line)
                 continue
 
@@ -431,14 +446,20 @@ class GromacsTopParser:
                 line = line.lstrip('#ifdef').lstrip()
                 active_conditions[line] = True
                 if not self.resolve_conditions:
-                    top.add(f"_{len(top._nodes)}", Condition(line, True))
+                    node_key, node_value = self._select_node_type(
+                        "condition", line, True
+                    )
+                    top.add(node_key, node_value)
                 continue
 
             if line.startswith('#ifndef'):
                 line = line.lstrip('#ifndef').lstrip()
                 active_conditions[line] = False
                 if not self.resolve_conditions:
-                    top.add(f"_{len(top._nodes)}", Condition(line, False))
+                    node_key, node_value = self._select_node_type(
+                        "condition", line, False
+                    )
+                    top.add(node_key, node_value)
                 continue
 
             if line.startswith('#else'):
@@ -448,23 +469,24 @@ class GromacsTopParser:
                 active_conditions[last_condition] = not last_value
 
                 if not self.resolve_conditions:
-                    top.add(
-                        f"_{len(top._nodes)}",
-                        Condition(last_condition, None)
-                        )
-                    top.add(
-                        f"_{len(top._nodes)}",
-                        Condition(last_condition, not last_value)
-                        )
+                    node_key, node_value = self._select_node_type(
+                        "condition", last_condition, None
+                    )
+                    top.add(node_key, node_value)
+
+                    node_key, node_value = self._select_node_type(
+                        "condition", last_condition, not last_value
+                    )
+                    top.add(node_key, node_value)
                     continue
 
             if line.startswith('#endif'):
                 last_condition, _ = active_conditions.popitem(last=True)
                 if not self.resolve_conditions:
-                    top.add(
-                        f"_{len(top._nodes)}",
-                        Condition(last_condition, None)
-                        )
+                    node_key, node_value = self._select_node_type(
+                        "condition", last_condition, None
+                    )
+                    top.add(node_key, node_value)
 
                     node = top[-1]
                     complement = top.find_complement(node)
@@ -491,45 +513,76 @@ class GromacsTopParser:
             if line.startswith(comment_chars):
                 char = line[0]
                 comment = line[1:].strip()
-                top.add(f"_{len(top._nodes)}", Comment(char, comment))
+                node_key, node_value = self._select_node_type(
+                    "comment", char, comment
+                )
+                top.add(node_key, node_value)
                 continue
 
             if line.startswith("#include"):
                 include = line.strip("#include").lstrip()
-                top.add(f"_{len(top._nodes)}", Include(include))
+                node_key, node_value = self._select_node_type(
+                    "include", include
+                )
+                top.add(node_key, node_value)
                 continue
 
             if line.startswith('['):
-                active_section = line.strip(' []').casefold()
-                section_info = SECTION_HIERARCHY.get(active_section, None)
-                if section_info is None:
+                _new_section = line.strip(' []').casefold()
+                node_type = self.__node_value_types.get(_new_section, None)
+                if node_type is None:
+                    # Should not happen for compliant topologies
                     if self.verbose:
-                        print(f"Unknown section {active_section}")
-                    top.add(f"_{len(top._nodes)}", Section(active_section))
+                        print(f"Unknown section {_new_section}")
+
+                    node_key, node_value = self._select_node_type(
+                        "section", _new_section
+                    )
+                    top.add(node_key, node_value)
+                    active_section = node_value
                     continue
 
-                category = section_info["category"]
-                if (category < active_category) and self.verbose:
-                    print(f"Inconsistent section {active_section}")
+                if (node_type.category < active_category) and self.verbose:
+                    print(f"Inconsistent section {_new_section}")
                 else:
-                    active_category = category
+                    active_category = node_type.category
 
-                rank = section_info["rank"]
-                if rank == 0:
-                    top.add(f"_{len(top._nodes)}", Section(active_section))
+                issubsection = issubclass(
+                    node_type, self.__node_value_types["subsection"]
+                    )
+
+                if issubsection:
+                    node_value = node_type(
+                        section=weakref.proxy(active_section)
+                        )
                 else:
-                    top.add(f"_{len(top._nodes)}", Subsection(active_section))
+                    node_value = node_type()
+                    active_section = node_value
 
+                node_key = node_value._make_node_key()
+                top.add(node_key, node_value)
                 continue
 
             if active_section == "defaults":
                 args = line.split()
-                top.add(f"_{len(top._nodes)}", DefaultsEntry(*args))
+                node_key, node_value = self._select_node_type(
+                    "defaults_entry", *args
+                )
+                top.add(node_key, node_value)
                 continue
 
-            top.add(f"_{len(top._nodes)}", GenericNodeValue(line))
+            node_key, node_value = self._select_node_type(
+                "generic", line
+            )
+            top.add(node_key, node_value)
 
         return top
+
+    def _select_node_type(self, name, *args, **kwargs):
+        node_type = self.__node_value_types[name]
+        node_value = node_type(*args, **kwargs)
+        node_key = node_value._make_node_key()
+        return node_key, node_value
 
 
 class Node:
@@ -540,122 +593,6 @@ class Node:
         v = self.value if hasattr(self, "value") else None
         attr_str = f"(key={k!r}, value={v!r})"
         return f"{type(self).__name__}{attr_str}"
-
-
-class NodeValue(ABC):
-
-    @abstractmethod
-    def __str__(self):
-        """Return node content formatted for topology file"""
-
-
-class GenericNodeValue(NodeValue):
-    """Generic fallback node value"""
-    def __init__(self, value):
-        self.value = value
-
-    def __str__(self):
-        return self.value.__str__()
-
-    def __repr__(self):
-        return f"{type(self).__name__}(value={self.value!r})"
-
-
-class Define(NodeValue):
-    """#define or #undef directives"""
-    def __init__(self, key, value):
-        self.key = key
-        self.value = value
-
-    def __str__(self):
-        if not isinstance(self.value, bool):
-            return f"#define {self.key} {self.value}"
-
-        if self.value is True:
-            return f"#define {self.key}"
-
-        if self.value is False:
-            return f"#undef {self.key}"
-
-
-class Condition(NodeValue):
-    """#ifdef, #ifndef, #endif directives"""
-    def __init__(self, key, value, complement=None):
-        self.key = key
-        self.value = value
-        self.complement = complement
-
-    def __str__(self):
-        if self.value is True:
-            return f"#ifdef {self.key}"
-
-        if self.value is False:
-            return f"#ifndef {self.key}"
-
-        if self.value is None:
-            return "#endif"
-
-
-class Section(NodeValue):
-    """A regular section heading"""
-    def __init__(self, title: str):
-        self.title = title
-
-    def __str__(self):
-        return f"[ {self.title} ]"
-
-
-class Subsection(NodeValue):
-    """A subsection heading"""
-    def __init__(self, title: str):
-        self.title = title
-
-    def __str__(self):
-        return f"[ {self.title} ]"
-
-
-class Comment(NodeValue):
-    """Standalone full-line comment"""
-    def __init__(self, char: str, comment: str):
-        self.char = char
-        self.comment = comment
-
-    def __str__(self):
-        return f"{self.char} {self.comment.__str__()}"
-
-
-class Include(NodeValue):
-    """#include directive"""
-    def __init__(self, include: str):
-        self.include = include
-
-    def __str__(self):
-        return f"#include {self.include.__str__()}"
-
-
-class DefaultsEntry(NodeValue):
-    def __init__(
-            self, nbfunc, comb_rule,
-            gen_pairs="no", fudgeLJ=None, fudgeQQ=None, n=None):
-
-        self.nbfunc = nbfunc
-        self.comb_rule = comb_rule
-        self.gen_pairs = gen_pairs
-        self.fudgeLJ = fudgeLJ
-        self.fudgeQQ = fudgeQQ
-        self.n = n
-
-    def __str__(self):
-        return_str = f"{self.nbfunc:<16}{self.comb_rule:<16}"
-        if self.gen_pairs is not None:
-            return_str += f"{self.gen_pairs:<16}"
-        if self.fudgeLJ is not None:
-            return_str += f"{self.fudgeLJ:<8}"
-        if self.fudgeQQ is not None:
-            return_str += f"{self.fudgeQQ:<8}"
-        if self.n is not None:
-            return_str += f"{self.n:<8}"
-        return return_str
 
 
 class AlwayGreater:
@@ -690,10 +627,6 @@ class AlwaysLess:
 
     def __le__(self, other):
         return True
-
-
-class AtomtypesEntry(NodeValue):
-    pass
 
 
 def get_gmx_dir():
@@ -735,4 +668,3 @@ def ensure_proxy(obj):
         return weakref.proxy(obj)
 
     return obj
-

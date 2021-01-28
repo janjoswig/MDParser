@@ -1,22 +1,22 @@
-_0 #include "amber99sb-ildn.ff/forcefield.itp"
+include_1            #include "amber99sb-ildn.ff/forcefield.itp"
 
-_1 [ moleculetype ]
+moleculetype_1       [ moleculetype ]
 
-_2 Ion    3
+generic_1            Ion    3
 
-_3 [ atoms ]
+atoms_1              [ atoms ]
 
-_4 1         C0      1     CA     CA      1     2.0000     40.080
+generic_2            1         C0      1     CA     CA      1     2.0000     40.080
 
-_5 #include "amber99sb-ildn.ff/tip3p.itp"
+include_2            #include "amber99sb-ildn.ff/tip3p.itp"
 
-_6 #include "amber99sb-ildn.ff/ions.itp"
+include_3            #include "amber99sb-ildn.ff/ions.itp"
 
-_7 [ system ]
+system_1             [ system ]
 
-_8 Ion not yet in water
+generic_3            Ion not yet in water
 
-_9 [ molecules ]
+molecules_1          [ molecules ]
 
-_10 Ion    1
+generic_4            Ion    1
 

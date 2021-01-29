@@ -112,3 +112,43 @@ class TestNode:
         node.value = "value"
 
         assert f"{node!r}" == "Node(key='key', value='value')"
+
+
+class TestNodeValues:
+
+    def test_representations(self):
+        node = _gmx_nodes.GenericNodeValue("value")
+
+        assert f"{node!r}" == "GenericNodeValue(value='value')"
+
+    def test_counting(self):
+        node_type = _gmx_nodes.GenericNodeValue
+        node_type.reset_count()
+        assert node_type._count == 0
+
+        node1 = node_type(1)
+        assert node1.count == 1
+        assert node_type._count == 1
+
+        node2 = node_type(2)
+        assert node1.count == 1
+        assert node2.count == 2
+        assert node_type._count == 2
+
+        node_type.reset_count()
+        assert node1.count == 1
+        assert node2.count == 2
+        assert node_type._count == 0
+
+        node_type.reset_count(3)
+        assert node_type._count == 3
+
+    def test_entries(self):
+
+        section_entry_type = _gmx_nodes.SectionEntry
+
+        section_entry = section_entry_type.from_line(
+            "a b c".split(), comment="abc"
+            )
+
+        assert f"{section_entry!s}" == "; abc"

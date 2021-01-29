@@ -323,6 +323,14 @@ class SectionEntry(NodeValue):
 
         return entry
 
+    def __str__(self):
+        return_str = ""
+
+        if self.comment is not None:
+            return_str += f"; {self.comment}"
+
+        return return_str
+
 
 class DefaultsEntry(SectionEntry):
     """Entry in defaults section"""

@@ -28,7 +28,7 @@ defaults_1           [ defaults ]
 
 comment_12           ; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
 
-defaults_entry_1     1               2               yes             0.5     0.8333  
+defaults_entry_1     1               2               yes             0.5     0.8333 
 
 atomtypes_1          [ atomtypes ]
 
@@ -1296,27 +1296,27 @@ define_31            #define torsion_ASN_CA_CB_CG_ND2_mult6 0.0        -0.443504
 
 moleculetype_1       [ moleculetype ]
 
-moleculetype_entry_1 Ion    3 
+moleculetype_entry_1     3
 
 atoms_1              [ atoms ]
 
-atoms_entry_1         1     C0    1     CA    CA    1     2.0    40.08  
+atoms_entry_1         1     C0    1     CA    CA   1     2.0    40.08 
 
 moleculetype_2       [ moleculetype ]
 
 comment_34           ; molname	nrexcl
 
-moleculetype_entry_2 SOL    2 
+moleculetype_entry_2     2
 
 atoms_2              [ atoms ]
 
 comment_35           ; id  at type     res nr  res name  at name  cg nr  charge    mass
 
-atoms_entry_2         1     OW    1     SOL   OW    1     -0.834 16.0   
+atoms_entry_2         1     OW    1     SOL   OW   1     -0.834 16.0  
 
-atoms_entry_3         2     HW    1     SOL   HW1   1     0.417  1.008  
+atoms_entry_3         2     HW    1     SOL   HW1  1     0.417  1.008 
 
-atoms_entry_4         3     HW    1     SOL   HW2   1     0.417  1.008  
+atoms_entry_4         3     HW    1     SOL   HW2  1     0.417  1.008 
 
 settles_1            [ settles ]
 
@@ -1336,121 +1336,121 @@ moleculetype_3       [ moleculetype ]
 
 comment_37           ; molname       nrexcl
 
-moleculetype_entry_3 IB+    1 ;  big positive ion
+moleculetype_entry_3     1 ;  big positive ion
 
 atoms_3              [ atoms ]
 
 comment_38           ; id    at type         res nr  residu name     at name  cg nr  charge
 
-atoms_entry_5         1     IB    1     IB+   IB    1     1.0    
+atoms_entry_5         1     IB    1     IB+   IB   1     1.0   
 
 moleculetype_4       [ moleculetype ]
 
 comment_39           ; molname       nrexcl
 
-moleculetype_entry_4 CA    1 
+moleculetype_entry_4     1
 
 atoms_4              [ atoms ]
 
 comment_40           ; id    at type         res nr  residu name     at name  cg nr  charge
 
-atoms_entry_6         1     C0    1     CA    CA    1     2.0    
+atoms_entry_6         1     C0    1     CA    CA   1     2.0   
 
 moleculetype_5       [ moleculetype ]
 
 comment_41           ; molname       nrexcl
 
-moleculetype_entry_5 CL    1 
+moleculetype_entry_5     1
 
 atoms_5              [ atoms ]
 
 comment_42           ; id    at type         res nr  residu name     at name  cg nr  charge
 
-atoms_entry_7         1     Cl    1     CL    CL    1     -1.0   
+atoms_entry_7         1     Cl    1     CL    CL   1     -1.0  
 
 moleculetype_6       [ moleculetype ]
 
 comment_43           ; molname       nrexcl
 
-moleculetype_entry_6 NA    1 
+moleculetype_entry_6     1
 
 atoms_6              [ atoms ]
 
 comment_44           ; id    at type         res nr  residu name     at name  cg nr  charge
 
-atoms_entry_8         1     Na    1     NA    NA    1     1.0    
+atoms_entry_8         1     Na    1     NA    NA   1     1.0   
 
 moleculetype_7       [ moleculetype ]
 
 comment_45           ; molname       nrexcl
 
-moleculetype_entry_7 MG    1 
+moleculetype_entry_7     1
 
 atoms_7              [ atoms ]
 
 comment_46           ; id    at type         res nr  residu name     at name  cg nr  charge
 
-atoms_entry_9         1     MG    1     MG    MG    1     2.0    
+atoms_entry_9         1     MG    1     MG    MG   1     2.0   
 
 moleculetype_8       [ moleculetype ]
 
 comment_47           ; molname       nrexcl
 
-moleculetype_entry_8 K    1 
+moleculetype_entry_8     1
 
 atoms_8              [ atoms ]
 
 comment_48           ; id    at type         res nr  residu name     at name  cg nr  charge
 
-atoms_entry_10        1     K     1     K     K     1     1.0    
+atoms_entry_10        1     K     1     K     K    1     1.0   
 
 moleculetype_9       [ moleculetype ]
 
 comment_49           ; molname       nrexcl
 
-moleculetype_entry_9 RB    1 
+moleculetype_entry_9     1
 
 atoms_9              [ atoms ]
 
 comment_50           ; id    at type         res nr  residu name     at name  cg nr  charge
 
-atoms_entry_11        1     Rb    1     RB    RB    1     1.0    
+atoms_entry_11        1     Rb    1     RB    RB   1     1.0   
 
 moleculetype_10      [ moleculetype ]
 
 comment_51           ; molname       nrexcl
 
-moleculetype_entry_10 CS    1 
+moleculetype_entry_10     1
 
 atoms_10             [ atoms ]
 
 comment_52           ; id    at type         res nr  residu name     at name  cg nr  charge
 
-atoms_entry_12        1     Cs    1     CS    CS    1     1.0    
+atoms_entry_12        1     Cs    1     CS    CS   1     1.0   
 
 moleculetype_11      [ moleculetype ]
 
 comment_53           ; molname       nrexcl
 
-moleculetype_entry_11 LI    1 
+moleculetype_entry_11     1
 
 atoms_11             [ atoms ]
 
 comment_54           ; id    at type         res nr  residu name     at name  cg nr  charge
 
-atoms_entry_13        1     Li    1     LI    LI    1     1.0    
+atoms_entry_13        1     Li    1     LI    LI   1     1.0   
 
 moleculetype_12      [ moleculetype ]
 
 comment_55           ; molname       nrexcl
 
-moleculetype_entry_12 ZN    1 
+moleculetype_entry_12     1
 
 atoms_12             [ atoms ]
 
 comment_56           ; id    at type         res nr  residu name     at name  cg nr  charge
 
-atoms_entry_14        1     Zn    1     ZN    ZN    1     2.0    
+atoms_entry_14        1     Zn    1     ZN    ZN   1     2.0   
 
 system_1             [ system ]
 

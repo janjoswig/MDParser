@@ -296,43 +296,102 @@ class Include(NodeValue):
         return f"#include {self.include.__str__()}"
 
 
-class DefaultsEntry(NodeValue):
+class SectionEntry(NodeValue):
+    """A section entry"""
+
+    _node_key_name = "section_entry"
+    _arg_names = []
+
+    def __init__(self, comment=None):
+        super().__init__()
+
+        self.comment = comment
+
+    @classmethod
+    def from_line(cls, *args, comment=None):
+
+        kwargs = {
+            kw: v
+            for kw, v
+            in zip(cls._arg_names, args)
+            }
+
+        entry = cls(
+            comment=comment,
+            **kwargs
+        )
+
+        return entry
+
+
+class DefaultsEntry(SectionEntry):
     """Entry in defaults section"""
 
     _node_key_name = "defaults_entry"
+    _arg_names = [
+        "nbfunc", "comb_rule",
+        "gen_pairs", "fudgeLJ", "fudgeQQ",
+        "n"
+    ]
 
     def __init__(
             self,
-            nbfunc, comb_rule,
+            nbfunc=None, comb_rule=None,
             gen_pairs="no", fudgeLJ=None, fudgeQQ=None, n=None,
             comment=None):
 
-        super().__init__()
+        super().__init__(comment=comment)
 
-        self.nbfunc = int(nbfunc)
-        self.comb_rule = int(comb_rule)
+        if nbfunc is not None:
+            nbfunc = int(nbfunc)
+        self.nbfunc = nbfunc
+
+        if comb_rule is not None:
+            comb_rule = int(comb_rule)
+        self.comb_rule = comb_rule
+
         self.gen_pairs = gen_pairs
-        self.fudgeLJ = float(fudgeLJ) if fudgeLJ is not None else None
-        self.fudgeQQ = float(fudgeQQ) if fudgeQQ is not None else None
-        self.n = int(n) if n is not None else None
-        self.comment = comment
+
+        if fudgeLJ is not None:
+            fudgeLJ = float(fudgeLJ)
+        self.fudgeLJ = fudgeLJ
+
+        if fudgeQQ is not None:
+            fudgeQQ = float(fudgeQQ)
+        self.fudgeQQ = fudgeQQ
+
+        if n is not None:
+            n = int(n)
+        self.n = n
 
     def __str__(self):
-        return_str = f"{self.nbfunc:<15} {self.comb_rule:<15} "
+        return_str = ""
+
+        if self.nbfunc is not None:
+            return_str += f"{self.nbfunc:<15}"
+
+        if self.comb_rule is not None:
+            return_str += f" {self.comb_rule:<15}"
+
         if self.gen_pairs is not None:
-            return_str += f"{self.gen_pairs:<15} "
+            return_str += f" {self.gen_pairs:<15}"
+
         if self.fudgeLJ is not None:
-            return_str += f"{self.fudgeLJ:<7} "
+            return_str += f" {self.fudgeLJ:<7}"
+
         if self.fudgeQQ is not None:
-            return_str += f"{self.fudgeQQ:<7} "
+            return_str += f" {self.fudgeQQ:<7}"
+
         if self.n is not None:
-            return_str += f"{self.n:<7} "
+            return_str += f" {self.n:<7}"
+
         if self.comment is not None:
-            return_str += f"; {self.comment}"
+            return_str += f" ; {self.comment}"
+
         return return_str
 
 
-class AtomtypesEntry(NodeValue):
+class AtomtypesEntry(SectionEntry):
 
     _node_key_name = "atomtypes_entry"
 
@@ -370,13 +429,16 @@ class AtomtypesEntry(NodeValue):
         return return_str
 
 
-class MoleculetypeEntry(NodeValue):
+class MoleculetypeEntry(SectionEntry):
 
     _node_key_name = "moleculetype_entry"
+    _arg_names = [
+        "name", "nrexcl"
+    ]
 
-    def __init__(self, name, nrexcl=None, comment=None):
+    def __init__(self, name=None, nrexcl=None, comment=None):
 
-        super().__init__()
+        super().__init__(comment=comment)
 
         self.name = name
 
@@ -384,23 +446,29 @@ class MoleculetypeEntry(NodeValue):
             nrexcl = int(nrexcl)
         self.nrexcl = nrexcl
 
-        self.comment = comment
-
     def __str__(self):
-        return_str = f"{self.name}"
+        return_str = ""
+
+        if self.name is None:
+            return_str += f"{self.name}"
 
         if self.nrexcl is not None:
-            return_str += f"    {self.nrexcl} "
+            return_str += f"    {self.nrexcl}"
 
         if self.comment is not None:
-            return_str += f"; {self.comment}"
+            return_str += f" ; {self.comment}"
 
         return return_str
 
 
-class AtomsEntry(NodeValue):
+class AtomsEntry(SectionEntry):
 
     _node_key_name = "atoms_entry"
+    _arg_names = [
+        "nr", "type", "resnr", "residue",
+        "atom", "cgnr", "charge", "mass",
+        "typeB", "chargeB", "massB"
+        ]
 
     def __init__(
             self,
@@ -409,7 +477,7 @@ class AtomsEntry(NodeValue):
             typeB=None, chargeB=None, massB=None,
             comment=None):
 
-        super().__init__()
+        super().__init__(comment=comment)
 
         if nr is not None:
             nr = int(nr)
@@ -446,56 +514,111 @@ class AtomsEntry(NodeValue):
             massB = float(massB)
         self.massB = massB
 
-        self.comment = comment
-
-    @classmethod
-    def from_line(cls, *args, comment=None):
-
-        arg_names = [
-            "nr", "type", "resnr", "residue",
-            "atom", "cgnr", "charge", "mass",
-            "typeB", "chargeB", "massB"
-            ]
-
-        kwargs = {
-            kw: v
-            for kw, v
-            in zip(arg_names, args)
-            }
-
-        entry = cls(
-            comment=comment,
-            **kwargs
-        )
-
-        return entry
-
     def __str__(self):
         return_str = (
-            f" {self.nr:<5} "
-            f"{self.type:<5} "
-            f"{self.resnr:<5} "
-            f"{self.residue:<5} "
-            f"{self.atom:<5} "
-            f"{self.cgnr:<5} "
+            f" {self.nr:<5}"
+            f" {self.type:<5}"
+            f" {self.resnr:<5}"
+            f" {self.residue:<5}"
+            f" {self.atom:<5}"
+            f"{self.cgnr:<5}"
         )
 
         if self.charge is not None:
-            return_str += f"{self.charge:<6} "
+            return_str += f" {self.charge:<6}"
 
         if self.mass is not None:
-            return_str += f"{self.mass:<6} "
+            return_str += f" {self.mass:<6}"
 
         if self.typeB is not None:
-            return_str += f"{self.typeB:<5} "
+            return_str += f" {self.typeB:<5}"
 
         if self.chargeB is not None:
-            return_str += f"{self.chargeB:<6} "
+            return_str += f" {self.chargeB:<6}"
 
         if self.massB is not None:
-            return_str += f"{self.massB:<6} "
+            return_str += f" {self.massB:<6}"
 
         if self.comment is not None:
-            return_str += f"; {self.comment}"
+            return_str += f" ; {self.comment}"
+
+        return return_str
+
+
+class BondsEntry(SectionEntry):
+
+    _node_key_name = "bonds_entry"
+
+    _arg_names = [
+        "ai", "aj", "funct",
+        "c0", "c1", "c2", "c3",
+        ]
+
+    def __init__(
+            self,
+            ai=None, aj=None,
+            funct=None,
+            c0=None,
+            c1=None,
+            c2=None,
+            c3=None,
+            comment=None):
+
+        super().__init__(comment=comment)
+
+        if ai is not None:
+            ai = int(ai)
+        self.ai = ai
+
+        if aj is not None:
+            aj = int(aj)
+        self.aj = aj
+
+        if funct is not None:
+            funct = int(funct)
+        self.funct = funct
+
+        if c0 is not None:
+            c0 = float(c0)
+        self.c0 = c0
+
+        if c1 is not None:
+            c1 = float(c1)
+        self.c1 = c1
+
+        if c2 is not None:
+            c2 = float(c2)
+        self.c2 = c2
+
+        if c3 is not None:
+            c3 = float(c3)
+        self.c3 = c3
+
+    def __str__(self):
+        return_str = ""
+
+        if self.ai is not None:
+            return_str += f"{self.ai:>5}"
+
+        if self.aj is not None:
+            return_str += f" {self.aj:>5}"
+
+        if self.funct is not None:
+            return_str += f" {self.funct:>5}"
+
+        if self.c0 is not None:
+            return_str += f" {self.c0:>5}"
+
+        if self.c1 is not None:
+            return_str += f" {self.c1:>5}"
+
+        if self.c2 is not None:
+            return_str += f" {self.c2:>5}"
+
+        if self.c3 is not None:
+            return_str += f" {self.c3:>5}"
+
+        if self.comment is not None:
+            return_str += f" ; {self.comment}"
 
         return return_str

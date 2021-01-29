@@ -8,7 +8,7 @@ generic_1            Ion    3
 
 atoms_1              [ atoms ]
 
-generic_2            1         C0      1     CA     CA      1     2.0000     40.080
+atoms_entry_1         1     C0    1     CA    CA    1     2.0    40.08  
 
 include_2            #include "amber99sb-ildn.ff/tip3p.itp"
 
@@ -16,9 +16,9 @@ include_3            #include "amber99sb-ildn.ff/ions.itp"
 
 system_1             [ system ]
 
-generic_3            Ion not yet in water
+generic_2            Ion not yet in water
 
 molecules_1          [ molecules ]
 
-generic_4            Ion    1
+generic_3            Ion    1
 

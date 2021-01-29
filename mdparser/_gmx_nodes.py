@@ -274,9 +274,13 @@ class Comment(NodeValue):
     def __init__(self, comment: str):
         super().__init__()
         self.comment = comment
+        self._char = ";"
 
     def __str__(self):
-        return f"; {self.comment.__str__()}"
+        if self._char is None:
+            return f"{self.comment}"
+        else:
+            return f"{self._char} {self.comment.__str__()}"
 
 
 class Include(NodeValue):
@@ -304,6 +308,7 @@ class DefaultsEntry(NodeValue):
             comment=None):
 
         super().__init__()
+
         self.nbfunc = int(nbfunc)
         self.comb_rule = int(comb_rule)
         self.gen_pairs = gen_pairs
@@ -323,16 +328,16 @@ class DefaultsEntry(NodeValue):
         if self.n is not None:
             return_str += f"{self.n:<7} "
         if self.comment is not None:
-            return_str += self.comment
+            return_str += f"; {self.comment}"
         return return_str
 
 
 class AtomtypesEntry(NodeValue):
 
-    _node_key_name = "atomtypess_entry"
+    _node_key_name = "atomtypes_entry"
 
-    def __init__(
-            self, *args, comment=None):
+    def __init__(self, *args, comment=None):
+
         super().__init__()
 
         self.name = args[0]
@@ -361,5 +366,64 @@ class AtomtypesEntry(NodeValue):
         return_str += f"{self.sigma:1.5e}  "
         return_str += f"{self.epsilon:1.5e} "
         if self.comment is not None:
-            return_str += self.comment
+            return_str += f"; {self.comment}"
+        return return_str
+
+
+class AtomsEntry(NodeValue):
+
+    _node_key_name = "atoms_entry"
+
+    def __init__(self, *args, comment=None):
+
+        super().__init__()
+
+        self.nr = int(args[0])
+        self.type = args[1]
+        self.resnr = int(args[2])
+        self.residue = args[3]
+        self.atom = args[4]
+        self.cgnr = int(args[5])
+        self.charge = float(args[6])
+
+        if len(args) > 7:
+            self.mass = float(args[7])
+        else:
+            self.mass = None
+
+        if len(args) > 8:
+            self.typeB = args[8]
+            self.chargeB = float(args[9])
+            self.massB = float(args[10])
+        else:
+            self.typeB = None
+            self.chargeB = None
+            self.massB = None
+
+        self.comment = comment
+
+    def __str__(self):
+        return_str = (
+            f" {self.nr:<5} "
+            f"{self.type:<5} "
+            f"{self.resnr:<5} "
+            f"{self.residue:<5} "
+            f"{self.atom:<5} "
+            f"{self.cgnr:<5} "
+            f"{self.charge:<6} "
+        )
+
+        if self.mass is not None:
+            return_str += f"{self.mass:<6} "
+
+        if self.typeB is not None:
+            return_str += (
+                f"{self.typeB:<5} "
+                f"{self.chargeB:<6} "
+                f"{self.massB:<6} "
+            )
+
+        if self.comment is not None:
+            return_str += f"; {self.comment}"
+
         return return_str

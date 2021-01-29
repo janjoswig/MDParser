@@ -1,2 +1,2 @@
-comment_1            ; * This file has a comment that spans two lines
+comment_1            * This file has a comment that spans two lines
 

@@ -49,6 +49,7 @@ DEFAULT_NODE_VALUE_TYPES = {
         "angle_restraints_z": _gmx_nodes.AngleRestraintsZSubsection,
         "defaults_entry": _gmx_nodes.DefaultsEntry,
         "atomtypes_entry": _gmx_nodes.AtomtypesEntry,
+        "atoms_entry": _gmx_nodes.AtomsEntry,
     }
 
 
@@ -556,6 +557,7 @@ class GromacsTopParser:
                 node_key, node_value = self._select_node_type(
                     "comment", line
                 )
+                node_value._char = None
                 top.add(node_key, node_value)
                 continue
 

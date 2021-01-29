@@ -1,3 +1,6 @@
+[![Code Coverage](https://raw.githubusercontent.com/janjoswig/MDParser/master/badges/coverage.svg)](https://github.com/janjoswig/MDParser)
+
+
 # MDParser
 
 This is a package for Python-parsers to process typical file formats used for Molecular Dynamics simulations. Currently supported modules and highlights:

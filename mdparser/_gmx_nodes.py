@@ -374,33 +374,73 @@ class AtomsEntry(NodeValue):
 
     _node_key_name = "atoms_entry"
 
-    def __init__(self, *args, comment=None):
+    def __init__(
+            self,
+            nr=None, type=None, resnr=None, residue=None,
+            atom=None, cgnr=None, charge=None, mass=None,
+            typeB=None, chargeB=None, massB=None,
+            comment=None):
 
         super().__init__()
 
-        self.nr = int(args[0])
-        self.type = args[1]
-        self.resnr = int(args[2])
-        self.residue = args[3]
-        self.atom = args[4]
-        self.cgnr = int(args[5])
-        self.charge = float(args[6])
+        if nr is not None:
+            nr = int(nr)
+        self.nr = nr
 
-        if len(args) > 7:
-            self.mass = float(args[7])
-        else:
-            self.mass = None
+        self.type = type
 
-        if len(args) > 8:
-            self.typeB = args[8]
-            self.chargeB = float(args[9])
-            self.massB = float(args[10])
-        else:
-            self.typeB = None
-            self.chargeB = None
-            self.massB = None
+        if resnr is not None:
+            resnr = int(resnr)
+        self.resnr = resnr
+
+        self.residue = residue
+        self.atom = atom
+
+        if cgnr is not None:
+            cgnr = int(cgnr)
+        self.cgnr = cgnr
+
+        if charge is not None:
+            charge = float(charge)
+        self.charge = charge
+
+        if mass is not None:
+            mass = float(mass)
+        self.mass = mass
+
+        self.typeB = typeB
+
+        if chargeB is not None:
+            chargeB = float(chargeB)
+        self.chargeB = chargeB
+
+        if massB is not None:
+            massB = float(massB)
+        self.massB = massB
 
         self.comment = comment
+
+    @classmethod
+    def from_line(cls, *args, comment=None):
+
+        arg_names = [
+            "nr", "type", "resnr", "residue",
+            "atom", "cgnr", "charge", "mass",
+            "typeB", "chargeB", "massB"
+            ]
+
+        kwargs = {
+            kw: v
+            for kw, v
+            in zip(arg_names, args)
+            }
+
+        entry = cls(
+            comment=comment,
+            **kwargs
+        )
+
+        return entry
 
     def __str__(self):
         return_str = (
@@ -410,18 +450,22 @@ class AtomsEntry(NodeValue):
             f"{self.residue:<5} "
             f"{self.atom:<5} "
             f"{self.cgnr:<5} "
-            f"{self.charge:<6} "
         )
+
+        if self.charge is not None:
+            return_str += f"{self.charge:<6} "
 
         if self.mass is not None:
             return_str += f"{self.mass:<6} "
 
         if self.typeB is not None:
-            return_str += (
-                f"{self.typeB:<5} "
-                f"{self.chargeB:<6} "
-                f"{self.massB:<6} "
-            )
+            return_str += f"{self.typeB:<5} "
+
+        if self.chargeB is not None:
+            return_str += f"{self.chargeB:<6} "
+
+        if self.massB is not None:
+            return_str += f"{self.massB:<6} "
 
         if self.comment is not None:
             return_str += f"; {self.comment}"

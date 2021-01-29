@@ -1296,7 +1296,7 @@ define_31            #define torsion_ASN_CA_CB_CG_ND2_mult6 0.0        -0.443504
 
 moleculetype_1       [ moleculetype ]
 
-generic_512          Ion    3
+moleculetype_entry_1 Ion    3 
 
 atoms_1              [ atoms ]
 
@@ -1306,7 +1306,7 @@ moleculetype_2       [ moleculetype ]
 
 comment_34           ; molname	nrexcl
 
-generic_513          SOL		2
+moleculetype_entry_2 SOL    2 
 
 atoms_2              [ atoms ]
 
@@ -1322,21 +1322,21 @@ settles_1            [ settles ]
 
 comment_36           ; OW	funct	doh	dhh
 
-generic_514          1       1       0.09572 0.15139
+generic_512          1       1       0.09572 0.15139
 
 exclusions_1         [ exclusions ]
 
-generic_515          1	2	3
+generic_513          1	2	3
 
-generic_516          2	1	3
+generic_514          2	1	3
 
-generic_517          3	1	2
+generic_515          3	1	2
 
 moleculetype_3       [ moleculetype ]
 
 comment_37           ; molname       nrexcl
 
-generic_518          IB+             1       ; big positive ion
+moleculetype_entry_3 IB+    1 ;  big positive ion
 
 atoms_3              [ atoms ]
 
@@ -1348,7 +1348,7 @@ moleculetype_4       [ moleculetype ]
 
 comment_39           ; molname       nrexcl
 
-generic_519          CA              1
+moleculetype_entry_4 CA    1 
 
 atoms_4              [ atoms ]
 
@@ -1360,7 +1360,7 @@ moleculetype_5       [ moleculetype ]
 
 comment_41           ; molname       nrexcl
 
-generic_520          CL              1
+moleculetype_entry_5 CL    1 
 
 atoms_5              [ atoms ]
 
@@ -1372,7 +1372,7 @@ moleculetype_6       [ moleculetype ]
 
 comment_43           ; molname       nrexcl
 
-generic_521          NA              1
+moleculetype_entry_6 NA    1 
 
 atoms_6              [ atoms ]
 
@@ -1384,7 +1384,7 @@ moleculetype_7       [ moleculetype ]
 
 comment_45           ; molname       nrexcl
 
-generic_522          MG              1
+moleculetype_entry_7 MG    1 
 
 atoms_7              [ atoms ]
 
@@ -1396,7 +1396,7 @@ moleculetype_8       [ moleculetype ]
 
 comment_47           ; molname       nrexcl
 
-generic_523          K               1
+moleculetype_entry_8 K    1 
 
 atoms_8              [ atoms ]
 
@@ -1408,7 +1408,7 @@ moleculetype_9       [ moleculetype ]
 
 comment_49           ; molname       nrexcl
 
-generic_524          RB              1
+moleculetype_entry_9 RB    1 
 
 atoms_9              [ atoms ]
 
@@ -1420,7 +1420,7 @@ moleculetype_10      [ moleculetype ]
 
 comment_51           ; molname       nrexcl
 
-generic_525          CS              1
+moleculetype_entry_10 CS    1 
 
 atoms_10             [ atoms ]
 
@@ -1432,7 +1432,7 @@ moleculetype_11      [ moleculetype ]
 
 comment_53           ; molname       nrexcl
 
-generic_526          LI              1
+moleculetype_entry_11 LI    1 
 
 atoms_11             [ atoms ]
 
@@ -1444,7 +1444,7 @@ moleculetype_12      [ moleculetype ]
 
 comment_55           ; molname       nrexcl
 
-generic_527          ZN              1
+moleculetype_entry_12 ZN    1 
 
 atoms_12             [ atoms ]
 
@@ -1454,9 +1454,9 @@ atoms_entry_14        1     Zn    1     ZN    ZN    1     2.0
 
 system_1             [ system ]
 
-generic_528          Ion not yet in water
+generic_516          Ion not yet in water
 
 molecules_1          [ molecules ]
 
-generic_529          Ion    1
+generic_517          Ion    1
 

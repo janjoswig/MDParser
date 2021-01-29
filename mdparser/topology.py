@@ -49,6 +49,7 @@ DEFAULT_NODE_VALUE_TYPES = {
         "angle_restraints_z": _gmx_nodes.AngleRestraintsZSubsection,
         "defaults_entry": _gmx_nodes.DefaultsEntry,
         "atomtypes_entry": _gmx_nodes.AtomtypesEntry,
+        "moleculetype_entry": _gmx_nodes.MoleculetypeEntry,
         "atoms_entry": _gmx_nodes.AtomsEntry,
     }
 

@@ -1250,7 +1250,7 @@ define_31            #define torsion_ASN_CA_CB_CG_ND2_mult6 0.0        -0.443504
 
 moleculetype_1       [ moleculetype ]
 
-generic_512          Ion    3
+moleculetype_entry_1 Ion    3 
 
 atoms_1              [ atoms ]
 
@@ -1260,13 +1260,13 @@ condition_1          #ifdef POSRES
 
 position_restraints_1 [ position_restraints ]
 
-generic_513          1     1  1000  1000  1000
+generic_512          1     1  1000  1000  1000
 
 condition_2          #endif
 
 moleculetype_2       [ moleculetype ]
 
-generic_514          SOL		2
+moleculetype_entry_2 SOL    2 
 
 atoms_2              [ atoms ]
 
@@ -1280,15 +1280,15 @@ condition_3          #ifndef FLEXIBLE
 
 settles_1            [ settles ]
 
-generic_515          1       1       0.09572 0.15139
+generic_513          1       1       0.09572 0.15139
 
 exclusions_1         [ exclusions ]
 
-generic_516          1	2	3
+generic_514          1	2	3
 
-generic_517          2	1	3
+generic_515          2	1	3
 
-generic_518          3	1	2
+generic_516          3	1	2
 
 condition_4          #endif
 
@@ -1296,13 +1296,13 @@ condition_5          #ifdef FLEXIBLE
 
 bonds_1              [ bonds ]
 
-generic_519          1       2       1       0.09572 502416.0   0.09572        502416.0
+generic_517          1       2       1       0.09572 502416.0   0.09572        502416.0
 
-generic_520          1       3       1       0.09572 502416.0   0.09572        502416.0
+generic_518          1       3       1       0.09572 502416.0   0.09572        502416.0
 
 angles_1             [ angles ]
 
-generic_521          2       1       3       1       104.52  628.02      104.52  628.02
+generic_519          2       1       3       1       104.52  628.02      104.52  628.02
 
 condition_6          #endif
 
@@ -1310,13 +1310,13 @@ condition_7          #ifdef POSRES_WATER
 
 position_restraints_2 [ position_restraints ]
 
-generic_522          1    1       1000       1000       1000
+generic_520          1    1       1000       1000       1000
 
 condition_8          #endif
 
 moleculetype_3       [ moleculetype ]
 
-generic_523          IB+             1
+moleculetype_entry_3 IB+    1 
 
 atoms_3              [ atoms ]
 
@@ -1324,7 +1324,7 @@ atoms_entry_5         1     IB    1     IB+   IB    1     1.0
 
 moleculetype_4       [ moleculetype ]
 
-generic_524          CA              1
+moleculetype_entry_4 CA    1 
 
 atoms_4              [ atoms ]
 
@@ -1332,7 +1332,7 @@ atoms_entry_6         1     C0    1     CA    CA    1     2.0
 
 moleculetype_5       [ moleculetype ]
 
-generic_525          CL              1
+moleculetype_entry_5 CL    1 
 
 atoms_5              [ atoms ]
 
@@ -1340,7 +1340,7 @@ atoms_entry_7         1     Cl    1     CL    CL    1     -1.0
 
 moleculetype_6       [ moleculetype ]
 
-generic_526          NA              1
+moleculetype_entry_6 NA    1 
 
 atoms_6              [ atoms ]
 
@@ -1348,7 +1348,7 @@ atoms_entry_8         1     Na    1     NA    NA    1     1.0
 
 moleculetype_7       [ moleculetype ]
 
-generic_527          MG              1
+moleculetype_entry_7 MG    1 
 
 atoms_7              [ atoms ]
 
@@ -1356,7 +1356,7 @@ atoms_entry_9         1     MG    1     MG    MG    1     2.0
 
 moleculetype_8       [ moleculetype ]
 
-generic_528          K               1
+moleculetype_entry_8 K    1 
 
 atoms_8              [ atoms ]
 
@@ -1364,7 +1364,7 @@ atoms_entry_10        1     K     1     K     K     1     1.0
 
 moleculetype_9       [ moleculetype ]
 
-generic_529          RB              1
+moleculetype_entry_9 RB    1 
 
 atoms_9              [ atoms ]
 
@@ -1372,7 +1372,7 @@ atoms_entry_11        1     Rb    1     RB    RB    1     1.0
 
 moleculetype_10      [ moleculetype ]
 
-generic_530          CS              1
+moleculetype_entry_10 CS    1 
 
 atoms_10             [ atoms ]
 
@@ -1380,7 +1380,7 @@ atoms_entry_12        1     Cs    1     CS    CS    1     1.0
 
 moleculetype_11      [ moleculetype ]
 
-generic_531          LI              1
+moleculetype_entry_11 LI    1 
 
 atoms_11             [ atoms ]
 
@@ -1388,7 +1388,7 @@ atoms_entry_13        1     Li    1     LI    LI    1     1.0
 
 moleculetype_12      [ moleculetype ]
 
-generic_532          ZN              1
+moleculetype_entry_12 ZN    1 
 
 atoms_12             [ atoms ]
 
@@ -1396,9 +1396,9 @@ atoms_entry_14        1     Zn    1     ZN    ZN    1     2.0
 
 system_1             [ system ]
 
-generic_533          Ion not yet in water
+generic_521          Ion not yet in water
 
 molecules_1          [ molecules ]
 
-generic_534          Ion    1
+generic_522          Ion    1
 

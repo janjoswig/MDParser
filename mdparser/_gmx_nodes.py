@@ -370,6 +370,34 @@ class AtomtypesEntry(NodeValue):
         return return_str
 
 
+class MoleculetypeEntry(NodeValue):
+
+    _node_key_name = "moleculetype_entry"
+
+    def __init__(self, name, nrexcl=None, comment=None):
+
+        super().__init__()
+
+        self.name = name
+
+        if nrexcl is not None:
+            nrexcl = int(nrexcl)
+        self.nrexcl = nrexcl
+
+        self.comment = comment
+
+    def __str__(self):
+        return_str = f"{self.name}"
+
+        if self.nrexcl is not None:
+            return_str += f"    {self.nrexcl} "
+
+        if self.comment is not None:
+            return_str += f"; {self.comment}"
+
+        return return_str
+
+
 class AtomsEntry(NodeValue):
 
     _node_key_name = "atoms_entry"

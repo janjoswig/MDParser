@@ -733,3 +733,43 @@ class BondsEntry(SectionEntry):
         return_str = self._finish_str(return_str)
 
         return return_str
+
+
+class ExclusionsEntry(SectionEntry):
+
+    _node_key_name = "exclusions_entry"
+
+    _arg_names = [
+        "indices"
+        ]
+
+    def __init__(
+            self,
+            indices=None,
+            comment=None):
+
+        super().__init__(comment=comment)
+
+        if indices is not None:
+            indices = [int(i) for i in indices]
+        self.indices = indices
+
+    @classmethod
+    def from_line(cls, *args, comment):
+
+        entry = cls(
+            indices=args,
+            comment=comment,
+        )
+
+        return entry
+
+    def __str__(self):
+        return_str = ""
+
+        if self.indices is not None:
+            return_str += " ".join([f"{i:>5}" for i in self.indices])
+
+        return_str = self._finish_str(return_str)
+
+        return return_str

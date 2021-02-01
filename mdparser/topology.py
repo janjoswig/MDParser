@@ -16,6 +16,8 @@ DEFAULT_NODE_VALUE_TYPES = {
         "include": _gmx_nodes.Include,
         "condition": _gmx_nodes.Condition,
         "section": _gmx_nodes.Section,
+        "subsection": _gmx_nodes.Subsection,
+        "entry": _gmx_nodes.SectionEntry,
         "defaults": _gmx_nodes.DefaultsSection,
         "atomtypes": _gmx_nodes.AtomtypesSection,
         "bondtypes": _gmx_nodes.BondtypesSection,
@@ -52,6 +54,7 @@ DEFAULT_NODE_VALUE_TYPES = {
         "moleculetype_entry": _gmx_nodes.MoleculetypeEntry,
         "atoms_entry": _gmx_nodes.AtomsEntry,
         "bonds_entry": _gmx_nodes.BondsEntry,
+        "exclusions_entry": _gmx_nodes.ExclusionsEntry,
     }
 
 
@@ -69,7 +72,9 @@ class GromacsTop:
     def __str__(self):
         return_str = ""
         for node in self:
-            return_str += f"{node.key:<20} {node.value!s}\n\n"
+            if isinstance(node.value, self.__node_value_types["section"]):
+                return_str += "\n"
+            return_str += f"{node.value!s}\n"
 
         return return_str
 

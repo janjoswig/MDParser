@@ -1284,11 +1284,11 @@ generic_513          1       1       0.09572 0.15139
 
 exclusions_1         [ exclusions ]
 
-generic_514          1	2	3
+exclusions_entry_1       1     2     3
 
-generic_515          2	1	3
+exclusions_entry_2       2     1     3
 
-generic_516          3	1	2
+exclusions_entry_3       3     1     2
 
 condition_4          #endif
 
@@ -1302,7 +1302,7 @@ bonds_entry_2            1     3     1 9.572000e-02 5.024160e+05 9.572000e-02 5.
 
 angles_1             [ angles ]
 
-generic_517          2       1       3       1       104.52  628.02      104.52  628.02
+generic_514          2       1       3       1       104.52  628.02      104.52  628.02
 
 condition_6          #endif
 
@@ -1310,7 +1310,7 @@ condition_7          #ifdef POSRES_WATER
 
 position_restraints_2 [ position_restraints ]
 
-generic_518          1    1       1000       1000       1000
+generic_515          1    1       1000       1000       1000
 
 condition_8          #endif
 
@@ -1396,9 +1396,9 @@ atoms_entry_14       1     Zn    1     ZN    ZN    1     2.0
 
 system_1             [ system ]
 
-generic_519          Ion not yet in water
+generic_516          Ion not yet in water
 
 molecules_1          [ molecules ]
 
-generic_520          Ion    1
+generic_517          Ion    1
 

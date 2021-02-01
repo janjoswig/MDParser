@@ -33,4 +33,8 @@ class TestParseTopologies:
 
         assert isinstance(topology, mdtop.GromacsTop)
 
-        file_regression.check(str(topology))
+        regression_str = ""
+        for node in topology:
+            regression_str += f"{node.key:<20} {node.value!s}\n\n"
+
+        file_regression.check(regression_str)

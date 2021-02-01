@@ -337,6 +337,14 @@ class SectionEntry(NodeValue):
 
         return return_str
 
+    def __repr__(self):
+        arg_name_repr = ", ".join(
+            f"{arg_name!s}={getattr(self, arg_name)!r}"
+            for arg_name in self._arg_names
+            )
+
+        return f"{type(self).__name__}({arg_name_repr})"
+
     def _finish_str(self, string):
         if self.comment is not None:
             string += f" ; {self.comment}"
@@ -514,6 +522,14 @@ class AtomtypesEntry(SectionEntry):
         return_str = self._finish_str(return_str)
 
         return return_str
+
+    def __repr__(self):
+        arg_name_repr = ", ".join(
+            f"{arg_name!s}={getattr(self, arg_name)!r}"
+            for arg_name in self._arg_names[0]
+            )
+
+        return f"{type(self).__name__}({arg_name_repr})"
 
 
 class MoleculetypeEntry(SectionEntry):

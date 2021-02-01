@@ -75,6 +75,19 @@ class TestGromacsTop:
         with pytest.raises(ValueError):
             _ = top.index("garbage")
 
+        top.relative_insert(
+            top[2], "special", _gmx_nodes.GenericNodeValue("grubbs")
+            )
+
+        assert top[3].value.value == "grubbs"
+
+        top.relative_insert(
+            top[3], "slurb", _gmx_nodes.GenericNodeValue("balaz"),
+            after=False
+            )
+
+        assert top[3].value.value == "balaz"
+
     def test_info(self):
 
         top = mdtop.GromacsTop()
@@ -146,6 +159,22 @@ class TestGromacsTop:
                 exclude=_gmx_nodes.Subsection
                 )
 
+        with pytest.raises(LookupError):
+            node = top.get_next_node_of_type(
+                start=top["another_section"],
+                stop=top["subsection"],
+                node_type=_gmx_nodes.Section,
+                exclude=_gmx_nodes.Subsection,
+                forward=False
+                )
+
+        node = top.get_next_node_of_type(
+            start=top["another_section"],
+            node_type=_gmx_nodes.Section,
+            exclude=_gmx_nodes.Subsection,
+            forward=False
+            )
+        assert node is top["section"]
 
 class TestNode:
 
@@ -174,11 +203,6 @@ class TestNodeValues:
                 _gmx_nodes.Define,
                 {"key": "key", "value": True},
                 ["key", "value"]
-            ),
-            (
-                _gmx_nodes.DefaultsEntry,
-                {},
-                []
             ),
         ]
     )

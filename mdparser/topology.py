@@ -207,6 +207,22 @@ class GromacsTop:
         prev.next = node
         next_node.prev = weakref.proxy(node)
 
+    def relative_insert(self, node, key, value, after=True):
+        """Insert node after/before other node"""
+
+        new_node = self._check_key_and_add_new_node(key)
+
+        if after is True:
+            new_node.prev, new_node.next = node.next.prev, node.next
+            new_node.next.prev = weakref.proxy(new_node)
+            node.next = new_node
+        else:
+            new_node.prev, new_node.next = node.prev, node
+            new_node.prev.next = new_node
+            node.prev = weakref.proxy(new_node)
+
+        new_node.key, new_node.value = key, value
+
     def get_next_node_of_type(
             self, start=None, stop=None, node_type=None,
             exclude=None, forward=True):
@@ -216,8 +232,8 @@ class GromacsTop:
             start: obj:`Node` to start from.  If `None`, a `node_type`
                 must be given and search starts at the beginning.
             stop: :obj:`Node` to stop at.  If `None`, search until end.
-            node_type: Type of node to search for.  If `None`, search
-                for same type as start.
+            node_type: Type of node value to search for.
+                If `None`, search for same type as start.
             exclude: Exclude node types from search.
             forward: If `True`, search topology forwards.  If `False`,
                 search backwards.
@@ -245,7 +261,7 @@ class GromacsTop:
 
         node = getattr(start, goto)
 
-        while node is not stop:
+        while unproxy_node(node) is not stop:
             if not isinstance(node.value, node_type):
                 node = getattr(node, goto)
                 continue
@@ -254,14 +270,14 @@ class GromacsTop:
                 node = getattr(node, goto)
                 continue
 
-            return node
+            return unproxy_node(node)
 
         raise LookupError(f"Node of type {node_type} not found")
 
     @property
     def includes_resolved(self):
         for node in self:
-            if isinstance(node.value, _gmx_nodes.Include):
+            if isinstance(node.value, self.__node_value_types["include"]):
                 return False
         else:
             return True
@@ -269,7 +285,7 @@ class GromacsTop:
     @property
     def conditions_resolved(self):
         for node in self:
-            if isinstance(node.value, _gmx_nodes.Condition):
+            if isinstance(node.value, self.__node_value_types["condition"]):
                 return False
         else:
             return True
@@ -286,7 +302,7 @@ class GromacsTop:
 
         current = getattr(node, goto)
         while current is not root:
-            if isinstance(current.value, _gmx_nodes.Condition):
+            if isinstance(current.value, self.__node_value_types["condition"]):
                 if current.value.key == node.value.key:
                     return current
             current = getattr(current, goto)
@@ -732,3 +748,7 @@ def ensure_proxy(obj):
         return weakref.proxy(obj)
 
     return obj
+
+
+def unproxy_node(node):
+    return node.prev.next

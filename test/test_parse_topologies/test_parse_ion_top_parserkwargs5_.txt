@@ -10,11 +10,9 @@ atoms_entry_1        1     C0    1     CA    CA    1     2.0    40.08
 
 include_2            #include "amber99sb-ildn.ff/tip3p.itp"
 
-include_3            #include "amber99sb-ildn.ff/ions.itp"
-
 system_1             [ system ]
 
-system_entry_1       Ion
+system_entry_1       Ion not yet in water
 
 molecules_1          [ molecules ]
 

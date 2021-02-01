@@ -21,8 +21,6 @@ Ion    3
    1    1       1000       1000       1000
 #endif
 
-#include "amber99sb-ildn.ff/ions.itp"
-
 [ system ]
 Ion not yet in water
 

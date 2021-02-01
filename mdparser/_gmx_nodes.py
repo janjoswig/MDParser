@@ -621,6 +621,16 @@ class SystemEntry(SectionEntry):
 
         self.name = name
 
+    @classmethod
+    def from_line(cls, *args, comment):
+
+        entry = cls(
+            name=" ".join(args),
+            comment=comment,
+        )
+
+        return entry
+
     def __str__(self):
         return_str = ""
 

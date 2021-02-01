@@ -17,7 +17,8 @@ class TestParseTopologies:
             ("ion.top", {}),
             ("ion.top", {"ignore_comments": False}),
             ("ion.top", {"include_shared": True, "ignore_comments": False}),
-            ("ion.top", {"include_shared": True, "resolve_conditions": False})
+            ("ion.top", {"include_shared": True, "resolve_conditions": False}),
+            ("two_ions.top", {}),
             ]
         )
     def test_parse(

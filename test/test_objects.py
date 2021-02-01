@@ -176,6 +176,7 @@ class TestGromacsTop:
             )
         assert node is top["section"]
 
+
 class TestNode:
 
     def test_representation(self):

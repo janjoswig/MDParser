@@ -332,6 +332,9 @@ class SectionEntry(NodeValue):
         return entry
 
     def __str__(self):
+        if self._raw is not None:
+            return self._raw
+
         return_str = ""
         return_str = self._finish_str(return_str)
 
@@ -532,6 +535,48 @@ class AtomtypesEntry(SectionEntry):
         return f"{type(self).__name__}({arg_name_repr})"
 
 
+class BondtypesEntry(SectionEntry):
+    _node_key_name = "bondtypes_entry"
+    _arg_names = [
+        "i", "j", "func", "c0", "c1", "c2", "c3"
+    ]
+
+
+class AngletypesEntry(SectionEntry):
+    _node_key_name = "angletypes_entry"
+    _arg_names = [
+        "i", "j", "k", "func", "c0", "c1", "c2", "c3"
+    ]
+
+
+class PairtypesEntry(SectionEntry):
+    _node_key_name = "pairtypes_entry"
+    _arg_names = [
+        "i", "j", "func", "c0", "c1", "c2", "c3", "c4"
+    ]
+
+
+class DihedraltypesEntry(SectionEntry):
+    _node_key_name = "dihedraltypes_entry"
+    _arg_names = [
+        "i", "j", "k", "l", "func", "c0", "c1", "c2", "c3", "c4", "c5"
+    ]
+
+
+class ConstrainttypesEntry(SectionEntry):
+    _node_key_name = "constrainttypes_entry"
+    _arg_names = [
+        "i", "j", "func", "c0", "c1"
+    ]
+
+
+class NonbondedParamsEntry(SectionEntry):
+    _node_key_name = "nonbonded_params_entry"
+    _arg_names = [
+        "i", "j", "func", "c0", "c1", "c2"
+    ]
+
+
 class MoleculetypeEntry(SectionEntry):
 
     _node_key_name = "moleculetype_entry"
@@ -557,6 +602,61 @@ class MoleculetypeEntry(SectionEntry):
 
         if self.nrexcl is not None:
             return_str += f"    {self.nrexcl}"
+
+        return_str = self._finish_str(return_str)
+
+        return return_str
+
+
+class SystemEntry(SectionEntry):
+
+    _node_key_name = "system_entry"
+    _arg_names = [
+        "name"
+    ]
+
+    def __init__(self, name=None, comment=None):
+
+        super().__init__(comment=comment)
+
+        self.name = name
+
+    def __str__(self):
+        return_str = ""
+
+        if self.name is not None:
+            return_str += f"{self.name}"
+
+        return_str = self._finish_str(return_str)
+
+        return return_str
+
+
+class MoleculesEntry(SectionEntry):
+
+    _node_key_name = "molecules_entry"
+    _arg_names = [
+        "molecule", "number"
+    ]
+
+    def __init__(self, molecule=None, number=None, comment=None):
+
+        super().__init__(comment=comment)
+
+        self.molecule = molecule
+
+        if number is not None:
+            number = int(number)
+        self.number = number
+
+    def __str__(self):
+        return_str = ""
+
+        if self.molecule is not None:
+            return_str += f"{self.molecule}"
+
+        if self.number is not None:
+            return_str += f"    {self.number}"
 
         return_str = self._finish_str(return_str)
 

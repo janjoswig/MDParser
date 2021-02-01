@@ -14,9 +14,9 @@ include_3            #include "amber99sb-ildn.ff/ions.itp"
 
 system_1             [ system ]
 
-generic_1            Ion not yet in water
+system_entry_1       Ion
 
 molecules_1          [ molecules ]
 
-generic_2            Ion    1
+molecules_entry_1    Ion    1
 

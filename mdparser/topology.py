@@ -16,8 +16,6 @@ DEFAULT_NODE_VALUE_TYPES = {
         "include": _gmx_nodes.Include,
         "condition": _gmx_nodes.Condition,
         "section": _gmx_nodes.Section,
-        "subsection": _gmx_nodes.Subsection,
-        "entry": _gmx_nodes.SectionEntry,
         "defaults": _gmx_nodes.DefaultsSection,
         "atomtypes": _gmx_nodes.AtomtypesSection,
         "bondtypes": _gmx_nodes.BondtypesSection,
@@ -49,12 +47,21 @@ DEFAULT_NODE_VALUE_TYPES = {
         "orientation_restraints": _gmx_nodes.OrientationRestraintsSubsection,
         "angle_restraints": _gmx_nodes.AngleRestraintsSubsection,
         "angle_restraints_z": _gmx_nodes.AngleRestraintsZSubsection,
+        "entry": _gmx_nodes.SectionEntry,
         "defaults_entry": _gmx_nodes.DefaultsEntry,
         "atomtypes_entry": _gmx_nodes.AtomtypesEntry,
+        "bondtypes_entry": _gmx_nodes.BondtypesEntry,   # raw
+        "angletypes_entry": _gmx_nodes.AngletypesEntry, # raw
+        "pairtypes_entry": _gmx_nodes.PairtypesEntry,   # raw
+        "dihedraltypes_entry": _gmx_nodes.DihedraltypesEntry,       # raw
+        "constrainttypes_entry": _gmx_nodes.ConstrainttypesEntry,   # raw
+        "nonbonded_params_entry": _gmx_nodes.NonbondedParamsEntry,  # raw
         "moleculetype_entry": _gmx_nodes.MoleculetypeEntry,
         "atoms_entry": _gmx_nodes.AtomsEntry,
         "bonds_entry": _gmx_nodes.BondsEntry,
         "exclusions_entry": _gmx_nodes.ExclusionsEntry,
+        "system_entry": _gmx_nodes.SystemEntry,
+        "molecules_entry": _gmx_nodes.MoleculesEntry,
     }
 
 
@@ -644,8 +651,16 @@ class GromacsTopParser:
                     comment = None
 
                 args = line.split()
-                node_value = node_type.from_line(*args, comment=comment)
-                node_key = node_value._make_node_key()
+
+                try:
+                    node_value = node_type.from_line(*args, comment=comment)
+                except TypeError:
+                    if comment is not None:
+                        line += f" ; {comment}"
+                    node_value = node_type.create_raw(f"{line}")
+                finally:
+                    node_key = node_value._make_node_key()
+
                 top.add(node_key, node_value)
                 continue
 

@@ -1,3 +1,5 @@
+import weakref
+
 import pytest
 
 import mdparser.topology as mdtop
@@ -330,3 +332,28 @@ class TestNodeValues:
             )
 
         assert f"{section_entry!s}" == " ; abc"
+
+
+class TestHelper:
+    def test_always_greater(self):
+        ag = mdtop.AlwaysGreater()
+        assert ag > 1
+        assert ag >= 10
+        assert not (ag < 5)
+        assert not (ag <= 50)
+        assert not (ag == 0)
+
+    def test_always_less(self):
+        al = mdtop.AlwaysLess()
+        assert al < 1
+        assert al <= 10
+        assert not (al > 5)
+        assert not (al >= 50)
+        assert not (al == 0)
+
+    def test_ensure_proxy(self):
+        node = mdtop.Node()
+        proxy = weakref.proxy(node)
+
+        assert isinstance(mdtop.ensure_proxy(proxy), weakref.ProxyType)
+        assert isinstance(mdtop.ensure_proxy(node), weakref.ProxyType)

@@ -185,7 +185,7 @@ class GromacsTop:
             start = AlwaysLess()
 
         if stop is None:
-            stop = AlwayGreater()
+            stop = AlwaysGreater()
 
         for i, node in enumerate(self):
             if i < start:
@@ -695,7 +695,7 @@ class Node:
         return f"{type(self).__name__}{attr_str}"
 
 
-class AlwayGreater:
+class AlwaysGreater:
     def __eq__(self, other):
         return False
 

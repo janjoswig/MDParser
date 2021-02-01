@@ -30,6 +30,7 @@ class NodeValue(ABC):
         """Return node content formatted for topology file"""
 
     def __repr__(self):
+        """Default representation"""
         return f"{type(self).__name__}()"
 
     def _make_node_key(self) -> str:
@@ -306,6 +307,13 @@ class SectionEntry(NodeValue):
         super().__init__()
 
         self.comment = comment
+        self._raw = None
+
+    @classmethod
+    def create_raw(cls, line):
+        node_value = cls()
+        node_value._raw = line
+        return node_value
 
     @classmethod
     def from_line(cls, *args, comment=None):
@@ -325,11 +333,17 @@ class SectionEntry(NodeValue):
 
     def __str__(self):
         return_str = ""
-
-        if self.comment is not None:
-            return_str += f"; {self.comment}"
+        return_str = self._finish_str(return_str)
 
         return return_str
+
+    def _finish_str(self, string):
+        if self.comment is not None:
+            string += f" ; {self.comment}"
+
+        string = string.rstrip()
+
+        return string
 
 
 class DefaultsEntry(SectionEntry):
@@ -393,8 +407,7 @@ class DefaultsEntry(SectionEntry):
         if self.n is not None:
             return_str += f" {self.n:<7}"
 
-        if self.comment is not None:
-            return_str += f" ; {self.comment}"
+        return_str = self._finish_str(return_str)
 
         return return_str
 
@@ -402,38 +415,104 @@ class DefaultsEntry(SectionEntry):
 class AtomtypesEntry(SectionEntry):
 
     _node_key_name = "atomtypes_entry"
+    _arg_names = [
+        [
+            "name",
+            "bond_type",
+            "at_num",
+            "mass",
+            "charge",
+            "ptype",
+            "sigma",
+            "epsilon"
+        ],
+        [
+            "name",
+            "at_num",
+            "mass",
+            "charge",
+            "ptype",
+            "sigma",
+            "epsilon"
+        ],
+    ]
 
-    def __init__(self, *args, comment=None):
+    def __init__(
+            self, name=None, bond_type=None, at_num=None, mass=None,
+            charge=None, ptype=None, sigma=None, epsilon=None, comment=None):
 
-        super().__init__()
+        super().__init__(comment=comment)
 
-        self.name = args[0]
-        self.at_num = int(args[-6])
-        self.mass = float(args[-5])
-        self.charge = float(args[-4])
-        self.ptype = args[-3]
-        self.sigma = float(args[-2])
-        self.epsilon = float(args[-1])
+        self.name = name
+        self.bond_type = bond_type
 
-        if len(args) == 8:
-            self.bond_type = args[1]
-        else:
-            self.bond_type = None
+        if at_num is not None:
+            self.at_num = int(at_num)
+
+        if mass is not None:
+            self.mass = float(mass)
+
+        if charge is not None:
+            self.charge = float(charge)
+
+        self.ptype = ptype
+
+        if sigma is not None:
+            self.sigma = float(sigma)
+
+        if epsilon is not None:
+            self.epsilon = float(epsilon)
 
         self.comment = comment
 
+    @classmethod
+    def from_line(cls, *args, comment):
+        if len(args) == 8:
+            arg_names = cls._arg_names[0]
+        else:
+            arg_names = cls._arg_names[1]
+
+        kwargs = {
+            kw: v
+            for kw, v
+            in zip(arg_names, args)
+            }
+
+        entry = cls(
+            comment=comment,
+            **kwargs
+        )
+
+        return entry
+
     def __str__(self):
-        return_str = f"{self.name:<9} "
+        return_str = ""
+        if self.name is not None:
+            return_str += f"{self.name:<9}"
+
         if self.bond_type is not None:
-            return_str += f"{self.bond_type:<4} "
-        return_str += f"{self.at_num:<3} "
-        return_str += f"{self.mass:<8} "
-        return_str += f"{self.charge:<6} "
-        return_str += f"{self.ptype:<1} "
-        return_str += f"{self.sigma:1.5e}  "
-        return_str += f"{self.epsilon:1.5e} "
-        if self.comment is not None:
-            return_str += f"; {self.comment}"
+            return_str += f" {self.bond_type:<4}"
+
+        if self.at_num is not None:
+            return_str += f" {self.at_num:<3}"
+
+        if self.mass is not None:
+            return_str += f" {self.mass:<8}"
+
+        if self.charge is not None:
+            return_str += f" {self.charge:<6}"
+
+        if self.ptype is not None:
+            return_str += f" {self.ptype:<1}"
+
+        if self.sigma is not None:
+            return_str += f" {self.sigma:1.5e}"
+
+        if self.epsilon is not None:
+            return_str += f"  {self.epsilon:1.5e}"
+
+        return_str = self._finish_str(return_str)
+
         return return_str
 
 
@@ -457,14 +536,13 @@ class MoleculetypeEntry(SectionEntry):
     def __str__(self):
         return_str = ""
 
-        if self.name is None:
+        if self.name is not None:
             return_str += f"{self.name}"
 
         if self.nrexcl is not None:
             return_str += f"    {self.nrexcl}"
 
-        if self.comment is not None:
-            return_str += f" ; {self.comment}"
+        return_str = self._finish_str(return_str)
 
         return return_str
 
@@ -523,14 +601,25 @@ class AtomsEntry(SectionEntry):
         self.massB = massB
 
     def __str__(self):
-        return_str = (
-            f" {self.nr:<5}"
-            f" {self.type:<5}"
-            f" {self.resnr:<5}"
-            f" {self.residue:<5}"
-            f" {self.atom:<5}"
-            f"{self.cgnr:<5}"
-        )
+        return_str = ""
+
+        if self.nr is not None:
+            return_str += f"{self.nr:<5}"
+
+        if self.type is not None:
+            return_str += f" {self.type:<5}"
+
+        if self.resnr is not None:
+            return_str += f" {self.resnr:<5}"
+
+        if self.residue is not None:
+            return_str += f" {self.residue:<5}"
+
+        if self.atom is not None:
+            return_str += f" {self.atom:<5}"
+
+        if self.cgnr is not None:
+            return_str += f" {self.cgnr:<5}"
 
         if self.charge is not None:
             return_str += f" {self.charge:<6}"
@@ -547,8 +636,7 @@ class AtomsEntry(SectionEntry):
         if self.massB is not None:
             return_str += f" {self.massB:<6}"
 
-        if self.comment is not None:
-            return_str += f" ; {self.comment}"
+        return_str = self._finish_str(return_str)
 
         return return_str
 
@@ -615,18 +703,17 @@ class BondsEntry(SectionEntry):
             return_str += f" {self.funct:>5}"
 
         if self.c0 is not None:
-            return_str += f" {self.c0:>5}"
+            return_str += f" {self.c0:1.6e}"
 
         if self.c1 is not None:
-            return_str += f" {self.c1:>5}"
+            return_str += f" {self.c1:1.6e}"
 
         if self.c2 is not None:
-            return_str += f" {self.c2:>5}"
+            return_str += f" {self.c2:1.6e}"
 
         if self.c3 is not None:
-            return_str += f" {self.c3:>5}"
+            return_str += f" {self.c3:1.6e}"
 
-        if self.comment is not None:
-            return_str += f" ; {self.comment}"
+        return_str = self._finish_str(return_str)
 
         return return_str

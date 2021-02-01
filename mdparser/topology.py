@@ -51,6 +51,7 @@ DEFAULT_NODE_VALUE_TYPES = {
         "atomtypes_entry": _gmx_nodes.AtomtypesEntry,
         "moleculetype_entry": _gmx_nodes.MoleculetypeEntry,
         "atoms_entry": _gmx_nodes.AtomsEntry,
+        "bonds_entry": _gmx_nodes.BondsEntry,
     }
 
 
@@ -563,16 +564,16 @@ class GromacsTopParser:
                 continue
 
             expected_entry = f"{active_section._node_key_name}_entry"
-            if expected_entry in self.__node_value_types:
+            node_type = self.__node_value_types.get(expected_entry, False)
+            if node_type is not False:
                 if not self.ignore_comments:
                     line, comment = self.split_comment(line)
                 else:
                     comment = None
 
                 args = line.split()
-                node_key, node_value = self._select_node_type(
-                    expected_entry, *args, comment=comment
-                )
+                node_value = node_type.from_line(*args, comment=comment)
+                node_key = node_value._make_node_key()
                 top.add(node_key, node_value)
                 continue
 
@@ -584,6 +585,8 @@ class GromacsTopParser:
         return top
 
     def _select_node_type(self, name, *args, **kwargs):
+        """Retrieve node type by name, initialize, and make key"""
+
         node_type = self.__node_value_types[name]
         node_value = node_type(*args, **kwargs)
         node_key = node_value._make_node_key()

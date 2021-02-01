@@ -24,139 +24,139 @@ define_2             #define _FF_AMBER99SBILDN
 
 defaults_1           [ defaults ]
 
-defaults_entry_1     1               2               yes             0.5     0.8333 
+defaults_entry_1     1               2               yes             0.5     0.8333
 
 atomtypes_1          [ atomtypes ]
 
-atomtypes_entry_1    Br        35  79.9     0.0    A 3.95559e-01  1.33888e+00 
+atomtypes_entry_1    Br        35  79.9     0.0    A 3.95559e-01  1.33888e+00
 
-atomtypes_entry_2    C         6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_2    C         6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_3    CA        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_3    CA        6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_4    CB        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_4    CB        6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_5    CC        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_5    CC        6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_6    CK        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_6    CK        6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_7    CM        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_7    CM        6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_8    CN        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_8    CN        6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_9    CQ        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_9    CQ        6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_10   CR        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_10   CR        6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_11   CT        6   12.01    0.0    A 3.39967e-01  4.57730e-01 
+atomtypes_entry_11   CT        6   12.01    0.0    A 3.39967e-01  4.57730e-01
 
-atomtypes_entry_12   CV        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_12   CV        6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_13   CW        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_13   CW        6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_14   C*        6   12.01    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_14   C*        6   12.01    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_15   C0        20  40.08    0.0    A 3.05240e-01  1.92376e+00 
+atomtypes_entry_15   C0        20  40.08    0.0    A 3.05240e-01  1.92376e+00
 
-atomtypes_entry_16   F         9   19.0     0.0    A 3.11815e-01  2.55224e-01 
+atomtypes_entry_16   F         9   19.0     0.0    A 3.11815e-01  2.55224e-01
 
-atomtypes_entry_17   H         1   1.008    0.0    A 1.06908e-01  6.56888e-02 
+atomtypes_entry_17   H         1   1.008    0.0    A 1.06908e-01  6.56888e-02
 
-atomtypes_entry_18   HC        1   1.008    0.0    A 2.64953e-01  6.56888e-02 
+atomtypes_entry_18   HC        1   1.008    0.0    A 2.64953e-01  6.56888e-02
 
-atomtypes_entry_19   H1        1   1.008    0.0    A 2.47135e-01  6.56888e-02 
+atomtypes_entry_19   H1        1   1.008    0.0    A 2.47135e-01  6.56888e-02
 
-atomtypes_entry_20   H2        1   1.008    0.0    A 2.29317e-01  6.56888e-02 
+atomtypes_entry_20   H2        1   1.008    0.0    A 2.29317e-01  6.56888e-02
 
-atomtypes_entry_21   H3        1   1.008    0.0    A 2.11499e-01  6.56888e-02 
+atomtypes_entry_21   H3        1   1.008    0.0    A 2.11499e-01  6.56888e-02
 
-atomtypes_entry_22   HA        1   1.008    0.0    A 2.59964e-01  6.27600e-02 
+atomtypes_entry_22   HA        1   1.008    0.0    A 2.59964e-01  6.27600e-02
 
-atomtypes_entry_23   H4        1   1.008    0.0    A 2.51055e-01  6.27600e-02 
+atomtypes_entry_23   H4        1   1.008    0.0    A 2.51055e-01  6.27600e-02
 
-atomtypes_entry_24   H5        1   1.008    0.0    A 2.42146e-01  6.27600e-02 
+atomtypes_entry_24   H5        1   1.008    0.0    A 2.42146e-01  6.27600e-02
 
-atomtypes_entry_25   HO        1   1.008    0.0    A 0.00000e+00  0.00000e+00 
+atomtypes_entry_25   HO        1   1.008    0.0    A 0.00000e+00  0.00000e+00
 
-atomtypes_entry_26   HS        1   1.008    0.0    A 1.06908e-01  6.56888e-02 
+atomtypes_entry_26   HS        1   1.008    0.0    A 1.06908e-01  6.56888e-02
 
-atomtypes_entry_27   HW        1   1.008    0.0    A 0.00000e+00  0.00000e+00 
+atomtypes_entry_27   HW        1   1.008    0.0    A 0.00000e+00  0.00000e+00
 
-atomtypes_entry_28   HP        1   1.008    0.0    A 1.95998e-01  6.56888e-02 
+atomtypes_entry_28   HP        1   1.008    0.0    A 1.95998e-01  6.56888e-02
 
-atomtypes_entry_29   I         53  126.9    0.0    A 4.18722e-01  1.67360e+00 
+atomtypes_entry_29   I         53  126.9    0.0    A 4.18722e-01  1.67360e+00
 
-atomtypes_entry_30   Cl        17  35.45    0.0    A 4.40104e-01  4.18400e-01 
+atomtypes_entry_30   Cl        17  35.45    0.0    A 4.40104e-01  4.18400e-01
 
-atomtypes_entry_31   Na        11  22.99    0.0    A 3.32840e-01  1.15897e-02 
+atomtypes_entry_31   Na        11  22.99    0.0    A 3.32840e-01  1.15897e-02
 
-atomtypes_entry_32   IB        0   131.0    0.0    A 8.90899e-01  4.18400e-01 
+atomtypes_entry_32   IB        0   131.0    0.0    A 8.90899e-01  4.18400e-01
 
-atomtypes_entry_33   MG        12  24.305   0.0    A 1.41225e-01  3.74342e+00 
+atomtypes_entry_33   MG        12  24.305   0.0    A 1.41225e-01  3.74342e+00
 
-atomtypes_entry_34   N         7   14.01    0.0    A 3.25000e-01  7.11280e-01 
+atomtypes_entry_34   N         7   14.01    0.0    A 3.25000e-01  7.11280e-01
 
-atomtypes_entry_35   NA        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
+atomtypes_entry_35   NA        7   14.01    0.0    A 3.25000e-01  7.11280e-01
 
-atomtypes_entry_36   NB        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
+atomtypes_entry_36   NB        7   14.01    0.0    A 3.25000e-01  7.11280e-01
 
-atomtypes_entry_37   NC        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
+atomtypes_entry_37   NC        7   14.01    0.0    A 3.25000e-01  7.11280e-01
 
-atomtypes_entry_38   N2        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
+atomtypes_entry_38   N2        7   14.01    0.0    A 3.25000e-01  7.11280e-01
 
-atomtypes_entry_39   N3        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
+atomtypes_entry_39   N3        7   14.01    0.0    A 3.25000e-01  7.11280e-01
 
-atomtypes_entry_40   N*        7   14.01    0.0    A 3.25000e-01  7.11280e-01 
+atomtypes_entry_40   N*        7   14.01    0.0    A 3.25000e-01  7.11280e-01
 
-atomtypes_entry_41   O         8   16.0     0.0    A 2.95992e-01  8.78640e-01 
+atomtypes_entry_41   O         8   16.0     0.0    A 2.95992e-01  8.78640e-01
 
-atomtypes_entry_42   OW        8   16.0     0.0    A 3.15061e-01  6.36386e-01 
+atomtypes_entry_42   OW        8   16.0     0.0    A 3.15061e-01  6.36386e-01
 
-atomtypes_entry_43   OH        8   16.0     0.0    A 3.06647e-01  8.80314e-01 
+atomtypes_entry_43   OH        8   16.0     0.0    A 3.06647e-01  8.80314e-01
 
-atomtypes_entry_44   OS        8   16.0     0.0    A 3.00001e-01  7.11280e-01 
+atomtypes_entry_44   OS        8   16.0     0.0    A 3.00001e-01  7.11280e-01
 
-atomtypes_entry_45   O2        8   16.0     0.0    A 2.95992e-01  8.78640e-01 
+atomtypes_entry_45   O2        8   16.0     0.0    A 2.95992e-01  8.78640e-01
 
-atomtypes_entry_46   P         15  30.97    0.0    A 3.74177e-01  8.36800e-01 
+atomtypes_entry_46   P         15  30.97    0.0    A 3.74177e-01  8.36800e-01
 
-atomtypes_entry_47   S         16  32.06    0.0    A 3.56359e-01  1.04600e+00 
+atomtypes_entry_47   S         16  32.06    0.0    A 3.56359e-01  1.04600e+00
 
-atomtypes_entry_48   SH        16  32.06    0.0    A 3.56359e-01  1.04600e+00 
+atomtypes_entry_48   SH        16  32.06    0.0    A 3.56359e-01  1.04600e+00
 
-atomtypes_entry_49   CU        29  63.55    0.0    A 3.39967e-01  3.59824e-01 
+atomtypes_entry_49   CU        29  63.55    0.0    A 3.39967e-01  3.59824e-01
 
-atomtypes_entry_50   K         19  39.1     0.0    A 4.73602e-01  1.37235e-03 
+atomtypes_entry_50   K         19  39.1     0.0    A 4.73602e-01  1.37235e-03
 
-atomtypes_entry_51   Rb        37  85.47    0.0    A 5.26699e-01  7.11280e-04 
+atomtypes_entry_51   Rb        37  85.47    0.0    A 5.26699e-01  7.11280e-04
 
-atomtypes_entry_52   Cs        55  132.91   0.0    A 6.04920e-01  3.37230e-04 
+atomtypes_entry_52   Cs        55  132.91   0.0    A 6.04920e-01  3.37230e-04
 
-atomtypes_entry_53   OW_spc    8   15.9994  0.0    A 3.16557e-01  6.50629e-01 
+atomtypes_entry_53   OW_spc    8   15.9994  0.0    A 3.16557e-01  6.50629e-01
 
-atomtypes_entry_54   HW_spc    1   1.008    0.0    A 0.00000e+00  0.00000e+00 
+atomtypes_entry_54   HW_spc    1   1.008    0.0    A 0.00000e+00  0.00000e+00
 
-atomtypes_entry_55   Li        3   6.94     0.0    A 2.02590e-01  7.65672e-02 
+atomtypes_entry_55   Li        3   6.94     0.0    A 2.02590e-01  7.65672e-02
 
-atomtypes_entry_56   Zn        30  65.4     0.0    A 1.95998e-01  5.23000e-02 
+atomtypes_entry_56   Zn        30  65.4     0.0    A 1.95998e-01  5.23000e-02
 
-atomtypes_entry_57   HW_tip4pew 1   1.008    0.0    A 0.00000e+00  0.00000e+00 
+atomtypes_entry_57   HW_tip4pew 1   1.008    0.0    A 0.00000e+00  0.00000e+00
 
-atomtypes_entry_58   OW_tip4pew 8   16.0     0.0    A 3.16435e-01  6.80946e-01 
+atomtypes_entry_58   OW_tip4pew 8   16.0     0.0    A 3.16435e-01  6.80946e-01
 
-atomtypes_entry_59   HW_tip4p  1   1.008    0.0    A 0.00000e+00  0.00000e+00 
+atomtypes_entry_59   HW_tip4p  1   1.008    0.0    A 0.00000e+00  0.00000e+00
 
-atomtypes_entry_60   OW_tip4p  8   16.0     0.0    A 3.15365e-01  6.48520e-01 
+atomtypes_entry_60   OW_tip4p  8   16.0     0.0    A 3.15365e-01  6.48520e-01
 
-atomtypes_entry_61   HW_tip5p  1   1.008    0.0    A 0.00000e+00  0.00000e+00 
+atomtypes_entry_61   HW_tip5p  1   1.008    0.0    A 0.00000e+00  0.00000e+00
 
-atomtypes_entry_62   OW_tip5p  8   16.0     0.0    A 3.12000e-01  6.69440e-01 
+atomtypes_entry_62   OW_tip5p  8   16.0     0.0    A 3.12000e-01  6.69440e-01
 
-atomtypes_entry_63   MW        0   0.0      0.0    D 0.00000e+00  0.00000e+00 
+atomtypes_entry_63   MW        0   0.0      0.0    D 0.00000e+00  0.00000e+00
 
-atomtypes_entry_64   MCH3      0   0.0      0.0    A 0.00000e+00  0.00000e+00 
+atomtypes_entry_64   MCH3      0   0.0      0.0    A 0.00000e+00  0.00000e+00
 
-atomtypes_entry_65   MNH3      0   0.0      0.0    A 0.00000e+00  0.00000e+00 
+atomtypes_entry_65   MNH3      0   0.0      0.0    A 0.00000e+00  0.00000e+00
 
 bondtypes_1          [ bondtypes ]
 
@@ -1250,11 +1250,11 @@ define_31            #define torsion_ASN_CA_CB_CG_ND2_mult6 0.0        -0.443504
 
 moleculetype_1       [ moleculetype ]
 
-moleculetype_entry_1     3
+moleculetype_entry_1 Ion    3
 
 atoms_1              [ atoms ]
 
-atoms_entry_1         1     C0    1     CA    CA   1     2.0    40.08 
+atoms_entry_1        1     C0    1     CA    CA    1     2.0    40.08
 
 condition_1          #ifdef POSRES
 
@@ -1266,15 +1266,15 @@ condition_2          #endif
 
 moleculetype_2       [ moleculetype ]
 
-moleculetype_entry_2     2
+moleculetype_entry_2 SOL    2
 
 atoms_2              [ atoms ]
 
-atoms_entry_2         1     OW    1     SOL   OW   1     -0.834 16.0  
+atoms_entry_2        1     OW    1     SOL   OW    1     -0.834 16.0
 
-atoms_entry_3         2     HW    1     SOL   HW1  1     0.417  1.008 
+atoms_entry_3        2     HW    1     SOL   HW1   1     0.417  1.008
 
-atoms_entry_4         3     HW    1     SOL   HW2  1     0.417  1.008 
+atoms_entry_4        3     HW    1     SOL   HW2   1     0.417  1.008
 
 condition_3          #ifndef FLEXIBLE
 
@@ -1296,13 +1296,13 @@ condition_5          #ifdef FLEXIBLE
 
 bonds_1              [ bonds ]
 
-generic_517          1       2       1       0.09572 502416.0   0.09572        502416.0
+bonds_entry_1            1     2     1 9.572000e-02 5.024160e+05 9.572000e-02 5.024160e+05
 
-generic_518          1       3       1       0.09572 502416.0   0.09572        502416.0
+bonds_entry_2            1     3     1 9.572000e-02 5.024160e+05 9.572000e-02 5.024160e+05
 
 angles_1             [ angles ]
 
-generic_519          2       1       3       1       104.52  628.02      104.52  628.02
+generic_517          2       1       3       1       104.52  628.02      104.52  628.02
 
 condition_6          #endif
 
@@ -1310,95 +1310,95 @@ condition_7          #ifdef POSRES_WATER
 
 position_restraints_2 [ position_restraints ]
 
-generic_520          1    1       1000       1000       1000
+generic_518          1    1       1000       1000       1000
 
 condition_8          #endif
 
 moleculetype_3       [ moleculetype ]
 
-moleculetype_entry_3     1
+moleculetype_entry_3 IB+    1
 
 atoms_3              [ atoms ]
 
-atoms_entry_5         1     IB    1     IB+   IB   1     1.0   
+atoms_entry_5        1     IB    1     IB+   IB    1     1.0
 
 moleculetype_4       [ moleculetype ]
 
-moleculetype_entry_4     1
+moleculetype_entry_4 CA    1
 
 atoms_4              [ atoms ]
 
-atoms_entry_6         1     C0    1     CA    CA   1     2.0   
+atoms_entry_6        1     C0    1     CA    CA    1     2.0
 
 moleculetype_5       [ moleculetype ]
 
-moleculetype_entry_5     1
+moleculetype_entry_5 CL    1
 
 atoms_5              [ atoms ]
 
-atoms_entry_7         1     Cl    1     CL    CL   1     -1.0  
+atoms_entry_7        1     Cl    1     CL    CL    1     -1.0
 
 moleculetype_6       [ moleculetype ]
 
-moleculetype_entry_6     1
+moleculetype_entry_6 NA    1
 
 atoms_6              [ atoms ]
 
-atoms_entry_8         1     Na    1     NA    NA   1     1.0   
+atoms_entry_8        1     Na    1     NA    NA    1     1.0
 
 moleculetype_7       [ moleculetype ]
 
-moleculetype_entry_7     1
+moleculetype_entry_7 MG    1
 
 atoms_7              [ atoms ]
 
-atoms_entry_9         1     MG    1     MG    MG   1     2.0   
+atoms_entry_9        1     MG    1     MG    MG    1     2.0
 
 moleculetype_8       [ moleculetype ]
 
-moleculetype_entry_8     1
+moleculetype_entry_8 K    1
 
 atoms_8              [ atoms ]
 
-atoms_entry_10        1     K     1     K     K    1     1.0   
+atoms_entry_10       1     K     1     K     K     1     1.0
 
 moleculetype_9       [ moleculetype ]
 
-moleculetype_entry_9     1
+moleculetype_entry_9 RB    1
 
 atoms_9              [ atoms ]
 
-atoms_entry_11        1     Rb    1     RB    RB   1     1.0   
+atoms_entry_11       1     Rb    1     RB    RB    1     1.0
 
 moleculetype_10      [ moleculetype ]
 
-moleculetype_entry_10     1
+moleculetype_entry_10 CS    1
 
 atoms_10             [ atoms ]
 
-atoms_entry_12        1     Cs    1     CS    CS   1     1.0   
+atoms_entry_12       1     Cs    1     CS    CS    1     1.0
 
 moleculetype_11      [ moleculetype ]
 
-moleculetype_entry_11     1
+moleculetype_entry_11 LI    1
 
 atoms_11             [ atoms ]
 
-atoms_entry_13        1     Li    1     LI    LI   1     1.0   
+atoms_entry_13       1     Li    1     LI    LI    1     1.0
 
 moleculetype_12      [ moleculetype ]
 
-moleculetype_entry_12     1
+moleculetype_entry_12 ZN    1
 
 atoms_12             [ atoms ]
 
-atoms_entry_14        1     Zn    1     ZN    ZN   1     2.0   
+atoms_entry_14       1     Zn    1     ZN    ZN    1     2.0
 
 system_1             [ system ]
 
-generic_521          Ion not yet in water
+generic_519          Ion not yet in water
 
 molecules_1          [ molecules ]
 
-generic_522          Ion    1
+generic_520          Ion    1
 

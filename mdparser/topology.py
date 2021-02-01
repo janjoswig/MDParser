@@ -207,6 +207,57 @@ class GromacsTop:
         prev.next = node
         next_node.prev = weakref.proxy(node)
 
+    def get_next_node_of_type(
+            self, start=None, stop=None, node_type=None,
+            exclude=None, forward=True):
+        """Search topology for another node
+
+        Args:
+            start: obj:`Node` to start from.  If `None`, a `node_type`
+                must be given and search starts at the beginning.
+            stop: :obj:`Node` to stop at.  If `None`, search until end.
+            node_type: Type of node to search for.  If `None`, search
+                for same type as start.
+            exclude: Exclude node types from search.
+            forward: If `True`, search topology forwards.  If `False`,
+                search backwards.
+        """
+        if start is None:
+            if node_type is None:
+                raise ValueError(
+                    "If start=None, a node type must be specified"
+                    )
+            start = self._root
+
+        if stop is None:
+            stop = self._root
+
+        if node_type is None:
+            node_type = type(start.value)
+
+        if exclude is None:
+            exclude = ()
+
+        if forward is True:
+            goto = "next"
+        else:
+            goto = "prev"
+
+        node = getattr(start, goto)
+
+        while node is not stop:
+            if not isinstance(node.value, node_type):
+                node = getattr(node, goto)
+                continue
+
+            if isinstance(node.value, exclude):
+                node = getattr(node, goto)
+                continue
+
+            return node
+
+        raise LookupError(f"Node of type {node_type} not found")
+
     @property
     def includes_resolved(self):
         for node in self:

@@ -100,6 +100,52 @@ class TestGromacsTop:
 
         assert isinstance(complement, mdtop.Node)
 
+    def test_get_next_node_of_type(self):
+        top = mdtop.GromacsTop()
+
+        with pytest.raises(ValueError):
+            top.get_next_node_of_type()
+
+        with pytest.raises(LookupError):
+            top.get_next_node_of_type(
+                node_type=_gmx_nodes.GenericNodeValue
+                )
+
+        top.add("section", _gmx_nodes.Section("sec"))
+        top.add("entry1", _gmx_nodes.SectionEntry("sec_entry"))
+        top.add("subsection", _gmx_nodes.Subsection("subsec"))
+        top.add("entry2", _gmx_nodes.SectionEntry("subsec_entry"))
+        top.add("another_section", _gmx_nodes.Section("another_sec"))
+
+        node = top.get_next_node_of_type(node_type=_gmx_nodes.Section)
+        assert node is top["section"]
+
+        node = top.get_next_node_of_type(
+            start=top["section"],
+            node_type=_gmx_nodes.Section
+            )
+        assert node is top["subsection"]
+
+        node = top.get_next_node_of_type(
+            start=top["section"],
+            )
+        assert node is top["subsection"]
+
+        node = top.get_next_node_of_type(
+            start=top["section"],
+            node_type=_gmx_nodes.Section,
+            exclude=_gmx_nodes.Subsection
+            )
+        assert node is top["another_section"]
+
+        with pytest.raises(LookupError):
+            node = top.get_next_node_of_type(
+                start=top["section"],
+                stop=top["another_section"],
+                node_type=_gmx_nodes.Section,
+                exclude=_gmx_nodes.Subsection
+                )
+
 
 class TestNode:
 

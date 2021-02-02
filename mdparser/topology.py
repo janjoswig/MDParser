@@ -50,9 +50,9 @@ DEFAULT_NODE_VALUE_TYPES = {
         "entry": _gmx_nodes.SectionEntry,
         "defaults_entry": _gmx_nodes.DefaultsEntry,
         "atomtypes_entry": _gmx_nodes.AtomtypesEntry,
-        "bondtypes_entry": _gmx_nodes.BondtypesEntry,   # raw
-        "angletypes_entry": _gmx_nodes.AngletypesEntry, # raw
-        "pairtypes_entry": _gmx_nodes.PairtypesEntry,   # raw
+        "bondtypes_entry": _gmx_nodes.BondtypesEntry,    # raw
+        "angletypes_entry": _gmx_nodes.AngletypesEntry,  # raw
+        "pairtypes_entry": _gmx_nodes.PairtypesEntry,    # raw
         "dihedraltypes_entry": _gmx_nodes.DihedraltypesEntry,       # raw
         "constrainttypes_entry": _gmx_nodes.ConstrainttypesEntry,   # raw
         "nonbonded_params_entry": _gmx_nodes.NonbondedParamsEntry,  # raw
@@ -100,8 +100,14 @@ class GromacsTop:
             yield current
 
     def __len__(self):
-        """Return number of nodes (may happen to be not all connected)"""
-        return self._nodes.__len__()
+        """Return number of linked nodes"""
+
+        length = 0
+
+        for length, _ in enumerate(self, 1):
+            pass
+
+        return length
 
     def __getitem__(self, query):
         if isinstance(query, str):
@@ -139,6 +145,21 @@ class GromacsTop:
         self._nodes[key] = node = Node()
 
         return node
+
+    @classmethod
+    def make_nvtype(cls, name, *args, **kwargs):
+        """Retrieve node type by name, initialize, and make key"""
+
+        nvtype = cls.__node_value_types[name]
+        node_value = nvtype(*args, **kwargs)
+        node_key = node_value._make_node_key()
+
+        return node_key, node_value
+
+    @classmethod
+    def select_nvtype(cls, name):
+        """Retrieve node type by name"""
+        return cls.__node_value_types[name]
 
     def add(self, key, value) -> None:
 
@@ -235,22 +256,22 @@ class GromacsTop:
         new_node.key, new_node.value = key, value
 
     def get_next_node_of_type(
-            self, start=None, stop=None, node_type=None,
+            self, start=None, stop=None, nvtype=None,
             exclude=None, forward=True):
         """Search topology for another node
 
         Args:
-            start: obj:`Node` to start from.  If `None`, a `node_type`
+            start: obj:`Node` to start from.  If `None`, an `nvtype`
                 must be given and search starts at the beginning.
             stop: :obj:`Node` to stop at.  If `None`, search until end.
-            node_type: Type of node value to search for.
+            nvtype: Type of node value to search for.
                 If `None`, search for same type as start.
             exclude: Exclude node types from search.
             forward: If `True`, search topology forwards.  If `False`,
                 search backwards.
         """
         if start is None:
-            if node_type is None:
+            if nvtype is None:
                 raise ValueError(
                     "If start=None, a node type must be specified"
                     )
@@ -259,8 +280,8 @@ class GromacsTop:
         if stop is None:
             stop = self._root
 
-        if node_type is None:
-            node_type = type(start.value)
+        if nvtype is None:
+            nvtype = type(start.value)
 
         if exclude is None:
             exclude = ()
@@ -273,7 +294,7 @@ class GromacsTop:
         node = getattr(start, goto)
 
         while unproxy_node(node) is not stop:
-            if not isinstance(node.value, node_type):
+            if not isinstance(node.value, nvtype):
                 node = getattr(node, goto)
                 continue
 
@@ -283,7 +304,7 @@ class GromacsTop:
 
             return unproxy_node(node)
 
-        raise LookupError(f"Node of type {node_type} not found")
+        raise LookupError(f"Node of type {nvtype} not found")
 
     @property
     def includes_resolved(self):
@@ -324,7 +345,7 @@ class GromacsTop:
 class GromacsTopParser:
     """Read and write GROMACS topology files"""
 
-    __node_value_types = DEFAULT_NODE_VALUE_TYPES
+    __top_type = GromacsTop
 
     def __init__(
             self,
@@ -464,7 +485,7 @@ class GromacsTopParser:
                 yield line
 
     def read(self, file: Iterable) -> GromacsTop:
-        top = GromacsTop()
+        top = self.__top_type()
 
         if self.preprocess:
             file = self.preprocess_includes(
@@ -484,7 +505,7 @@ class GromacsTopParser:
         active_definitions = {}
         active_definitions.update(self.definitions)
 
-        for node_value_type in self.__node_value_types.values():
+        for node_value_type in top._GromacsTop__node_value_types.values():
             node_value_type.reset_count()
 
         previous = ''
@@ -500,7 +521,7 @@ class GromacsTopParser:
             previous = ''
 
             if self.ignore_comments:
-                line, _ = self.split_comment(line)
+                line, _ = split_comment(line)
 
             line = line.strip()
 
@@ -510,13 +531,13 @@ class GromacsTopParser:
             if line.startswith('#define'):
                 line = line.lstrip("#define").lstrip().split(maxsplit=1)
                 if len(line) == 1:
-                    node_key, node_value = self._select_node_type(
+                    node_key, node_value = top.make_nvtype(
                         "define", line[0], True
                     )
                     top.add(node_key, node_value)
                     active_definitions[line[0]] = True
                 else:
-                    node_key, node_value = self._select_node_type(
+                    node_key, node_value = top.make_nvtype(
                         "define", line[0], line[1]
                     )
                     top.add(node_key, node_value)
@@ -525,7 +546,7 @@ class GromacsTopParser:
 
             if line.startswith('#undef'):
                 line = line.lstrip("#undef").lstrip()
-                node_key, node_value = self._select_node_type(
+                node_key, node_value = top.make_nvtype(
                     "define", line, False
                 )
                 top.add(node_key, node_value)
@@ -536,7 +557,7 @@ class GromacsTopParser:
                 line = line.lstrip('#ifdef').lstrip()
                 active_conditions[line] = True
                 if not self.resolve_conditions:
-                    node_key, node_value = self._select_node_type(
+                    node_key, node_value = top.make_nvtype(
                         "condition", line, True
                     )
                     top.add(node_key, node_value)
@@ -546,7 +567,7 @@ class GromacsTopParser:
                 line = line.lstrip('#ifndef').lstrip()
                 active_conditions[line] = False
                 if not self.resolve_conditions:
-                    node_key, node_value = self._select_node_type(
+                    node_key, node_value = top.make_nvtype(
                         "condition", line, False
                     )
                     top.add(node_key, node_value)
@@ -559,12 +580,12 @@ class GromacsTopParser:
                 active_conditions[last_condition] = not last_value
 
                 if not self.resolve_conditions:
-                    node_key, node_value = self._select_node_type(
+                    node_key, node_value = top.make_nvtype(
                         "condition", last_condition, None
                     )
                     top.add(node_key, node_value)
 
-                    node_key, node_value = self._select_node_type(
+                    node_key, node_value = top.make_nvtype(
                         "condition", last_condition, not last_value
                     )
                     top.add(node_key, node_value)
@@ -573,7 +594,7 @@ class GromacsTopParser:
             if line.startswith('#endif'):
                 last_condition, _ = active_conditions.popitem(last=True)
                 if not self.resolve_conditions:
-                    node_key, node_value = self._select_node_type(
+                    node_key, node_value = top.make_nvtype(
                         "condition", last_condition, None
                     )
                     top.add(node_key, node_value)
@@ -602,7 +623,7 @@ class GromacsTopParser:
 
             if line.startswith(";"):
                 comment = line[1:].strip()
-                node_key, node_value = self._select_node_type(
+                node_key, node_value = top.make_nvtype(
                     "comment", comment
                 )
                 top.add(node_key, node_value)
@@ -610,7 +631,7 @@ class GromacsTopParser:
 
             if line.startswith("#include"):
                 include = line.strip("#include").lstrip()
-                node_key, node_value = self._select_node_type(
+                node_key, node_value = top.make_nvtype(
                     "include", include
                 )
                 top.add(node_key, node_value)
@@ -618,35 +639,35 @@ class GromacsTopParser:
 
             if line.startswith('['):
                 _new_section = line.strip(' []').casefold()
-                node_type = self.__node_value_types.get(_new_section, None)
-                if node_type is None:
+                nvtype = top._GromacsTop__node_value_types.get(_new_section, None)
+                if nvtype is None:
                     # Should not happen for compliant topologies
                     if self.verbose:
                         print(f"Unknown section {_new_section}")
 
-                    node_key, node_value = self._select_node_type(
+                    node_key, node_value = top.make_nvtype(
                         "section", _new_section
                     )
                     top.add(node_key, node_value)
                     active_section = active_supersection = node_value
                     continue
 
-                if (node_type.category < active_category) and self.verbose:
+                if (nvtype.category < active_category) and self.verbose:
                     print(f"Inconsistent section {_new_section}")
                 else:
-                    active_category = node_type.category
+                    active_category = nvtype.category
 
                 issubsection = issubclass(
-                    node_type, self.__node_value_types["subsection"]
+                    nvtype, top._GromacsTop__node_value_types["subsection"]
                     )
 
                 if issubsection:
-                    node_value = node_type(
+                    node_value = nvtype(
                         section=weakref.proxy(active_supersection)
                         )
                     active_section = node_value
                 else:
-                    node_value = node_type()
+                    node_value = nvtype()
                     active_section = active_supersection = node_value
 
                 node_key = node_value._make_node_key()
@@ -654,7 +675,7 @@ class GromacsTopParser:
                 continue
 
             if active_section is None:
-                node_key, node_value = self._select_node_type(
+                node_key, node_value = top.make_nvtype(
                     "comment", line
                 )
                 node_value._char = None
@@ -662,46 +683,35 @@ class GromacsTopParser:
                 continue
 
             expected_entry = f"{active_section._node_key_name}_entry"
-            node_type = self.__node_value_types.get(expected_entry, False)
-            if node_type is not False:
+            nvtype = top._GromacsTop__node_value_types.get(
+                expected_entry, False
+                )
+            if nvtype is not False:
                 if not self.ignore_comments:
-                    line, comment = self.split_comment(line)
+                    line, comment = split_comment(line)
                 else:
                     comment = None
 
                 args = line.split()
 
                 try:
-                    node_value = node_type.from_line(*args, comment=comment)
+                    node_value = nvtype.from_line(*args, comment=comment)
                 except TypeError:
                     if comment is not None:
                         line += f" ; {comment}"
-                    node_value = node_type.create_raw(f"{line}")
+                    node_value = nvtype.create_raw(f"{line}")
                 finally:
                     node_key = node_value._make_node_key()
 
                 top.add(node_key, node_value)
                 continue
 
-            node_key, node_value = self._select_node_type(
+            node_key, node_value = top.make_nvtype(
                 "generic", line
             )
             top.add(node_key, node_value)
 
         return top
-
-    def _select_node_type(self, name, *args, **kwargs):
-        """Retrieve node type by name, initialize, and make key"""
-
-        node_type = self.__node_value_types[name]
-        node_value = node_type(*args, **kwargs)
-        node_key = node_value._make_node_key()
-        return node_key, node_value
-
-    def split_comment(self, line):
-        if ";" in line:
-            return tuple(line.split(";", maxsplit=1))
-        return line, None
 
 
 class Node:
@@ -807,6 +817,12 @@ def ensure_proxy(obj):
 
 def unproxy_node(node):
     return node.prev.next
+
+
+def split_comment(line):
+    if ";" in line:
+        return tuple(line.split(";", maxsplit=1))
+    return line, None
 
 
 def path_in_blacklist(include_path, include_blacklist):

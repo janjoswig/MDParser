@@ -124,7 +124,7 @@ class TestGromacsTop:
 
         with pytest.raises(LookupError):
             top.get_next_node_of_type(
-                node_type=_gmx_nodes.GenericNodeValue
+                nvtype=_gmx_nodes.GenericNodeValue
                 )
 
         top.add("section", _gmx_nodes.Section("sec"))
@@ -133,12 +133,12 @@ class TestGromacsTop:
         top.add("entry2", _gmx_nodes.SectionEntry("subsec_entry"))
         top.add("another_section", _gmx_nodes.Section("another_sec"))
 
-        node = top.get_next_node_of_type(node_type=_gmx_nodes.Section)
+        node = top.get_next_node_of_type(nvtype=_gmx_nodes.Section)
         assert node is top["section"]
 
         node = top.get_next_node_of_type(
             start=top["section"],
-            node_type=_gmx_nodes.Section
+            nvtype=_gmx_nodes.Section
             )
         assert node is top["subsection"]
 
@@ -149,7 +149,7 @@ class TestGromacsTop:
 
         node = top.get_next_node_of_type(
             start=top["section"],
-            node_type=_gmx_nodes.Section,
+            nvtype=_gmx_nodes.Section,
             exclude=_gmx_nodes.Subsection
             )
         assert node is top["another_section"]
@@ -158,7 +158,7 @@ class TestGromacsTop:
             node = top.get_next_node_of_type(
                 start=top["section"],
                 stop=top["another_section"],
-                node_type=_gmx_nodes.Section,
+                nvtype=_gmx_nodes.Section,
                 exclude=_gmx_nodes.Subsection
                 )
 
@@ -166,14 +166,14 @@ class TestGromacsTop:
             node = top.get_next_node_of_type(
                 start=top["another_section"],
                 stop=top["subsection"],
-                node_type=_gmx_nodes.Section,
+                nvtype=_gmx_nodes.Section,
                 exclude=_gmx_nodes.Subsection,
                 forward=False
                 )
 
         node = top.get_next_node_of_type(
             start=top["another_section"],
-            node_type=_gmx_nodes.Section,
+            nvtype=_gmx_nodes.Section,
             exclude=_gmx_nodes.Subsection,
             forward=False
             )
@@ -206,7 +206,7 @@ class TestNode:
 class TestNodeValues:
 
     @pytest.mark.parametrize(
-        "node_type,init_values,expected_attrs",
+        "nvtype,init_values,expected_attrs",
         [
             (
                 _gmx_nodes.GenericNodeValue,
@@ -220,8 +220,8 @@ class TestNodeValues:
             ),
         ]
     )
-    def test_representations(self, node_type, init_values, expected_attrs):
-        node = node_type(**init_values)
+    def test_representations(self, nvtype, init_values, expected_attrs):
+        node = nvtype(**init_values)
 
         expected_attr_str = ", ".join(
             f"{v!s}={init_values[v]!r}"
@@ -313,26 +313,26 @@ class TestNodeValues:
         assert node._raw == strange_line
 
     def test_counting(self):
-        node_type = _gmx_nodes.GenericNodeValue
-        node_type.reset_count()
-        assert node_type._count == 0
+        nvtype = _gmx_nodes.GenericNodeValue
+        nvtype.reset_count()
+        assert nvtype._count == 0
 
-        node1 = node_type(1)
+        node1 = nvtype(1)
         assert node1.count == 1
-        assert node_type._count == 1
+        assert nvtype._count == 1
 
-        node2 = node_type(2)
-        assert node1.count == 1
-        assert node2.count == 2
-        assert node_type._count == 2
-
-        node_type.reset_count()
+        node2 = nvtype(2)
         assert node1.count == 1
         assert node2.count == 2
-        assert node_type._count == 0
+        assert nvtype._count == 2
 
-        node_type.reset_count(3)
-        assert node_type._count == 3
+        nvtype.reset_count()
+        assert node1.count == 1
+        assert node2.count == 2
+        assert nvtype._count == 0
+
+        nvtype.reset_count(3)
+        assert nvtype._count == 3
 
     def test_entries(self):
 

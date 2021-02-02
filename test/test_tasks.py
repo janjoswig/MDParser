@@ -10,7 +10,7 @@ class TestTopologyTasks:
     def test_get_subsections(self, tasks_top):
 
         first_molecule = tasks_top.get_next_node_of_type(
-            node_type=mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"]
+            nvtype=mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"]
             )
         subsections = mdtasks.get_subsections(tasks_top, first_molecule)
         assert len(subsections) == 2
@@ -28,7 +28,7 @@ class TestTopologyTasks:
     def test_get_last_entry(self, tasks_top):
 
         first_atoms = tasks_top.get_next_node_of_type(
-            node_type=mdtop.DEFAULT_NODE_VALUE_TYPES["atoms"]
+            nvtype=tasks_top.select_nvtype("atoms")
             )
         last_entry = mdtasks.get_last_entry(tasks_top, first_atoms)
 

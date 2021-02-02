@@ -3,16 +3,20 @@ from . import _gmx_nodes
 
 
 def get_subsections(top, section_node):
+    section_nvtype = mdtop.GromacsTop.select_nvtype("section")
+    subsection_nvtype = mdtop.GromacsTop.select_nvtype("subsection")
+
     subsections = []
     start = section_node
     while True:
         next_section = top.get_next_node_of_type(
             start,
-            node_type=mdtop.DEFAULT_NODE_VALUE_TYPES["section"])
+            nvtype=section_nvtype
+            )
 
         if not isinstance(
                 next_section.value,
-                mdtop.DEFAULT_NODE_VALUE_TYPES["subsection"]):
+                subsection_nvtype):
             break
 
         subsections.append(next_section)
@@ -22,10 +26,12 @@ def get_subsections(top, section_node):
 
 
 def get_last_entry(top, section_node):
+    entry_nvtype = mdtop.GromacsTop.select_nvtype("entry")
+
     current = section_node
     while isinstance(
             current.next.value,
-            mdtop.DEFAULT_NODE_VALUE_TYPES["entry"]):
+            entry_nvtype):
         current = current.next
 
     return current
@@ -42,7 +48,7 @@ def merge_molecules(top, name=None):
         try:
             moleculetype = top.get_next_node_of_type(
                 start=moleculetype,
-                node_type=mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"]
+                nvtype=mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"]
                 )
         except LookupError:
             break
@@ -56,7 +62,7 @@ def merge_molecules(top, name=None):
 
     molecules_section = top.get_next_node_of_type(
         start=top._root,
-        node_type=mdtop.DEFAULT_NODE_VALUE_TYPES["molecules"],
+        nvtype=mdtop.DEFAULT_NODE_VALUE_TYPES["molecules"],
         forward=False
         )
 

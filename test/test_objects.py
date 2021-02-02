@@ -86,7 +86,7 @@ class TestGromacsTop:
 
         top.relative_insert(
             top[3], "slurb", _gmx_nodes.GenericNodeValue("balaz"),
-            after=False
+            forward=False
             )
 
         assert top[3].value.value == "balaz"

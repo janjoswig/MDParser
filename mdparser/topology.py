@@ -219,12 +219,12 @@ class GromacsTop:
         prev.next = node
         next_node.prev = weakref.proxy(node)
 
-    def relative_insert(self, node, key, value, after=True):
+    def relative_insert(self, node, key, value, forward=True):
         """Insert node after/before other node"""
 
         new_node = self._check_key_and_add_new_node(key)
 
-        if after is True:
+        if forward is True:
             new_node.prev, new_node.next = node.next.prev, node.next
             new_node.next.prev = weakref.proxy(new_node)
             node.next = new_node

@@ -29,3 +29,73 @@ def get_last_entry(top, section_node):
         current = current.next
 
     return current
+
+
+def merge_molecules(top, name=None):
+
+    raise NotImplementedError
+
+    moleculetype_list = []
+    moleculetype = top._root
+
+    while True:
+        try:
+            moleculetype = top.get_next_node_of_type(
+                start=moleculetype,
+                node_type=mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"]
+                )
+        except LookupError:
+            break
+        else:
+            moleculetype_list.append(moleculetype)
+
+    if len(moleculetype_list) == 0:
+        raise LookupError(
+            "No molecules found"
+        )
+
+    molecules_section = top.get_next_node_of_type(
+        start=top._root,
+        node_type=mdtop.DEFAULT_NODE_VALUE_TYPES["molecules"],
+        forward=False
+        )
+
+    moleculetype_subsection_mapping = {}
+    for moleculetype in moleculetype_list:
+        key = moleculetype.next.value.name
+        subsection_list = get_subsections(top, moleculetype)
+        moleculetype_subsection_mapping[key] = subsection_list
+
+    molecules_entry = molecules_section.next
+    atom_nr_offset = 0
+
+    if name is None:
+        name = moleculetype_list[0].next.value.name
+
+    mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"].reset_count(
+        len(moleculetype_list)
+        )
+    merged_moleculetype_value = mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"]
+    top.relative_insert(
+        moleculetype_list[0],
+        merged_moleculetype_value._makekey,
+        merged_moleculetype_value,
+        after=False,
+        )
+
+    merged_moleculetype = mdtop.unproxy_node(moleculetype_list[0].prev)
+
+    while True:
+        if not isinstance(
+                molecules_entry,
+                mdtop.DEFAULT_NODE_VALUE_TYPES["molecules_entry"]):
+            break
+
+        molecule_name = molecules_entry.value.molecule
+        molecule_count = molecules_entry.value.number
+
+        subsection_list = moleculetype_subsection_mapping[molecule_name]
+
+        for _ in range(molecule_count):
+            for subsection in subsection_list:
+                new_subsection_value = type(subsection.value)()

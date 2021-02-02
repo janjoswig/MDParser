@@ -1,3 +1,4 @@
+import pathlib
 import weakref
 
 import pytest
@@ -357,3 +358,48 @@ class TestHelper:
 
         assert isinstance(mdtop.ensure_proxy(proxy), weakref.ProxyType)
         assert isinstance(mdtop.ensure_proxy(node), weakref.ProxyType)
+
+    @pytest.mark.parametrize(
+        "include_path,include_blacklist,expected",
+        [
+            (
+                pathlib.Path(
+                    "/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"
+                ),
+                [pathlib.Path("forcefield.itp")],
+                True
+            ),
+            (
+                pathlib.Path(
+                    "/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"
+                ),
+                [pathlib.Path("amber99sb-ildn")],
+                True
+            ),
+            (
+                "/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp",
+                ["amber99sb-ildn"],
+                True
+            ),
+            (
+                pathlib.Path(
+                    "/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"
+                ),
+                [pathlib.Path("dummy.dat"), pathlib.Path("amber99sb-ildn")],
+                True
+            ),
+            (
+                pathlib.Path(
+                    "/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"
+                ),
+                [pathlib.Path("dummy.dat"), pathlib.Path("foo.bar")],
+                False
+            )
+        ]
+    )
+    def test_path_in_blacklist(
+            self, include_path, include_blacklist, expected):
+
+        ignore = mdtop.path_in_blacklist(include_path, include_blacklist)
+
+        assert ignore is expected

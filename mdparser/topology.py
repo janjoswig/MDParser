@@ -335,6 +335,7 @@ class GromacsTopParser:
             include_shared: bool = False,
             local_paths: Optional[Iterable[Any]] = None,
             shared_paths: Optional[Iterable[Any]] = None,
+            include_blacklist: Optional[Iterable[Any]] = None,
             definitions: Optional[Mapping[str, Any]] = None,
             resolve_conditions: bool = True,
             verbose: bool = True):
@@ -353,6 +354,10 @@ class GromacsTopParser:
             shared_paths = [pathlib.Path(p) for p in shared_paths]
         self.shared_paths = shared_paths
 
+        if include_blacklist is not None:
+            include_blacklist = [pathlib.Path(f) for f in include_blacklist]
+        self.include_blacklist = include_blacklist
+
         self.verbose = verbose
         self.resolve_conditions = resolve_conditions
 
@@ -366,7 +371,8 @@ class GromacsTopParser:
             include_local=True,
             local_paths=None,
             include_shared=False,
-            shared_paths=None):
+            shared_paths=None,
+            include_blacklist=None):
         """Pre-process topology file-like object
 
         Yield topology file line by line and resolve '#include'
@@ -399,6 +405,9 @@ class GromacsTopParser:
         else:
             shared_paths = [pathlib.Path(p) for p in shared_paths]
 
+        if include_blacklist is not None:
+            include_blacklist = [pathlib.Path(f) for f in include_blacklist]
+
         for line in file:
             if not line.startswith('#include'):
                 yield line
@@ -410,6 +419,10 @@ class GromacsTopParser:
             if include_local:
                 for include_dir in _local_paths:
                     include_path = include_dir / include_file
+
+                    if path_in_blacklist(include_path, include_blacklist):
+                        continue
+
                     if not include_path.is_file():
                         continue
 
@@ -419,7 +432,8 @@ class GromacsTopParser:
                             include_local=include_local,
                             local_paths=local_paths,
                             include_shared=include_shared,
-                            shared_paths=shared_paths
+                            shared_paths=shared_paths,
+                            include_blacklist=include_blacklist,
                         )
                     found_locally = True
                     break
@@ -428,6 +442,10 @@ class GromacsTopParser:
             if not found_locally and include_shared:
                 for include_dir in shared_paths:
                     include_path = include_dir / include_file
+
+                    if path_in_blacklist(include_path, include_blacklist):
+                        continue
+
                     if not include_path.is_file():
                         continue
 
@@ -437,7 +455,8 @@ class GromacsTopParser:
                             include_local=include_local,
                             local_paths=local_paths,
                             include_shared=include_shared,
-                            shared_paths=shared_paths
+                            shared_paths=shared_paths,
+                            include_blacklist=include_blacklist,
                         )
                     found_shared = True
                     break
@@ -454,7 +473,8 @@ class GromacsTopParser:
                 include_local=self.include_local,
                 local_paths=self.local_paths,
                 include_shared=self.include_shared,
-                shared_paths=self.shared_paths
+                shared_paths=self.shared_paths,
+                include_blacklist=self.include_blacklist,
                 )
 
         active_section = None
@@ -772,3 +792,16 @@ def ensure_proxy(obj):
 
 def unproxy_node(node):
     return node.prev.next
+
+
+def path_in_blacklist(include_path, include_blacklist):
+    if include_blacklist is None:
+        return False
+
+    include_path = str(include_path)
+
+    for ignored in include_blacklist:
+        if str(ignored) in include_path:
+            return True
+
+    return False

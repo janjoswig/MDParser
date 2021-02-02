@@ -18,6 +18,10 @@ class TestParseTopologies:
             ("ion.top", {"ignore_comments": False}),
             ("ion.top", {"include_shared": True, "ignore_comments": False}),
             ("ion.top", {"include_shared": True, "resolve_conditions": False}),
+            ("ion.top", {
+                "include_shared": True,
+                "include_blacklist": ["forcefield.itp"]
+                }),
             ("two_ions.top", {}),
             ]
         )

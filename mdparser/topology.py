@@ -263,6 +263,29 @@ class GromacsTop:
 
         new_node.key, new_node.value = key, value
 
+    def block_insert(self, node, block_start, block_end, forward=True):
+        """Insert block of linked nodes before/after node"""
+
+        if forward is True:
+            block_start.prev = node.next.prev
+            block_end.next = node.next
+            block_end.next.prev = weakref.proxy(block_end)
+            node.next = block_start
+        else:
+            block_start.prev = node.prev
+            block_end.next = node
+            node.prev.next = block_start
+            node.prev = weakref.proxy(block_end)
+
+        current = block_start
+        while current is not block_end:
+            if current.key in self._nodes:
+                raise KeyError(f"node {current.key!r} does already exist")
+
+            self._nodes[current.key] = current
+
+            current = current.next
+
     def get_next_node_with_nvtype(
             self, start=None, stop=None, nvtype=None,
             exclude=None, forward=True):

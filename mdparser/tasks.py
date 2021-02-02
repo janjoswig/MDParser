@@ -42,7 +42,6 @@ def get_last_entry(top, section_node):
 def merge_molecules(top, name=None):
 
     section_nvtype = mdtop.GromacsTop.select_nvtype("section")
-    section_entry_nvtype = mdtop.GromacsTop.select_nvtype("entry")
     moleculetype_section_nvtype = mdtop.GromacsTop.select_nvtype(
         "moleculetype"
         )

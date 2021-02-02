@@ -91,6 +91,33 @@ class TestGromacsTop:
 
         assert top[3].value.value == "balaz"
 
+    def test_block_insert(self):
+        def set_up():
+            top = mdtop.GromacsTop()
+            top.add("1", _gmx_nodes.GenericNodeValue("1"))
+            top.add("2", _gmx_nodes.GenericNodeValue("2"))
+            top.add("3", _gmx_nodes.GenericNodeValue("3"))
+
+            node = mdtop.Node()
+            node.value = _gmx_nodes.GenericNodeValue("4")
+            node.key = "4"
+
+            other = mdtop.Node()
+            other.value = _gmx_nodes.GenericNodeValue("5")
+            other.key = "5"
+
+            node.connect(other)
+
+            return top, node, other
+
+        top, node, other = set_up()
+        top.block_insert(top[1], node, other)
+        assert [x.value.value for x in top] == ["1", "2", "4", "5", "3"]
+
+        top, node, other = set_up()
+        top.block_insert(top[1], node, other, forward=False)
+        assert [x.value.value for x in top] == ["1", "4", "5", "2", "3"]
+
     def test_info(self):
 
         top = mdtop.GromacsTop()

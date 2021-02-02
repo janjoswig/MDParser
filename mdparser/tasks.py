@@ -76,14 +76,19 @@ def merge_molecules(top, name=None):
         len(moleculetype_list)
         )
     merged_moleculetype_value = mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"]
-    top.relative_insert(
-        moleculetype_list[0],
-        merged_moleculetype_value._makekey,
-        merged_moleculetype_value,
-        after=False,
+    root = merged_moleculetype = mdtop.Node()
+    merged_moleculetype.key = merged_moleculetype_value._make_node_key
+    merged_moleculetype.value = merged_moleculetype_value
+
+    merged_moleculetype_entry = mdtop.Node()
+    merged_moleculetype_entry.value = mdtop.DEFAULT_NODE_VALUE_TYPES[
+        "moleculetype"
+        ](name=name, nrexcl=3)
+    merged_moleculetype_entry.key = (
+        merged_moleculetype_entry.value._make_node_key()
         )
 
-    merged_moleculetype = mdtop.unproxy_node(moleculetype_list[0].prev)
+    merged_moleculetype = merged_moleculetype.next
 
     while True:
         if not isinstance(
@@ -99,3 +104,7 @@ def merge_molecules(top, name=None):
         for _ in range(molecule_count):
             for subsection in subsection_list:
                 new_subsection_value = type(subsection.value)()
+                new_subsection = mdtop.Node()
+                new_subsection.key = new_subsection_value._make_node_key()
+                new_subsection.value = new_subsection_value
+                merged_moleculetypes.connect(new_subsection)

@@ -72,7 +72,6 @@ class GromacsTop:
     def __init__(self):
         self._nodes = dict()
         self._hardroot = Node()
-        self._hardroot.key = self._hardroot.value = None
         self._root = root = weakref.proxy(self._hardroot)
         root.prev = root.next = root
 
@@ -708,11 +707,27 @@ class GromacsTopParser:
 class Node:
     __slots__ = ["prev", "next", "key", "value", '__weakref__']
 
+    def __init__(self):
+        self.prev = None
+        self.next = None
+        self.key = None
+        self.value = None
+
     def __repr__(self):
         k = self.key if hasattr(self, "key") else None
         v = self.value if hasattr(self, "value") else None
         attr_str = f"(key={k!r}, value={v!r})"
         return f"{type(self).__name__}{attr_str}"
+
+    def connect(self, other, forward=True):
+        """Link another node in forward/backward direction"""
+
+        if forward is True:
+            self.next = other
+            other.prev = weakref.proxy(self)
+        else:
+            self.prev = weakref.proxy(other)
+            other.next = self
 
 
 class AlwaysGreater:

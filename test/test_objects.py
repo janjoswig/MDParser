@@ -192,6 +192,16 @@ class TestNode:
 
         assert f"{node!r}" == "Node(key='key', value='value')"
 
+    def test_connect(self):
+        node = mdtop.Node()
+        other = mdtop.Node()
+
+        node.connect(other)
+        assert node.next is other
+
+        node.connect(other, forward=False)
+        assert other.next is node
+
 
 class TestNodeValues:
 

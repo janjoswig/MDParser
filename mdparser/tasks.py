@@ -9,7 +9,7 @@ def get_subsections(top, section_node):
     subsections = []
     start = section_node
     while True:
-        next_section = top.get_next_node_of_type(
+        next_section = top.get_next_node_with_nvtype(
             start,
             nvtype=section_nvtype
             )
@@ -46,7 +46,7 @@ def merge_molecules(top, name=None):
 
     while True:
         try:
-            moleculetype = top.get_next_node_of_type(
+            moleculetype = top.get_next_node_with_nvtype(
                 start=moleculetype,
                 nvtype=mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"]
                 )
@@ -60,7 +60,7 @@ def merge_molecules(top, name=None):
             "No molecules found"
         )
 
-    molecules_section = top.get_next_node_of_type(
+    molecules_section = top.get_next_node_with_nvtype(
         start=top._root,
         nvtype=mdtop.DEFAULT_NODE_VALUE_TYPES["molecules"],
         forward=False

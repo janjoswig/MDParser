@@ -845,6 +845,23 @@ class BondsEntry(SectionEntry):
         return return_str
 
 
+class PairsEntry(SectionEntry):
+
+    _node_key_name = "pairs_entry"
+
+    _arg_names = [
+        "i", "j", "func", "c0", "c1", "c2", "c3", "c4"
+    ]
+
+
+class PairsNBEntry(SectionEntry):
+
+    _node_key_name = "pairs_nb_entry"
+
+    _arg_names = [
+        "i", "j", "func", "c0", "c1", "c2", "c3", "c4"
+    ]
+
 class ExclusionsEntry(SectionEntry):
 
     _node_key_name = "exclusions_entry"

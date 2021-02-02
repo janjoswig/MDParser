@@ -116,14 +116,14 @@ class TestGromacsTop:
 
         assert isinstance(complement, mdtop.Node)
 
-    def test_get_next_node_of_type(self):
+    def test_get_next_node_with_nvtype(self):
         top = mdtop.GromacsTop()
 
         with pytest.raises(ValueError):
-            top.get_next_node_of_type()
+            top.get_next_node_with_nvtype()
 
         with pytest.raises(LookupError):
-            top.get_next_node_of_type(
+            top.get_next_node_with_nvtype(
                 nvtype=_gmx_nodes.GenericNodeValue
                 )
 
@@ -133,21 +133,21 @@ class TestGromacsTop:
         top.add("entry2", _gmx_nodes.SectionEntry("subsec_entry"))
         top.add("another_section", _gmx_nodes.Section("another_sec"))
 
-        node = top.get_next_node_of_type(nvtype=_gmx_nodes.Section)
+        node = top.get_next_node_with_nvtype(nvtype=_gmx_nodes.Section)
         assert node is top["section"]
 
-        node = top.get_next_node_of_type(
+        node = top.get_next_node_with_nvtype(
             start=top["section"],
             nvtype=_gmx_nodes.Section
             )
         assert node is top["subsection"]
 
-        node = top.get_next_node_of_type(
+        node = top.get_next_node_with_nvtype(
             start=top["section"],
             )
         assert node is top["subsection"]
 
-        node = top.get_next_node_of_type(
+        node = top.get_next_node_with_nvtype(
             start=top["section"],
             nvtype=_gmx_nodes.Section,
             exclude=_gmx_nodes.Subsection
@@ -155,7 +155,7 @@ class TestGromacsTop:
         assert node is top["another_section"]
 
         with pytest.raises(LookupError):
-            node = top.get_next_node_of_type(
+            node = top.get_next_node_with_nvtype(
                 start=top["section"],
                 stop=top["another_section"],
                 nvtype=_gmx_nodes.Section,
@@ -163,7 +163,7 @@ class TestGromacsTop:
                 )
 
         with pytest.raises(LookupError):
-            node = top.get_next_node_of_type(
+            node = top.get_next_node_with_nvtype(
                 start=top["another_section"],
                 stop=top["subsection"],
                 nvtype=_gmx_nodes.Section,
@@ -171,7 +171,7 @@ class TestGromacsTop:
                 forward=False
                 )
 
-        node = top.get_next_node_of_type(
+        node = top.get_next_node_with_nvtype(
             start=top["another_section"],
             nvtype=_gmx_nodes.Section,
             exclude=_gmx_nodes.Subsection,

@@ -172,7 +172,10 @@ class GromacsTop:
         root.prev = weakref.proxy(node)
 
     def pop(self, key):
-        return self._nodes.pop(key)
+        node = self._nodes.pop(key)
+        node.prev.next = node.next
+        node.next.prev = node.prev
+        return node
 
     def discard(self, key) -> None:
         try:
@@ -258,7 +261,7 @@ class GromacsTop:
 
         new_node.key, new_node.value = key, value
 
-    def get_next_node_of_type(
+    def get_next_node_with_nvtype(
             self, start=None, stop=None, nvtype=None,
             exclude=None, forward=True):
         """Search topology for another node
@@ -642,7 +645,9 @@ class GromacsTopParser:
 
             if line.startswith('['):
                 _new_section = line.strip(' []').casefold()
-                nvtype = top._GromacsTop__node_value_types.get(_new_section, None)
+                nvtype = top._GromacsTop__node_value_types.get(
+                    _new_section, None
+                    )
                 if nvtype is None:
                     # Should not happen for compliant topologies
                     if self.verbose:
@@ -700,6 +705,7 @@ class GromacsTopParser:
                 try:
                     node_value = nvtype.from_line(*args, comment=comment)
                 except TypeError:
+                    # Should not happen if entry type can deal with line
                     if comment is not None:
                         line += f" ; {comment}"
                     node_value = nvtype.create_raw(f"{line}")
@@ -709,6 +715,7 @@ class GromacsTopParser:
                 top.add(node_key, node_value)
                 continue
 
+            # Absolute fallback
             node_key, node_value = top.make_nvtype(
                 "generic", line
             )
@@ -727,9 +734,7 @@ class Node:
         self.value = None
 
     def __repr__(self):
-        k = self.key if hasattr(self, "key") else None
-        v = self.value if hasattr(self, "value") else None
-        attr_str = f"(key={k!r}, value={v!r})"
+        attr_str = f"(key={self.key!r}, value={self.value!r})"
         return f"{type(self).__name__}{attr_str}"
 
     def connect(self, other, forward=True):
@@ -744,6 +749,9 @@ class Node:
 
 
 class AlwaysGreater:
+
+    __slots__ = []
+
     def __eq__(self, other):
         return False
 
@@ -761,6 +769,9 @@ class AlwaysGreater:
 
 
 class AlwaysLess:
+
+    __slots__ = []
+
     def __eq__(self, other):
         return False
 

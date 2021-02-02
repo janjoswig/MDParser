@@ -9,7 +9,7 @@ class TestTopologyTasks:
 
     def test_get_subsections(self, tasks_top):
 
-        first_molecule = tasks_top.get_next_node_of_type(
+        first_molecule = tasks_top.get_next_node_with_nvtype(
             nvtype=mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"]
             )
         subsections = mdtasks.get_subsections(tasks_top, first_molecule)
@@ -27,7 +27,7 @@ class TestTopologyTasks:
 
     def test_get_last_entry(self, tasks_top):
 
-        first_atoms = tasks_top.get_next_node_of_type(
+        first_atoms = tasks_top.get_next_node_with_nvtype(
             nvtype=tasks_top.select_nvtype("atoms")
             )
         last_entry = mdtasks.get_last_entry(tasks_top, first_atoms)

@@ -129,7 +129,7 @@ class GromacsTop:
                 raise IndexError("index out of range")
 
         raise ValueError(
-            f"items should be queried by 'str' (node key), "
+            f"items can only be queried by 'str' (node key), "
             f"or 'int' or 'slice' (node index), not {type(query).__name__!r}"
             )
 
@@ -170,6 +170,9 @@ class GromacsTop:
         node.prev, node.next, node.key, node.value = last, root, key, value
         last.next = node
         root.prev = weakref.proxy(node)
+
+    def pop(self, key):
+        return self._nodes.pop(key)
 
     def discard(self, key) -> None:
         try:

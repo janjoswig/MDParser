@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-
 class NodeValue(ABC):
     """Abstract base class for node value types"""
 
@@ -309,6 +308,17 @@ class SectionEntry(NodeValue):
         self.comment = comment
         self._raw = None
 
+    def __copy__(self):
+        kwargs = {
+            arg_name: getattr(self, arg_name)
+            for arg_name
+            in self._arg_names
+        }
+        copied = type(self)(**kwargs, comment=self.comment)
+        copied._raw = self._raw
+
+        return copied
+
     @classmethod
     def create_raw(cls, line):
         node_value = cls()
@@ -427,7 +437,6 @@ class AtomtypesEntry(SectionEntry):
 
     _node_key_name = "atomtypes_entry"
     _arg_names = [
-        [
             "name",
             "bond_type",
             "at_num",
@@ -436,16 +445,6 @@ class AtomtypesEntry(SectionEntry):
             "ptype",
             "sigma",
             "epsilon"
-        ],
-        [
-            "name",
-            "at_num",
-            "mass",
-            "charge",
-            "ptype",
-            "sigma",
-            "epsilon"
-        ],
     ]
 
     def __init__(
@@ -478,10 +477,10 @@ class AtomtypesEntry(SectionEntry):
 
     @classmethod
     def from_line(cls, *args, comment):
-        if len(args) == 8:
-            arg_names = cls._arg_names[0]
+        if len(args) == 7:
+            arg_names = cls._arg_names[0:1] + cls._arg_names[2:]
         else:
-            arg_names = cls._arg_names[1]
+            arg_names = cls._arg_names
 
         kwargs = {
             kw: v
@@ -529,7 +528,7 @@ class AtomtypesEntry(SectionEntry):
     def __repr__(self):
         arg_name_repr = ", ".join(
             f"{arg_name!s}={getattr(self, arg_name)!r}"
-            for arg_name in self._arg_names[0]
+            for arg_name in self._arg_names
             )
 
         return f"{type(self).__name__}({arg_name_repr})"

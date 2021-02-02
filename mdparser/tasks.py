@@ -1,4 +1,4 @@
-from copy import deepcopy
+from copy import copy
 
 import mdparser.topology as mdtop
 from . import _gmx_nodes
@@ -42,6 +42,7 @@ def get_last_entry(top, section_node):
 def merge_molecules(top, name=None):
 
     section_nvtype = mdtop.GromacsTop.select_nvtype("section")
+    section_entry_nvtype = mdtop.GromacsTop.select_nvtype("entry")
     moleculetype_section_nvtype = mdtop.GromacsTop.select_nvtype(
         "moleculetype"
         )
@@ -81,8 +82,6 @@ def merge_molecules(top, name=None):
         subsection_list = get_subsections(top, moleculetype_section)
         moleculetype_subsection_mapping[key] = subsection_list
 
-    atom_nr_offset = 0
-
     if name is None:
         name = moleculetype_section_list[0].next.value.molecule
 
@@ -103,11 +102,12 @@ def merge_molecules(top, name=None):
     new_current.connect(new_next)
     new_current = new_next
 
-    molecules_entry = molecules_section.next
-    if not isinstance(molecules_entry.value, molecules_entry_nvtype):
-        raise LookupError("no molecules entry found")
+    atom_nr = 0
 
+    molecules_entry = molecules_section
     while True:
+        molecules_entry = molecules_entry.next
+
         if not isinstance(molecules_entry.value, molecules_entry_nvtype):
             break
 
@@ -117,21 +117,39 @@ def merge_molecules(top, name=None):
         subsection_list = moleculetype_subsection_mapping[molecule_name]
 
         for _ in range(molecule_count):
+
+            atom_nr_offset = atom_nr
+
             for subsection in subsection_list:
+
                 new_next = mdtop.Node()
                 new_next.value = type(subsection.value)()
                 new_next.key = new_next.value._make_node_key()
                 new_current.connect(new_next)
                 new_current = new_next
 
-                subsection_entry = subsection.next
-                while not isinstance(subsection_entry.value, section_nvtype):
-                    new_next = deepcopy()
-                    if isinstance(subsection_entry.value, atoms_entry_nvtype):
-                        pass
-
+                subsection_entry = subsection
+                while True:
                     subsection_entry = subsection_entry.next
 
-        molecules_entry = molecules_entry.next
+                    if isinstance(subsection_entry.value, section_nvtype):
+                        break
+
+                    print(subsection_entry.value)
+                    new_next = mdtop.Node()
+                    new_next.value = copy(subsection_entry.value)
+                    new_next.key = new_next.value._make_node_key()
+                    new_current.connect(new_next)
+                    new_current = new_next
+
+                    if isinstance(new_current.value, atoms_entry_nvtype):
+                        new_current.value.nr += atom_nr_offset
+                        atom_nr = new_current.value.nr
+                        continue
+
+                    if isinstance(new_current.value, bonds_entry_nvtype):
+                        new_current.value.ai += atom_nr_offset
+                        new_current.value.aj += atom_nr_offset
+                        continue
 
     return hardroot

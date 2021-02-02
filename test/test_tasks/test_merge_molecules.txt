@@ -1,0 +1,12 @@
+[ moleculetype ]
+
+new    3
+
+[ atoms ]
+
+[ bonds ]
+
+[ atoms ]
+
+[ atoms ]
+

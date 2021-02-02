@@ -59,6 +59,8 @@ DEFAULT_NODE_VALUE_TYPES = {
         "moleculetype_entry": _gmx_nodes.MoleculetypeEntry,
         "atoms_entry": _gmx_nodes.AtomsEntry,
         "bonds_entry": _gmx_nodes.BondsEntry,
+        "pairs_entry": _gmx_nodes.PairsEntry,       # raw
+        "pairs_nb_entry": _gmx_nodes.PairsNBEntry,  # raw
         "exclusions_entry": _gmx_nodes.ExclusionsEntry,
         "system_entry": _gmx_nodes.SystemEntry,
         "molecules_entry": _gmx_nodes.MoleculesEntry,

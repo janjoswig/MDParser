@@ -581,14 +581,14 @@ class MoleculetypeEntry(SectionEntry):
 
     _node_key_name = "moleculetype_entry"
     _arg_names = [
-        "name", "nrexcl"
+        "molecule", "nrexcl"
     ]
 
-    def __init__(self, name=None, nrexcl=None, comment=None):
+    def __init__(self, molecule=None, nrexcl=None, comment=None):
 
         super().__init__(comment=comment)
 
-        self.name = name
+        self.molecule = molecule
 
         if nrexcl is not None:
             nrexcl = int(nrexcl)
@@ -597,8 +597,8 @@ class MoleculetypeEntry(SectionEntry):
     def __str__(self):
         return_str = ""
 
-        if self.name is not None:
-            return_str += f"{self.name}"
+        if self.molecule is not None:
+            return_str += f"{self.molecule}"
 
         if self.nrexcl is not None:
             return_str += f"    {self.nrexcl}"
@@ -861,6 +861,7 @@ class PairsNBEntry(SectionEntry):
     _arg_names = [
         "i", "j", "func", "c0", "c1", "c2", "c3", "c4"
     ]
+
 
 class ExclusionsEntry(SectionEntry):
 

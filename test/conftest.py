@@ -32,6 +32,6 @@ def tasks_top():
     top.add("system_entry", _gmx_nodes.SystemEntry("Two molecules"))
     top.add("molecules", _gmx_nodes.MoleculesSection())
     top.add("mol1count", _gmx_nodes.MoleculesEntry("mol1", 1))
-    top.add("mol2count", _gmx_nodes.MoleculesEntry("mol2", 1))
+    top.add("mol2count", _gmx_nodes.MoleculesEntry("mol2", 2))
 
     return top

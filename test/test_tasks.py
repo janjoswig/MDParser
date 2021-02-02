@@ -38,3 +38,13 @@ class TestTopologyTasks:
             )
 
         assert last_entry.value.type == "B"
+
+    def test_merge_molecules(self, tasks_top, file_regression):
+        root = node = mdtasks.merge_molecules(tasks_top, name="new")
+
+        regression_string = f"{node.value!s}\n\n"
+        while node.next is not None:
+            node = node.next
+            regression_string += f"{node.value!s}\n\n"
+
+        file_regression.check(regression_string)

@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 import mdparser.topology as mdtop
 from . import _gmx_nodes
 
@@ -39,67 +41,74 @@ def get_last_entry(top, section_node):
 
 def merge_molecules(top, name=None):
 
-    raise NotImplementedError
+    section_nvtype = mdtop.GromacsTop.select_nvtype("section")
+    moleculetype_section_nvtype = mdtop.GromacsTop.select_nvtype(
+        "moleculetype"
+        )
+    atoms_entry_nvtype = mdtop.GromacsTop.select_nvtype("atoms_entry")
+    bonds_entry_nvtype = mdtop.GromacsTop.select_nvtype("bonds_entry")
+    molecules_nvtype = mdtop.GromacsTop.select_nvtype("molecules")
+    molecules_entry_nvtype = mdtop.GromacsTop.select_nvtype("molecules_entry")
 
-    moleculetype_list = []
-    moleculetype = top._root
+    moleculetype_section_list = []
 
+    moleculetype_section = top._root
     while True:
         try:
-            moleculetype = top.get_next_node_with_nvtype(
-                start=moleculetype,
-                nvtype=mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"]
+            moleculetype_section = top.get_next_node_with_nvtype(
+                start=moleculetype_section,
+                nvtype=moleculetype_section_nvtype
                 )
         except LookupError:
             break
         else:
-            moleculetype_list.append(moleculetype)
+            moleculetype_section_list.append(moleculetype_section)
 
-    if len(moleculetype_list) == 0:
+    if len(moleculetype_section_list) == 0:
         raise LookupError(
-            "No molecules found"
+            "no moleculetypes found"
         )
 
     molecules_section = top.get_next_node_with_nvtype(
-        start=top._root,
-        nvtype=mdtop.DEFAULT_NODE_VALUE_TYPES["molecules"],
+        nvtype=molecules_nvtype,
         forward=False
         )
 
     moleculetype_subsection_mapping = {}
-    for moleculetype in moleculetype_list:
-        key = moleculetype.next.value.name
-        subsection_list = get_subsections(top, moleculetype)
+    for moleculetype_section in moleculetype_section_list:
+        moleculetype_entry = moleculetype_section.next
+        key = moleculetype_entry.value.molecule
+        subsection_list = get_subsections(top, moleculetype_section)
         moleculetype_subsection_mapping[key] = subsection_list
 
-    molecules_entry = molecules_section.next
     atom_nr_offset = 0
 
     if name is None:
-        name = moleculetype_list[0].next.value.name
+        name = moleculetype_section_list[0].next.value.molecule
 
-    mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"].reset_count(
-        len(moleculetype_list)
+    moleculetype_section_nvtype.reset_count(
+        len(moleculetype_section_list)
         )
-    merged_moleculetype_value = mdtop.DEFAULT_NODE_VALUE_TYPES["moleculetype"]
-    root = merged_moleculetype = mdtop.Node()
-    merged_moleculetype.key = merged_moleculetype_value._make_node_key
-    merged_moleculetype.value = merged_moleculetype_value
 
-    merged_moleculetype_entry = mdtop.Node()
-    merged_moleculetype_entry.value = mdtop.DEFAULT_NODE_VALUE_TYPES[
+    hardroot = new_current = mdtop.Node()
+    new_current.key, new_current.value = mdtop.GromacsTop.make_nvtype(
         "moleculetype"
-        ](name=name, nrexcl=3)
-    merged_moleculetype_entry.key = (
-        merged_moleculetype_entry.value._make_node_key()
         )
 
-    merged_moleculetype = merged_moleculetype.next
+    new_next = mdtop.Node()
+    new_next.key, new_next.value = mdtop.GromacsTop.make_nvtype(
+        "moleculetype_entry", molecule=name, nrexcl=3
+        )
+
+    new_current.connect(new_next)
+    new_current = new_next
+
+    molecules_entry = molecules_section.next
+    if not isinstance(molecules_entry.value, molecules_entry_nvtype):
+        raise LookupError("no molecules entry found")
 
     while True:
-        if not isinstance(
-                molecules_entry,
-                mdtop.DEFAULT_NODE_VALUE_TYPES["molecules_entry"]):
+        if not isinstance(molecules_entry.value, molecules_entry_nvtype):
             break
 
         molecule_name = molecules_entry.value.molecule
@@ -109,8 +118,20 @@ def merge_molecules(top, name=None):
 
         for _ in range(molecule_count):
             for subsection in subsection_list:
-                new_subsection_value = type(subsection.value)()
-                new_subsection = mdtop.Node()
-                new_subsection.key = new_subsection_value._make_node_key()
-                new_subsection.value = new_subsection_value
-                merged_moleculetypes.connect(new_subsection)
+                new_next = mdtop.Node()
+                new_next.value = type(subsection.value)()
+                new_next.key = new_next.value._make_node_key()
+                new_current.connect(new_next)
+                new_current = new_next
+
+                subsection_entry = subsection.next
+                while not isinstance(subsection_entry.value, section_nvtype):
+                    new_next = deepcopy()
+                    if isinstance(subsection_entry.value, atoms_entry_nvtype):
+                        pass
+
+                    subsection_entry = subsection_entry.next
+
+        molecules_entry = molecules_entry.next
+
+    return hardroot

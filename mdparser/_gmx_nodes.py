@@ -368,6 +368,117 @@ class SectionEntry(NodeValue):
         return string
 
 
+class PropertyInvoker:
+    """Invokes descriptor protocol for instance attributes"""
+
+    def __setattr__(self, attr, value):
+        try:
+            got = super().__getattribute__(attr)
+            got.__set__(self, value)
+        except AttributeError:
+            super().__setattr__(attr, value)
+
+    def __getattribute__(self, attr):
+        got = super().__getattribute__(attr)
+        try:
+            return got.__get__(self, type(self))
+        except AttributeError:
+            return got
+
+
+class P2TermEntry(SectionEntry, PropertyInvoker):
+
+    _node_key_name = "p2_term_entry"
+
+    _args = [
+        "i", "j",
+        "funct",
+        "c"
+        ]
+
+    def getc(self, index):
+        def getter(self):
+            return self.c[index]
+        return getter
+
+    def setc(self, index):
+        def setter(self, value):
+            self.c[index] = value
+        return setter
+
+    def delc(self, index):
+        def deleter(self):
+            del self.c[index]
+        return deleter
+
+    def __init__(
+            self,
+            i=None, j=None,
+            funct=None,
+            c=None,
+            comment=None):
+
+        super().__init__(comment=comment)
+
+        if i is not None:
+            i = int(i)
+        self.i = i
+
+        if j is not None:
+            j = int(j)
+        self.j = j
+
+        if funct is not None:
+            funct = int(funct)
+        self.funct = funct
+
+        if c is None:
+            c = []
+        self.c = [float(x) for x in c]
+
+        for index in range(len(c)):
+            setattr(
+                self, f"c{index}", property(
+                    fget=self.getc(index),
+                    fset=self.setc(index),
+                    fdel=self.delc(index),
+                    doc="Access term coefficients"
+                    )
+                )
+
+    @classmethod
+    def from_line(cls, *args, comment=None):
+
+        i, j, funct, *c = args
+
+        entry = cls(
+            i=i, j=j, funct=funct, c=c,
+            comment=comment,
+        )
+
+        return entry
+
+    def __str__(self):
+        return_str = ""
+
+        if self.i is not None:
+            return_str += f"{self.i:>5}"
+
+        if self.j is not None:
+            return_str += f" {self.j:>5}"
+
+        if self.funct is not None:
+            return_str += f" {self.funct:>5}"
+
+        for x in self.c:
+            if x is not None:
+                return_str += f" {x:1.6e}"
+
+        return_str = self._finish_str(return_str)
+
+        return return_str
+
+
 class DefaultsEntry(SectionEntry):
     """Entry in defaults section"""
 
@@ -438,14 +549,14 @@ class AtomtypesEntry(SectionEntry):
 
     _node_key_name = "atomtypes_entry"
     _args = [
-            "name",
-            "bond_type",
-            "at_num",
-            "mass",
-            "charge",
-            "ptype",
-            "sigma",
-            "epsilon"
+        "name",
+        "bond_type",
+        "at_num",
+        "mass",
+        "charge",
+        "ptype",
+        "sigma",
+        "epsilon"
     ]
 
     def __init__(
@@ -535,11 +646,8 @@ class AtomtypesEntry(SectionEntry):
         return f"{type(self).__name__}({arg_name_repr})"
 
 
-class BondtypesEntry(SectionEntry):
+class BondtypesEntry(P2TermEntry):
     _node_key_name = "bondtypes_entry"
-    _args = [
-        "i", "j", "func", "c0", "c1", "c2", "c3"
-    ]
 
 
 class AngletypesEntry(SectionEntry):
@@ -549,11 +657,8 @@ class AngletypesEntry(SectionEntry):
     ]
 
 
-class PairtypesEntry(SectionEntry):
+class PairtypesEntry(P2TermEntry):
     _node_key_name = "pairtypes_entry"
-    _args = [
-        "i", "j", "func", "c0", "c1", "c2", "c3", "c4"
-    ]
 
 
 class DihedraltypesEntry(SectionEntry):
@@ -766,116 +871,6 @@ class AtomsEntry(SectionEntry):
 
         return return_str
 
-
-class PropertyInvoker:
-    """Invokes descriptor protocol for instance attributes"""
-
-    def __setattr__(self, attr, value):
-        try:
-            got = super().__getattribute__(attr)
-            got.__set__(self, value)
-        except AttributeError:
-            super().__setattr__(attr, value)
-
-    def __getattribute__(self, attr):
-        got = super().__getattribute__(attr)
-        try:
-            return got.__get__(self, type(self))
-        except AttributeError:
-            return got
-
-
-class P2TermEntry(SectionEntry, PropertyInvoker):
-
-    _node_key_name = "p2_term_entry"
-
-    _args = [
-        "i", "j",
-        "funct",
-        "c"
-        ]
-
-    def getc(self, index):
-        def getter(self):
-            return self.c[index]
-        return getter
-
-    def setc(self, index):
-        def setter(self, value):
-            self.c[index] = value
-        return setter
-
-    def delc(self, index):
-        def deleter(self):
-            del self.c[index]
-        return deleter
-
-    def __init__(
-            self,
-            i=None, j=None,
-            funct=None,
-            c=None,
-            comment=None):
-
-        super().__init__(comment=comment)
-
-        if i is not None:
-            i = int(i)
-        self.i = i
-
-        if j is not None:
-            j = int(j)
-        self.j = j
-
-        if funct is not None:
-            funct = int(funct)
-        self.funct = funct
-
-        if c is None:
-            c = []
-        self.c = [float(x) for x in c]
-
-        for index in range(len(c)):
-            setattr(
-                self, f"c{index}", property(
-                    fget=self.getc(index),
-                    fset=self.setc(index),
-                    fdel=self.delc(index),
-                    doc="Access term coefficients"
-                    )
-                )
-
-    @classmethod
-    def from_line(cls, *args, comment=None):
-
-        i, j, funct, *c = args
-
-        entry = cls(
-            i=i, j=j, funct=funct, c=c,
-            comment=comment,
-        )
-
-        return entry
-
-    def __str__(self):
-        return_str = ""
-
-        if self.i is not None:
-            return_str += f"{self.i:>5}"
-
-        if self.j is not None:
-            return_str += f" {self.j:>5}"
-
-        if self.funct is not None:
-            return_str += f" {self.funct:>5}"
-
-        for x in self.c:
-            if x is not None:
-                return_str += f" {x:1.6e}"
-
-        return_str = self._finish_str(return_str)
-
-        return return_str
 
 
 class BondsEntry(P2TermEntry):

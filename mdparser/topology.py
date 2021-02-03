@@ -50,18 +50,19 @@ DEFAULT_NODE_VALUE_TYPES = {
         "entry": _gmx_nodes.SectionEntry,
         "defaults_entry": _gmx_nodes.DefaultsEntry,
         "atomtypes_entry": _gmx_nodes.AtomtypesEntry,
-        "bondtypes_entry": _gmx_nodes.BondtypesEntry,    # raw
+        "bondtypes_entry": _gmx_nodes.BondtypesEntry,
         "angletypes_entry": _gmx_nodes.AngletypesEntry,  # raw
-        "pairtypes_entry": _gmx_nodes.PairtypesEntry,    # raw
+        "pairtypes_entry": _gmx_nodes.PairtypesEntry,
         "dihedraltypes_entry": _gmx_nodes.DihedraltypesEntry,       # raw
         "constrainttypes_entry": _gmx_nodes.ConstrainttypesEntry,   # raw
         "nonbonded_params_entry": _gmx_nodes.NonbondedParamsEntry,  # raw
         "moleculetype_entry": _gmx_nodes.MoleculetypeEntry,
         "atoms_entry": _gmx_nodes.AtomsEntry,
         "bonds_entry": _gmx_nodes.BondsEntry,
-        "pairs_entry": _gmx_nodes.PairsEntry,       # raw
-        "pairs_nb_entry": _gmx_nodes.PairsNBEntry,  # raw
+        "pairs_entry": _gmx_nodes.PairsEntry,
+        "pairs_nb_entry": _gmx_nodes.PairsNBEntry,
         "exclusions_entry": _gmx_nodes.ExclusionsEntry,
+        "constraints_entry": _gmx_nodes.ConstraintsEntry,
         "system_entry": _gmx_nodes.SystemEntry,
         "molecules_entry": _gmx_nodes.MoleculesEntry,
     }

@@ -38,7 +38,5 @@ Two molecules
 
 [ molecules ]
 
-mol1    2
-
-mol2    2
+new    1
 

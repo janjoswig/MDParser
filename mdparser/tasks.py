@@ -164,3 +164,15 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
                 ][-1]
             )
         )
+
+    top.block_discard(
+        molecules_section.next,
+        get_last_entry(molecules_section)
+        )
+
+    key, value = mdtop.GromacsTop.make_nvtype(
+        "molecules_entry", molecule=name, number=1
+        )
+    top.relative_insert(
+        molecules_section, key, value
+        )

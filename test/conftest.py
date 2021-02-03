@@ -20,7 +20,7 @@ def tasks_top():
         ))
     top.add("mol1_bonds", _gmx_nodes.BondsSubsection())
     top.add("mol1_bonds_entry_1", _gmx_nodes.BondsEntry(
-        ai=1, aj=2, funct=1
+        i=1, j=2, funct=1
         ))
     top.add("mol2", _gmx_nodes.MoleculetypeSection())
     top.add("mol2_entry", _gmx_nodes.MoleculetypeEntry("mol2", 3))

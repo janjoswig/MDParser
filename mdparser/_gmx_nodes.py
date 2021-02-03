@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class NodeValue(ABC):
     """Abstract base class for node value types"""
 
@@ -300,7 +301,7 @@ class SectionEntry(NodeValue):
     """A section entry"""
 
     _node_key_name = "section_entry"
-    _arg_names = []
+    _args = []
 
     def __init__(self, comment=None):
         super().__init__()
@@ -312,7 +313,7 @@ class SectionEntry(NodeValue):
         kwargs = {
             arg_name: getattr(self, arg_name)
             for arg_name
-            in self._arg_names
+            in self._args
         }
         copied = type(self)(**kwargs, comment=self.comment)
         copied._raw = self._raw
@@ -331,7 +332,7 @@ class SectionEntry(NodeValue):
         kwargs = {
             kw: v
             for kw, v
-            in zip(cls._arg_names, args)
+            in zip(cls._args, args)
             }
 
         entry = cls(
@@ -353,7 +354,7 @@ class SectionEntry(NodeValue):
     def __repr__(self):
         arg_name_repr = ", ".join(
             f"{arg_name!s}={getattr(self, arg_name)!r}"
-            for arg_name in self._arg_names
+            for arg_name in self._args
             )
 
         return f"{type(self).__name__}({arg_name_repr})"
@@ -371,7 +372,7 @@ class DefaultsEntry(SectionEntry):
     """Entry in defaults section"""
 
     _node_key_name = "defaults_entry"
-    _arg_names = [
+    _args = [
         "nbfunc", "comb_rule",
         "gen_pairs", "fudgeLJ", "fudgeQQ",
         "n"
@@ -436,7 +437,7 @@ class DefaultsEntry(SectionEntry):
 class AtomtypesEntry(SectionEntry):
 
     _node_key_name = "atomtypes_entry"
-    _arg_names = [
+    _args = [
             "name",
             "bond_type",
             "at_num",
@@ -478,9 +479,9 @@ class AtomtypesEntry(SectionEntry):
     @classmethod
     def from_line(cls, *args, comment):
         if len(args) == 7:
-            arg_names = cls._arg_names[0:1] + cls._arg_names[2:]
+            arg_names = cls._args[0:1] + cls._args[2:]
         else:
-            arg_names = cls._arg_names
+            arg_names = cls._args
 
         kwargs = {
             kw: v
@@ -528,7 +529,7 @@ class AtomtypesEntry(SectionEntry):
     def __repr__(self):
         arg_name_repr = ", ".join(
             f"{arg_name!s}={getattr(self, arg_name)!r}"
-            for arg_name in self._arg_names
+            for arg_name in self._args
             )
 
         return f"{type(self).__name__}({arg_name_repr})"
@@ -536,42 +537,42 @@ class AtomtypesEntry(SectionEntry):
 
 class BondtypesEntry(SectionEntry):
     _node_key_name = "bondtypes_entry"
-    _arg_names = [
+    _args = [
         "i", "j", "func", "c0", "c1", "c2", "c3"
     ]
 
 
 class AngletypesEntry(SectionEntry):
     _node_key_name = "angletypes_entry"
-    _arg_names = [
+    _args = [
         "i", "j", "k", "func", "c0", "c1", "c2", "c3"
     ]
 
 
 class PairtypesEntry(SectionEntry):
     _node_key_name = "pairtypes_entry"
-    _arg_names = [
+    _args = [
         "i", "j", "func", "c0", "c1", "c2", "c3", "c4"
     ]
 
 
 class DihedraltypesEntry(SectionEntry):
     _node_key_name = "dihedraltypes_entry"
-    _arg_names = [
+    _args = [
         "i", "j", "k", "l", "func", "c0", "c1", "c2", "c3", "c4", "c5"
     ]
 
 
 class ConstrainttypesEntry(SectionEntry):
     _node_key_name = "constrainttypes_entry"
-    _arg_names = [
+    _args = [
         "i", "j", "func", "c0", "c1"
     ]
 
 
 class NonbondedParamsEntry(SectionEntry):
     _node_key_name = "nonbonded_params_entry"
-    _arg_names = [
+    _args = [
         "i", "j", "func", "c0", "c1", "c2"
     ]
 
@@ -579,7 +580,7 @@ class NonbondedParamsEntry(SectionEntry):
 class MoleculetypeEntry(SectionEntry):
 
     _node_key_name = "moleculetype_entry"
-    _arg_names = [
+    _args = [
         "molecule", "nrexcl"
     ]
 
@@ -610,7 +611,7 @@ class MoleculetypeEntry(SectionEntry):
 class SystemEntry(SectionEntry):
 
     _node_key_name = "system_entry"
-    _arg_names = [
+    _args = [
         "name"
     ]
 
@@ -644,7 +645,7 @@ class SystemEntry(SectionEntry):
 class MoleculesEntry(SectionEntry):
 
     _node_key_name = "molecules_entry"
-    _arg_names = [
+    _args = [
         "molecule", "number"
     ]
 
@@ -675,7 +676,7 @@ class MoleculesEntry(SectionEntry):
 class AtomsEntry(SectionEntry):
 
     _node_key_name = "atoms_entry"
-    _arg_names = [
+    _args = [
         "nr", "type", "resnr", "residue",
         "atom", "cgnr", "charge", "mass",
         "typeB", "chargeB", "massB"
@@ -766,107 +767,137 @@ class AtomsEntry(SectionEntry):
         return return_str
 
 
-class BondsEntry(SectionEntry):
+class PropertyInvoker:
+    """Invokes descriptor protocol for instance attributes"""
 
-    _node_key_name = "bonds_entry"
+    def __setattr__(self, attr, value):
+        try:
+            got = super().__getattribute__(attr)
+            got.__set__(self, value)
+        except AttributeError:
+            super().__setattr__(attr, value)
 
-    _arg_names = [
-        "ai", "aj", "funct",
-        "c0", "c1", "c2", "c3",
+    def __getattribute__(self, attr):
+        got = super().__getattribute__(attr)
+        try:
+            return got.__get__(self, type(self))
+        except AttributeError:
+            return got
+
+
+class P2TermEntry(SectionEntry, PropertyInvoker):
+
+    _node_key_name = "p2_term_entry"
+
+    _args = [
+        "i", "j",
+        "funct",
+        "c"
         ]
+
+    def getc(self, index):
+        def getter(self):
+            return self.c[index]
+        return getter
+
+    def setc(self, index):
+        def setter(self, value):
+            self.c[index] = value
+        return setter
+
+    def delc(self, index):
+        def deleter(self):
+            del self.c[index]
+        return deleter
 
     def __init__(
             self,
-            ai=None, aj=None,
+            i=None, j=None,
             funct=None,
-            c0=None,
-            c1=None,
-            c2=None,
-            c3=None,
+            c=None,
             comment=None):
 
         super().__init__(comment=comment)
 
-        if ai is not None:
-            ai = int(ai)
-        self.ai = ai
+        if i is not None:
+            i = int(i)
+        self.i = i
 
-        if aj is not None:
-            aj = int(aj)
-        self.aj = aj
+        if j is not None:
+            j = int(j)
+        self.j = j
 
         if funct is not None:
             funct = int(funct)
         self.funct = funct
 
-        if c0 is not None:
-            c0 = float(c0)
-        self.c0 = c0
+        if c is None:
+            c = []
+        self.c = [float(x) for x in c]
 
-        if c1 is not None:
-            c1 = float(c1)
-        self.c1 = c1
+        for index in range(len(c)):
+            setattr(
+                self, f"c{index}", property(
+                    fget=self.getc(index),
+                    fset=self.setc(index),
+                    fdel=self.delc(index),
+                    doc="Access term coefficients"
+                    )
+                )
 
-        if c2 is not None:
-            c2 = float(c2)
-        self.c2 = c2
+    @classmethod
+    def from_line(cls, *args, comment=None):
 
-        if c3 is not None:
-            c3 = float(c3)
-        self.c3 = c3
+        i, j, funct, *c = args
+
+        entry = cls(
+            i=i, j=j, funct=funct, c=c,
+            comment=comment,
+        )
+
+        return entry
 
     def __str__(self):
         return_str = ""
 
-        if self.ai is not None:
-            return_str += f"{self.ai:>5}"
+        if self.i is not None:
+            return_str += f"{self.i:>5}"
 
-        if self.aj is not None:
-            return_str += f" {self.aj:>5}"
+        if self.j is not None:
+            return_str += f" {self.j:>5}"
 
         if self.funct is not None:
             return_str += f" {self.funct:>5}"
 
-        if self.c0 is not None:
-            return_str += f" {self.c0:1.6e}"
-
-        if self.c1 is not None:
-            return_str += f" {self.c1:1.6e}"
-
-        if self.c2 is not None:
-            return_str += f" {self.c2:1.6e}"
-
-        if self.c3 is not None:
-            return_str += f" {self.c3:1.6e}"
+        for x in self.c:
+            if x is not None:
+                return_str += f" {x:1.6e}"
 
         return_str = self._finish_str(return_str)
 
         return return_str
 
 
-class PairsEntry(SectionEntry):
+class BondsEntry(P2TermEntry):
+
+    _node_key_name = "bonds_entry"
+
+
+class PairsEntry(P2TermEntry):
 
     _node_key_name = "pairs_entry"
 
-    _arg_names = [
-        "i", "j", "func", "c0", "c1", "c2", "c3", "c4"
-    ]
 
-
-class PairsNBEntry(SectionEntry):
+class PairsNBEntry(P2TermEntry):
 
     _node_key_name = "pairs_nb_entry"
-
-    _arg_names = [
-        "i", "j", "func", "c0", "c1", "c2", "c3", "c4"
-    ]
 
 
 class ExclusionsEntry(SectionEntry):
 
     _node_key_name = "exclusions_entry"
 
-    _arg_names = [
+    _args = [
         "indices"
         ]
 
@@ -900,3 +931,8 @@ class ExclusionsEntry(SectionEntry):
         return_str = self._finish_str(return_str)
 
         return return_str
+
+
+class ConstraintsEntry(P2TermEntry):
+
+    _node_key_name = "constraints_entry"

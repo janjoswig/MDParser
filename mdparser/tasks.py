@@ -46,6 +46,8 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
         )
     atoms_entry_nvtype = mdtop.GromacsTop.select_nvtype("atoms_entry")
     bonds_entry_nvtype = mdtop.GromacsTop.select_nvtype("bonds_entry")
+    pairs_entry_nvtype = mdtop.GromacsTop.select_nvtype("pairs_entry")
+    p2_entry_nvtype = (bonds_entry_nvtype, pairs_entry_nvtype)
     molecules_nvtype = mdtop.GromacsTop.select_nvtype("molecules")
     molecules_entry_nvtype = mdtop.GromacsTop.select_nvtype("molecules_entry")
 
@@ -144,9 +146,9 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
                         atom_nr = new_current.value.nr
                         continue
 
-                    if isinstance(new_current.value, bonds_entry_nvtype):
-                        new_current.value.ai += atom_nr_offset
-                        new_current.value.aj += atom_nr_offset
+                    if isinstance(new_current.value, p2_entry_nvtype):
+                        new_current.value.i += atom_nr_offset
+                        new_current.value.j += atom_nr_offset
                         continue
 
     top.block_insert(

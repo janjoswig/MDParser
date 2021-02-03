@@ -47,3 +47,13 @@ class TestTopologyTasks:
             regression_string += f"{node.value!s}\n\n"
 
         file_regression.check(regression_string)
+
+    def test_merge_qmmm_molecules(self, datadir, file_regression):
+
+        parser = mdtop.GromacsTopParser(include_blacklist=["forcefield.itp"])
+        with open(datadir / "qmmm.top") as topfile:
+            topology = parser.read(topfile)
+
+        mdtasks.merge_molecules(topology, name="QMMM_model")
+
+        file_regression.check(str(topology))

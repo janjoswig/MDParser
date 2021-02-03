@@ -30,8 +30,7 @@ class TestParseTopologies:
             datadir,
             file_regression,
             filename,
-            parserkwargs
-            ):
+            parserkwargs):
         parser = mdtop.GromacsTopParser(**parserkwargs)
         with open(datadir / filename) as topfile:
             topology = parser.read(topfile)

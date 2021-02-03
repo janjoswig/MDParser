@@ -195,6 +195,16 @@ Protein             3
    12    20    19    21     4 
 
 
+; Include water topology
+#include "amberGS.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
 [ system ]
 ; Name
 Protein

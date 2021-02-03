@@ -30,7 +30,7 @@ class TestTopologyTasks:
         first_atoms = tasks_top.get_next_node_with_nvtype(
             nvtype=tasks_top.select_nvtype("atoms")
             )
-        last_entry = mdtasks.get_last_entry(tasks_top, first_atoms)
+        last_entry = mdtasks.get_last_entry(first_atoms)
 
         assert isinstance(
             last_entry.value,
@@ -40,11 +40,10 @@ class TestTopologyTasks:
         assert last_entry.value.type == "B"
 
     def test_merge_molecules(self, tasks_top, file_regression):
-        root = node = mdtasks.merge_molecules(tasks_top, name="new")
+        mdtasks.merge_molecules(tasks_top, name="new")
 
-        regression_string = f"{node.value!s}\n\n"
-        while node.next is not None:
-            node = node.next
+        regression_string = ""
+        for node in tasks_top:
             regression_string += f"{node.value!s}\n\n"
 
         file_regression.check(regression_string)

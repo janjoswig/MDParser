@@ -1,10 +1,9 @@
 from copy import copy
 
 import mdparser.topology as mdtop
-from . import _gmx_nodes
 
 
-def get_subsections(top, section_node):
+def get_subsections(top: mdtop.GromacsTop, section_node):
     section_nvtype = mdtop.GromacsTop.select_nvtype("section")
     subsection_nvtype = mdtop.GromacsTop.select_nvtype("subsection")
 
@@ -27,7 +26,7 @@ def get_subsections(top, section_node):
     return subsections
 
 
-def get_last_entry(top, section_node):
+def get_last_entry(section_node):
     entry_nvtype = mdtop.GromacsTop.select_nvtype("entry")
 
     current = section_node
@@ -39,7 +38,7 @@ def get_last_entry(top, section_node):
     return current
 
 
-def merge_molecules(top, name=None):
+def merge_molecules(top: mdtop.GromacsTop, name=None):
 
     section_nvtype = mdtop.GromacsTop.select_nvtype("section")
     moleculetype_section_nvtype = mdtop.GromacsTop.select_nvtype(
@@ -134,7 +133,6 @@ def merge_molecules(top, name=None):
                     if isinstance(subsection_entry.value, section_nvtype):
                         break
 
-                    print(subsection_entry.value)
                     new_next = mdtop.Node()
                     new_next.value = copy(subsection_entry.value)
                     new_next.key = new_next.value._make_node_key()
@@ -151,4 +149,18 @@ def merge_molecules(top, name=None):
                         new_current.value.aj += atom_nr_offset
                         continue
 
-    return hardroot
+    top.block_insert(
+        moleculetype_section_list[0],
+        hardroot,
+        new_current,
+        forward=False
+        )
+
+    top.block_discard(
+        moleculetype_section_list[0],
+        get_last_entry(
+            moleculetype_subsection_mapping[
+                moleculetype_section_list[-1].next.value.molecule
+                ][-1]
+            )
+        )

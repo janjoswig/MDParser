@@ -278,12 +278,26 @@ class GromacsTop:
             node.prev = weakref.proxy(block_end)
 
         current = block_start
-        while current is not block_end:
+        while current is not block_end.next:
             if current.key in self._nodes:
                 raise KeyError(f"node {current.key!r} does already exist")
 
             self._nodes[current.key] = current
 
+            current = current.next
+
+    def block_discard(self, block_start, block_end):
+        block_start.prev.next = block_end.next
+        block_end.next.prev = block_start.prev
+
+        block_start.prev = None
+        block_end.next = None
+
+        current = block_start
+        while True:
+            _ = self._nodes[current.key]
+            if current is block_end:
+                break
             current = current.next
 
     def get_next_node_with_nvtype(

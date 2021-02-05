@@ -792,11 +792,11 @@ class AtomsEntry(SectionEntry):
         ("residue", str, make_formatter("<5")),
         ("atom", str, make_formatter("<5")),
         ("cgnr", int, make_formatter("<5")),
-        ("charge", float, make_formatter("<6")),
-        ("mass", float, make_formatter("<6")),
+        ("charge", float, make_formatter(">7.4f")),
+        ("mass", float, make_formatter("7.3f")),
         ("typeB", float, make_formatter("<5")),
-        ("chargeB", float, make_formatter("<6")),
-        ("massB", float, make_formatter("<6"))
+        ("chargeB", float, make_formatter(">7.4f")),
+        ("massB", float, make_formatter("7.3f"))
         ]
 
     def __init__(

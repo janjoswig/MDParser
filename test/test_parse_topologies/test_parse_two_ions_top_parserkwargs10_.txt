@@ -6,7 +6,7 @@ moleculetype_entry_1  CA     1
 
 atoms_1              [ atoms ]
 
-atoms_entry_1         1     C0    1     CA    CA    1     2.0
+atoms_entry_1         1     C0    1     CA    CA    1      2.0000
 
 moleculetype_2       [ moleculetype ]
 

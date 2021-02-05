@@ -45,9 +45,19 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
         "moleculetype"
         )
     atoms_entry_nvtype = mdtop.GromacsTop.select_nvtype("atoms_entry")
-    bonds_entry_nvtype = mdtop.GromacsTop.select_nvtype("bonds_entry")
-    pairs_entry_nvtype = mdtop.GromacsTop.select_nvtype("pairs_entry")
-    p2_entry_nvtype = (bonds_entry_nvtype, pairs_entry_nvtype)
+    p1term_entry_nvtype = mdtop.GromacsTop.select_nvtype("p1term_entry")
+    p2term_entry_nvtype = mdtop.GromacsTop.select_nvtype("p2term_entry")
+    p3term_entry_nvtype = mdtop.GromacsTop.select_nvtype("p3term_entry")
+    p4term_entry_nvtype = mdtop.GromacsTop.select_nvtype("p4term_entry")
+    virtual_sitesn_entry_nvtype = mdtop.GromacsTop.select_nvtype(
+        "virtual_sitesn_entry"
+        )
+    virtual_sites1_entry_nvtype = mdtop.GromacsTop.select_nvtype(
+        "virtual_sites1_entry"
+        )
+    exclusions_entry_nvtype = mdtop.GromacsTop.select_nvtype(
+        "exclusions_entry"
+        )
     molecules_nvtype = mdtop.GromacsTop.select_nvtype("molecules")
     molecules_entry_nvtype = mdtop.GromacsTop.select_nvtype("molecules_entry")
 
@@ -141,15 +151,48 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
                     new_current.connect(new_next)
                     new_current = new_next
 
-                    if isinstance(new_current.value, atoms_entry_nvtype):
-                        new_current.value.nr += atom_nr_offset
-                        atom_nr = new_current.value.nr
+                    value = new_current.value
+                    if isinstance(value, atoms_entry_nvtype):
+                        value.nr += atom_nr_offset
+                        atom_nr = value.nr
                         continue
 
-                    if isinstance(new_current.value, p2_entry_nvtype):
-                        new_current.value.i += atom_nr_offset
-                        new_current.value.j += atom_nr_offset
+                    if isinstance(value, p1term_entry_nvtype):
+                        value.i += atom_nr_offset
+
+                        if isinstance(value, virtual_sites1_entry_nvtype):
+                            for index in range(len(value.f)):
+                                value.f[index] += atom_nr_offset
+                            continue
+
+                        if isinstance(value, virtual_sitesn_entry_nvtype):
+                            for index in range(len(value.c)):
+                                value.c[index] += atom_nr_offset
+                            continue
+
                         continue
+
+                    if isinstance(value, p2term_entry_nvtype):
+                        value.i += atom_nr_offset
+                        value.j += atom_nr_offset
+                        continue
+
+                    if isinstance(value, p3term_entry_nvtype):
+                        value.i += atom_nr_offset
+                        value.j += atom_nr_offset
+                        value.k += atom_nr_offset
+                        continue
+
+                    if isinstance(value, p4term_entry_nvtype):
+                        i += atom_nr_offset
+                        j += atom_nr_offset
+                        k += atom_nr_offset
+                        l += atom_nr_offset
+                        continue
+
+                    if isinstance(value, exclusions_entry_nvtype):
+                        for index in range(len(value.indices)):
+                            value.indices[index] += atom_nr_offset
 
     top.block_insert(
         moleculetype_section_list[0],

@@ -1254,7 +1254,7 @@ moleculetype_entry_1  Ion     3
 
 atoms_1              [ atoms ]
 
-atoms_entry_1         1     C0    1     CA    CA    1     2.0    40.08
+atoms_entry_1         1     C0    1     CA    CA    1      2.0000  40.080
 
 condition_1          #ifdef POSRES
 
@@ -1270,11 +1270,11 @@ moleculetype_entry_2  SOL     2
 
 atoms_2              [ atoms ]
 
-atoms_entry_2         1     OW    1     SOL   OW    1     -0.834 16.0
+atoms_entry_2         1     OW    1     SOL   OW    1     -0.8340  16.000
 
-atoms_entry_3         2     HW    1     SOL   HW1   1     0.417  1.008
+atoms_entry_3         2     HW    1     SOL   HW1   1      0.4170   1.008
 
-atoms_entry_4         3     HW    1     SOL   HW2   1     0.417  1.008
+atoms_entry_4         3     HW    1     SOL   HW2   1      0.4170   1.008
 
 condition_3          #ifndef FLEXIBLE
 

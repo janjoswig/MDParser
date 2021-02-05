@@ -300,7 +300,7 @@ class TestNodeValues:
         [
             (
                 "  1    H    1     PROP    PH    1   0.398    1.008  CH3     0.0  15.035",
-                " 1     H     1     PROP  PH    1     0.398  1.008  CH3   0.0    15.035 ; abc"
+                " 1     H     1     PROP  PH    1      0.3980   1.008 CH3    0.0000  15.035 ; abc"
             )
         ]
     )

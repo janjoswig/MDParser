@@ -77,6 +77,10 @@ DEFAULT_NODE_VALUE_TYPES = {
         "orientation_restraints_entry": _gmx_nodes.OrientationRestraintsEntry,
         "angle_restraints_entry": _gmx_nodes.AngleRestraintsEntry,
         "angle_restraints_z_entry": _gmx_nodes.AngleRestraintsZEntry,
+        "p1term_entry": _gmx_nodes.P1TermEntry,
+        "p2term_entry": _gmx_nodes.P2TermEntry,
+        "p3term_entry": _gmx_nodes.P3TermEntry,
+        "p4term_entry": _gmx_nodes.P4TermEntry,
         "system_entry": _gmx_nodes.SystemEntry,
         "molecules_entry": _gmx_nodes.MoleculesEntry,
     }

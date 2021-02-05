@@ -1260,7 +1260,7 @@ condition_1          #ifdef POSRES
 
 position_restraints_1 [ position_restraints ]
 
-generic_1            1     1  1000  1000  1000
+position_restraints_entry_1      1     1 1.000000e+03 1.000000e+03 1.000000e+03
 
 condition_2          #endif
 
@@ -1280,7 +1280,7 @@ condition_3          #ifndef FLEXIBLE
 
 settles_1            [ settles ]
 
-generic_2            1       1       0.09572 0.15139
+settles_entry_1           1     1 9.572000e-02 1.513900e-01
 
 exclusions_1         [ exclusions ]
 
@@ -1310,7 +1310,7 @@ condition_7          #ifdef POSRES_WATER
 
 position_restraints_2 [ position_restraints ]
 
-generic_3            1    1       1000       1000       1000
+position_restraints_entry_2      1     1 1.000000e+03 1.000000e+03 1.000000e+03
 
 condition_8          #endif
 

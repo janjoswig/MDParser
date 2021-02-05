@@ -22,7 +22,7 @@ atoms_entry_4         3     HW    1     SOL   HW2   1     0.417  1.008
 
 settles_1            [ settles ]
 
-generic_1            1       1       0.09572 0.15139
+settles_entry_1           1     1 9.572000e-02 1.513900e-01
 
 exclusions_1         [ exclusions ]
 

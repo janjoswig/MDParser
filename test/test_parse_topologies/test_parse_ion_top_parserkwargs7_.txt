@@ -1322,7 +1322,7 @@ settles_1            [ settles ]
 
 comment_36           ; OW	funct	doh	dhh
 
-generic_1            1       1       0.09572 0.15139
+settles_entry_1           1     1 9.572000e-02 1.513900e-01
 
 exclusions_1         [ exclusions ]
 

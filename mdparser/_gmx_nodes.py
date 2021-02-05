@@ -865,10 +865,127 @@ class ConstraintsEntry(P2TermEntry):
     _node_key_name = "constraints_entry"
 
 
-class SettlesEntry(SectionEntry):
+class SettlesEntry(P1TermEntry):
     _node_key_name = "settles_entry"
+
+
+class VirtualSites1Entry(P1TermEntry):
+    _node_key_name = "virtual_sites1_entry"
     _args = [
-        "i", int, make_formatter("<5"),
-        "funct", int, make_formatter("<5"),
-        "c", None, make_formatter("<5"),
-    ]
+        ("i", int, make_formatter(">5")),
+        ("f", None, make_formatter(">5")),
+        ("funct", int, make_formatter(">5")),
+        ("c", None, make_formatter("1.6e"))
+        ]
+
+    def __init__(
+            self, i=None, f=None,
+            funct=None, c=None, comment=None):
+
+        super().__init__(
+            i=i,
+            funct=funct,
+            c=c,
+            comment=comment
+            )
+
+        if f is None:
+            f = []
+        self.f = [int(x) for x in f]
+
+    @classmethod
+    def from_line(cls, *args, comment=None):
+
+        i, f1, funct, *c = args
+        f = [f1]
+
+        entry = cls(
+            i=i, f=f, funct=funct, c=c,
+            comment=comment,
+        )
+
+        return entry
+
+
+class VirtualSites2Entry(VirtualSites1Entry):
+    _node_key_name = "virtual_sites2_entry"
+
+    @classmethod
+    def from_line(cls, *args, comment=None):
+
+        i, f1, f2, funct, *c = args
+        f = [f1, f2]
+
+        entry = cls(
+            i=i, f=f, funct=funct, c=c,
+            comment=comment,
+        )
+
+        return entry
+
+
+class VirtualSites3Entry(VirtualSites1Entry):
+    _node_key_name = "virtual_sites3_entry"
+
+    @classmethod
+    def from_line(cls, *args, comment=None):
+
+        i, f1, f2, f3, funct, *c = args
+        f = [f1, f2, f3]
+
+        entry = cls(
+            i=i, f=f, funct=funct, c=c,
+            comment=comment,
+        )
+
+        return entry
+
+
+class VirtualSites4Entry(VirtualSites1Entry):
+    _node_key_name = "virtual_sites4_entry"
+
+    @classmethod
+    def from_line(cls, *args, comment=None):
+
+        i, f1, f2, f3, f4, funct, *c = args
+        f = [f1, f2, f3, f4]
+
+        entry = cls(
+            i=i, f=f, funct=funct, c=c,
+            comment=comment,
+        )
+
+        return entry
+
+
+class VirtualSitesNEntry(P1TermEntry):
+    _node_key_name = "virtual_sitesn_entry"
+    _args = [
+        ("i", int, make_formatter(">5")),
+        ("funct", int, make_formatter(">5")),
+        ("c", None, make_formatter(">5"))
+        ]
+
+
+class PositionRestraintsEntry(P1TermEntry):
+    _node_key_name = "position_restraints_entry"
+
+
+class DistanceRestraintsEntry(P2TermEntry):
+    _node_key_name = "distance_restraints_entry"
+
+
+class DihedralRestraintsEntry(P4TermEntry):
+    _node_key_name = "dihedral_restraints_entry"
+
+
+class OrientationRestraintsEntry(P2TermEntry):
+    _node_key_name = "orientations_restraints_entry"
+
+
+class AngleRestraintsEntry(P4TermEntry):
+    _node_key_name = "angle_restraints_entry"
+
+
+class AngleRestraintsZEntry(P2TermEntry):
+    _node_key_name = "angle_restraints_z_entry"

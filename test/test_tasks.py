@@ -61,3 +61,11 @@ class TestTopologyTasks:
         mdtasks.merge_molecules(topology, name="QMMM_model")
 
         file_regression.check(str(topology))
+
+    def test_fail_merge_when_no_molecule(self, datadir, file_regression):
+        parser = mdtop.GromacsTopParser()
+        with open(datadir / "no_molecule.top") as topfile:
+            topology = parser.read(topfile)
+
+        with pytest.raises(LookupError):
+            mdtasks.merge_molecules(topology)

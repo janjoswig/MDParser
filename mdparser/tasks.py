@@ -157,6 +157,24 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
                         atom_nr = value.nr
                         continue
 
+                    if isinstance(value, p2term_entry_nvtype):
+                        value.i += atom_nr_offset
+                        value.j += atom_nr_offset
+                        continue
+
+                    if isinstance(value, p3term_entry_nvtype):
+                        value.i += atom_nr_offset
+                        value.j += atom_nr_offset
+                        value.k += atom_nr_offset
+                        continue
+
+                    if isinstance(value, p4term_entry_nvtype):
+                        value.i += atom_nr_offset
+                        value.j += atom_nr_offset
+                        value.k += atom_nr_offset
+                        value.l += atom_nr_offset
+                        continue
+
                     if isinstance(value, p1term_entry_nvtype):
                         value.i += atom_nr_offset
 
@@ -170,24 +188,6 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
                                 value.c[index] += atom_nr_offset
                             continue
 
-                        continue
-
-                    if isinstance(value, p2term_entry_nvtype):
-                        value.i += atom_nr_offset
-                        value.j += atom_nr_offset
-                        continue
-
-                    if isinstance(value, p3term_entry_nvtype):
-                        value.i += atom_nr_offset
-                        value.j += atom_nr_offset
-                        value.k += atom_nr_offset
-                        continue
-
-                    if isinstance(value, p4term_entry_nvtype):
-                        i += atom_nr_offset
-                        j += atom_nr_offset
-                        k += atom_nr_offset
-                        l += atom_nr_offset
                         continue
 
                     if isinstance(value, exclusions_entry_nvtype):

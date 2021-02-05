@@ -1,0 +1,11 @@
+;
+;	Created by:
+;	                    :-) GROMACS - gmx pdb2gmx, 2019.1 (-:
+;
+
+; Include forcefield parameters
+#include "amberGS.ff/forcefield.itp"
+
+[ system ]
+; Name
+Protein

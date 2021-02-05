@@ -49,9 +49,6 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
     p2term_entry_nvtype = mdtop.GromacsTop.select_nvtype("p2term_entry")
     p3term_entry_nvtype = mdtop.GromacsTop.select_nvtype("p3term_entry")
     p4term_entry_nvtype = mdtop.GromacsTop.select_nvtype("p4term_entry")
-    virtual_sitesn_entry_nvtype = mdtop.GromacsTop.select_nvtype(
-        "virtual_sitesn_entry"
-        )
     virtual_sites1_entry_nvtype = mdtop.GromacsTop.select_nvtype(
         "virtual_sites1_entry"
         )
@@ -175,19 +172,13 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
                         value.l += atom_nr_offset
                         continue
 
+                    if isinstance(value, virtual_sites1_entry_nvtype):
+                        for index in range(len(value.f)):
+                            value.f[index] += atom_nr_offset
+                        continue
+
                     if isinstance(value, p1term_entry_nvtype):
                         value.i += atom_nr_offset
-
-                        if isinstance(value, virtual_sites1_entry_nvtype):
-                            for index in range(len(value.f)):
-                                value.f[index] += atom_nr_offset
-                            continue
-
-                        if isinstance(value, virtual_sitesn_entry_nvtype):
-                            for index in range(len(value.c)):
-                                value.c[index] += atom_nr_offset
-                            continue
-
                         continue
 
                     if isinstance(value, exclusions_entry_nvtype):

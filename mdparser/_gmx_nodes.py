@@ -958,13 +958,38 @@ class VirtualSites4Entry(VirtualSites1Entry):
         return entry
 
 
-class VirtualSitesNEntry(P1TermEntry):
+class VirtualSitesNEntry(VirtualSites1Entry):
     _node_key_name = "virtual_sitesn_entry"
     _args = [
         ("i", int, make_formatter(">5")),
         ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter(">5"))
+        ("f", None, make_formatter(">5")),
         ]
+
+    def __init__(
+            self, i=None,
+            funct=None, f=None, comment=None):
+
+        super().__init__(
+            i=i,
+            funct=funct,
+            f=f,
+            comment=comment
+            )
+
+        delattr(self, "c")
+
+    @classmethod
+    def from_line(cls, *args, comment=None):
+
+        i, funct, *f = args
+
+        entry = cls(
+            i=i, f=f, funct=funct,
+            comment=comment,
+        )
+
+        return entry
 
 
 class PositionRestraintsEntry(P1TermEntry):

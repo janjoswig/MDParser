@@ -48,8 +48,13 @@ class TestTopologyTasks:
 
         file_regression.check(regression_string)
 
-    @pytest.mark.parametrize("filename", ["qmmm.top", "qmmm_water.top"])
-    def test_merge_qmmm_molecules(self, filename, datadir, file_regression):
+    @pytest.mark.parametrize("filename,name", [
+        ("qmmm.top", "QMMM_model"),
+        ("qmmm_water.top", "QMMM_model"),
+        ("qmmm_tip4p.top", None),
+        ])
+    def test_merge_qmmm_molecules(
+            self, filename, name, datadir, file_regression):
 
         parser = mdtop.GromacsTopParser(
             include_shared=True,
@@ -58,11 +63,11 @@ class TestTopologyTasks:
         with open(datadir / filename) as topfile:
             topology = parser.read(topfile)
 
-        mdtasks.merge_molecules(topology, name="QMMM_model")
+        mdtasks.merge_molecules(topology, name=name)
 
         file_regression.check(str(topology))
 
-    def test_fail_merge_when_no_molecule(self, datadir, file_regression):
+    def test_fail_merge_when_no_molecule(self, datadir):
         parser = mdtop.GromacsTopParser()
         with open(datadir / "no_molecule.top") as topfile:
             topology = parser.read(topfile)

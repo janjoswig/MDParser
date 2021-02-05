@@ -1,4 +1,19 @@
 from abc import ABC, abstractmethod
+from typing import Iterable
+
+
+def _trim_locals(d):
+    return {
+        k: v
+        for k, v in d.items()
+        if k not in ("self", "__class__")
+        }
+
+
+def make_formatter(f):
+    def formatter(value):
+        return f"{value:{f}}"
+    return formatter
 
 
 class NodeValue(ABC):
@@ -303,8 +318,28 @@ class SectionEntry(NodeValue):
     _node_key_name = "section_entry"
     _args = []
 
-    def __init__(self, comment=None):
+    def __init__(self, comment=None, **kwargs):
         super().__init__()
+
+        for name, target_type, *_ in self._args:
+            value = kwargs.get(name)
+            if value is None:
+                setattr(self, name, value)
+                continue
+
+            if target_type is None:
+                continue
+
+            try:
+                value = target_type(value)
+            except ValueError:
+                if not isinstance(value, str):
+                    raise TypeError(
+                        f"Argument {name!r} should be 'str' or "
+                        f"convertible to {target_type.__name__!r}"
+                        )
+
+            setattr(self, name, value)
 
         self.comment = comment
         self._raw = None
@@ -312,7 +347,7 @@ class SectionEntry(NodeValue):
     def __copy__(self):
         kwargs = {
             arg_name: getattr(self, arg_name)
-            for arg_name
+            for arg_name, *_
             in self._args
         }
         copied = type(self)(**kwargs, comment=self.comment)
@@ -330,7 +365,7 @@ class SectionEntry(NodeValue):
     def from_line(cls, *args, comment=None):
 
         kwargs = {
-            kw: v
+            kw[0]: v
             for kw, v
             in zip(cls._args, args)
             }
@@ -347,6 +382,18 @@ class SectionEntry(NodeValue):
             return self._raw
 
         return_str = ""
+        for name, *_, formatter in self._args:
+            value = getattr(self, name)
+            if value is None:
+                continue
+
+            if not isinstance(value, str) and isinstance(value, Iterable):
+                for v in value:
+                    return_str += f" {formatter(v)}"
+                continue
+
+            return_str += f" {formatter(value)}"
+
         return_str = self._finish_str(return_str)
 
         return return_str
@@ -354,7 +401,7 @@ class SectionEntry(NodeValue):
     def __repr__(self):
         arg_name_repr = ", ".join(
             f"{arg_name!s}={getattr(self, arg_name)!r}"
-            for arg_name in self._args
+            for arg_name, *_ in self._args
             )
 
         return f"{type(self).__name__}({arg_name_repr})"
@@ -391,9 +438,10 @@ class P2TermEntry(SectionEntry, PropertyInvoker):
     _node_key_name = "p2_term_entry"
 
     _args = [
-        "i", "j",
-        "funct",
-        "c"
+        ("i", int, make_formatter(">5")),
+        ("j", int, make_formatter(">5")),
+        ("funct", int, make_formatter(">5")),
+        ("c", None, make_formatter("1.6e"))
         ]
 
     def getc(self, index):
@@ -416,27 +464,21 @@ class P2TermEntry(SectionEntry, PropertyInvoker):
             i=None, j=None,
             funct=None,
             c=None,
-            comment=None):
+            comment=None,
+            **kwargs):
 
-        super().__init__(comment=comment)
+        locals_ = _trim_locals(locals())
 
-        if i is not None:
-            i = int(i)
-        self.i = i
+        print("in p2_term", locals_)
 
-        if j is not None:
-            j = int(j)
-        self.j = j
-
-        if funct is not None:
-            funct = int(funct)
-        self.funct = funct
+        super().__init__(**locals_, **kwargs)
 
         if c is None:
             c = []
         self.c = [float(x) for x in c]
 
-        for index in range(len(c)):
+        for index in range(len(self.c)):
+            # Add instance specific properties "c0", "c1", ...
             setattr(
                 self, f"c{index}", property(
                     fget=self.getc(index),
@@ -458,25 +500,57 @@ class P2TermEntry(SectionEntry, PropertyInvoker):
 
         return entry
 
-    def __str__(self):
-        return_str = ""
 
-        if self.i is not None:
-            return_str += f"{self.i:>5}"
+class P3TermEntry(P2TermEntry):
 
-        if self.j is not None:
-            return_str += f" {self.j:>5}"
+    _node_key_name = "p3_term_entry"
 
-        if self.funct is not None:
-            return_str += f" {self.funct:>5}"
+    _args = [
+        ("i", int, make_formatter(">5")),
+        ("j", int, make_formatter(">5")),
+        ("k", int, make_formatter(">5")),
+        ("funct", int, make_formatter(">5")),
+        ("c", None, make_formatter("1.6e"))
+        ]
 
-        for x in self.c:
-            if x is not None:
-                return_str += f" {x:1.6e}"
+    @classmethod
+    def from_line(cls, *args, comment=None):
 
-        return_str = self._finish_str(return_str)
+        i, j, k, funct, *c = args
 
-        return return_str
+        entry = cls(
+            i=i, j=j, k=k, funct=funct, c=c,
+            comment=comment,
+        )
+
+        return entry
+
+
+class P4TermEntry(P2TermEntry):
+
+    _node_key_name = "p4_term_entry"
+
+    _args = [
+        ("i", int, make_formatter(">5")),
+        ("j", int, make_formatter(">5")),
+        ("k", int, make_formatter(">5")),
+        ("l", int, make_formatter(">5")),
+        ("funct", int, make_formatter(">5")),
+        ("c", None, make_formatter("1.6e"))
+        ]
+
+    @classmethod
+    def from_line(cls, *args, comment=None):
+
+        i, j, k, l, funct, *c = args
+
+        entry = cls(
+            i=i, j=j, k=k, l=l,
+            funct=funct, c=c,
+            comment=comment,
+        )
+
+        return entry
 
 
 class DefaultsEntry(SectionEntry):
@@ -484,9 +558,10 @@ class DefaultsEntry(SectionEntry):
 
     _node_key_name = "defaults_entry"
     _args = [
-        "nbfunc", "comb_rule",
-        "gen_pairs", "fudgeLJ", "fudgeQQ",
-        "n"
+        ("nbfunc", int), ("comb_rule", int),
+        ("gen_pairs", str),
+        ("fudgeLJ", float), ("fudgeQQ", float),
+        ("n", int)
     ]
 
     def __init__(
@@ -495,29 +570,9 @@ class DefaultsEntry(SectionEntry):
             gen_pairs="no", fudgeLJ=None, fudgeQQ=None, n=None,
             comment=None):
 
-        super().__init__(comment=comment)
+        locals_ = _trim_locals(locals())
 
-        if nbfunc is not None:
-            nbfunc = int(nbfunc)
-        self.nbfunc = nbfunc
-
-        if comb_rule is not None:
-            comb_rule = int(comb_rule)
-        self.comb_rule = comb_rule
-
-        self.gen_pairs = gen_pairs
-
-        if fudgeLJ is not None:
-            fudgeLJ = float(fudgeLJ)
-        self.fudgeLJ = fudgeLJ
-
-        if fudgeQQ is not None:
-            fudgeQQ = float(fudgeQQ)
-        self.fudgeQQ = fudgeQQ
-
-        if n is not None:
-            n = int(n)
-        self.n = n
+        super().__init__(**locals_)
 
     def __str__(self):
         return_str = ""
@@ -549,43 +604,23 @@ class AtomtypesEntry(SectionEntry):
 
     _node_key_name = "atomtypes_entry"
     _args = [
-        "name",
-        "bond_type",
-        "at_num",
-        "mass",
-        "charge",
-        "ptype",
-        "sigma",
-        "epsilon"
+        ("name", str),
+        ("bond_type", str),
+        ("at_num", int),
+        ("mass", float),
+        ("charge", float),
+        ("ptype", str),
+        ("sigma", float),
+        ("epsilon", float)
     ]
 
     def __init__(
             self, name=None, bond_type=None, at_num=None, mass=None,
             charge=None, ptype=None, sigma=None, epsilon=None, comment=None):
 
-        super().__init__(comment=comment)
+        locals_ = _trim_locals(locals())
 
-        self.name = name
-        self.bond_type = bond_type
-
-        if at_num is not None:
-            self.at_num = int(at_num)
-
-        if mass is not None:
-            self.mass = float(mass)
-
-        if charge is not None:
-            self.charge = float(charge)
-
-        self.ptype = ptype
-
-        if sigma is not None:
-            self.sigma = float(sigma)
-
-        if epsilon is not None:
-            self.epsilon = float(epsilon)
-
-        self.comment = comment
+        super().__init__(**locals_)
 
     @classmethod
     def from_line(cls, *args, comment):
@@ -595,7 +630,7 @@ class AtomtypesEntry(SectionEntry):
             arg_names = cls._args
 
         kwargs = {
-            kw: v
+            kw[0]: v
             for kw, v
             in zip(arg_names, args)
             }
@@ -637,14 +672,6 @@ class AtomtypesEntry(SectionEntry):
 
         return return_str
 
-    def __repr__(self):
-        arg_name_repr = ", ".join(
-            f"{arg_name!s}={getattr(self, arg_name)!r}"
-            for arg_name in self._args
-            )
-
-        return f"{type(self).__name__}({arg_name_repr})"
-
 
 class BondtypesEntry(P2TermEntry):
     _node_key_name = "bondtypes_entry"
@@ -668,36 +695,26 @@ class DihedraltypesEntry(SectionEntry):
     ]
 
 
-class ConstrainttypesEntry(SectionEntry):
+class ConstrainttypesEntry(P2TermEntry):
     _node_key_name = "constrainttypes_entry"
-    _args = [
-        "i", "j", "func", "c0", "c1"
-    ]
 
 
-class NonbondedParamsEntry(SectionEntry):
+class NonbondedParamsEntry(P2TermEntry):
     _node_key_name = "nonbonded_params_entry"
-    _args = [
-        "i", "j", "func", "c0", "c1", "c2"
-    ]
 
 
 class MoleculetypeEntry(SectionEntry):
 
     _node_key_name = "moleculetype_entry"
     _args = [
-        "molecule", "nrexcl"
+        ("molecule", str), ("nrexcl", int)
     ]
 
     def __init__(self, molecule=None, nrexcl=None, comment=None):
 
-        super().__init__(comment=comment)
+        locals_ = _trim_locals(locals())
 
-        self.molecule = molecule
-
-        if nrexcl is not None:
-            nrexcl = int(nrexcl)
-        self.nrexcl = nrexcl
+        super().__init__(**locals_)
 
     def __str__(self):
         return_str = ""
@@ -717,14 +734,14 @@ class SystemEntry(SectionEntry):
 
     _node_key_name = "system_entry"
     _args = [
-        "name"
+        ("name", str)
     ]
 
     def __init__(self, name=None, comment=None):
 
-        super().__init__(comment=comment)
+        locals_ = _trim_locals(locals())
 
-        self.name = name
+        super().__init__(**locals_)
 
     @classmethod
     def from_line(cls, *args, comment):
@@ -751,18 +768,14 @@ class MoleculesEntry(SectionEntry):
 
     _node_key_name = "molecules_entry"
     _args = [
-        "molecule", "number"
+        ("molecule", str), ("number", int)
     ]
 
     def __init__(self, molecule=None, number=None, comment=None):
 
-        super().__init__(comment=comment)
+        locals_ = _trim_locals(locals())
 
-        self.molecule = molecule
-
-        if number is not None:
-            number = int(number)
-        self.number = number
+        super().__init__(**locals_)
 
     def __str__(self):
         return_str = ""
@@ -782,9 +795,12 @@ class AtomsEntry(SectionEntry):
 
     _node_key_name = "atoms_entry"
     _args = [
-        "nr", "type", "resnr", "residue",
-        "atom", "cgnr", "charge", "mass",
-        "typeB", "chargeB", "massB"
+        ("nr", int), ("type", str),
+        ("resnr", int), ("residue", str),
+        ("atom", str), ("cgnr", int),
+        ("charge", float), ("mass", float),
+        ("typeB", float), ("chargeB", float),
+        ("massB", float)
         ]
 
     def __init__(
@@ -794,42 +810,9 @@ class AtomsEntry(SectionEntry):
             typeB=None, chargeB=None, massB=None,
             comment=None):
 
-        super().__init__(comment=comment)
+        locals_ = _trim_locals(locals())
 
-        if nr is not None:
-            nr = int(nr)
-        self.nr = nr
-
-        self.type = type
-
-        if resnr is not None:
-            resnr = int(resnr)
-        self.resnr = resnr
-
-        self.residue = residue
-        self.atom = atom
-
-        if cgnr is not None:
-            cgnr = int(cgnr)
-        self.cgnr = cgnr
-
-        if charge is not None:
-            charge = float(charge)
-        self.charge = charge
-
-        if mass is not None:
-            mass = float(mass)
-        self.mass = mass
-
-        self.typeB = typeB
-
-        if chargeB is not None:
-            chargeB = float(chargeB)
-        self.chargeB = chargeB
-
-        if massB is not None:
-            massB = float(massB)
-        self.massB = massB
+        super().__init__(**locals_)
 
     def __str__(self):
         return_str = ""
@@ -872,7 +855,6 @@ class AtomsEntry(SectionEntry):
         return return_str
 
 
-
 class BondsEntry(P2TermEntry):
 
     _node_key_name = "bonds_entry"
@@ -893,7 +875,7 @@ class ExclusionsEntry(SectionEntry):
     _node_key_name = "exclusions_entry"
 
     _args = [
-        "indices"
+        ("indices", None)
         ]
 
     def __init__(
@@ -901,11 +883,13 @@ class ExclusionsEntry(SectionEntry):
             indices=None,
             comment=None):
 
-        super().__init__(comment=comment)
+        locals_ = _trim_locals(locals())
 
-        if indices is not None:
-            indices = [int(i) for i in indices]
-        self.indices = indices
+        super().__init__(**locals_)
+
+        if indices is None:
+            indices = []
+        self.indices = [int(i) for i in indices]
 
     @classmethod
     def from_line(cls, *args, comment):

@@ -2,19 +2,19 @@ include_1            #include "amber99sb-ildn.ff/forcefield.itp"
 
 moleculetype_1       [ moleculetype ]
 
-moleculetype_entry_1 Ion    3
+moleculetype_entry_1  Ion     3
 
 atoms_1              [ atoms ]
 
-atoms_entry_1        1     C0    1     CA    CA    1     2.0    40.08
+atoms_entry_1         1     C0    1     CA    CA    1     2.0    40.08
 
 include_2            #include "amber99sb-ildn.ff/tip3p.itp"
 
 system_1             [ system ]
 
-system_entry_1       Ion not yet in water
+system_entry_1        Ion not yet in water
 
 molecules_1          [ molecules ]
 
-molecules_entry_1    Ion    1
+molecules_entry_1     Ion      1
 

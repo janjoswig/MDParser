@@ -1,0 +1,4 @@
+coverage
+pytest
+pytest-raises
+pytest-regressions

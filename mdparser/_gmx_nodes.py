@@ -311,6 +311,9 @@ class Include(NodeValue):
     def __str__(self):
         return f"#include {self.include.__str__()}"
 
+    def __repr__(self):
+        return f"{type(self).__name__}({self.include})"
+
 
 class SectionEntry(NodeValue):
     """A section entry"""
@@ -486,7 +489,11 @@ class P1TermEntry(SectionEntry, PropertyInvoker):
     @classmethod
     def from_line(cls, *args, comment=None):
 
-        i, funct, *c = args
+        i, *rest = args
+        if rest:
+            funct, *c = rest
+        else:
+            funct = c = None
 
         entry = cls(
             i=i, funct=funct, c=c,
@@ -519,7 +526,11 @@ class P2TermEntry(P1TermEntry):
     @classmethod
     def from_line(cls, *args, comment=None):
 
-        i, j, funct, *c = args
+        i, j, *rest = args
+        if rest:
+            funct, *c = rest
+        else:
+            funct = c = None
 
         entry = cls(
             i=i, j=j, funct=funct, c=c,
@@ -553,7 +564,11 @@ class P3TermEntry(P1TermEntry):
     @classmethod
     def from_line(cls, *args, comment=None):
 
-        i, j, k, funct, *c = args
+        i, j, k, *rest = args
+        if rest:
+            funct, *c = rest
+        else:
+            funct = c = None
 
         entry = cls(
             i=i, j=j, k=k, funct=funct, c=c,
@@ -588,7 +603,11 @@ class P4TermEntry(P1TermEntry):
     @classmethod
     def from_line(cls, *args, comment=None):
 
-        i, j, k, l, funct, *c = args
+        i, j, k, l, *rest = args
+        if rest:
+            funct, *c = rest
+        else:
+            funct = c = None
 
         entry = cls(
             i=i, j=j, k=k, l=l,
@@ -667,65 +686,26 @@ class AtomtypesEntry(SectionEntry):
 
 class BondtypesEntry(P2TermEntry):
     _node_key_name = "bondtypes_entry"
-    _args = [
-        ("i", str, make_formatter(">5")),
-        ("j", str, make_formatter(">5")),
-        ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter("1.6e"))
-        ]
 
 
 class AngletypesEntry(P3TermEntry):
     _node_key_name = "angletypes_entry"
-    _args = [
-        ("i", str, make_formatter(">5")),
-        ("j", str, make_formatter(">5")),
-        ("k", str, make_formatter(">5")),
-        ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter("1.6e"))
-        ]
 
 
 class PairtypesEntry(P2TermEntry):
     _node_key_name = "pairtypes_entry"
-    _args = [
-        ("i", str, make_formatter(">5")),
-        ("j", str, make_formatter(">5")),
-        ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter("1.6e"))
-        ]
 
 
 class DihedraltypesEntry(P4TermEntry):
     _node_key_name = "dihedraltypes_entry"
-    _args = [
-        ("i", str, make_formatter(">5")),
-        ("j", str, make_formatter(">5")),
-        ("k", str, make_formatter(">5")),
-        ("l", str, make_formatter(">5")),
-        ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter("1.6e"))
-        ]
 
 
 class ConstrainttypesEntry(P2TermEntry):
     _node_key_name = "constrainttypes_entry"
-    _args = [
-        ("i", str, make_formatter(">5")),
-        ("j", str, make_formatter(">5")),
-        ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter("1.6e"))
-        ]
 
 
 class NonbondedParamsEntry(P2TermEntry):
     _node_key_name = "nonbonded_params_entry"
-    _args = [
-        ("i", str, make_formatter(">5")),
-        ("j", str, make_formatter(">5")),
-        ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter("1.6e"))
-        ]
 
 
 class MoleculetypeEntry(SectionEntry):
@@ -896,7 +876,11 @@ class VirtualSites1Entry(P1TermEntry):
     @classmethod
     def from_line(cls, *args, comment=None):
 
-        i, f1, funct, *c = args
+        i, f1, *rest = args
+        if rest:
+            funct, *c = rest
+        else:
+            funct = c = None
         f = [f1]
 
         entry = cls(
@@ -913,7 +897,11 @@ class VirtualSites2Entry(VirtualSites1Entry):
     @classmethod
     def from_line(cls, *args, comment=None):
 
-        i, f1, f2, funct, *c = args
+        i, f1, f2, *rest = args
+        if rest:
+            funct, *c = rest
+        else:
+            funct = c = None
         f = [f1, f2]
 
         entry = cls(
@@ -930,7 +918,11 @@ class VirtualSites3Entry(VirtualSites1Entry):
     @classmethod
     def from_line(cls, *args, comment=None):
 
-        i, f1, f2, f3, funct, *c = args
+        i, f1, f2, f3, *rest = args
+        if rest:
+            funct, *c = rest
+        else:
+            funct = c = None
         f = [f1, f2, f3]
 
         entry = cls(
@@ -947,7 +939,11 @@ class VirtualSites4Entry(VirtualSites1Entry):
     @classmethod
     def from_line(cls, *args, comment=None):
 
-        i, f1, f2, f3, f4, funct, *c = args
+        i, f1, f2, f3, f4, *rest = args
+        if rest:
+            funct, *c = rest
+        else:
+            funct = c = None
         f = [f1, f2, f3, f4]
 
         entry = cls(
@@ -982,7 +978,11 @@ class VirtualSitesNEntry(VirtualSites1Entry):
     @classmethod
     def from_line(cls, *args, comment=None):
 
-        i, funct, *f = args
+        i, *rest = args
+        if rest:
+            funct, *f = rest
+        else:
+            funct = f = None
 
         entry = cls(
             i=i, f=f, funct=funct,

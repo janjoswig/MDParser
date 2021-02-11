@@ -16,12 +16,27 @@ class TestParseTopologies:
             ("comment_multiline.top", {"ignore_comments": False}),
             ("ion.top", {}),
             ("ion.top", {"ignore_comments": False}),
-            ("ion.top", {"include_shared": True, "ignore_comments": False}),
-            ("ion.top", {"include_shared": True, "resolve_conditions": False}),
-            ("ion.top", {
-                "include_shared": True,
-                "include_blacklist": ["forcefield.itp"]
-                }),
+            pytest.param(
+                "ion.top", {
+                    "include_shared": True,
+                    "ignore_comments": False
+                    },
+                marks=pytest.mark.needs_gmx
+                ),
+            pytest.param(
+                "ion.top", {
+                    "include_shared": True,
+                    "resolve_conditions": False
+                    },
+                marks=pytest.mark.needs_gmx
+                ),
+            pytest.param(
+                "ion.top", {
+                    "include_shared": True,
+                    "include_blacklist": ["forcefield.itp"]
+                    },
+                marks=pytest.mark.needs_gmx
+                ),
             ("two_ions.top", {}),
             ]
         )

@@ -3,6 +3,15 @@ from setuptools import setup, find_packages
 with open("README.md", "r", encoding="utf-8") as f_:
     long_description = f_.read()
 
+requirements_map = {
+    "test": "-test"
+    }
+
+requirements = {}
+for category, fname in requirements_map.items():
+    with open(f"requirements{fname}.txt") as fp:
+        requirements[category] = fp.read().strip().split("\n")
+
 setup(
     name='mdparser',
     version="0.0.1",
@@ -18,5 +27,8 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    extras_require={
+        "test": requirements["test"],
+        },
     python_requires='>=3.6'
 )

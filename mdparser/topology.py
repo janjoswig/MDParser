@@ -853,13 +853,16 @@ def get_gmx_dir():
     stdout is parsed for the entries 'Executable' and 'Data prefix'.
     """
 
-    call = 'gmx -h'
-    feedback = subprocess.run(
-        shlex.split(call),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        encoding='utf8'
-        )
+    call = 'gmxx -h'
+    try:
+        feedback = subprocess.run(
+            shlex.split(call),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            encoding='utf8'
+            )
+    except FileNotFoundError:
+        return None, None
 
     if feedback.returncode != 0:
         return None, None

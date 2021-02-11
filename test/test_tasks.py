@@ -2,7 +2,6 @@ import pytest
 
 import mdparser.topology as mdtop
 import mdparser.tasks as mdtasks
-from mdparser import _gmx_nodes
 
 
 class TestTopologyTasks:
@@ -48,6 +47,7 @@ class TestTopologyTasks:
 
         file_regression.check(regression_string)
 
+    @pytest.mark.needs_gmx
     @pytest.mark.parametrize("filename,name", [
         ("qmmm.top", "QMMM_model"),
         ("qmmm_water.top", "QMMM_model"),

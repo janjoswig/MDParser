@@ -34,8 +34,14 @@ class TotalCoverageParser(HTMLParser):
 
 
 if __name__ == "__main__":
-    test_command = "pytest --cov-report html --cov=mdparser"
-    subprocess.run(shlex.split(test_command))
+
+    test_command_list = [
+        "coverage run -m pytest",
+        "coverage html"
+        ]
+
+    for command in test_command_list:
+        subprocess.run(shlex.split(command))
 
     with open("htmlcov/index.html") as f_:
         coverage_content = f_.read()

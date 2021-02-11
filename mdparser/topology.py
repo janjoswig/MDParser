@@ -853,7 +853,7 @@ def get_gmx_dir():
     stdout is parsed for the entries 'Executable' and 'Data prefix'.
     """
 
-    call = 'gmxx -h'
+    call = 'gmx -h'
     try:
         feedback = subprocess.run(
             shlex.split(call),

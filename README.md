@@ -156,4 +156,8 @@ MoleculesEntry(molecule='Urea', number=1)
 MoleculesEntry(molecule='SOL', number=1000)
 ```
 
+The following figure illustrates, how these topology-elements are stored.
+
+![Topology-elements stored as doubly-linked list](docsrc/figures/doubly_linked_list.png)
+
 Nodes can be modified or deleted and new nodes can be inserted.

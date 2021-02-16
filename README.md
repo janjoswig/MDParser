@@ -37,7 +37,7 @@ Urea         3
 [ bonds ]
     1       2
     1       3
-    1   6
+    1       6
     3       4
     3       5
     6       7
@@ -71,7 +71,7 @@ Urea         3
     1    4     3    5     1  180     0  10
 
 ; Include TIP3P water topology
-#include "amber99/tip3p.itp"
+#include "amber99.ff/tip3p.itp"
 
 [ system ]
 Urea in Water
@@ -96,7 +96,7 @@ parser = mdtop.GromacsTopParser(
 )
 
 with open("topol.top") as topfile:
-    top = parser.read(topolfile)
+    top = parser.read(topfile)
 
 ```
 

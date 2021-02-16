@@ -100,7 +100,7 @@ with open("topol.top") as topfile:
 
 ```
 
-By default, comments (starting with `";"`) are ignored and conditional directives (`#ifdef`/`#ifndef` blocks) are resolved. Each element of the topology file is represented as a node in the `top` object:
+By default, comments (starting with `";"`) are ignored and conditional directives (`#ifdef`/`#ifndef` blocks) are resolved. Each element of the topology file is represented as a node in the `top` object. More specifically, a topology-element is translated into a specific type of node-value:
 
 ```python
 for node in top:
@@ -148,7 +148,18 @@ PositionRestraintsEntry(i=3, funct=1, c=[1000.0, 0.0, 0.0])
 DihedralRestraintsSubsection()
 DihedralRestraintsEntry(i=3, j=6, k=1, l=2, funct=1, c=[180.0, 0.0, 10.0])
 DihedralRestraintsEntry(i=1, j=4, k=3, l=5, funct=1, c=[180.0, 0.0, 10.0])
-Include("amber99/tip3p.itp")
+MoleculetypeSection()
+MoleculetypeEntry(molecule='SOL', nrexcl=2)
+AtomsSubsection()
+AtomsEntry(nr=1, type='OW', resnr=1, residue='SOL', atom='OW', cgnr=1, charge=-0.834, mass=16.0, typeB=None, chargeB=None, massB=None)
+AtomsEntry(nr=2, type='HW', resnr=1, residue='SOL', atom='HW1', cgnr=1, charge=0.417, mass=1.008, typeB=None, chargeB=None, massB=None)
+AtomsEntry(nr=3, type='HW', resnr=1, residue='SOL', atom='HW2', cgnr=1, charge=0.417, mass=1.008, typeB=None, chargeB=None, massB=None)
+SettlesSubsection()
+SettlesEntry(i=1, funct=1, c=[0.09572, 0.15139])
+ExclusionsSubsection()
+ExclusionsEntry(indices=[1, 2, 3])
+ExclusionsEntry(indices=[2, 1, 3])
+ExclusionsEntry(indices=[3, 1, 2])
 SystemSection()
 SystemEntry(name='Urea in Water')
 MoleculesSection()

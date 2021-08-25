@@ -456,7 +456,8 @@ class GromacsTopParser:
             local_paths=None,
             include_shared=False,
             shared_paths=None,
-            include_blacklist=None):
+            include_blacklist=None,
+            verbose=True):
         """Pre-process topology file-like object
 
         Yield topology file line by line and resolve '#include'
@@ -498,19 +499,26 @@ class GromacsTopParser:
                 continue
 
             include_file = line.split()[1].strip('"')
+            excluded = False
 
             found_locally = False
             if include_local:
                 for include_dir in _local_paths:
                     include_path = include_dir / include_file
 
-                    if path_in_blacklist(include_path, include_blacklist):
-                        continue
-
                     if not include_path.is_file():
                         continue
 
+                    if path_in_blacklist(include_path, include_blacklist):
+                        excluded = True
+                        if verbose:
+                            print(f"Not including {include_path} (blacklist)")
+                        continue
+
                     with open(include_path) as open_file:
+                        if verbose:
+                            print(f"Including {include_path} (local)")
+
                         yield from self.preprocess_includes(
                             open_file,
                             include_local=include_local,
@@ -527,13 +535,19 @@ class GromacsTopParser:
                 for include_dir in shared_paths:
                     include_path = include_dir / include_file
 
-                    if path_in_blacklist(include_path, include_blacklist):
-                        continue
-
                     if not include_path.is_file():
                         continue
 
+                    if path_in_blacklist(include_path, include_blacklist):
+                        excluded = True
+                        if verbose:
+                            print(f"Not including {include_path} (blacklist)")
+                        continue
+
                     with open(include_path) as open_file:
+                        if verbose:
+                            print(f"Including {include_path} (shared)")
+
                         yield from self.preprocess_includes(
                             open_file,
                             include_local=include_local,
@@ -546,6 +560,8 @@ class GromacsTopParser:
                     break
 
             if not (found_locally or found_shared):
+                if verbose & (not excluded):
+                    print(f"Could not find {include_file}")
                 yield line
 
     def read(self, file: Iterable) -> GromacsTop:
@@ -559,6 +575,7 @@ class GromacsTopParser:
                 include_shared=self.include_shared,
                 shared_paths=self.shared_paths,
                 include_blacklist=self.include_blacklist,
+                verbose=self.verbose
                 )
 
         active_section = None

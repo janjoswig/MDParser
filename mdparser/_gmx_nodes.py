@@ -1,69 +1,6 @@
-from abc import ABC, abstractmethod
 from typing import Iterable
 
-
-def _trim_locals(d):
-    return {k: v for k, v in d.items() if k not in ("self", "__class__")}
-
-
-def make_formatter(f):
-    def formatter(value):
-        return f"{value:{f}}"
-
-    return formatter
-
-
-class NodeValue(ABC):
-    """Abstract base class for node value types"""
-
-    _count = 0
-    _node_key_name = "abstract"
-
-    @classmethod
-    def reset_count(cls, value: int = None):
-        if value is None:
-            value = 0
-        cls._count = value
-
-    @classmethod
-    def increase_count(cls):
-        cls._count += 1
-
-    @property
-    def count(self):
-        return self._count
-
-    def __init__(self):
-        self.increase_count()
-        self._count = type(self)._count
-
-    @abstractmethod
-    def __str__(self):
-        """Return node content formatted for topology file"""
-
-    def __repr__(self):
-        """Default representation"""
-        return f"{type(self).__name__}()"
-
-    def _make_node_key(self) -> str:
-        """Return string usable as node key"""
-        return f"{self._node_key_name}_{self._count}"
-
-
-class GenericNodeValue(NodeValue):
-    """Generic fallback node value"""
-
-    _node_key_name = "generic"
-
-    def __init__(self, value):
-        super().__init__()
-        self.value = value
-
-    def __str__(self):
-        return self.value.__str__()
-
-    def __repr__(self):
-        return f"{type(self).__name__}(value={self.value!r})"
+from ._base import NodeValue, make_formatter, trim_locals
 
 
 class Define(NodeValue):
@@ -445,7 +382,7 @@ class P1TermEntry(SectionEntry, PropertyInvoker):
         return deleter
 
     def __init__(self, i=None, funct=None, c=None, comment=None, **kwargs):
-        locals_ = _trim_locals(locals())
+        locals_ = trim_locals(locals())
 
         super().__init__(**locals_, **kwargs)
 
@@ -608,7 +545,7 @@ class DefaultsEntry(SectionEntry):
         n=None,
         comment=None,
     ):
-        locals_ = _trim_locals(locals())
+        locals_ = trim_locals(locals())
 
         super().__init__(**locals_)
 
@@ -638,7 +575,7 @@ class AtomtypesEntry(SectionEntry):
         epsilon=None,
         comment=None,
     ):
-        locals_ = _trim_locals(locals())
+        locals_ = trim_locals(locals())
 
         super().__init__(**locals_)
 
@@ -688,7 +625,7 @@ class MoleculetypeEntry(SectionEntry):
     ]
 
     def __init__(self, molecule=None, nrexcl=None, comment=None):
-        locals_ = _trim_locals(locals())
+        locals_ = trim_locals(locals())
 
         super().__init__(**locals_)
 
@@ -698,7 +635,7 @@ class SystemEntry(SectionEntry):
     _args = [("name", str, make_formatter(""))]
 
     def __init__(self, name=None, comment=None):
-        locals_ = _trim_locals(locals())
+        locals_ = trim_locals(locals())
 
         super().__init__(**locals_)
 
@@ -720,7 +657,7 @@ class MoleculesEntry(SectionEntry):
     ]
 
     def __init__(self, molecule=None, number=None, comment=None):
-        locals_ = _trim_locals(locals())
+        locals_ = trim_locals(locals())
 
         super().__init__(**locals_)
 
@@ -756,7 +693,7 @@ class AtomsEntry(SectionEntry):
         massB=None,
         comment=None,
     ):
-        locals_ = _trim_locals(locals())
+        locals_ = trim_locals(locals())
 
         super().__init__(**locals_)
 
@@ -786,7 +723,7 @@ class ExclusionsEntry(SectionEntry):
     _args = [("indices", None, make_formatter(">5"))]
 
     def __init__(self, indices=None, comment=None):
-        locals_ = _trim_locals(locals())
+        locals_ = trim_locals(locals())
 
         super().__init__(**locals_)
 

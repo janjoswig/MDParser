@@ -6,11 +6,14 @@ import subprocess
 from typing import Any, Iterable, Mapping, Optional, TextIO, Union
 import weakref
 
+from . import _base
 from . import _gmx_nodes
 
+DEFAULT_GENERIC_NODE_VALUE_TYPES = {
+    _base.GenericNodeValue._node_key_name: _base.GenericNodeValue,
+}
 
-DEFAULT_NODE_VALUE_TYPES = {
-    "generic": _gmx_nodes.GenericNodeValue,
+DEFAULT_GMX_NODE_VALUE_TYPES = {
     "comment": _gmx_nodes.Comment,
     "define": _gmx_nodes.Define,
     "include": _gmx_nodes.Include,
@@ -87,7 +90,7 @@ DEFAULT_NODE_VALUE_TYPES = {
 
 
 class GromacsTop:
-    __node_value_types = DEFAULT_NODE_VALUE_TYPES
+    __node_value_types = DEFAULT_GMX_NODE_VALUE_TYPES
 
     def __init__(self):
         self._nodes = dict()

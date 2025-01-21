@@ -4,7 +4,7 @@ import weakref
 import pytest
 
 import mdparser.topology as mdtop
-from mdparser import _gmx_nodes
+from mdparser import _base, _gmx_nodes
 
 
 class TestGromacsTop:
@@ -25,7 +25,7 @@ class TestGromacsTop:
         assert len(top) == 0
 
         for count, (k, v) in enumerate(node_list, 1):
-            top.add(k, _gmx_nodes.GenericNodeValue(v))
+            top.add(k, _base.GenericNodeValue(v))
             assert top[k].value.value == v
             assert len(top) == count
 
@@ -38,7 +38,7 @@ class TestGromacsTop:
         assert ("node2" in top) is True
 
         with pytest.raises(KeyError):
-            top.add("node2", _gmx_nodes.GenericNodeValue("garbage"))
+            top.add("node2", _base.GenericNodeValue("garbage"))
 
         top.discard("node2")
         assert len(top) == 3
@@ -52,11 +52,11 @@ class TestGromacsTop:
         for node, expected_key in zip(reversed(top), ["node4", "node3", "node1"]):
             assert node.key == expected_key
 
-        top.replace("node3", _gmx_nodes.GenericNodeValue("balthazar"))
+        top.replace("node3", _base.GenericNodeValue("balthazar"))
         assert top[1].value.value == "balthazar"
 
-        top.insert(1, "new", _gmx_nodes.GenericNodeValue("cato"))
-        top.insert(10, "other", _gmx_nodes.GenericNodeValue("brick"))
+        top.insert(1, "new", _base.GenericNodeValue("cato"))
+        top.insert(10, "other", _base.GenericNodeValue("brick"))
 
         with pytest.raises(IndexError):
             _ = top[10]
@@ -76,12 +76,12 @@ class TestGromacsTop:
         with pytest.raises(ValueError):
             _ = top.index("garbage")
 
-        top.relative_insert(top[2], "special", _gmx_nodes.GenericNodeValue("grubbs"))
+        top.relative_insert(top[2], "special", _base.GenericNodeValue("grubbs"))
 
         assert top[3].value.value == "grubbs"
 
         top.relative_insert(
-            top[3], "slurb", _gmx_nodes.GenericNodeValue("balaz"), forward=False
+            top[3], "slurb", _base.GenericNodeValue("balaz"), forward=False
         )
 
         assert top[3].value.value == "balaz"
@@ -89,16 +89,16 @@ class TestGromacsTop:
     def test_block_insert(self):
         def set_up():
             top = mdtop.GromacsTop()
-            top.add("1", _gmx_nodes.GenericNodeValue("1"))
-            top.add("2", _gmx_nodes.GenericNodeValue("2"))
-            top.add("3", _gmx_nodes.GenericNodeValue("3"))
+            top.add("1", _base.GenericNodeValue("1"))
+            top.add("2", _base.GenericNodeValue("2"))
+            top.add("3", _base.GenericNodeValue("3"))
 
             node = mdtop.Node()
-            node.value = _gmx_nodes.GenericNodeValue("4")
+            node.value = _base.GenericNodeValue("4")
             node.key = "4"
 
             other = mdtop.Node()
-            other.value = _gmx_nodes.GenericNodeValue("5")
+            other.value = _base.GenericNodeValue("5")
             other.key = "5"
 
             node.connect(other)
@@ -129,7 +129,7 @@ class TestGromacsTop:
     def test_find_complement(self):
         top = mdtop.GromacsTop()
         top.add("if", _gmx_nodes.Condition("some", True))
-        top.add("entry", _gmx_nodes.GenericNodeValue("important"))
+        top.add("entry", _base.GenericNodeValue("important"))
         top.add("end", _gmx_nodes.Condition("some", None))
 
         node = top[-1]
@@ -144,7 +144,7 @@ class TestGromacsTop:
             top.get_next_node_with_nvtype()
 
         with pytest.raises(LookupError):
-            top.get_next_node_with_nvtype(nvtype=_gmx_nodes.GenericNodeValue)
+            top.get_next_node_with_nvtype(nvtype=_base.GenericNodeValue)
 
         top.add("section", _gmx_nodes.Section("sec"))
         top.add("entry1", _gmx_nodes.SectionEntry("sec_entry"))
@@ -224,7 +224,7 @@ class TestNodeValues:
     @pytest.mark.parametrize(
         "nvtype,init_values,expected_attrs",
         [
-            (_gmx_nodes.GenericNodeValue, {"value": "value"}, ["value"]),
+            (_base.GenericNodeValue, {"value": "value"}, ["value"]),
             (_gmx_nodes.Define, {"key": "key", "value": True}, ["key", "value"]),
         ],
     )
@@ -313,7 +313,7 @@ class TestNodeValues:
         assert node._raw == strange_line
 
     def test_counting(self):
-        nvtype = _gmx_nodes.GenericNodeValue
+        nvtype = _base.GenericNodeValue
         nvtype.reset_count()
         assert nvtype._count == 0
 

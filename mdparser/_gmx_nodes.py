@@ -3,16 +3,13 @@ from typing import Iterable
 
 
 def _trim_locals(d):
-    return {
-        k: v
-        for k, v in d.items()
-        if k not in ("self", "__class__")
-        }
+    return {k: v for k, v in d.items() if k not in ("self", "__class__")}
 
 
 def make_formatter(f):
     def formatter(value):
         return f"{value:{f}}"
+
     return formatter
 
 
@@ -129,7 +126,6 @@ class Section(NodeValue):
 
 
 class SpecializedSection(Section):
-
     category = 0
     allowed_occurrence = 0
 
@@ -198,7 +194,6 @@ class Subsection(Section):
 
 
 class SpecializedSubsection(Subsection):
-
     category = 1
     allowed_occurrence = 0
 
@@ -340,7 +335,7 @@ class SectionEntry(NodeValue):
                     raise TypeError(
                         f"Argument {name!r} should be 'str' or "
                         f"convertible to {target_type.__name__!r}"
-                        )
+                    )
 
             setattr(self, name, value)
 
@@ -348,11 +343,7 @@ class SectionEntry(NodeValue):
         self._raw = None
 
     def __copy__(self):
-        kwargs = {
-            arg_name: getattr(self, arg_name)
-            for arg_name, *_
-            in self._args
-        }
+        kwargs = {arg_name: getattr(self, arg_name) for arg_name, *_ in self._args}
         copied = type(self)(**kwargs, comment=self.comment)
         copied._raw = self._raw
 
@@ -366,17 +357,9 @@ class SectionEntry(NodeValue):
 
     @classmethod
     def from_line(cls, *args, comment=None):
+        kwargs = {kw[0]: v for kw, v in zip(cls._args, args)}
 
-        kwargs = {
-            kw[0]: v
-            for kw, v
-            in zip(cls._args, args)
-            }
-
-        entry = cls(
-            comment=comment,
-            **kwargs
-        )
+        entry = cls(comment=comment, **kwargs)
 
         return entry
 
@@ -403,9 +386,8 @@ class SectionEntry(NodeValue):
 
     def __repr__(self):
         arg_name_repr = ", ".join(
-            f"{arg_name!s}={getattr(self, arg_name)!r}"
-            for arg_name, *_ in self._args
-            )
+            f"{arg_name!s}={getattr(self, arg_name)!r}" for arg_name, *_ in self._args
+        )
 
         return f"{type(self).__name__}({arg_name_repr})"
 
@@ -441,32 +423,28 @@ class P1TermEntry(SectionEntry, PropertyInvoker):
     _args = [
         ("i", int, make_formatter(">5")),
         ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter("1.6e"))
-        ]
+        ("c", None, make_formatter("1.6e")),
+    ]
 
     def getc(self, index):
         def getter(self):
             return self.c[index]
+
         return getter
 
     def setc(self, index):
         def setter(self, value):
             self.c[index] = value
+
         return setter
 
     def delc(self, index):
         def deleter(self):
             del self.c[index]
+
         return deleter
 
-    def __init__(
-            self,
-            i=None,
-            funct=None,
-            c=None,
-            comment=None,
-            **kwargs):
-
+    def __init__(self, i=None, funct=None, c=None, comment=None, **kwargs):
         locals_ = _trim_locals(locals())
 
         super().__init__(**locals_, **kwargs)
@@ -478,17 +456,18 @@ class P1TermEntry(SectionEntry, PropertyInvoker):
         for index in range(len(self.c)):
             # Add instance specific properties "c0", "c1", ...
             setattr(
-                self, f"c{index}", property(
+                self,
+                f"c{index}",
+                property(
                     fget=self.getc(index),
                     fset=self.setc(index),
                     fdel=self.delc(index),
-                    doc="Access term coefficients"
-                    )
-                )
+                    doc="Access term coefficients",
+                ),
+            )
 
     @classmethod
     def from_line(cls, *args, comment=None):
-
         i, *rest = args
         if rest:
             funct, *c = rest
@@ -496,7 +475,9 @@ class P1TermEntry(SectionEntry, PropertyInvoker):
             funct = c = None
 
         entry = cls(
-            i=i, funct=funct, c=c,
+            i=i,
+            funct=funct,
+            c=c,
             comment=comment,
         )
 
@@ -509,23 +490,14 @@ class P2TermEntry(P1TermEntry):
         ("i", int, make_formatter(">5")),
         ("j", int, make_formatter(">5")),
         ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter("1.6e"))
-        ]
+        ("c", None, make_formatter("1.6e")),
+    ]
 
-    def __init__(
-            self, i=None, j=None,
-            funct=None, c=None, comment=None):
-
-        super().__init__(
-            i=i, j=j,
-            funct=funct,
-            c=c,
-            comment=comment
-            )
+    def __init__(self, i=None, j=None, funct=None, c=None, comment=None):
+        super().__init__(i=i, j=j, funct=funct, c=c, comment=comment)
 
     @classmethod
     def from_line(cls, *args, comment=None):
-
         i, j, *rest = args
         if rest:
             funct, *c = rest
@@ -533,7 +505,10 @@ class P2TermEntry(P1TermEntry):
             funct = c = None
 
         entry = cls(
-            i=i, j=j, funct=funct, c=c,
+            i=i,
+            j=j,
+            funct=funct,
+            c=c,
             comment=comment,
         )
 
@@ -547,23 +522,14 @@ class P3TermEntry(P1TermEntry):
         ("j", int, make_formatter(">5")),
         ("k", int, make_formatter(">5")),
         ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter("1.6e"))
-        ]
+        ("c", None, make_formatter("1.6e")),
+    ]
 
-    def __init__(
-            self, i=None, j=None, k=None,
-            funct=None, c=None, comment=None):
-
-        super().__init__(
-            i=i, j=j, k=k,
-            funct=funct,
-            c=c,
-            comment=comment
-            )
+    def __init__(self, i=None, j=None, k=None, funct=None, c=None, comment=None):
+        super().__init__(i=i, j=j, k=k, funct=funct, c=c, comment=comment)
 
     @classmethod
     def from_line(cls, *args, comment=None):
-
         i, j, k, *rest = args
         if rest:
             funct, *c = rest
@@ -571,7 +537,11 @@ class P3TermEntry(P1TermEntry):
             funct = c = None
 
         entry = cls(
-            i=i, j=j, k=k, funct=funct, c=c,
+            i=i,
+            j=j,
+            k=k,
+            funct=funct,
+            c=c,
             comment=comment,
         )
 
@@ -586,23 +556,16 @@ class P4TermEntry(P1TermEntry):
         ("k", int, make_formatter(">5")),
         ("l", int, make_formatter(">5")),
         ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter("1.6e"))
-        ]
+        ("c", None, make_formatter("1.6e")),
+    ]
 
     def __init__(
-            self, i=None, j=None, k=None, l=None,
-            funct=None, c=None, comment=None):
-
-        super().__init__(
-            i=i, j=j, k=k, l=l,
-            funct=funct,
-            c=c,
-            comment=comment
-            )
+        self, i=None, j=None, k=None, l=None, funct=None, c=None, comment=None
+    ):
+        super().__init__(i=i, j=j, k=k, l=l, funct=funct, c=c, comment=comment)
 
     @classmethod
     def from_line(cls, *args, comment=None):
-
         i, j, k, l, *rest = args
         if rest:
             funct, *c = rest
@@ -610,8 +573,12 @@ class P4TermEntry(P1TermEntry):
             funct = c = None
 
         entry = cls(
-            i=i, j=j, k=k, l=l,
-            funct=funct, c=c,
+            i=i,
+            j=j,
+            k=k,
+            l=l,
+            funct=funct,
+            c=c,
             comment=comment,
         )
 
@@ -628,15 +595,19 @@ class DefaultsEntry(SectionEntry):
         ("gen_pairs", str, make_formatter("<15")),
         ("fudgeLJ", float, make_formatter("<7")),
         ("fudgeQQ", float, make_formatter("<7")),
-        ("n", int, make_formatter("<7"))
+        ("n", int, make_formatter("<7")),
     ]
 
     def __init__(
-            self,
-            nbfunc=None, comb_rule=None,
-            gen_pairs="no", fudgeLJ=None, fudgeQQ=None, n=None,
-            comment=None):
-
+        self,
+        nbfunc=None,
+        comb_rule=None,
+        gen_pairs="no",
+        fudgeLJ=None,
+        fudgeQQ=None,
+        n=None,
+        comment=None,
+    ):
         locals_ = _trim_locals(locals())
 
         super().__init__(**locals_)
@@ -652,13 +623,21 @@ class AtomtypesEntry(SectionEntry):
         ("charge", float, make_formatter("<6")),
         ("ptype", str, make_formatter("<1")),
         ("sigma", float, make_formatter("1.5e")),
-        ("epsilon", float, make_formatter("1.5e"))
+        ("epsilon", float, make_formatter("1.5e")),
     ]
 
     def __init__(
-            self, name=None, bond_type=None, at_num=None, mass=None,
-            charge=None, ptype=None, sigma=None, epsilon=None, comment=None):
-
+        self,
+        name=None,
+        bond_type=None,
+        at_num=None,
+        mass=None,
+        charge=None,
+        ptype=None,
+        sigma=None,
+        epsilon=None,
+        comment=None,
+    ):
         locals_ = _trim_locals(locals())
 
         super().__init__(**locals_)
@@ -670,16 +649,9 @@ class AtomtypesEntry(SectionEntry):
         else:
             arg_names = cls._args
 
-        kwargs = {
-            kw[0]: v
-            for kw, v
-            in zip(arg_names, args)
-            }
+        kwargs = {kw[0]: v for kw, v in zip(arg_names, args)}
 
-        entry = cls(
-            comment=comment,
-            **kwargs
-        )
+        entry = cls(comment=comment, **kwargs)
 
         return entry
 
@@ -709,36 +681,29 @@ class NonbondedParamsEntry(P2TermEntry):
 
 
 class MoleculetypeEntry(SectionEntry):
-
     _node_key_name = "moleculetype_entry"
     _args = [
         ("molecule", str, make_formatter("")),
-        ("nrexcl", int, make_formatter(">5"))
+        ("nrexcl", int, make_formatter(">5")),
     ]
 
     def __init__(self, molecule=None, nrexcl=None, comment=None):
-
         locals_ = _trim_locals(locals())
 
         super().__init__(**locals_)
 
 
 class SystemEntry(SectionEntry):
-
     _node_key_name = "system_entry"
-    _args = [
-        ("name", str, make_formatter(""))
-    ]
+    _args = [("name", str, make_formatter(""))]
 
     def __init__(self, name=None, comment=None):
-
         locals_ = _trim_locals(locals())
 
         super().__init__(**locals_)
 
     @classmethod
     def from_line(cls, *args, comment):
-
         entry = cls(
             name=" ".join(args),
             comment=comment,
@@ -748,22 +713,19 @@ class SystemEntry(SectionEntry):
 
 
 class MoleculesEntry(SectionEntry):
-
     _node_key_name = "molecules_entry"
     _args = [
         ("molecule", str, make_formatter("")),
-        ("number", int, make_formatter(">6"))
+        ("number", int, make_formatter(">6")),
     ]
 
     def __init__(self, molecule=None, number=None, comment=None):
-
         locals_ = _trim_locals(locals())
 
         super().__init__(**locals_)
 
 
 class AtomsEntry(SectionEntry):
-
     _node_key_name = "atoms_entry"
     _args = [
         ("nr", int, make_formatter("<5")),
@@ -776,16 +738,24 @@ class AtomsEntry(SectionEntry):
         ("mass", float, make_formatter("7.3f")),
         ("typeB", float, make_formatter("<5")),
         ("chargeB", float, make_formatter(">7.4f")),
-        ("massB", float, make_formatter("7.3f"))
-        ]
+        ("massB", float, make_formatter("7.3f")),
+    ]
 
     def __init__(
-            self,
-            nr=None, type=None, resnr=None, residue=None,
-            atom=None, cgnr=None, charge=None, mass=None,
-            typeB=None, chargeB=None, massB=None,
-            comment=None):
-
+        self,
+        nr=None,
+        type=None,
+        resnr=None,
+        residue=None,
+        atom=None,
+        cgnr=None,
+        charge=None,
+        mass=None,
+        typeB=None,
+        chargeB=None,
+        massB=None,
+        comment=None,
+    ):
         locals_ = _trim_locals(locals())
 
         super().__init__(**locals_)
@@ -813,15 +783,9 @@ class DihedralsEntry(P4TermEntry):
 
 class ExclusionsEntry(SectionEntry):
     _node_key_name = "exclusions_entry"
-    _args = [
-        ("indices", None, make_formatter(">5"))
-        ]
+    _args = [("indices", None, make_formatter(">5"))]
 
-    def __init__(
-            self,
-            indices=None,
-            comment=None):
-
+    def __init__(self, indices=None, comment=None):
         locals_ = _trim_locals(locals())
 
         super().__init__(**locals_)
@@ -832,7 +796,6 @@ class ExclusionsEntry(SectionEntry):
 
     @classmethod
     def from_line(cls, *args, comment):
-
         entry = cls(
             indices=args,
             comment=comment,
@@ -855,19 +818,11 @@ class VirtualSites1Entry(P1TermEntry):
         ("i", int, make_formatter(">5")),
         ("f", None, make_formatter(">5")),
         ("funct", int, make_formatter(">5")),
-        ("c", None, make_formatter("1.6e"))
-        ]
+        ("c", None, make_formatter("1.6e")),
+    ]
 
-    def __init__(
-            self, i=None, f=None,
-            funct=None, c=None, comment=None):
-
-        super().__init__(
-            i=i,
-            funct=funct,
-            c=c,
-            comment=comment
-            )
+    def __init__(self, i=None, f=None, funct=None, c=None, comment=None):
+        super().__init__(i=i, funct=funct, c=c, comment=comment)
 
         if f is None:
             f = []
@@ -875,7 +830,6 @@ class VirtualSites1Entry(P1TermEntry):
 
     @classmethod
     def from_line(cls, *args, comment=None):
-
         i, f1, *rest = args
         if rest:
             funct, *c = rest
@@ -884,7 +838,10 @@ class VirtualSites1Entry(P1TermEntry):
         f = [f1]
 
         entry = cls(
-            i=i, f=f, funct=funct, c=c,
+            i=i,
+            f=f,
+            funct=funct,
+            c=c,
             comment=comment,
         )
 
@@ -896,7 +853,6 @@ class VirtualSites2Entry(VirtualSites1Entry):
 
     @classmethod
     def from_line(cls, *args, comment=None):
-
         i, f1, f2, *rest = args
         if rest:
             funct, *c = rest
@@ -905,7 +861,10 @@ class VirtualSites2Entry(VirtualSites1Entry):
         f = [f1, f2]
 
         entry = cls(
-            i=i, f=f, funct=funct, c=c,
+            i=i,
+            f=f,
+            funct=funct,
+            c=c,
             comment=comment,
         )
 
@@ -917,7 +876,6 @@ class VirtualSites3Entry(VirtualSites1Entry):
 
     @classmethod
     def from_line(cls, *args, comment=None):
-
         i, f1, f2, f3, *rest = args
         if rest:
             funct, *c = rest
@@ -926,7 +884,10 @@ class VirtualSites3Entry(VirtualSites1Entry):
         f = [f1, f2, f3]
 
         entry = cls(
-            i=i, f=f, funct=funct, c=c,
+            i=i,
+            f=f,
+            funct=funct,
+            c=c,
             comment=comment,
         )
 
@@ -938,7 +899,6 @@ class VirtualSites4Entry(VirtualSites1Entry):
 
     @classmethod
     def from_line(cls, *args, comment=None):
-
         i, f1, f2, f3, f4, *rest = args
         if rest:
             funct, *c = rest
@@ -947,7 +907,10 @@ class VirtualSites4Entry(VirtualSites1Entry):
         f = [f1, f2, f3, f4]
 
         entry = cls(
-            i=i, f=f, funct=funct, c=c,
+            i=i,
+            f=f,
+            funct=funct,
+            c=c,
             comment=comment,
         )
 
@@ -960,24 +923,15 @@ class VirtualSitesNEntry(VirtualSites1Entry):
         ("i", int, make_formatter(">5")),
         ("funct", int, make_formatter(">5")),
         ("f", None, make_formatter(">5")),
-        ]
+    ]
 
-    def __init__(
-            self, i=None,
-            funct=None, f=None, comment=None):
-
-        super().__init__(
-            i=i,
-            funct=funct,
-            f=f,
-            comment=comment
-            )
+    def __init__(self, i=None, funct=None, f=None, comment=None):
+        super().__init__(i=i, funct=funct, f=f, comment=comment)
 
         delattr(self, "c")
 
     @classmethod
     def from_line(cls, *args, comment=None):
-
         i, *rest = args
         if rest:
             funct, *f = rest
@@ -985,7 +939,9 @@ class VirtualSitesNEntry(VirtualSites1Entry):
             funct = f = None
 
         entry = cls(
-            i=i, f=f, funct=funct,
+            i=i,
+            f=f,
+            funct=funct,
             comment=comment,
         )
 

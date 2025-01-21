@@ -8,17 +8,17 @@ from mdparser import _gmx_nodes
 
 
 class TestGromacsTop:
-
     def test_representation(self):
-
         top = mdtop.GromacsTop()
         assert f"{top!r}" == "GromacsTop()"
         assert f"{top!s}" == ""
 
     def test_node_operations(self):
         node_list = [
-            ("node1", "foo"), ("node2", "bar"), ("node3", "baz"),
-            ("node4", "brawl")
+            ("node1", "foo"),
+            ("node2", "bar"),
+            ("node3", "baz"),
+            ("node4", "brawl"),
         ]
 
         top = mdtop.GromacsTop()
@@ -49,9 +49,7 @@ class TestGromacsTop:
         for node, expected_key in zip(top, ["node1", "node3", "node4"]):
             assert node.key == expected_key
 
-        for node, expected_key in zip(
-                reversed(top),
-                ["node4", "node3", "node1"]):
+        for node, expected_key in zip(reversed(top), ["node4", "node3", "node1"]):
             assert node.key == expected_key
 
         top.replace("node3", _gmx_nodes.GenericNodeValue("balthazar"))
@@ -78,16 +76,13 @@ class TestGromacsTop:
         with pytest.raises(ValueError):
             _ = top.index("garbage")
 
-        top.relative_insert(
-            top[2], "special", _gmx_nodes.GenericNodeValue("grubbs")
-            )
+        top.relative_insert(top[2], "special", _gmx_nodes.GenericNodeValue("grubbs"))
 
         assert top[3].value.value == "grubbs"
 
         top.relative_insert(
-            top[3], "slurb", _gmx_nodes.GenericNodeValue("balaz"),
-            forward=False
-            )
+            top[3], "slurb", _gmx_nodes.GenericNodeValue("balaz"), forward=False
+        )
 
         assert top[3].value.value == "balaz"
 
@@ -119,7 +114,6 @@ class TestGromacsTop:
         assert [x.value.value for x in top] == ["1", "4", "5", "2", "3"]
 
     def test_info(self):
-
         top = mdtop.GromacsTop()
 
         assert top.includes_resolved is True
@@ -150,9 +144,7 @@ class TestGromacsTop:
             top.get_next_node_with_nvtype()
 
         with pytest.raises(LookupError):
-            top.get_next_node_with_nvtype(
-                nvtype=_gmx_nodes.GenericNodeValue
-                )
+            top.get_next_node_with_nvtype(nvtype=_gmx_nodes.GenericNodeValue)
 
         top.add("section", _gmx_nodes.Section("sec"))
         top.add("entry1", _gmx_nodes.SectionEntry("sec_entry"))
@@ -164,21 +156,20 @@ class TestGromacsTop:
         assert node is top["section"]
 
         node = top.get_next_node_with_nvtype(
-            start=top["section"],
-            nvtype=_gmx_nodes.Section
-            )
+            start=top["section"], nvtype=_gmx_nodes.Section
+        )
         assert node is top["subsection"]
 
         node = top.get_next_node_with_nvtype(
             start=top["section"],
-            )
+        )
         assert node is top["subsection"]
 
         node = top.get_next_node_with_nvtype(
             start=top["section"],
             nvtype=_gmx_nodes.Section,
-            exclude=_gmx_nodes.Subsection
-            )
+            exclude=_gmx_nodes.Subsection,
+        )
         assert node is top["another_section"]
 
         with pytest.raises(LookupError):
@@ -186,8 +177,8 @@ class TestGromacsTop:
                 start=top["section"],
                 stop=top["another_section"],
                 nvtype=_gmx_nodes.Section,
-                exclude=_gmx_nodes.Subsection
-                )
+                exclude=_gmx_nodes.Subsection,
+            )
 
         with pytest.raises(LookupError):
             node = top.get_next_node_with_nvtype(
@@ -195,20 +186,19 @@ class TestGromacsTop:
                 stop=top["subsection"],
                 nvtype=_gmx_nodes.Section,
                 exclude=_gmx_nodes.Subsection,
-                forward=False
-                )
+                forward=False,
+            )
 
         node = top.get_next_node_with_nvtype(
             start=top["another_section"],
             nvtype=_gmx_nodes.Section,
             exclude=_gmx_nodes.Subsection,
-            forward=False
-            )
+            forward=False,
+        )
         assert node is top["section"]
 
 
 class TestNode:
-
     def test_representation(self):
         node = mdtop.Node()
 
@@ -231,29 +221,19 @@ class TestNode:
 
 
 class TestNodeValues:
-
     @pytest.mark.parametrize(
         "nvtype,init_values,expected_attrs",
         [
-            (
-                _gmx_nodes.GenericNodeValue,
-                {"value": "value"},
-                ["value"]
-            ),
-            (
-                _gmx_nodes.Define,
-                {"key": "key", "value": True},
-                ["key", "value"]
-            ),
-        ]
+            (_gmx_nodes.GenericNodeValue, {"value": "value"}, ["value"]),
+            (_gmx_nodes.Define, {"key": "key", "value": True}, ["key", "value"]),
+        ],
     )
     def test_representations(self, nvtype, init_values, expected_attrs):
         node = nvtype(**init_values)
 
         expected_attr_str = ", ".join(
-            f"{v!s}={init_values[v]!r}"
-            for v in expected_attrs
-            )
+            f"{v!s}={init_values[v]!r}" for v in expected_attrs
+        )
         assert f"{node!r}" == f"{type(node).__name__}({expected_attr_str})"
 
     def test_define_node(self):
@@ -271,26 +251,27 @@ class TestNodeValues:
             "1", "2", "no", "1.0", "0.8333", "12", comment="abc"
         )
 
-        assert f"{default_entry_node!s}" == " 1               2               no              1.0     0.8333  12      ; abc"
+        assert (
+            f"{default_entry_node!s}"
+            == " 1               2               no              1.0     0.8333  12      ; abc"
+        )
 
     @pytest.mark.parametrize(
         "line,expected",
         [
             (
                 "C            6      12.01    0.0000  A   3.39967e-01  3.59824e-01",
-                " C         6   12.01    0.0    A 3.39967e-01 3.59824e-01 ; abc"
+                " C         6   12.01    0.0    A 3.39967e-01 3.59824e-01 ; abc",
             ),
             (
                 "opls_001   C	6      12.01100     0.500       A    3.75000e-01  4.39320e-01",
-                " opls_001  C    6   12.011   0.5    A 3.75000e-01 4.39320e-01 ; abc"
-            )
-        ]
+                " opls_001  C    6   12.011   0.5    A 3.75000e-01 4.39320e-01 ; abc",
+            ),
+        ],
     )
     def test_atomtypes_entry(self, line, expected):
-
         atomtypes_entry_node = _gmx_nodes.AtomtypesEntry.from_line(
-            *line.split(),
-            comment="abc"
+            *line.split(), comment="abc"
         )
 
         assert f"{atomtypes_entry_node!s}" == expected
@@ -300,15 +281,13 @@ class TestNodeValues:
         [
             (
                 "  1    H    1     PROP    PH    1   0.398    1.008  CH3     0.0  15.035",
-                " 1     H     1     PROP  PH    1      0.3980   1.008 CH3    0.0000  15.035 ; abc"
+                " 1     H     1     PROP  PH    1      0.3980   1.008 CH3    0.0000  15.035 ; abc",
             )
-        ]
+        ],
     )
     def test_atoms_entry(self, line, expected):
-
         atomtypes_entry_node = _gmx_nodes.AtomsEntry.from_line(
-            *line.split(),
-            comment="abc"
+            *line.split(), comment="abc"
         )
 
         assert f"{atomtypes_entry_node!s}" == expected
@@ -318,24 +297,18 @@ class TestNodeValues:
         [
             (
                 "    6     7     1 1.000000e-01 3.138000e+05 1.000000e-01 3.138000e+05",
-                "     6     7     1 1.000000e-01 3.138000e+05 1.000000e-01 3.138000e+05 ; abc"
+                "     6     7     1 1.000000e-01 3.138000e+05 1.000000e-01 3.138000e+05 ; abc",
             )
-        ]
+        ],
     )
     def test_bonds_entry(self, line, expected):
-
-        bonds_entry_node = _gmx_nodes.BondsEntry.from_line(
-            *line.split(),
-            comment="abc"
-        )
+        bonds_entry_node = _gmx_nodes.BondsEntry.from_line(*line.split(), comment="abc")
 
         assert f"{bonds_entry_node!s}" == expected
 
     def test_raw(self):
         strange_line = "This was will not be parsed correctly!"
-        node = _gmx_nodes.SectionEntry.create_raw(
-            strange_line
-            )
+        node = _gmx_nodes.SectionEntry.create_raw(strange_line)
 
         assert node._raw == strange_line
 
@@ -362,12 +335,9 @@ class TestNodeValues:
         assert nvtype._count == 3
 
     def test_entries(self):
-
         section_entry_type = _gmx_nodes.SectionEntry
 
-        section_entry = section_entry_type.from_line(
-            "a b c".split(), comment="abc"
-            )
+        section_entry = section_entry_type.from_line("a b c".split(), comment="abc")
 
         assert f"{section_entry!s}" == " ; abc"
 
@@ -400,43 +370,33 @@ class TestHelper:
         "include_path,include_blacklist,expected",
         [
             (
-                pathlib.Path(
-                    "/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"
-                ),
+                pathlib.Path("/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"),
                 [pathlib.Path("forcefield.itp")],
-                True
+                True,
             ),
             (
-                pathlib.Path(
-                    "/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"
-                ),
+                pathlib.Path("/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"),
                 [pathlib.Path("amber99sb-ildn")],
-                True
+                True,
             ),
             (
                 "/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp",
                 ["amber99sb-ildn"],
-                True
+                True,
             ),
             (
-                pathlib.Path(
-                    "/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"
-                ),
+                pathlib.Path("/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"),
                 [pathlib.Path("dummy.dat"), pathlib.Path("amber99sb-ildn")],
-                True
+                True,
             ),
             (
-                pathlib.Path(
-                    "/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"
-                ),
+                pathlib.Path("/usr/share/gromacs/top/amber99sb-ildn/forcefield.itp"),
                 [pathlib.Path("dummy.dat"), pathlib.Path("foo.bar")],
-                False
-            )
-        ]
+                False,
+            ),
+        ],
     )
-    def test_path_in_blacklist(
-            self, include_path, include_blacklist, expected):
-
+    def test_path_in_blacklist(self, include_path, include_blacklist, expected):
         ignore = mdtop.path_in_blacklist(include_path, include_blacklist)
 
         assert ignore is expected

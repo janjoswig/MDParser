@@ -10,84 +10,83 @@ from . import _gmx_nodes
 
 
 DEFAULT_NODE_VALUE_TYPES = {
-        "generic": _gmx_nodes.GenericNodeValue,
-        "comment": _gmx_nodes.Comment,
-        "define": _gmx_nodes.Define,
-        "include": _gmx_nodes.Include,
-        "condition": _gmx_nodes.Condition,
-        "section": _gmx_nodes.Section,
-        "defaults": _gmx_nodes.DefaultsSection,
-        "atomtypes": _gmx_nodes.AtomtypesSection,
-        "bondtypes": _gmx_nodes.BondtypesSection,
-        "angletypes": _gmx_nodes.AngletypesSection,
-        "pairtypes": _gmx_nodes.PairtypesSection,
-        "dihedraltypes": _gmx_nodes.DihedraltypesSection,
-        "constrainttypes": _gmx_nodes.ConstrainttypesSection,
-        "nonbonded_params": _gmx_nodes.NonbondedParamsSection,
-        "moleculetype": _gmx_nodes.MoleculetypeSection,
-        "system": _gmx_nodes.SystemSection,
-        "molecules": _gmx_nodes.MoleculesSection,
-        "subsection": _gmx_nodes.Subsection,
-        "atoms": _gmx_nodes.AtomsSubsection,
-        "bonds": _gmx_nodes.BondsSubsection,
-        "pairs": _gmx_nodes.PairsSubsection,
-        "pairs_nb": _gmx_nodes.PairsNBSubsection,
-        "angles": _gmx_nodes.AnglesSubsection,
-        "dihedrals": _gmx_nodes.DihedralsSubsection,
-        "exclusions": _gmx_nodes.ExclusionsSubsection,
-        "constraints": _gmx_nodes.ConstraintsSubsection,
-        "settles": _gmx_nodes.SettlesSubsection,
-        "virtual_sites2": _gmx_nodes.VirtualSites2Subsection,
-        "virtual_sites3": _gmx_nodes.VirtualSites3Subsection,
-        "virtual_sites4": _gmx_nodes.VirtualSites4Subsection,
-        "virtual_sitesn": _gmx_nodes.VirtualSitesNSubsection,
-        "position_restraints": _gmx_nodes.PositionRestraintsSubsection,
-        "distance_restraints": _gmx_nodes.DistanceRestraintsSubsection,
-        "dihedral_restraints": _gmx_nodes.DihedralRestraintsSubsection,
-        "orientation_restraints": _gmx_nodes.OrientationRestraintsSubsection,
-        "angle_restraints": _gmx_nodes.AngleRestraintsSubsection,
-        "angle_restraints_z": _gmx_nodes.AngleRestraintsZSubsection,
-        "entry": _gmx_nodes.SectionEntry,
-        "defaults_entry": _gmx_nodes.DefaultsEntry,
-        "atomtypes_entry": _gmx_nodes.AtomtypesEntry,
-        "bondtypes_entry": _gmx_nodes.BondtypesEntry,
-        "angletypes_entry": _gmx_nodes.AngletypesEntry,
-        "pairtypes_entry": _gmx_nodes.PairtypesEntry,
-        "dihedraltypes_entry": _gmx_nodes.DihedraltypesEntry,
-        "constrainttypes_entry": _gmx_nodes.ConstrainttypesEntry,
-        "nonbonded_params_entry": _gmx_nodes.NonbondedParamsEntry,
-        "moleculetype_entry": _gmx_nodes.MoleculetypeEntry,
-        "atoms_entry": _gmx_nodes.AtomsEntry,
-        "bonds_entry": _gmx_nodes.BondsEntry,
-        "pairs_entry": _gmx_nodes.PairsEntry,
-        "pairs_nb_entry": _gmx_nodes.PairsNBEntry,
-        "angles_entry": _gmx_nodes.AnglesEntry,
-        "dihedrals_entry": _gmx_nodes.DihedralsEntry,
-        "exclusions_entry": _gmx_nodes.ExclusionsEntry,
-        "constraints_entry": _gmx_nodes.ConstraintsEntry,
-        "settles_entry": _gmx_nodes.SettlesEntry,
-        "virtual_sites1_entry": _gmx_nodes.VirtualSites1Entry,
-        "virtual_sites2_entry": _gmx_nodes.VirtualSites2Entry,
-        "virtual_sites3_entry": _gmx_nodes.VirtualSites3Entry,
-        "virtual_sites4_entry": _gmx_nodes.VirtualSites4Entry,
-        "virtual_sitesn_entry": _gmx_nodes.VirtualSitesNEntry,
-        "position_restraints_entry": _gmx_nodes.PositionRestraintsEntry,
-        "distance_restraints_entry": _gmx_nodes.DistanceRestraintsEntry,
-        "dihedral_restraints_entry": _gmx_nodes.DihedralRestraintsEntry,
-        "orientation_restraints_entry": _gmx_nodes.OrientationRestraintsEntry,
-        "angle_restraints_entry": _gmx_nodes.AngleRestraintsEntry,
-        "angle_restraints_z_entry": _gmx_nodes.AngleRestraintsZEntry,
-        "p1term_entry": _gmx_nodes.P1TermEntry,
-        "p2term_entry": _gmx_nodes.P2TermEntry,
-        "p3term_entry": _gmx_nodes.P3TermEntry,
-        "p4term_entry": _gmx_nodes.P4TermEntry,
-        "system_entry": _gmx_nodes.SystemEntry,
-        "molecules_entry": _gmx_nodes.MoleculesEntry,
-    }
+    "generic": _gmx_nodes.GenericNodeValue,
+    "comment": _gmx_nodes.Comment,
+    "define": _gmx_nodes.Define,
+    "include": _gmx_nodes.Include,
+    "condition": _gmx_nodes.Condition,
+    "section": _gmx_nodes.Section,
+    "defaults": _gmx_nodes.DefaultsSection,
+    "atomtypes": _gmx_nodes.AtomtypesSection,
+    "bondtypes": _gmx_nodes.BondtypesSection,
+    "angletypes": _gmx_nodes.AngletypesSection,
+    "pairtypes": _gmx_nodes.PairtypesSection,
+    "dihedraltypes": _gmx_nodes.DihedraltypesSection,
+    "constrainttypes": _gmx_nodes.ConstrainttypesSection,
+    "nonbonded_params": _gmx_nodes.NonbondedParamsSection,
+    "moleculetype": _gmx_nodes.MoleculetypeSection,
+    "system": _gmx_nodes.SystemSection,
+    "molecules": _gmx_nodes.MoleculesSection,
+    "subsection": _gmx_nodes.Subsection,
+    "atoms": _gmx_nodes.AtomsSubsection,
+    "bonds": _gmx_nodes.BondsSubsection,
+    "pairs": _gmx_nodes.PairsSubsection,
+    "pairs_nb": _gmx_nodes.PairsNBSubsection,
+    "angles": _gmx_nodes.AnglesSubsection,
+    "dihedrals": _gmx_nodes.DihedralsSubsection,
+    "exclusions": _gmx_nodes.ExclusionsSubsection,
+    "constraints": _gmx_nodes.ConstraintsSubsection,
+    "settles": _gmx_nodes.SettlesSubsection,
+    "virtual_sites2": _gmx_nodes.VirtualSites2Subsection,
+    "virtual_sites3": _gmx_nodes.VirtualSites3Subsection,
+    "virtual_sites4": _gmx_nodes.VirtualSites4Subsection,
+    "virtual_sitesn": _gmx_nodes.VirtualSitesNSubsection,
+    "position_restraints": _gmx_nodes.PositionRestraintsSubsection,
+    "distance_restraints": _gmx_nodes.DistanceRestraintsSubsection,
+    "dihedral_restraints": _gmx_nodes.DihedralRestraintsSubsection,
+    "orientation_restraints": _gmx_nodes.OrientationRestraintsSubsection,
+    "angle_restraints": _gmx_nodes.AngleRestraintsSubsection,
+    "angle_restraints_z": _gmx_nodes.AngleRestraintsZSubsection,
+    "entry": _gmx_nodes.SectionEntry,
+    "defaults_entry": _gmx_nodes.DefaultsEntry,
+    "atomtypes_entry": _gmx_nodes.AtomtypesEntry,
+    "bondtypes_entry": _gmx_nodes.BondtypesEntry,
+    "angletypes_entry": _gmx_nodes.AngletypesEntry,
+    "pairtypes_entry": _gmx_nodes.PairtypesEntry,
+    "dihedraltypes_entry": _gmx_nodes.DihedraltypesEntry,
+    "constrainttypes_entry": _gmx_nodes.ConstrainttypesEntry,
+    "nonbonded_params_entry": _gmx_nodes.NonbondedParamsEntry,
+    "moleculetype_entry": _gmx_nodes.MoleculetypeEntry,
+    "atoms_entry": _gmx_nodes.AtomsEntry,
+    "bonds_entry": _gmx_nodes.BondsEntry,
+    "pairs_entry": _gmx_nodes.PairsEntry,
+    "pairs_nb_entry": _gmx_nodes.PairsNBEntry,
+    "angles_entry": _gmx_nodes.AnglesEntry,
+    "dihedrals_entry": _gmx_nodes.DihedralsEntry,
+    "exclusions_entry": _gmx_nodes.ExclusionsEntry,
+    "constraints_entry": _gmx_nodes.ConstraintsEntry,
+    "settles_entry": _gmx_nodes.SettlesEntry,
+    "virtual_sites1_entry": _gmx_nodes.VirtualSites1Entry,
+    "virtual_sites2_entry": _gmx_nodes.VirtualSites2Entry,
+    "virtual_sites3_entry": _gmx_nodes.VirtualSites3Entry,
+    "virtual_sites4_entry": _gmx_nodes.VirtualSites4Entry,
+    "virtual_sitesn_entry": _gmx_nodes.VirtualSitesNEntry,
+    "position_restraints_entry": _gmx_nodes.PositionRestraintsEntry,
+    "distance_restraints_entry": _gmx_nodes.DistanceRestraintsEntry,
+    "dihedral_restraints_entry": _gmx_nodes.DihedralRestraintsEntry,
+    "orientation_restraints_entry": _gmx_nodes.OrientationRestraintsEntry,
+    "angle_restraints_entry": _gmx_nodes.AngleRestraintsEntry,
+    "angle_restraints_z_entry": _gmx_nodes.AngleRestraintsZEntry,
+    "p1term_entry": _gmx_nodes.P1TermEntry,
+    "p2term_entry": _gmx_nodes.P2TermEntry,
+    "p3term_entry": _gmx_nodes.P3TermEntry,
+    "p4term_entry": _gmx_nodes.P4TermEntry,
+    "system_entry": _gmx_nodes.SystemEntry,
+    "molecules_entry": _gmx_nodes.MoleculesEntry,
+}
 
 
 class GromacsTop:
-
     __node_value_types = DEFAULT_NODE_VALUE_TYPES
 
     def __init__(self):
@@ -152,7 +151,7 @@ class GromacsTop:
         raise ValueError(
             f"items can only be queried by 'str' (node key), "
             f"or 'int' or 'slice' (node index), not {type(query).__name__!r}"
-            )
+        )
 
     def __contains__(self, key):
         if key in self._nodes:
@@ -183,7 +182,6 @@ class GromacsTop:
         return cls.__node_value_types[name]
 
     def add(self, key, value) -> None:
-
         node = self._check_key_and_add_new_node(key)
 
         root = self._root
@@ -320,8 +318,8 @@ class GromacsTop:
             current = current.next
 
     def get_next_node_with_nvtype(
-            self, start=None, stop=None, nvtype=None,
-            exclude=None, forward=True):
+        self, start=None, stop=None, nvtype=None, exclude=None, forward=True
+    ):
         """Search topology for another node
 
         Args:
@@ -336,9 +334,7 @@ class GromacsTop:
         """
         if start is None:
             if nvtype is None:
-                raise ValueError(
-                    "If start=None, a node type must be specified"
-                    )
+                raise ValueError("If start=None, a node type must be specified")
             start = self._root
 
         if stop is None:
@@ -412,18 +408,18 @@ class GromacsTopParser:
     __top_type = GromacsTop
 
     def __init__(
-            self,
-            ignore_comments: bool = True,
-            preprocess: bool = True,
-            include_local: bool = True,
-            include_shared: bool = False,
-            local_paths: Optional[Iterable[Any]] = None,
-            shared_paths: Optional[Iterable[Any]] = None,
-            include_blacklist: Optional[Iterable[Any]] = None,
-            definitions: Optional[Mapping[str, Any]] = None,
-            resolve_conditions: bool = True,
-            verbose: bool = True):
-
+        self,
+        ignore_comments: bool = True,
+        preprocess: bool = True,
+        include_local: bool = True,
+        include_shared: bool = False,
+        local_paths: Optional[Iterable[Any]] = None,
+        shared_paths: Optional[Iterable[Any]] = None,
+        include_blacklist: Optional[Iterable[Any]] = None,
+        definitions: Optional[Mapping[str, Any]] = None,
+        resolve_conditions: bool = True,
+        verbose: bool = True,
+    ):
         self.ignore_comments = ignore_comments
         self.preprocess = preprocess
         self.include_local = include_local
@@ -450,14 +446,15 @@ class GromacsTopParser:
             self.definitions.update(definitions)
 
     def preprocess_includes(
-            self,
-            file: Union[TextIO, Iterable[str]],
-            include_local=True,
-            local_paths=None,
-            include_shared=False,
-            shared_paths=None,
-            include_blacklist=None,
-            verbose=True):
+        self,
+        file: Union[TextIO, Iterable[str]],
+        include_local=True,
+        local_paths=None,
+        include_shared=False,
+        shared_paths=None,
+        include_blacklist=None,
+        verbose=True,
+    ):
         """Pre-process topology file-like object
 
         Yield topology file line by line and resolve '#include'
@@ -494,7 +491,7 @@ class GromacsTopParser:
             include_blacklist = [pathlib.Path(f) for f in include_blacklist]
 
         for line in file:
-            if not line.startswith('#include'):
+            if not line.startswith("#include"):
                 yield line
                 continue
 
@@ -575,8 +572,8 @@ class GromacsTopParser:
                 include_shared=self.include_shared,
                 shared_paths=self.shared_paths,
                 include_blacklist=self.include_blacklist,
-                verbose=self.verbose
-                )
+                verbose=self.verbose,
+            )
 
         active_section = None
         active_supersection = None
@@ -589,75 +586,62 @@ class GromacsTopParser:
         for node_value_type in top._GromacsTop__node_value_types.values():
             node_value_type.reset_count()
 
-        previous = ''
+        previous = ""
         for line in file:
-
-            if line.strip().endswith('\\'):
+            if line.strip().endswith("\\"):
                 # Resolve multi-line statement
-                line = line[:line.rfind('\\')]
+                line = line[: line.rfind("\\")]
                 previous = f"{previous}{line}"
                 continue
 
             line = f"{previous}{line}"
-            previous = ''
+            previous = ""
 
             if self.ignore_comments:
                 line, _ = split_comment(line)
 
             line = line.strip()
 
-            if line in ['', '\n', '\n\r']:
+            if line in ["", "\n", "\n\r"]:
                 continue
 
-            if line.startswith('#define'):
+            if line.startswith("#define"):
                 line = line.lstrip("#define").lstrip().split(maxsplit=1)
                 if len(line) == 1:
-                    node_key, node_value = top.make_nvtype(
-                        "define", line[0], True
-                    )
+                    node_key, node_value = top.make_nvtype("define", line[0], True)
                     top.add(node_key, node_value)
                     active_definitions[line[0]] = True
                 else:
-                    node_key, node_value = top.make_nvtype(
-                        "define", line[0], line[1]
-                    )
+                    node_key, node_value = top.make_nvtype("define", line[0], line[1])
                     top.add(node_key, node_value)
                     active_definitions[line[0]] = line[1]
                 continue
 
-            if line.startswith('#undef'):
+            if line.startswith("#undef"):
                 line = line.lstrip("#undef").lstrip()
-                node_key, node_value = top.make_nvtype(
-                    "define", line, False
-                )
+                node_key, node_value = top.make_nvtype("define", line, False)
                 top.add(node_key, node_value)
                 _ = active_definitions.pop(line)
                 continue
 
-            if line.startswith('#ifdef'):
-                line = line.lstrip('#ifdef').lstrip()
+            if line.startswith("#ifdef"):
+                line = line.lstrip("#ifdef").lstrip()
                 active_conditions[line] = True
                 if not self.resolve_conditions:
-                    node_key, node_value = top.make_nvtype(
-                        "condition", line, True
-                    )
+                    node_key, node_value = top.make_nvtype("condition", line, True)
                     top.add(node_key, node_value)
                 continue
 
-            if line.startswith('#ifndef'):
-                line = line.lstrip('#ifndef').lstrip()
+            if line.startswith("#ifndef"):
+                line = line.lstrip("#ifndef").lstrip()
                 active_conditions[line] = False
                 if not self.resolve_conditions:
-                    node_key, node_value = top.make_nvtype(
-                        "condition", line, False
-                    )
+                    node_key, node_value = top.make_nvtype("condition", line, False)
                     top.add(node_key, node_value)
                 continue
 
-            if line.startswith('#else'):
-                last_condition, last_value = next(
-                    reversed(active_conditions.items())
-                    )
+            if line.startswith("#else"):
+                last_condition, last_value = next(reversed(active_conditions.items()))
                 active_conditions[last_condition] = not last_value
 
                 if not self.resolve_conditions:
@@ -672,7 +656,7 @@ class GromacsTopParser:
                     top.add(node_key, node_value)
                     continue
 
-            if line.startswith('#endif'):
+            if line.startswith("#endif"):
                 last_condition, _ = active_conditions.popitem(last=True)
                 if not self.resolve_conditions:
                     node_key, node_value = top.make_nvtype(
@@ -704,33 +688,25 @@ class GromacsTopParser:
 
             if line.startswith(";"):
                 comment = line[1:].strip()
-                node_key, node_value = top.make_nvtype(
-                    "comment", comment
-                )
+                node_key, node_value = top.make_nvtype("comment", comment)
                 top.add(node_key, node_value)
                 continue
 
             if line.startswith("#include"):
                 include = line.strip("#include").lstrip()
-                node_key, node_value = top.make_nvtype(
-                    "include", include
-                )
+                node_key, node_value = top.make_nvtype("include", include)
                 top.add(node_key, node_value)
                 continue
 
-            if line.startswith('['):
-                _new_section = line.strip(' []').casefold()
-                nvtype = top._GromacsTop__node_value_types.get(
-                    _new_section, None
-                    )
+            if line.startswith("["):
+                _new_section = line.strip(" []").casefold()
+                nvtype = top._GromacsTop__node_value_types.get(_new_section, None)
                 if nvtype is None:
                     # Should not happen for compliant topologies
                     if self.verbose:
                         print(f"Unknown section {_new_section}")
 
-                    node_key, node_value = top.make_nvtype(
-                        "section", _new_section
-                    )
+                    node_key, node_value = top.make_nvtype("section", _new_section)
                     top.add(node_key, node_value)
                     active_section = active_supersection = node_value
                     continue
@@ -742,12 +718,10 @@ class GromacsTopParser:
 
                 issubsection = issubclass(
                     nvtype, top._GromacsTop__node_value_types["subsection"]
-                    )
+                )
 
                 if issubsection:
-                    node_value = nvtype(
-                        section=weakref.proxy(active_supersection)
-                        )
+                    node_value = nvtype(section=weakref.proxy(active_supersection))
                     active_section = node_value
                 else:
                     node_value = nvtype()
@@ -758,17 +732,13 @@ class GromacsTopParser:
                 continue
 
             if active_section is None:
-                node_key, node_value = top.make_nvtype(
-                    "comment", line
-                )
+                node_key, node_value = top.make_nvtype("comment", line)
                 node_value._char = None
                 top.add(node_key, node_value)
                 continue
 
             expected_entry = f"{active_section._node_key_name}_entry"
-            nvtype = top._GromacsTop__node_value_types.get(
-                expected_entry, False
-                )
+            nvtype = top._GromacsTop__node_value_types.get(expected_entry, False)
             if nvtype is not False:
                 if not self.ignore_comments:
                     line, comment = split_comment(line)
@@ -791,16 +761,14 @@ class GromacsTopParser:
                 continue
 
             # Absolute fallback
-            node_key, node_value = top.make_nvtype(
-                "generic", line
-            )
+            node_key, node_value = top.make_nvtype("generic", line)
             top.add(node_key, node_value)
 
         return top
 
 
 class Node:
-    __slots__ = ["prev", "next", "key", "value", '__weakref__']
+    __slots__ = ["prev", "next", "key", "value", "__weakref__"]
 
     def __init__(self):
         self.prev = None
@@ -824,7 +792,6 @@ class Node:
 
 
 class AlwaysGreater:
-
     __slots__ = []
 
     def __eq__(self, other):
@@ -844,7 +811,6 @@ class AlwaysGreater:
 
 
 class AlwaysLess:
-
     __slots__ = []
 
     def __eq__(self, other):
@@ -870,30 +836,30 @@ def get_gmx_dir():
     stdout is parsed for the entries 'Executable' and 'Data prefix'.
     """
 
-    call = 'gmx -h'
+    call = "gmx -h"
     try:
         feedback = subprocess.run(
             shlex.split(call),
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            encoding='utf8'
-            )
+            encoding="utf8",
+        )
     except FileNotFoundError:
         return None, None
 
     if feedback.returncode != 0:
         return None, None
 
-    _feedback = feedback.stderr.split('\n')
+    _feedback = feedback.stderr.split("\n")
 
     gmx_exe = None
     gmx_shared = None
 
     for line in _feedback:
-        if line.startswith('Executable'):
+        if line.startswith("Executable"):
             gmx_exe = pathlib.Path(line.split()[-1])
-        if line.startswith('Data prefix'):
-            gmx_shared = pathlib.Path(line.split()[-1]) / 'share/gromacs/top'
+        if line.startswith("Data prefix"):
+            gmx_shared = pathlib.Path(line.split()[-1]) / "share/gromacs/top"
 
     return gmx_exe, gmx_shared
 

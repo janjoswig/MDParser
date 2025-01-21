@@ -1,6 +1,6 @@
 import pytest
 
-import mdparser.topology as mdtop
+from mdparser.topology import GromacsTopology, GromacsTopologyParser
 
 
 class TestParseTopologies:
@@ -35,11 +35,11 @@ class TestParseTopologies:
         ],
     )
     def test_parse(self, datadir, file_regression, filename, parserkwargs):
-        parser = mdtop.GromacsTopParser(**parserkwargs)
+        parser = GromacsTopologyParser(**parserkwargs)
         with open(datadir / filename) as topfile:
             topology = parser.read(topfile)
 
-        assert isinstance(topology, mdtop.GromacsTop)
+        assert isinstance(topology, GromacsTopology)
 
         regression_str = ""
         for node in topology:

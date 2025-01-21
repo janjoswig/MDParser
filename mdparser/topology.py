@@ -23,14 +23,31 @@ for name in dir(_gmx_nodes):
         DEFAULT_GMX_NODE_VALUE_TYPES[obj._node_key_name] = obj
 
 
-class GromacsTop:
-    __node_value_types = DEFAULT_GMX_NODE_VALUE_TYPES
+class Topology:
+    """Base class for topologies
+
+    Linked list of :class:`Node` instances:
+    """
+
+    __node_value_types = DEFAULT_GENERIC_NODE_VALUE_TYPES
 
     def __init__(self):
+        print(self.__node_value_types)
         self._nodes = dict()
         self._hardroot = Node()
         self._root = root = weakref.proxy(self._hardroot)
         root.prev = root.next = root
+
+    def __repr__(self):
+        return f"{type(self).__name__}()"
+
+    @property
+    def node_value_types(self):
+        return getattr(self, f"_{type(self).__name__}__node_value_types")
+
+
+class GromacsTopology(Topology):
+    __node_value_types = DEFAULT_GMX_NODE_VALUE_TYPES
 
     def __str__(self):
         return_str = ""
@@ -40,9 +57,6 @@ class GromacsTop:
             return_str += f"{node.value!s}\n"
 
         return return_str
-
-    def __repr__(self):
-        return f"{type(self).__name__}()"
 
     def __iter__(self):
         root = current = self._root
@@ -339,10 +353,10 @@ class GromacsTop:
         return
 
 
-class GromacsTopParser:
+class GromacsTopologyParser:
     """Read and write GROMACS topology files"""
 
-    __top_type = GromacsTop
+    _top_type = GromacsTopology
 
     def __init__(
         self,
@@ -498,8 +512,8 @@ class GromacsTopParser:
                     print(f"Could not find {include_file}")
                 yield line
 
-    def read(self, file: Iterable) -> GromacsTop:
-        top = self.__top_type()
+    def read(self, file: Iterable) -> GromacsTopology:
+        top = self._top_type()
 
         if self.preprocess:
             file = self.preprocess_includes(
@@ -520,8 +534,10 @@ class GromacsTopParser:
         active_definitions = {}
         active_definitions.update(self.definitions)
 
-        for node_value_type in top._GromacsTop__node_value_types.values():
+        for node_value_type in top.node_value_types.values():
+            print(node_value_type, node_value_type._count)
             node_value_type.reset_count()
+            print(node_value_type, node_value_type._count)
 
         previous = ""
         for line in file:
@@ -637,7 +653,7 @@ class GromacsTopParser:
 
             if line.startswith("["):
                 _new_section = line.strip(" []").casefold()
-                nvtype = top._GromacsTop__node_value_types.get(_new_section, None)
+                nvtype = top.node_value_types.get(_new_section, None)
                 if nvtype is None:
                     # Should not happen for compliant topologies
                     if self.verbose:
@@ -654,7 +670,7 @@ class GromacsTopParser:
                     active_category = nvtype.category
 
                 issubsection = issubclass(
-                    nvtype, top._GromacsTop__node_value_types["subsection"]
+                    nvtype, top.node_value_types["subsection"]
                 )
 
                 if issubsection:
@@ -675,7 +691,7 @@ class GromacsTopParser:
                 continue
 
             expected_entry = f"{active_section._node_key_name}_entry"
-            nvtype = top._GromacsTop__node_value_types.get(expected_entry, False)
+            nvtype = top.node_value_types.get(expected_entry, False)
             if nvtype is not False:
                 if not self.ignore_comments:
                     line, comment = split_comment(line)

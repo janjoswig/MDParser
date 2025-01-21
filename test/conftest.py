@@ -1,12 +1,11 @@
 import pytest
 
-import mdparser.topology as mdtop
-from mdparser import _gmx_nodes
+from mdparser import _gmx_nodes, topology
 
 
 @pytest.fixture
 def tasks_top():
-    top = mdtop.GromacsTop()
+    top = topology.GromacsTopology()
 
     top.add("ff", _gmx_nodes.Include("forcefield.itp"))
     top.add("mol1", _gmx_nodes.MoleculetypeSection())

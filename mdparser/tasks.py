@@ -1,11 +1,11 @@
 from copy import copy
 
-import mdparser.topology as mdtop
+from mdparser import topology
 
 
-def get_subsections(top: mdtop.GromacsTop, section_node):
-    section_nvtype = mdtop.GromacsTop.select_nvtype("section")
-    subsection_nvtype = mdtop.GromacsTop.select_nvtype("subsection")
+def get_subsections(top: topology.GromacsTopology, section_node):
+    section_nvtype = topology.GromacsTopology.select_nvtype("section")
+    subsection_nvtype = topology.GromacsTopology.select_nvtype("subsection")
 
     subsections = []
     start = section_node
@@ -22,7 +22,7 @@ def get_subsections(top: mdtop.GromacsTop, section_node):
 
 
 def get_last_entry(section_node):
-    entry_nvtype = mdtop.GromacsTop.select_nvtype("entry")
+    entry_nvtype = topology.GromacsTopology.select_nvtype("entry")
 
     current = section_node
     while isinstance(current.next.value, entry_nvtype):
@@ -31,18 +31,18 @@ def get_last_entry(section_node):
     return current
 
 
-def merge_molecules(top: mdtop.GromacsTop, name=None):
-    section_nvtype = mdtop.GromacsTop.select_nvtype("section")
-    moleculetype_section_nvtype = mdtop.GromacsTop.select_nvtype("moleculetype")
-    atoms_entry_nvtype = mdtop.GromacsTop.select_nvtype("atoms_entry")
-    p1term_entry_nvtype = mdtop.GromacsTop.select_nvtype("p1term_entry")
-    p2term_entry_nvtype = mdtop.GromacsTop.select_nvtype("p2term_entry")
-    p3term_entry_nvtype = mdtop.GromacsTop.select_nvtype("p3term_entry")
-    p4term_entry_nvtype = mdtop.GromacsTop.select_nvtype("p4term_entry")
-    virtual_sites1_entry_nvtype = mdtop.GromacsTop.select_nvtype("virtual_sites1_entry")
-    exclusions_entry_nvtype = mdtop.GromacsTop.select_nvtype("exclusions_entry")
-    molecules_nvtype = mdtop.GromacsTop.select_nvtype("molecules")
-    molecules_entry_nvtype = mdtop.GromacsTop.select_nvtype("molecules_entry")
+def merge_molecules(top: topology.GromacsTopology, name=None):
+    section_nvtype = topology.GromacsTopology.select_nvtype("section")
+    moleculetype_section_nvtype = topology.GromacsTopology.select_nvtype("moleculetype")
+    atoms_entry_nvtype = topology.GromacsTopology.select_nvtype("atoms_entry")
+    p1term_entry_nvtype = topology.GromacsTopology.select_nvtype("p1term_entry")
+    p2term_entry_nvtype = topology.GromacsTopology.select_nvtype("p2term_entry")
+    p3term_entry_nvtype = topology.GromacsTopology.select_nvtype("p3term_entry")
+    p4term_entry_nvtype = topology.GromacsTopology.select_nvtype("p4term_entry")
+    virtual_sites1_entry_nvtype = topology.GromacsTopology.select_nvtype("virtual_sites1_entry")
+    exclusions_entry_nvtype = topology.GromacsTopology.select_nvtype("exclusions_entry")
+    molecules_nvtype = topology.GromacsTopology.select_nvtype("molecules")
+    molecules_entry_nvtype = topology.GromacsTopology.select_nvtype("molecules_entry")
 
     moleculetype_section_list = []
 
@@ -76,11 +76,11 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
 
     moleculetype_section_nvtype.reset_count(len(moleculetype_section_list))
 
-    hardroot = new_current = mdtop.Node()
-    new_current.key, new_current.value = mdtop.GromacsTop.make_nvtype("moleculetype")
+    hardroot = new_current = topology.Node()
+    new_current.key, new_current.value = topology.GromacsTopology.make_nvtype("moleculetype")
 
-    new_next = mdtop.Node()
-    new_next.key, new_next.value = mdtop.GromacsTop.make_nvtype(
+    new_next = topology.Node()
+    new_next.key, new_next.value = topology.GromacsTopology.make_nvtype(
         "moleculetype_entry", molecule=name, nrexcl=3
     )
 
@@ -105,7 +105,7 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
             atom_nr_offset = atom_nr
 
             for subsection in subsection_list:
-                new_next = mdtop.Node()
+                new_next = topology.Node()
                 new_next.value = type(subsection.value)()
                 new_next.key = new_next.value._make_node_key()
                 new_current.connect(new_next)
@@ -118,7 +118,7 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
                     if isinstance(subsection_entry.value, section_nvtype):
                         break
 
-                    new_next = mdtop.Node()
+                    new_next = topology.Node()
                     new_next.value = copy(subsection_entry.value)
                     new_next.key = new_next.value._make_node_key()
                     new_current.connect(new_next)
@@ -174,7 +174,7 @@ def merge_molecules(top: mdtop.GromacsTop, name=None):
 
     top.block_discard(molecules_section.next, get_last_entry(molecules_section))
 
-    key, value = mdtop.GromacsTop.make_nvtype(
+    key, value = topology.GromacsTopology.make_nvtype(
         "molecules_entry", molecule=name, number=1
     )
     top.relative_insert(molecules_section, key, value)

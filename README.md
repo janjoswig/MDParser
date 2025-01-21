@@ -7,7 +7,7 @@ This is a package for Python-parsers to process typical file formats used for Mo
 
 ## Topologies (`mdparser.topology`)
 
-### GROMACS (`GromacsTopParser`)
+### GROMACS (`GromacsTopologyParser`)
 
 Read GROMACS topology (.top) files and image them as a Python object or vice versa. The structure of the file is essentially captured in a doubly-linked list exposing it for easy manipulation. Common tasks like adding parts to a topology, merging topologies, retrieval of information, or checking the file for consistency can be performed.
 
@@ -86,11 +86,10 @@ SOL              1000
 The file can be read for example like this:
 
 ```python
-from mdparser import topology as mdtop
-from mdparser import tasks as mdtasks
+from mdparser import tasks, topology
 
 
-parser = mdtop.GromacsTopParser(
+parser = topology.GromacsTopologyParser(
     include_shared=True,                  # Resolve include directives
     include_blacklist=["forcefield.itp"]  # Leave some includes untouched
 )

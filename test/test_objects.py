@@ -3,14 +3,14 @@ import weakref
 
 import pytest
 
-import mdparser.topology as mdtop
+from mdparser import topology
 from mdparser import _base, _gmx_nodes
 
 
-class TestGromacsTop:
+class TestGromacsTopology:
     def test_representation(self):
-        top = mdtop.GromacsTop()
-        assert f"{top!r}" == "GromacsTop()"
+        top = topology.GromacsTopology()
+        assert f"{top!r}" == "GromacsTopology()"
         assert f"{top!s}" == ""
 
     def test_node_operations(self):
@@ -21,7 +21,7 @@ class TestGromacsTop:
             ("node4", "brawl"),
         ]
 
-        top = mdtop.GromacsTop()
+        top = topology.GromacsTopology()
         assert len(top) == 0
 
         for count, (k, v) in enumerate(node_list, 1):
@@ -88,16 +88,16 @@ class TestGromacsTop:
 
     def test_block_insert(self):
         def set_up():
-            top = mdtop.GromacsTop()
+            top = topology.GromacsTopology()
             top.add("1", _base.GenericNodeValue("1"))
             top.add("2", _base.GenericNodeValue("2"))
             top.add("3", _base.GenericNodeValue("3"))
 
-            node = mdtop.Node()
+            node = topology.Node()
             node.value = _base.GenericNodeValue("4")
             node.key = "4"
 
-            other = mdtop.Node()
+            other = topology.Node()
             other.value = _base.GenericNodeValue("5")
             other.key = "5"
 
@@ -114,7 +114,7 @@ class TestGromacsTop:
         assert [x.value.value for x in top] == ["1", "4", "5", "2", "3"]
 
     def test_info(self):
-        top = mdtop.GromacsTop()
+        top = topology.GromacsTopology()
 
         assert top.includes_resolved is True
         assert top.conditions_resolved is True
@@ -127,7 +127,7 @@ class TestGromacsTop:
         assert top.conditions_resolved is False
 
     def test_find_complement(self):
-        top = mdtop.GromacsTop()
+        top = topology.GromacsTopology()
         top.add("if", _gmx_nodes.Condition("some", True))
         top.add("entry", _base.GenericNodeValue("important"))
         top.add("end", _gmx_nodes.Condition("some", None))
@@ -135,10 +135,10 @@ class TestGromacsTop:
         node = top[-1]
         complement = top.find_complement(node)
 
-        assert isinstance(complement, mdtop.Node)
+        assert isinstance(complement, topology.Node)
 
     def test_get_next_node_with_nvtype(self):
-        top = mdtop.GromacsTop()
+        top = topology.GromacsTopology()
 
         with pytest.raises(ValueError):
             top.get_next_node_with_nvtype()
@@ -200,7 +200,7 @@ class TestGromacsTop:
 
 class TestNode:
     def test_representation(self):
-        node = mdtop.Node()
+        node = topology.Node()
 
         assert f"{node!r}" == "Node(key=None, value=None)"
 
@@ -210,8 +210,8 @@ class TestNode:
         assert f"{node!r}" == "Node(key='key', value='value')"
 
     def test_connect(self):
-        node = mdtop.Node()
-        other = mdtop.Node()
+        node = topology.Node()
+        other = topology.Node()
 
         node.connect(other)
         assert node.next is other
@@ -344,7 +344,7 @@ class TestNodeValues:
 
 class TestHelper:
     def test_always_greater(self):
-        ag = mdtop.AlwaysGreater()
+        ag = topology.AlwaysGreater()
         assert ag > 1
         assert ag >= 10
         assert not (ag < 5)
@@ -352,7 +352,7 @@ class TestHelper:
         assert not (ag == 0)
 
     def test_always_less(self):
-        al = mdtop.AlwaysLess()
+        al = topology.AlwaysLess()
         assert al < 1
         assert al <= 10
         assert not (al > 5)
@@ -360,11 +360,11 @@ class TestHelper:
         assert not (al == 0)
 
     def test_ensure_proxy(self):
-        node = mdtop.Node()
+        node = topology.Node()
         proxy = weakref.proxy(node)
 
-        assert isinstance(mdtop.ensure_proxy(proxy), weakref.ProxyType)
-        assert isinstance(mdtop.ensure_proxy(node), weakref.ProxyType)
+        assert isinstance(topology.ensure_proxy(proxy), weakref.ProxyType)
+        assert isinstance(topology.ensure_proxy(node), weakref.ProxyType)
 
     @pytest.mark.parametrize(
         "include_path,include_blacklist,expected",
@@ -397,6 +397,6 @@ class TestHelper:
         ],
     )
     def test_path_in_blacklist(self, include_path, include_blacklist, expected):
-        ignore = mdtop.path_in_blacklist(include_path, include_blacklist)
+        ignore = topology.path_in_blacklist(include_path, include_blacklist)
 
         assert ignore is expected

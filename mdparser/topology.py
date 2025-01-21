@@ -9,84 +9,18 @@ import weakref
 from . import _base
 from . import _gmx_nodes
 
+
 DEFAULT_GENERIC_NODE_VALUE_TYPES = {
     _base.GenericNodeValue._node_key_name: _base.GenericNodeValue,
 }
 
-DEFAULT_GMX_NODE_VALUE_TYPES = {
-    "comment": _gmx_nodes.Comment,
-    "define": _gmx_nodes.Define,
-    "include": _gmx_nodes.Include,
-    "condition": _gmx_nodes.Condition,
-    "section": _gmx_nodes.Section,
-    "defaults": _gmx_nodes.DefaultsSection,
-    "atomtypes": _gmx_nodes.AtomtypesSection,
-    "bondtypes": _gmx_nodes.BondtypesSection,
-    "angletypes": _gmx_nodes.AngletypesSection,
-    "pairtypes": _gmx_nodes.PairtypesSection,
-    "dihedraltypes": _gmx_nodes.DihedraltypesSection,
-    "constrainttypes": _gmx_nodes.ConstrainttypesSection,
-    "nonbonded_params": _gmx_nodes.NonbondedParamsSection,
-    "moleculetype": _gmx_nodes.MoleculetypeSection,
-    "system": _gmx_nodes.SystemSection,
-    "molecules": _gmx_nodes.MoleculesSection,
-    "subsection": _gmx_nodes.Subsection,
-    "atoms": _gmx_nodes.AtomsSubsection,
-    "bonds": _gmx_nodes.BondsSubsection,
-    "pairs": _gmx_nodes.PairsSubsection,
-    "pairs_nb": _gmx_nodes.PairsNBSubsection,
-    "angles": _gmx_nodes.AnglesSubsection,
-    "dihedrals": _gmx_nodes.DihedralsSubsection,
-    "exclusions": _gmx_nodes.ExclusionsSubsection,
-    "constraints": _gmx_nodes.ConstraintsSubsection,
-    "settles": _gmx_nodes.SettlesSubsection,
-    "virtual_sites2": _gmx_nodes.VirtualSites2Subsection,
-    "virtual_sites3": _gmx_nodes.VirtualSites3Subsection,
-    "virtual_sites4": _gmx_nodes.VirtualSites4Subsection,
-    "virtual_sitesn": _gmx_nodes.VirtualSitesNSubsection,
-    "position_restraints": _gmx_nodes.PositionRestraintsSubsection,
-    "distance_restraints": _gmx_nodes.DistanceRestraintsSubsection,
-    "dihedral_restraints": _gmx_nodes.DihedralRestraintsSubsection,
-    "orientation_restraints": _gmx_nodes.OrientationRestraintsSubsection,
-    "angle_restraints": _gmx_nodes.AngleRestraintsSubsection,
-    "angle_restraints_z": _gmx_nodes.AngleRestraintsZSubsection,
-    "entry": _gmx_nodes.SectionEntry,
-    "defaults_entry": _gmx_nodes.DefaultsEntry,
-    "atomtypes_entry": _gmx_nodes.AtomtypesEntry,
-    "bondtypes_entry": _gmx_nodes.BondtypesEntry,
-    "angletypes_entry": _gmx_nodes.AngletypesEntry,
-    "pairtypes_entry": _gmx_nodes.PairtypesEntry,
-    "dihedraltypes_entry": _gmx_nodes.DihedraltypesEntry,
-    "constrainttypes_entry": _gmx_nodes.ConstrainttypesEntry,
-    "nonbonded_params_entry": _gmx_nodes.NonbondedParamsEntry,
-    "moleculetype_entry": _gmx_nodes.MoleculetypeEntry,
-    "atoms_entry": _gmx_nodes.AtomsEntry,
-    "bonds_entry": _gmx_nodes.BondsEntry,
-    "pairs_entry": _gmx_nodes.PairsEntry,
-    "pairs_nb_entry": _gmx_nodes.PairsNBEntry,
-    "angles_entry": _gmx_nodes.AnglesEntry,
-    "dihedrals_entry": _gmx_nodes.DihedralsEntry,
-    "exclusions_entry": _gmx_nodes.ExclusionsEntry,
-    "constraints_entry": _gmx_nodes.ConstraintsEntry,
-    "settles_entry": _gmx_nodes.SettlesEntry,
-    "virtual_sites1_entry": _gmx_nodes.VirtualSites1Entry,
-    "virtual_sites2_entry": _gmx_nodes.VirtualSites2Entry,
-    "virtual_sites3_entry": _gmx_nodes.VirtualSites3Entry,
-    "virtual_sites4_entry": _gmx_nodes.VirtualSites4Entry,
-    "virtual_sitesn_entry": _gmx_nodes.VirtualSitesNEntry,
-    "position_restraints_entry": _gmx_nodes.PositionRestraintsEntry,
-    "distance_restraints_entry": _gmx_nodes.DistanceRestraintsEntry,
-    "dihedral_restraints_entry": _gmx_nodes.DihedralRestraintsEntry,
-    "orientation_restraints_entry": _gmx_nodes.OrientationRestraintsEntry,
-    "angle_restraints_entry": _gmx_nodes.AngleRestraintsEntry,
-    "angle_restraints_z_entry": _gmx_nodes.AngleRestraintsZEntry,
-    "p1term_entry": _gmx_nodes.P1TermEntry,
-    "p2term_entry": _gmx_nodes.P2TermEntry,
-    "p3term_entry": _gmx_nodes.P3TermEntry,
-    "p4term_entry": _gmx_nodes.P4TermEntry,
-    "system_entry": _gmx_nodes.SystemEntry,
-    "molecules_entry": _gmx_nodes.MoleculesEntry,
-}
+DEFAULT_GMX_NODE_VALUE_TYPES = {}
+for name in dir(_gmx_nodes):
+    obj = getattr(_gmx_nodes, name)
+    if not isinstance(obj, type):
+        continue
+    if issubclass(obj, _base.NodeValue):
+        DEFAULT_GMX_NODE_VALUE_TYPES[obj._node_key_name] = obj
 
 
 class GromacsTop:

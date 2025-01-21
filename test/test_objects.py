@@ -73,7 +73,6 @@ class TestGromacsTopology:
 
         assert [x.value.value for x in top[[1, 2]]] == ["cato", "balthazar"]
 
-        print([node.value.value for node in top])
         assert top[1].value.value == "cato"
         assert top[-1].value.value == "brick"
 
@@ -96,38 +95,52 @@ class TestGromacsTopology:
 
         assert top[3].value.value == "balaz"
 
+    @staticmethod
+    def set_up():
+        top = topology.GromacsTopology()
+        top.add("1", _base.GenericNodeValue("1"))
+        top.add("2", _base.GenericNodeValue("2"))
+        top.add("3", _base.GenericNodeValue("3"))
+
+        node = topology.Node()
+        node.value = _base.GenericNodeValue("4")
+        node.key = "4"
+
+        other = topology.Node()
+        other.value = _base.GenericNodeValue("5")
+        other.key = "5"
+
+        node.connect(other)
+
+        return top, node, other
+
     def test_block_insert(self):
-        def set_up():
-            top = topology.GromacsTopology()
-            top.add("1", _base.GenericNodeValue("1"))
-            top.add("2", _base.GenericNodeValue("2"))
-            top.add("3", _base.GenericNodeValue("3"))
 
-            node = topology.Node()
-            node.value = _base.GenericNodeValue("4")
-            node.key = "4"
-
-            other = topology.Node()
-            other.value = _base.GenericNodeValue("5")
-            other.key = "5"
-
-            node.connect(other)
-
-            return top, node, other
-
-        top, node, other = set_up()
+        top, node, other = self.set_up()
         top.block_insert(1, node, other)
         assert [x.value.value for x in top] == ["1", "4", "5", "2", "3"]
+        assert set(top._nodes.keys()) == {"1", "2", "3", "4", "5"}
 
-        top, node, other = set_up()
+    def test_relative_block_insert(self):
+        top, node, other = self.set_up()
         anchor = top[2]
         top.relative_block_insert(anchor, node, other)
         assert [x.value.value for x in top] == ["1", "2", "3", "4", "5"]
+        assert set(top._nodes.keys()) == {"1", "2", "3", "4", "5"}
 
-        top, node, other = set_up()
+    def test_relative_block_insert_backward(self):
+        top, node, other = self.set_up()
         anchor = top[2]
         top.relative_block_insert(anchor, node, other, forward=False)
         assert [x.value.value for x in top] == ["1", "2", "4", "5", "3"]
+        assert set(top._nodes.keys()) == {"1", "2", "3", "4", "5"}
+
+    def test_block_discard(self):
+        top, *_ = self.set_up()
+        start = top[0]
+        end = top[-1]
+        top.block_discard(start, end)
+        assert set(top._nodes.keys()) == set()
 
     def test_info(self):
         top = topology.GromacsTopology()

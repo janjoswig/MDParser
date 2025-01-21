@@ -1,4 +1,6 @@
+import weakref
 from abc import ABC, abstractmethod
+from collections import OrderedDict
 from typing import Optional
 
 
@@ -64,3 +66,136 @@ class GenericNodeValue(NodeValue):
 
     def __repr__(self):
         return f"{type(self).__name__}(value={self.value!r})"
+
+
+class Node:
+    __slots__ = ["_prev", "_next", "_key", "value", "__weakref__"]
+
+    def __init__(
+        self,
+        *,
+        key: Optional[str] = None,
+        value: Optional[NodeValue] = None,
+        prev: Optional["Node"] = None,
+        next: Optional["Node"] = None,
+    ) -> None:
+        self.key = key
+        self.value = value
+        self.prev = prev
+        self.next = next
+
+    @property
+    def key(self) -> Optional[str]:
+        if self._key is not None:
+            return self._key
+
+        if self.value is not None:
+            try:
+                self._key = self.value._make_node_key()
+            except AttributeError:
+                pass
+
+        return self._key
+
+    @key.setter
+    def key(self, value: Optional[str]) -> None:
+        self._key = value
+
+    @property
+    def prev(self) -> Optional["Node"]:
+        return self._prev
+
+    @prev.setter
+    def prev(self, value: Optional["Node"]) -> None:
+        if value is not None:
+            value = ensure_proxy(value)
+        self._prev = value
+
+    @property
+    def next(self) -> Optional["Node"]:
+        return self._next
+
+    @next.setter
+    def next(self, value: Optional["Node"]) -> None:
+        self._next = value
+
+    def __repr__(self) -> str:
+        attr_str = f"(key={self.key!r}, value={self.value!r})"
+        return f"{type(self).__name__}{attr_str}"
+
+    def connect(self, other: "Node", forward: bool = True) -> None:
+        """Link another node in forward/backward direction
+
+        Note:
+            Does not attempt to unproxy nodes, so it is recommended
+            to call `connect` in forward direction only passing unproxied nodes
+            or in backward direction only from unproxied nodes.
+
+        Args:
+            other: Node to connect to
+
+        Keyword args:
+            forward: If `True`, connect to `other` as next node. Otherwise,
+                connect to `other` as previous node.
+        """
+
+        if forward is True:
+            self.next = other
+            other.prev = ensure_proxy(self)
+        else:
+            self.prev = ensure_proxy(other)
+            other.next = self
+
+    def disconnect(self, forward: bool = False, backward: bool = False) -> None:
+        if backward:
+            self.prev.next = None
+            self.prev = None
+
+        if forward:
+            self.next.prev = None
+            self.next = None
+
+    @property
+    def is_connected(self) -> bool:
+        return self.is_forward_connected and self.is_backward_connected
+
+    @property
+    def is_forward_connected(self) -> bool:
+        return self.next is not None
+
+    @property
+    def is_backward_connected(self) -> bool:
+        return self.prev is not None
+
+
+def ensure_proxy(obj):
+    """Return a proxy of an object avoiding proxy of proxy"""
+
+    if not isinstance(obj, (weakref.ProxyType, weakref.CallableProxyType)):
+        return weakref.proxy(obj)
+
+    return obj
+
+
+def unproxy_node(node) -> Node:
+    return node.prev.next
+
+
+def get_node_path(start: Node, end: Node):
+    if start is end:
+        return [start]
+
+    seen_nodes = OrderedDict()
+    seen_nodes[start] = None
+    reached_end = False
+    while not reached_end and start.is_forward_connected:
+        start = start.next # type: ignore
+        if start in seen_nodes:
+            raise ValueError("Could not reach end node")
+        seen_nodes[start] = None
+        reached_end = start is end
+
+    if reached_end:
+        return list(seen_nodes.keys())
+
+    raise ValueError("Could not reach end node")

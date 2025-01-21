@@ -17,12 +17,12 @@ from typing import (
 )
 import weakref
 
-from . import _base
+from ._base import Node, NodeValue, GenericNodeValue, ensure_proxy, unproxy_node, get_node_path
 from . import _gmx_nodes
 
 
 DEFAULT_GENERIC_NODE_VALUE_TYPES = {
-    _base.GenericNodeValue._node_key_name: _base.GenericNodeValue,
+    GenericNodeValue._node_key_name: GenericNodeValue,
 }
 
 DEFAULT_GMX_NODE_VALUE_TYPES = {}
@@ -30,73 +30,8 @@ for name in dir(_gmx_nodes):
     obj = getattr(_gmx_nodes, name)
     if not isinstance(obj, type):
         continue
-    if issubclass(obj, _base.NodeValue):
+    if issubclass(obj, NodeValue):
         DEFAULT_GMX_NODE_VALUE_TYPES[obj._node_key_name] = obj
-
-
-class Node:
-    __slots__ = ["_prev", "next", "key", "value", "__weakref__"]
-
-    def __init__(
-        self,
-        key: Optional[str] = None,
-        value: Optional[_base.NodeValue] = None,
-        prev: Optional["Node"] = None,
-        next: Optional["Node"] = None,
-    ) -> None:
-        self.key = key
-        self.value = value
-        self.prev = prev
-        self.next = next
-
-    @property
-    def prev(self) -> Optional["Node"]:
-        return self._prev
-
-    @prev.setter
-    def prev(self, value: Optional["Node"]) -> None:
-        if value is not None:
-            value = ensure_proxy(value)
-        self._prev = value
-
-    def __repr__(self) -> str:
-        attr_str = f"(key={self.key!r}, value={self.value!r})"
-        return f"{type(self).__name__}{attr_str}"
-
-    def connect(self, other: "Node", forward: bool = True) -> None:
-        """Link another node in forward/backward direction
-
-        Note:
-            Does not attempt to unproxy nodes, so it is recommended
-            to call `connect` in forward direction only passing unproxied nodes
-            or in backward direction only from unproxied nodes.
-
-        Args:
-            other: Node to connect to
-
-        Keyword args:
-            forward: If `True`, connect to `other` as next node. Otherwise,
-                connect to `other` as previous node.
-        """
-
-        if forward is True:
-            self.next = other
-            other.prev = ensure_proxy(self)
-        else:
-            self.prev = ensure_proxy(other)
-            other.next = self
-
-    @property
-    def is_connected(self) -> bool:
-        return self.is_foward_connected and self.is_backward_connected
-
-    @property
-    def is_foward_connected(self) -> bool:
-        return self.next is not None
-
-    @property
-    def is_backward_connected(self) -> bool:
-        return self.prev is not None
 
 
 class Topology:
@@ -157,12 +92,17 @@ class Topology:
                 iterable = iter(self)
 
             try:
-                return next(islice(iterable, query, query + 1))
+                node = next(islice(iterable, query, query + 1))
             except StopIteration:
                 raise IndexError("index out of range")
+            try:
+                node = unproxy_node(node)
+            except AttributeError:
+                pass
+            return node
 
         if isinstance(query, str):
-            return self._nodes.__getitem__(query)
+            return self._nodes[query]
 
         if isinstance(query, slice):
             return islice(self, query.start, query.stop, query.step)
@@ -177,23 +117,15 @@ class Topology:
             return True
         return False
 
-    def _check_key_and_add_new_node(self, key: str) -> Node:
-        if key in self._nodes:
-            raise KeyError(f"node {key!r} does already exist")
-
-        self._nodes[key] = node = Node()
-
-        return node
-
     @classmethod
-    def select_nvtype(cls, name: str) -> Type[_base.NodeValue]:
+    def select_nvtype(cls, name: str) -> Type[NodeValue]:
         """Retrieve node type by name"""
         return getattr(cls, f"_{cls.__name__}__node_value_types")[name]
 
     @classmethod
     def make_node_value(
-        cls, nvtype: Union[str, Type[_base.NodeValue]], *args: Any, **kwargs: Any
-    ) -> Tuple[str, _base.NodeValue]:
+        cls, nvtype: Union[str, Type[NodeValue]], *args: Any, **kwargs: Any
+    ) -> Tuple[str, NodeValue]:
         """Initialise node value type and make key
 
         Args:
@@ -215,14 +147,53 @@ class Topology:
 
         return node_key, node_value
 
-    def add(self, key: str, value: _base.NodeValue) -> None:
-        node = self._check_key_and_add_new_node(key)
+    def _add_node(self, node: Node, key: Optional[str] = None) -> None:
+        if key is None:
+            key = node.key
 
+        if key is None:
+            raise LookupError(
+                "No node key was provided and none could be taken from the node"
+            )
+
+        if key in self._nodes:
+            raise KeyError(f"node {key!r} does already exist")
+
+        node.key = key
+        self._nodes[key] = node
+
+    def _batch_add_nodes(self, nodes: Iterable[Node], keys: Optional[Iterable[str]] = None) -> None:
+        if keys is None:
+            keys = []
+            for i, node in enumerate(nodes):
+                key = node.key
+                if key is None:
+                    raise LookupError(
+                        f"No node keys were provided and none could be taken from the node with index {i}"
+                    )
+                keys.append(key)
+        else:
+            keys = list(keys)
+
+        nodes = list(nodes)
+
+        if len(nodes) != len(keys):
+            raise ValueError("Number of nodes and keys must be equal")
+
+        for key in keys:
+            if key in self._nodes:
+                raise KeyError(f"node {key!r} does already exist")
+
+        for k, node in zip(keys, nodes):
+            self._nodes[k] = node
+
+    def add(self, key: str, value: NodeValue) -> None:
         root = self._root
         last = root.prev
-        node.prev, node.next, node.key, node.value = last, root, key, value
-        last.next = node
-        root.prev = weakref.proxy(node)
+        node = Node(key=key, value=value)
+        self._add_node(node)
+        node.connect(last, forward=False)
+        node.connect(root)
 
     def pop(self, key: str) -> Node:
         node = self._nodes.pop(key)
@@ -239,7 +210,7 @@ class Topology:
             node.prev.next = node.next
             node.next.prev = node.prev
 
-    def replace(self, key: str, value: _base.NodeValue) -> None:
+    def replace(self, key: str, value: NodeValue) -> None:
         """Replace node with specific key while retaining key"""
 
         old_node = self._nodes.pop(key)
@@ -278,11 +249,11 @@ class Topology:
 
         raise ValueError(f"node {key!r} is not in list")
 
-    def insert(self, index: int, key: str, value: _base.NodeValue) -> None:
+    def insert(self, index: int, key: str, value: NodeValue) -> None:
         """Insert node before index"""
 
-        node = self._check_key_and_add_new_node(key)
-        node.key, node.value = key, value
+        node = Node(key=key, value=value)
+        self._add_node(node)
 
         prev = root = self._root
         next_node = root.next
@@ -300,17 +271,19 @@ class Topology:
         node.connect(next_node)
 
     def relative_insert(
-        self, node: Node, key: str, value: _base.NodeValue, forward: bool = True
+        self, node: Node, key: str, value: NodeValue, forward: bool = True
     ) -> None:
         """Insert node after/before other node"""
 
-        new_node = self._check_key_and_add_new_node(key)
-        new_node.key, new_node.value = key, value
+        new_node = Node(key=key, value=value)
+        self._add_node(new_node)
 
         if forward is True:
+            assert node.next is not None
             new_node.connect(node.next)
             new_node.connect(node, forward=False)
         else:
+            assert node.prev is not None
             node.prev.connect(new_node)
             new_node.connect(node)
 
@@ -319,6 +292,10 @@ class Topology:
 
         if not isinstance(index, int):
             raise ValueError("index must be an integer")
+
+        block_nodes = get_node_path(block_start, block_end)
+        print(block_nodes)
+        self._batch_add_nodes(block_nodes)
 
         prev = root = self._root
         next_node = root.next
@@ -331,6 +308,7 @@ class Topology:
             prev = root.prev
             next_node = prev.next
 
+        assert prev is not None
         prev.connect(block_start)
         block_end.connect(next_node)
 
@@ -339,29 +317,38 @@ class Topology:
     ):
         """Insert block of linked nodes before/after node"""
 
+        block_nodes = get_node_path(block_start, block_end)
+        self._batch_add_nodes(block_nodes)
+
         if forward is True:
+            assert node.next is not None
             block_end.connect(node.next)
             node.connect(block_start)
         else:
+            assert node.prev is not None
             node.prev.connect(block_start)
             block_end.connect(node)
 
-    def block_discard(self, block_start, block_end):
-        block_start.prev.next = block_end.next
-        block_end.next.prev = block_start.prev
+    def block_discard(self, block_start: Node, block_end: Node) -> None:
+        if not block_start.is_backward_connected:
+            raise ValueError("Block start is not backward connected")
 
-        block_start.prev = None
-        block_end.next = None
+        if not block_end.is_forward_connected:
+            raise ValueError("Block end is not forward connected")
 
-        current = block_start
-        while True:
-            _ = self._nodes[current.key]
-            if current is block_end:
-                break
-            current = current.next
+        prev = block_start.prev
+        next_node = block_end.next
+        block_start.disconnect(backward=True)
+        block_end.disconnect(forward=True)
+        prev.connect(next_node) # type: ignore
+
+        block_nodes = get_node_path(block_start, block_end)
+        for node in block_nodes:
+            if node.key is not None:
+                del self._nodes[node.key]
 
     def get_next_node_with_nvtype(
-        self, start: Node = None, stop=None, nvtype=None, exclude=None, forward=True
+        self, start: Optional[Node] = None, stop: Optional[Node] = None, nvtype=None, exclude=None, forward=True
     ):
         """Search topology for another node
 
@@ -901,19 +888,6 @@ def get_gmx_dir():
             gmx_shared = pathlib.Path(line.split()[-1]) / "share/gromacs/top"
 
     return gmx_exe, gmx_shared
-
-
-def ensure_proxy(obj):
-    """Return a proxy of an object avoiding proxy of proxy"""
-
-    if not isinstance(obj, (weakref.ProxyType, weakref.CallableProxyType)):
-        return weakref.proxy(obj)
-
-    return obj
-
-
-def unproxy_node(node):
-    return node.prev.next
 
 
 def split_comment(line):

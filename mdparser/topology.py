@@ -32,7 +32,6 @@ class Topology:
     __node_value_types = DEFAULT_GENERIC_NODE_VALUE_TYPES
 
     def __init__(self):
-        print(self.__node_value_types)
         self._nodes = dict()
         self._hardroot = Node()
         self._root = root = weakref.proxy(self._hardroot)
@@ -50,9 +49,14 @@ class GromacsTopology(Topology):
     __node_value_types = DEFAULT_GMX_NODE_VALUE_TYPES
 
     def __str__(self):
+        section_type = self.select_nvtype("section")
+        entry_type = self.select_nvtype("section_entry")
+
         return_str = ""
         for node in self:
-            if isinstance(node.value, self.__node_value_types["section"]):
+            if not isinstance(node.value, entry_type) and isinstance(node.prev.value, entry_type):
+                return_str += "\n"
+            elif isinstance(node.value, section_type) and (node.prev is not self._root):
                 return_str += "\n"
             return_str += f"{node.value!s}\n"
 
@@ -535,9 +539,7 @@ class GromacsTopologyParser:
         active_definitions.update(self.definitions)
 
         for node_value_type in top.node_value_types.values():
-            print(node_value_type, node_value_type._count)
             node_value_type.reset_count()
-            print(node_value_type, node_value_type._count)
 
         previous = ""
         for line in file:

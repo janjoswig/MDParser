@@ -63,6 +63,7 @@ class Section(NodeValue):
 
 
 class SpecializedSection(Section):
+    _node_key_name = "special_section"
     category = 0
     allowed_occurrence = 0
 
@@ -131,6 +132,7 @@ class Subsection(Section):
 
 
 class SpecializedSubsection(Subsection):
+    _node_key_name = "special_subsection"
     category = 1
     allowed_occurrence = 0
 

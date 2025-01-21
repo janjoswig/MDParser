@@ -8,10 +8,16 @@ from mdparser import _base, _gmx_nodes
 
 
 class TestGromacsTopology:
-    def test_representation(self):
+    def test_representation_empty(self):
         top = topology.GromacsTopology()
         assert f"{top!r}" == "GromacsTopology()"
         assert f"{top!s}" == ""
+
+    def test_representation(self):
+        top = topology.GromacsTopology()
+        top.add("node", _base.GenericNodeValue("node"))
+        assert f"{top!r}" == "GromacsTopology()"
+        assert f"{top!s}" == "node\n"
 
     def test_node_operations(self):
         node_list = [

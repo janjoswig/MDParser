@@ -1,18 +1,20 @@
 import pytest
 
-from mdparser import tasks, topology
+from mdparser import tasks
+from mdparser.topology import GromacsTopologyParser
+
 
 class TestTopologyTasks:
     def test_get_subsections(self, tasks_top):
         first_molecule = tasks_top.get_next_node_with_nvtype(
-            nvtype=topology.DEFAULT_GMX_NODE_VALUE_TYPES["moleculetype"]
+            nvtype=tasks_top.select_nvtype("moleculetype")
         )
         subsections = tasks.get_subsections(tasks_top, first_molecule)
         assert len(subsections) == 2
 
-        assert isinstance(subsections[0].value, topology.DEFAULT_GMX_NODE_VALUE_TYPES["atoms"])
+        assert isinstance(subsections[0].value, tasks_top.select_nvtype("atoms"))
 
-        assert isinstance(subsections[1].value, topology.DEFAULT_GMX_NODE_VALUE_TYPES["bonds"])
+        assert isinstance(subsections[1].value, tasks_top.select_nvtype("bonds"))
 
     def test_get_last_entry(self, tasks_top):
         first_atoms = tasks_top.get_next_node_with_nvtype(
@@ -20,9 +22,7 @@ class TestTopologyTasks:
         )
         last_entry = tasks.get_last_entry(first_atoms)
 
-        assert isinstance(
-            last_entry.value, topology.DEFAULT_GMX_NODE_VALUE_TYPES["atoms_entry"]
-        )
+        assert isinstance(last_entry.value, tasks_top.select_nvtype("atoms_entry"))
 
         assert last_entry.value.type == "B"
 
@@ -45,7 +45,7 @@ class TestTopologyTasks:
         ],
     )
     def test_merge_qmmm_molecules(self, filename, name, datadir, file_regression):
-        parser = topology.GromacsTopologyParser(
+        parser = GromacsTopologyParser(
             include_shared=True, include_blacklist=["forcefield.itp"]
         )
         with open(datadir / filename) as topfile:
@@ -56,7 +56,7 @@ class TestTopologyTasks:
         file_regression.check(str(topology))
 
     def test_fail_merge_when_no_molecule(self, datadir):
-        parser = topology.GromacsTopologyParser()
+        parser = GromacsTopologyParser()
         with open(datadir / "no_molecule.top") as topfile:
             topology = parser.read(topfile)
 

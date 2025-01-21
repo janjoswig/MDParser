@@ -44,24 +44,6 @@ class Topology:
     def node_value_types(self):
         return getattr(self, f"_{type(self).__name__}__node_value_types")
 
-
-class GromacsTopology(Topology):
-    __node_value_types = DEFAULT_GMX_NODE_VALUE_TYPES
-
-    def __str__(self):
-        section_type = self.select_nvtype("section")
-        entry_type = self.select_nvtype("section_entry")
-
-        return_str = ""
-        for node in self:
-            if not isinstance(node.value, entry_type) and isinstance(node.prev.value, entry_type):
-                return_str += "\n"
-            elif isinstance(node.value, section_type) and (node.prev is not self._root):
-                return_str += "\n"
-            return_str += f"{node.value!s}\n"
-
-        return return_str
-
     def __iter__(self):
         root = current = self._root
         while current.next is not root:
@@ -122,6 +104,31 @@ class GromacsTopology(Topology):
         return node
 
     @classmethod
+    def select_nvtype(cls, name):
+        """Retrieve node type by name"""
+        return getattr(cls, f"_{cls.__name__}__node_value_types")[name]
+
+
+class GromacsTopology(Topology):
+    __node_value_types = DEFAULT_GMX_NODE_VALUE_TYPES
+
+    def __str__(self):
+        section_type = self.select_nvtype("section")
+        entry_type = self.select_nvtype("section_entry")
+
+        return_str = ""
+        for node in self:
+            if not isinstance(node.value, entry_type) and isinstance(
+                node.prev.value, entry_type
+            ):
+                return_str += "\n"
+            elif isinstance(node.value, section_type) and (node.prev is not self._root):
+                return_str += "\n"
+            return_str += f"{node.value!s}\n"
+
+        return return_str
+
+    @classmethod
     def make_nvtype(cls, name, *args, **kwargs):
         """Retrieve node type by name, initialize, and make key"""
 
@@ -130,11 +137,6 @@ class GromacsTopology(Topology):
         node_key = node_value._make_node_key()
 
         return node_key, node_value
-
-    @classmethod
-    def select_nvtype(cls, name):
-        """Retrieve node type by name"""
-        return cls.__node_value_types[name]
 
     def add(self, key, value) -> None:
         node = self._check_key_and_add_new_node(key)
@@ -671,9 +673,7 @@ class GromacsTopologyParser:
                 else:
                     active_category = nvtype.category
 
-                issubsection = issubclass(
-                    nvtype, top.node_value_types["subsection"]
-                )
+                issubsection = issubclass(nvtype, top.node_value_types["subsection"])
 
                 if issubsection:
                     node_value = nvtype(section=weakref.proxy(active_supersection))

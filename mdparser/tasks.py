@@ -3,9 +3,9 @@ from copy import copy
 from mdparser import topology
 
 
-def get_subsections(top: topology.GromacsTopology, section_node):
-    section_nvtype = topology.GromacsTopology.select_nvtype("section")
-    subsection_nvtype = topology.GromacsTopology.select_nvtype("subsection")
+def get_subsections(top: topology.Topology, section_node):
+    section_nvtype = top.select_nvtype("section")
+    subsection_nvtype = top.select_nvtype("subsection")
 
     subsections = []
     start = section_node
@@ -22,7 +22,7 @@ def get_subsections(top: topology.GromacsTopology, section_node):
 
 
 def get_last_entry(section_node):
-    entry_nvtype = topology.GromacsTopology.select_nvtype("entry")
+    entry_nvtype = topology.GromacsTopology.select_nvtype("section_entry")
 
     current = section_node
     while isinstance(current.next.value, entry_nvtype):
@@ -35,11 +35,13 @@ def merge_molecules(top: topology.GromacsTopology, name=None):
     section_nvtype = topology.GromacsTopology.select_nvtype("section")
     moleculetype_section_nvtype = topology.GromacsTopology.select_nvtype("moleculetype")
     atoms_entry_nvtype = topology.GromacsTopology.select_nvtype("atoms_entry")
-    p1term_entry_nvtype = topology.GromacsTopology.select_nvtype("p1term_entry")
-    p2term_entry_nvtype = topology.GromacsTopology.select_nvtype("p2term_entry")
-    p3term_entry_nvtype = topology.GromacsTopology.select_nvtype("p3term_entry")
-    p4term_entry_nvtype = topology.GromacsTopology.select_nvtype("p4term_entry")
-    virtual_sites1_entry_nvtype = topology.GromacsTopology.select_nvtype("virtual_sites1_entry")
+    p1term_entry_nvtype = topology.GromacsTopology.select_nvtype("p1_term_entry")
+    p2term_entry_nvtype = topology.GromacsTopology.select_nvtype("p2_term_entry")
+    p3term_entry_nvtype = topology.GromacsTopology.select_nvtype("p3_term_entry")
+    p4term_entry_nvtype = topology.GromacsTopology.select_nvtype("p4_term_entry")
+    virtual_sites1_entry_nvtype = topology.GromacsTopology.select_nvtype(
+        "virtual_sites1_entry"
+    )
     exclusions_entry_nvtype = topology.GromacsTopology.select_nvtype("exclusions_entry")
     molecules_nvtype = topology.GromacsTopology.select_nvtype("molecules")
     molecules_entry_nvtype = topology.GromacsTopology.select_nvtype("molecules_entry")
@@ -77,7 +79,9 @@ def merge_molecules(top: topology.GromacsTopology, name=None):
     moleculetype_section_nvtype.reset_count(len(moleculetype_section_list))
 
     hardroot = new_current = topology.Node()
-    new_current.key, new_current.value = topology.GromacsTopology.make_nvtype("moleculetype")
+    new_current.key, new_current.value = topology.GromacsTopology.make_nvtype(
+        "moleculetype"
+    )
 
     new_next = topology.Node()
     new_next.key, new_next.value = topology.GromacsTopology.make_nvtype(

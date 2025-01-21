@@ -3,7 +3,18 @@ from itertools import islice
 import pathlib
 import shlex
 import subprocess
-from typing import Any, Iterable, Mapping, Optional, TextIO, Union
+from typing import (
+    Any,
+    Dict,
+    Iterable,
+    Iterator,
+    Mapping,
+    Tuple,
+    Type,
+    Optional,
+    TextIO,
+    Union,
+)
 import weakref
 
 from . import _base
@@ -21,6 +32,71 @@ for name in dir(_gmx_nodes):
         continue
     if issubclass(obj, _base.NodeValue):
         DEFAULT_GMX_NODE_VALUE_TYPES[obj._node_key_name] = obj
+
+
+class Node:
+    __slots__ = ["_prev", "next", "key", "value", "__weakref__"]
+
+    def __init__(
+        self,
+        key: Optional[str] = None,
+        value: Optional[_base.NodeValue] = None,
+        prev: Optional["Node"] = None,
+        next: Optional["Node"] = None,
+    ) -> None:
+        self.key = key
+        self.value = value
+        self.prev = prev
+        self.next = next
+
+    @property
+    def prev(self) -> Optional["Node"]:
+        return self._prev
+
+    @prev.setter
+    def prev(self, value: Optional["Node"]) -> None:
+        if value is not None:
+            value = ensure_proxy(value)
+        self._prev = value
+
+    def __repr__(self) -> str:
+        attr_str = f"(key={self.key!r}, value={self.value!r})"
+        return f"{type(self).__name__}{attr_str}"
+
+    def connect(self, other: "Node", forward: bool = True) -> None:
+        """Link another node in forward/backward direction
+
+        Note:
+            Does not attempt to unproxy nodes, so it is recommended
+            to call `connect` in forward direction only passing unproxied nodes
+            or in backward direction only from unproxied nodes.
+
+        Args:
+            other: Node to connect to
+
+        Keyword args:
+            forward: If `True`, connect to `other` as next node. Otherwise,
+                connect to `other` as previous node.
+        """
+
+        if forward is True:
+            self.next = other
+            other.prev = ensure_proxy(self)
+        else:
+            self.prev = ensure_proxy(other)
+            other.next = self
+
+    @property
+    def is_connected(self) -> bool:
+        return self.is_foward_connected and self.is_backward_connected
+
+    @property
+    def is_foward_connected(self) -> bool:
+        return self.next is not None
+
+    @property
+    def is_backward_connected(self) -> bool:
+        return self.prev is not None
 
 
 class Topology:
@@ -41,39 +117,39 @@ class Topology:
         return f"{type(self).__name__}()"
 
     @property
-    def node_value_types(self):
+    def node_value_types(self) -> Dict[str, Any]:
         return getattr(self, f"_{type(self).__name__}__node_value_types")
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Node]:
         root = current = self._root
         while current.next is not root:
             current = current.next
             yield current
 
-    def __reversed__(self):
+    def __reversed__(self) -> Iterator[Node]:
         root = current = self._root
         while current.prev is not root:
             current = current.prev
             yield current
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Return number of linked nodes"""
 
         length = 0
-
         for length, _ in enumerate(self, 1):
             pass
 
         return length
 
-    def __getitem__(self, query):
-        if isinstance(query, str):
-            return self._nodes.__getitem__(query)
+    def __getitem__(self, query: Union[str, int, slice]) -> Union[Node, Iterator[Node]]:
+        def _query_int(query: int) -> Node:
+            if not isinstance(query, int):
+                raise ValueError(
+                    f"items can only be queried by 'str' (node key), "
+                    f"or (iterables of) 'int' or 'slice' (node index), "
+                    f"not {type(query).__name__!r}"
+                )
 
-        if isinstance(query, slice):
-            return islice(self, query.start, query.stop, query.step)
-
-        if isinstance(query, int):
             if query < 0:
                 query = (query * -1) - 1
                 iterable = reversed(self)
@@ -85,17 +161,23 @@ class Topology:
             except StopIteration:
                 raise IndexError("index out of range")
 
-        raise ValueError(
-            f"items can only be queried by 'str' (node key), "
-            f"or 'int' or 'slice' (node index), not {type(query).__name__!r}"
-        )
+        if isinstance(query, str):
+            return self._nodes.__getitem__(query)
 
-    def __contains__(self, key):
+        if isinstance(query, slice):
+            return islice(self, query.start, query.stop, query.step)
+
+        if isinstance(query, Iterable):
+            return (_query_int(x) for x in query)
+
+        return _query_int(query)
+
+    def __contains__(self, key: str) -> bool:
         if key in self._nodes:
             return True
         return False
 
-    def _check_key_and_add_new_node(self, key):
+    def _check_key_and_add_new_node(self, key: str) -> Node:
         if key in self._nodes:
             raise KeyError(f"node {key!r} does already exist")
 
@@ -104,41 +186,36 @@ class Topology:
         return node
 
     @classmethod
-    def select_nvtype(cls, name):
+    def select_nvtype(cls, name: str) -> Type[_base.NodeValue]:
         """Retrieve node type by name"""
         return getattr(cls, f"_{cls.__name__}__node_value_types")[name]
 
-
-class GromacsTopology(Topology):
-    __node_value_types = DEFAULT_GMX_NODE_VALUE_TYPES
-
-    def __str__(self):
-        section_type = self.select_nvtype("section")
-        entry_type = self.select_nvtype("section_entry")
-
-        return_str = ""
-        for node in self:
-            if not isinstance(node.value, entry_type) and isinstance(
-                node.prev.value, entry_type
-            ):
-                return_str += "\n"
-            elif isinstance(node.value, section_type) and (node.prev is not self._root):
-                return_str += "\n"
-            return_str += f"{node.value!s}\n"
-
-        return return_str
-
     @classmethod
-    def make_nvtype(cls, name, *args, **kwargs):
-        """Retrieve node type by name, initialize, and make key"""
+    def make_node_value(
+        cls, nvtype: Union[str, Type[_base.NodeValue]], *args: Any, **kwargs: Any
+    ) -> Tuple[str, _base.NodeValue]:
+        """Initialise node value type and make key
 
-        nvtype = cls.__node_value_types[name]
+        Args:
+            nvtype: Node value type or name
+            *args: Passed on to node value type
+
+        Keyword args:
+            **kwargs: Passed on to node value type
+
+        Returns:
+            A key and initialised node value
+        """
+
+        if isinstance(nvtype, str):
+            nvtype = cls.select_nvtype(nvtype)
+
         node_value = nvtype(*args, **kwargs)
         node_key = node_value._make_node_key()
 
         return node_key, node_value
 
-    def add(self, key, value) -> None:
+    def add(self, key: str, value: _base.NodeValue) -> None:
         node = self._check_key_and_add_new_node(key)
 
         root = self._root
@@ -147,13 +224,13 @@ class GromacsTopology(Topology):
         last.next = node
         root.prev = weakref.proxy(node)
 
-    def pop(self, key):
+    def pop(self, key: str) -> Node:
         node = self._nodes.pop(key)
         node.prev.next = node.next
         node.next.prev = node.prev
         return node
 
-    def discard(self, key) -> None:
+    def discard(self, key: str) -> None:
         try:
             node = self._nodes.pop(key)
         except KeyError:
@@ -162,7 +239,7 @@ class GromacsTopology(Topology):
             node.prev.next = node.next
             node.next.prev = node.prev
 
-    def replace(self, key, value):
+    def replace(self, key: str, value: _base.NodeValue) -> None:
         """Replace node with specific key while retaining key"""
 
         old_node = self._nodes.pop(key)
@@ -172,7 +249,7 @@ class GromacsTopology(Topology):
         new_node.prev.next = new_node
         new_node.next.prev = weakref.proxy(new_node)
 
-    def index(self, key, start=None, stop=None):
+    def index(self, key: str, start: Optional[int] = None, stop: Optional[int] = None):
         """Return index of node
 
         Args:
@@ -201,10 +278,12 @@ class GromacsTopology(Topology):
 
         raise ValueError(f"node {key!r} is not in list")
 
-    def insert(self, index, key, value):
+    def insert(self, index: int, key: str, value: _base.NodeValue) -> None:
         """Insert node before index"""
 
         node = self._check_key_and_add_new_node(key)
+        node.key, node.value = key, value
+
         prev = root = self._root
         next_node = root.next
 
@@ -216,49 +295,56 @@ class GromacsTopology(Topology):
             prev = root.prev
             next_node = prev.next
 
-        node.prev, node.next = prev, next_node
-        node.key, node.value = key, value
-        prev.next = node
-        next_node.prev = weakref.proxy(node)
+        assert prev is not None
+        prev.connect(node)
+        node.connect(next_node)
 
-    def relative_insert(self, node, key, value, forward=True):
+    def relative_insert(
+        self, node: Node, key: str, value: _base.NodeValue, forward: bool = True
+    ) -> None:
         """Insert node after/before other node"""
 
         new_node = self._check_key_and_add_new_node(key)
-
-        if forward is True:
-            new_node.prev, new_node.next = node.next.prev, node.next
-            new_node.next.prev = weakref.proxy(new_node)
-            node.next = new_node
-        else:
-            new_node.prev, new_node.next = node.prev, node
-            new_node.prev.next = new_node
-            node.prev = weakref.proxy(new_node)
-
         new_node.key, new_node.value = key, value
 
-    def block_insert(self, node, block_start, block_end, forward=True):
+        if forward is True:
+            new_node.connect(node.next)
+            new_node.connect(node, forward=False)
+        else:
+            node.prev.connect(new_node)
+            new_node.connect(node)
+
+    def block_insert(self, index: int, block_start: Node, block_end: Node) -> None:
+        """Insert block of linked nodes before index"""
+
+        if not isinstance(index, int):
+            raise ValueError("index must be an integer")
+
+        prev = root = self._root
+        next_node = root.next
+
+        for i, next_node in enumerate(self):
+            if i == index:
+                prev = next_node.prev
+                break
+        else:
+            prev = root.prev
+            next_node = prev.next
+
+        prev.connect(block_start)
+        block_end.connect(next_node)
+
+    def relative_block_insert(
+        self, node: Node, block_start: Node, block_end: Node, forward: bool = True
+    ):
         """Insert block of linked nodes before/after node"""
 
         if forward is True:
-            block_start.prev = node.next.prev
-            block_end.next = node.next
-            block_end.next.prev = weakref.proxy(block_end)
-            node.next = block_start
+            block_end.connect(node.next)
+            node.connect(block_start)
         else:
-            block_start.prev = node.prev
-            block_end.next = node
-            node.prev.next = block_start
-            node.prev = weakref.proxy(block_end)
-
-        current = block_start
-        while current is not block_end.next:
-            if current.key in self._nodes:
-                raise KeyError(f"node {current.key!r} does already exist")
-
-            self._nodes[current.key] = current
-
-            current = current.next
+            node.prev.connect(block_start)
+            block_end.connect(node)
 
     def block_discard(self, block_start, block_end):
         block_start.prev.next = block_end.next
@@ -275,12 +361,12 @@ class GromacsTopology(Topology):
             current = current.next
 
     def get_next_node_with_nvtype(
-        self, start=None, stop=None, nvtype=None, exclude=None, forward=True
+        self, start: Node = None, stop=None, nvtype=None, exclude=None, forward=True
     ):
         """Search topology for another node
 
         Args:
-            start: obj:`Node` to start from.  If `None`, an `nvtype`
+            start: :obj:`Node` to start from.  If `None`, an `nvtype`
                 must be given and search starts at the beginning.
             stop: :obj:`Node` to stop at.  If `None`, search until end.
             nvtype: Type of node value to search for.
@@ -322,6 +408,26 @@ class GromacsTopology(Topology):
             return unproxy_node(node)
 
         raise LookupError(f"Node of type {nvtype} not found")
+
+
+class GromacsTopology(Topology):
+    __node_value_types = DEFAULT_GMX_NODE_VALUE_TYPES
+
+    def __str__(self):
+        section_type = self.select_nvtype("section")
+        entry_type = self.select_nvtype("section_entry")
+
+        return_str = ""
+        for node in self:
+            if not isinstance(node.value, entry_type) and isinstance(
+                node.prev.value, entry_type
+            ):
+                return_str += "\n"
+            elif isinstance(node.value, section_type) and (node.prev is not self._root):
+                return_str += "\n"
+            return_str += f"{node.value!s}\n"
+
+        return return_str
 
     @property
     def includes_resolved(self):
@@ -565,18 +671,20 @@ class GromacsTopologyParser:
             if line.startswith("#define"):
                 line = line.lstrip("#define").lstrip().split(maxsplit=1)
                 if len(line) == 1:
-                    node_key, node_value = top.make_nvtype("define", line[0], True)
+                    node_key, node_value = top.make_node_value("define", line[0], True)
                     top.add(node_key, node_value)
                     active_definitions[line[0]] = True
                 else:
-                    node_key, node_value = top.make_nvtype("define", line[0], line[1])
+                    node_key, node_value = top.make_node_value(
+                        "define", line[0], line[1]
+                    )
                     top.add(node_key, node_value)
                     active_definitions[line[0]] = line[1]
                 continue
 
             if line.startswith("#undef"):
                 line = line.lstrip("#undef").lstrip()
-                node_key, node_value = top.make_nvtype("define", line, False)
+                node_key, node_value = top.make_node_value("define", line, False)
                 top.add(node_key, node_value)
                 _ = active_definitions.pop(line)
                 continue
@@ -585,7 +693,7 @@ class GromacsTopologyParser:
                 line = line.lstrip("#ifdef").lstrip()
                 active_conditions[line] = True
                 if not self.resolve_conditions:
-                    node_key, node_value = top.make_nvtype("condition", line, True)
+                    node_key, node_value = top.make_node_value("condition", line, True)
                     top.add(node_key, node_value)
                 continue
 
@@ -593,7 +701,7 @@ class GromacsTopologyParser:
                 line = line.lstrip("#ifndef").lstrip()
                 active_conditions[line] = False
                 if not self.resolve_conditions:
-                    node_key, node_value = top.make_nvtype("condition", line, False)
+                    node_key, node_value = top.make_node_value("condition", line, False)
                     top.add(node_key, node_value)
                 continue
 
@@ -602,12 +710,12 @@ class GromacsTopologyParser:
                 active_conditions[last_condition] = not last_value
 
                 if not self.resolve_conditions:
-                    node_key, node_value = top.make_nvtype(
+                    node_key, node_value = top.make_node_value(
                         "condition", last_condition, None
                     )
                     top.add(node_key, node_value)
 
-                    node_key, node_value = top.make_nvtype(
+                    node_key, node_value = top.make_node_value(
                         "condition", last_condition, not last_value
                     )
                     top.add(node_key, node_value)
@@ -616,7 +724,7 @@ class GromacsTopologyParser:
             if line.startswith("#endif"):
                 last_condition, _ = active_conditions.popitem(last=True)
                 if not self.resolve_conditions:
-                    node_key, node_value = top.make_nvtype(
+                    node_key, node_value = top.make_node_value(
                         "condition", last_condition, None
                     )
                     top.add(node_key, node_value)
@@ -645,13 +753,13 @@ class GromacsTopologyParser:
 
             if line.startswith(";"):
                 comment = line[1:].strip()
-                node_key, node_value = top.make_nvtype("comment", comment)
+                node_key, node_value = top.make_node_value("comment", comment)
                 top.add(node_key, node_value)
                 continue
 
             if line.startswith("#include"):
                 include = line.strip("#include").lstrip()
-                node_key, node_value = top.make_nvtype("include", include)
+                node_key, node_value = top.make_node_value("include", include)
                 top.add(node_key, node_value)
                 continue
 
@@ -663,7 +771,7 @@ class GromacsTopologyParser:
                     if self.verbose:
                         print(f"Unknown section {_new_section}")
 
-                    node_key, node_value = top.make_nvtype("section", _new_section)
+                    node_key, node_value = top.make_node_value("section", _new_section)
                     top.add(node_key, node_value)
                     active_section = active_supersection = node_value
                     continue
@@ -687,7 +795,7 @@ class GromacsTopologyParser:
                 continue
 
             if active_section is None:
-                node_key, node_value = top.make_nvtype("comment", line)
+                node_key, node_value = top.make_node_value("comment", line)
                 node_value._char = None
                 top.add(node_key, node_value)
                 continue
@@ -716,34 +824,10 @@ class GromacsTopologyParser:
                 continue
 
             # Absolute fallback
-            node_key, node_value = top.make_nvtype("generic", line)
+            node_key, node_value = top.make_node_value("generic", line)
             top.add(node_key, node_value)
 
         return top
-
-
-class Node:
-    __slots__ = ["prev", "next", "key", "value", "__weakref__"]
-
-    def __init__(self):
-        self.prev = None
-        self.next = None
-        self.key = None
-        self.value = None
-
-    def __repr__(self):
-        attr_str = f"(key={self.key!r}, value={self.value!r})"
-        return f"{type(self).__name__}{attr_str}"
-
-    def connect(self, other, forward=True):
-        """Link another node in forward/backward direction"""
-
-        if forward is True:
-            self.next = other
-            other.prev = weakref.proxy(self)
-        else:
-            self.prev = weakref.proxy(other)
-            other.next = self
 
 
 class AlwaysGreater:

@@ -79,12 +79,12 @@ def merge_molecules(top: topology.GromacsTopology, name=None):
     moleculetype_section_nvtype.reset_count(len(moleculetype_section_list))
 
     hardroot = new_current = topology.Node()
-    new_current.key, new_current.value = topology.GromacsTopology.make_nvtype(
+    new_current.key, new_current.value = topology.GromacsTopology.make_node_value(
         "moleculetype"
     )
 
     new_next = topology.Node()
-    new_next.key, new_next.value = topology.GromacsTopology.make_nvtype(
+    new_next.key, new_next.value = topology.GromacsTopology.make_node_value(
         "moleculetype_entry", molecule=name, nrexcl=3
     )
 
@@ -165,7 +165,9 @@ def merge_molecules(top: topology.GromacsTopology, name=None):
                         for index in range(len(value.indices)):
                             value.indices[index] += atom_nr_offset
 
-    top.block_insert(moleculetype_section_list[0], hardroot, new_current, forward=False)
+    top.relative_block_insert(
+        moleculetype_section_list[0], hardroot, new_current, forward=False
+    )
 
     top.block_discard(
         moleculetype_section_list[0],
@@ -178,7 +180,7 @@ def merge_molecules(top: topology.GromacsTopology, name=None):
 
     top.block_discard(molecules_section.next, get_last_entry(molecules_section))
 
-    key, value = topology.GromacsTopology.make_nvtype(
+    key, value = topology.GromacsTopology.make_node_value(
         "molecules_entry", molecule=name, number=1
     )
     top.relative_insert(molecules_section, key, value)

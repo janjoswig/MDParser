@@ -37,6 +37,7 @@ class TestGromacsTopology:
 
         for i in range(4):
             assert top[i].value.value == node_list[i][1]
+        # ["foo", "bar", "baz", "brawl"]
 
         node_value_slice = [x.value.value for x in top[1:3]]
         assert node_value_slice == [x[1] for x in node_list[1:3]]
@@ -49,6 +50,7 @@ class TestGromacsTopology:
         top.discard("node2")
         assert len(top) == 3
         assert ("node2" in top) is False
+        # ["foo", "baz", "brawl"]
 
         top.discard("garbage")
 
@@ -60,16 +62,18 @@ class TestGromacsTopology:
 
         top.replace("node3", _base.GenericNodeValue("balthazar"))
         assert top[1].value.value == "balthazar"
+        # ["foo", "balthazar", "brawl"]
 
         top.insert(1, "new", _base.GenericNodeValue("cato"))
         top.insert(10, "other", _base.GenericNodeValue("brick"))
+        # ["foo", "cato", "balthazar", "brawl", "brick"]
 
         with pytest.raises(IndexError):
             _ = top[10]
 
-        with pytest.raises(ValueError):
-            _ = top[[1, 2]]
+        assert [x.value.value for x in top[[1, 2]]] == ["cato", "balthazar"]
 
+        print([node.value.value for node in top])
         assert top[1].value.value == "cato"
         assert top[-1].value.value == "brick"
 
@@ -112,12 +116,18 @@ class TestGromacsTopology:
             return top, node, other
 
         top, node, other = set_up()
-        top.block_insert(top[1], node, other)
-        assert [x.value.value for x in top] == ["1", "2", "4", "5", "3"]
+        top.block_insert(1, node, other)
+        assert [x.value.value for x in top] == ["1", "4", "5", "2", "3"]
 
         top, node, other = set_up()
-        top.block_insert(top[1], node, other, forward=False)
-        assert [x.value.value for x in top] == ["1", "4", "5", "2", "3"]
+        anchor = top[2]
+        top.relative_block_insert(anchor, node, other)
+        assert [x.value.value for x in top] == ["1", "2", "3", "4", "5"]
+
+        top, node, other = set_up()
+        anchor = top[2]
+        top.relative_block_insert(anchor, node, other, forward=False)
+        assert [x.value.value for x in top] == ["1", "2", "4", "5", "3"]
 
     def test_info(self):
         top = topology.GromacsTopology()
@@ -221,9 +231,11 @@ class TestNode:
 
         node.connect(other)
         assert node.next is other
+        assert isinstance(other.prev, weakref.ProxyType)
 
         node.connect(other, forward=False)
         assert other.next is node
+        assert isinstance(node.prev, weakref.ProxyType)
 
 
 class TestNodeValues:

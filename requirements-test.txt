@@ -1,3 +1,4 @@
+anybadge
 coverage
 pytest
 pytest-raises

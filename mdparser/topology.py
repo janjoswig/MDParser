@@ -398,7 +398,7 @@ class Topology:
 
 
 class GromacsTopology(Topology):
-    __node_value_types = DEFAULT_GMX_NODE_VALUE_TYPES
+    __node_value_types = {**Topology._Topology__node_value_types, **DEFAULT_GMX_NODE_VALUE_TYPES}  # type: ignore
 
     def __str__(self):
         section_type = self.select_nvtype("section")

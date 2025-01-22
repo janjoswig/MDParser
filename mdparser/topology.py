@@ -474,15 +474,21 @@ class GromacsTopologyParser:
         self.preprocess = preprocess
         self.include_local = include_local
 
-        if local_paths is not None:
-            local_paths = [pathlib.Path(p) for p in local_paths]
-        self.local_paths = local_paths
+        if local_paths is None:
+            self.local_paths = None
+        else:
+            if isinstance(local_paths, str) or not isinstance(local_paths, Iterable):
+                local_paths = [local_paths]
+            self.local_paths = [pathlib.Path(p) for p in local_paths]
 
         self.include_shared = include_shared
 
-        if shared_paths is not None:
-            shared_paths = [pathlib.Path(p) for p in shared_paths]
-        self.shared_paths = shared_paths
+        if shared_paths is None:
+            self.shared_paths = None
+        else:
+            if isinstance(shared_paths, str) or not isinstance(shared_paths, Iterable):
+                shared_paths = [shared_paths]
+            self.shared_paths = [pathlib.Path(p) for p in shared_paths]
 
         if include_blacklist is not None:
             include_blacklist = [pathlib.Path(f) for f in include_blacklist]
@@ -520,10 +526,8 @@ class GromacsTopologyParser:
             try:
                 file_path = pathlib.Path(file.name).parent.absolute()
             except AttributeError:
-                file_path = None
-
-            if file_path is not None:
-                _local_paths.append(file_path)
+                file_path = pathlib.Path.cwd()
+            _local_paths.append(file_path)
 
         else:
             _local_paths = [pathlib.Path(p) for p in local_paths]

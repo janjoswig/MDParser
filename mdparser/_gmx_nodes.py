@@ -101,7 +101,7 @@ class ConstrainttypesSection(SpecializedSection):
 
 
 class NonbondedParamsSection(SpecializedSection):
-    _node_key_name = "nonbonded_params"
+    _node_key_name = "nonbond_params"
 
 
 class MoleculetypeSection(SpecializedSection):

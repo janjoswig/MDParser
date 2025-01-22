@@ -654,7 +654,7 @@ class SystemEntry(SectionEntry):
 class MoleculesEntry(SectionEntry):
     _node_key_name = "molecules_entry"
     _args = [
-        ("molecule", str, make_formatter("")),
+        ("molecule", str, make_formatter("<15")),
         ("number", int, make_formatter(">6")),
     ]
 

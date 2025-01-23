@@ -802,7 +802,7 @@ class GromacsTopologyParser:
 
             if active_section is None:
                 node_key, node_value = top.make_node_value("comment", line)
-                node_value._char = None
+                node_value._char = None  # type:ignore
                 top.add(node_key, node_value)
                 continue
 

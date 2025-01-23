@@ -221,7 +221,7 @@ class Comment(NodeValue):
     """Standalone full-line comment"""
 
     _node_key_name = "comment"
-    _char = ";"
+    _char: Optional[str] = ";"
 
     def __init__(self, comment: str):
         super().__init__()

@@ -2,41 +2,41 @@
 
 [ moleculetype ]
 
- new     3
+new     3
 
 [ atoms ]
 
- 1     A
+1     A
 
- 2     B
+2     B
 
 [ bonds ]
 
-     1     2     1
+    1     2     1
 
 [ atoms ]
 
- 3     A
+3     A
 
- 4     B
+4     B
 
 [ bonds ]
 
-     3     4     1
+    3     4     1
 
 [ atoms ]
 
- 5     C
+5     C
 
 [ atoms ]
 
- 6     C
+6     C
 
 [ system ]
 
- Two molecules
+Two molecules
 
 [ molecules ]
 
- new      1
+new                  1
 

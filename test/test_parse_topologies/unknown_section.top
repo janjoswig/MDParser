@@ -1,0 +1,19 @@
+; Test topology containing an unknown section
+
+[ atomtypes ]
+ C0        20  40.08    0.0    A 3.05240e-01 1.92376e+00
+
+[ stub ]
+ X   2   rot 3.4
+
+[ moleculetype ]
+Ion    3
+
+[ atoms ]
+     1         C0      1     CA     CA      1     2.0000     40.080
+
+[ system ]
+Ion
+
+[ molecules ]
+Ion    1

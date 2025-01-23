@@ -1,11 +1,14 @@
-from collections import OrderedDict
-from itertools import islice
+import os
 import pathlib
 import shlex
 import subprocess
+import weakref
+from collections import OrderedDict
+from itertools import islice
 from typing import (
     Any,
     Dict,
+    List,
     Iterable,
     Iterator,
     Mapping,
@@ -15,10 +18,12 @@ from typing import (
     TextIO,
     Union,
 )
-import weakref
 
 from ._base import Node, NodeValue, GenericNodeValue, ensure_proxy, unproxy_node, get_node_path
 from . import _gmx_nodes
+
+
+StrOrPath = Union[str, os.PathLike]
 
 
 DEFAULT_GENERIC_NODE_VALUE_TYPES = {
@@ -294,7 +299,6 @@ class Topology:
             raise ValueError("index must be an integer")
 
         block_nodes = get_node_path(block_start, block_end)
-        print(block_nodes)
         self._batch_add_nodes(block_nodes)
 
         prev = root = self._root
@@ -453,7 +457,34 @@ class GromacsTopology(Topology):
 
 
 class GromacsTopologyParser:
-    """Read and write GROMACS topology files"""
+    """Read and write GROMACS topology files
+
+    Attributes:
+        ignore_comments: If `True`, skips lines starting with ";"
+        preprocess: If `True`, runs once through the file before
+            actual parsing to resolve includes. Options `include_local`, and
+            `include_shared` have no effect if this is `False`.
+        include_local: If `True`, tries to resolve "#include" statements
+            for local files. Local files are searched for relative to paths
+            given in `local_paths`.
+        local_paths: List of paths to search for local files. If `None`,
+            uses the directory of the file being read, or the current working
+            directory if reading string input.
+        include_shared: If `True`, tries to resolve "#include" statements
+            for shared files. Shared files are searched for relative to paths
+            given in `shared_paths`.
+        shared_paths: List of paths to search for shared files. If `None`,
+            tries to determine the GROMACS shared directory if there is
+            a valid installation.
+        include_blacklist: List of file paths (local or shared) to exclude from
+            inclusion.
+        definitions: Mapping of variable names to values. To replicate the
+            behaviour of "-DPOSRES" or "#define POSRES", use `{"POSRES": True}`.
+        resolve_conditions: If `True`, resolve "#ifdef", "#ifndef", and "#else"
+            blocks based on present definitions.
+        verbose: Be chatty.
+        reset_counts: If `True`, sets the node value type counters to zero before parsing.
+    """
 
     _top_type = GromacsTopology
 
@@ -463,61 +494,56 @@ class GromacsTopologyParser:
         preprocess: bool = True,
         include_local: bool = True,
         include_shared: bool = False,
-        local_paths: Optional[Iterable[Any]] = None,
-        shared_paths: Optional[Iterable[Any]] = None,
-        include_blacklist: Optional[Iterable[Any]] = None,
+        local_paths: Optional[Union[StrOrPath, Iterable[StrOrPath]]] = None,
+        shared_paths: Optional[Union[StrOrPath, Iterable[StrOrPath]]] = None,
+        include_blacklist: Optional[Union[StrOrPath, Iterable[StrOrPath]]] = None,
         definitions: Optional[Mapping[str, Any]] = None,
         resolve_conditions: bool = True,
         verbose: bool = True,
+        reset_counts: bool = True,
     ):
         self.ignore_comments = ignore_comments
         self.preprocess = preprocess
         self.include_local = include_local
-
-        if local_paths is None:
-            self.local_paths = None
-        else:
-            if isinstance(local_paths, str) or not isinstance(local_paths, Iterable):
-                local_paths = [local_paths]
-            self.local_paths = [pathlib.Path(p) for p in local_paths]
-
+        self.local_paths = self.to_list_of_paths(local_paths)
         self.include_shared = include_shared
-
-        if shared_paths is None:
-            self.shared_paths = None
-        else:
-            if isinstance(shared_paths, str) or not isinstance(shared_paths, Iterable):
-                shared_paths = [shared_paths]
-            self.shared_paths = [pathlib.Path(p) for p in shared_paths]
-
-        if include_blacklist is not None:
-            include_blacklist = [pathlib.Path(f) for f in include_blacklist]
-        self.include_blacklist = include_blacklist
-
-        self.verbose = verbose
+        self.shared_paths = self.to_list_of_paths(shared_paths)
+        self.include_blacklist = self.to_list_of_paths(include_blacklist, resolve=False)
         self.resolve_conditions = resolve_conditions
+        self.verbose = verbose
+        self.reset_counts = reset_counts
 
-        self.definitions = {}
-        if definitions is not None:
-            self.definitions.update(definitions)
+        if definitions is None:
+            definitions = {}
+        self.definitions = {**definitions}
+
+    @staticmethod
+    def to_list_of_paths(
+            paths: Optional[Union[StrOrPath, Iterable[StrOrPath]]], resolve: bool = True) -> Optional[List[pathlib.Path]]:
+        """Convert input to list of pathlib.Path instances"""
+
+        if paths is None:
+            return
+
+        if isinstance(paths, str) or not isinstance(paths, Iterable):
+            paths = [paths]
+
+        if resolve:
+            return [pathlib.Path(f).resolve() for f in paths]
+
+        return [pathlib.Path(f) for f in paths]
 
     def preprocess_includes(
         self,
         file: Union[TextIO, Iterable[str]],
-        include_local=True,
-        local_paths=None,
-        include_shared=False,
-        shared_paths=None,
-        include_blacklist=None,
-        verbose=True,
-    ):
+        local_paths: Optional[List[pathlib.Path]] = None,
+        shared_paths: Optional[List[pathlib.Path]] = None,
+        include_blacklist: Optional[List[pathlib.Path]] = None,
+    ) -> Iterator[str]:
         """Pre-process topology file-like object
 
         Yield topology file line by line and resolve '#include'
         statements.
-
-        Args:
-            file: File-like iterable.
         """
 
         if local_paths is None:
@@ -529,20 +555,15 @@ class GromacsTopologyParser:
                 file_path = pathlib.Path.cwd()
             _local_paths.append(file_path)
 
-        else:
-            _local_paths = [pathlib.Path(p) for p in local_paths]
-
         if shared_paths is None:
             shared_paths = []
+
             gmx_shared = get_gmx_dir()[1]
             if gmx_shared is not None:
                 shared_paths.append(gmx_shared)
 
-        else:
-            shared_paths = [pathlib.Path(p) for p in shared_paths]
-
-        if include_blacklist is not None:
-            include_blacklist = [pathlib.Path(f) for f in include_blacklist]
+        if include_blacklist is None:
+            include_blacklist = []
 
         for line in file:
             if not line.startswith("#include"):
@@ -553,28 +574,26 @@ class GromacsTopologyParser:
             excluded = False
 
             found_locally = False
-            if include_local:
+            if self.include_local:
                 for include_dir in _local_paths:
                     include_path = include_dir / include_file
 
                     if not include_path.is_file():
                         continue
 
-                    if path_in_blacklist(include_path, include_blacklist):
+                    if path_in_paths(include_path, include_blacklist):
                         excluded = True
-                        if verbose:
+                        if self.verbose:
                             print(f"Not including {include_path} (blacklist)")
                         continue
 
-                    with open(include_path) as open_file:
-                        if verbose:
+                    with open(include_path) as fp:
+                        if self.verbose:
                             print(f"Including {include_path} (local)")
 
                         yield from self.preprocess_includes(
-                            open_file,
-                            include_local=include_local,
+                            fp,
                             local_paths=local_paths,
-                            include_shared=include_shared,
                             shared_paths=shared_paths,
                             include_blacklist=include_blacklist,
                         )
@@ -582,28 +601,26 @@ class GromacsTopologyParser:
                     break
 
             found_shared = False
-            if not found_locally and include_shared:
+            if not found_locally and self.include_shared:
                 for include_dir in shared_paths:
                     include_path = include_dir / include_file
 
                     if not include_path.is_file():
                         continue
 
-                    if path_in_blacklist(include_path, include_blacklist):
+                    if path_in_paths(include_path, include_blacklist):
                         excluded = True
-                        if verbose:
+                        if self.verbose:
                             print(f"Not including {include_path} (blacklist)")
                         continue
 
                     with open(include_path) as open_file:
-                        if verbose:
+                        if self.verbose:
                             print(f"Including {include_path} (shared)")
 
                         yield from self.preprocess_includes(
                             open_file,
-                            include_local=include_local,
                             local_paths=local_paths,
-                            include_shared=include_shared,
                             shared_paths=shared_paths,
                             include_blacklist=include_blacklist,
                         )
@@ -611,40 +628,38 @@ class GromacsTopologyParser:
                     break
 
             if not (found_locally or found_shared):
-                if verbose & (not excluded):
+                if self.verbose & (not excluded):
                     print(f"Could not find {include_file}")
                 yield line
 
-    def read(self, file: Iterable) -> GromacsTopology:
+    def read(self, file: Union[TextIO, Iterable[str]]) -> GromacsTopology:
         top = self._top_type()
 
         if self.preprocess:
             file = self.preprocess_includes(
                 file,
-                include_local=self.include_local,
                 local_paths=self.local_paths,
-                include_shared=self.include_shared,
                 shared_paths=self.shared_paths,
                 include_blacklist=self.include_blacklist,
-                verbose=self.verbose,
             )
 
         active_section = None
         active_supersection = None
-        active_category = 0
+        active_category = 0  # 0: header, 1: moleculetype sections, 2: system sections
 
         active_conditions = OrderedDict()
         active_definitions = {}
         active_definitions.update(self.definitions)
 
-        for node_value_type in top.node_value_types.values():
-            node_value_type.reset_count()
+        if self.reset_counts:
+            for node_value_type in top.node_value_types.values():
+                node_value_type.reset_count()
 
         previous = ""
         for line in file:
             if line.strip().endswith("\\"):
                 # Resolve multi-line statement
-                line = line[: line.rfind("\\")]
+                line = line[:line.rfind("\\")]
                 previous = f"{previous}{line}"
                 continue
 
@@ -900,14 +915,11 @@ def split_comment(line):
     return line, None
 
 
-def path_in_blacklist(include_path, include_blacklist):
-    if include_blacklist is None:
-        return False
+def path_in_paths(test_path: pathlib.Path, path_list: List[pathlib.Path]) -> bool:
 
-    include_path = str(include_path)
-
-    for ignored in include_blacklist:
-        if str(ignored) in include_path:
+    for compare in path_list:
+        compare_parts = compare.parts
+        if test_path.parts[-len(compare_parts):] == compare_parts:
             return True
 
     return False

@@ -1,4 +1,5 @@
-from typing import Iterable
+from itertools import count
+from typing import Any, Callable, List, Iterable, Optional, Tuple
 
 from ._base import NodeValue, make_formatter, trim_locals
 
@@ -220,11 +221,11 @@ class Comment(NodeValue):
     """Standalone full-line comment"""
 
     _node_key_name = "comment"
+    _char = ";"
 
     def __init__(self, comment: str):
         super().__init__()
         self.comment = comment
-        self._char = ";"
 
     def __str__(self):
         if self._char is None:
@@ -249,37 +250,55 @@ class Include(NodeValue):
         return f"{type(self).__name__}({self.include})"
 
 
+class FlexibleArgs:
+    def __iter__(self):
+        yield from ((f"a{i}", str, lambda x : x) for i in count(1))
+
+
 class SectionEntry(NodeValue):
-    """A section entry"""
+    """A section entry
+
+    Use class attribute `_args` (in subclasses) to specify
+    allowed elements stored
+    in an entry as tuples `(name, type_converter, formatter)`.
+    A type converter can be any callable that takes a value and returns
+    one. A formatter is any functions that takes a value and returns a
+    formatted string for printing.
+
+    If `_args=[]` (as for the plain `SectionEntry` class), works with an
+    arbitrary number of elements, no type conversion, and
+    no special formatting. This will add `_args` as an instance attribute
+    for the actual arguments passed.
+    """
 
     _node_key_name = "section_entry"
-    _args = []
+    _args: List[Tuple[str, Optional[Callable[[Any], Any]], Callable[[Any], str]]] = []
 
     def __init__(self, comment=None, **kwargs):
         super().__init__()
 
-        for name, target_type, *_ in self._args:
-            value = kwargs.get(name)
-            if value is None:
-                setattr(self, name, value)
-                continue
+        allowed_args = type(self)._args
 
-            if target_type is None:
-                continue
+        if not allowed_args:
+            self._args = []
+            for name, value in kwargs.items():
+                self.set_arg(name, value)
+                self._args.append((name, None, make_formatter()))
 
-            try:
-                value = target_type(value)
-            except ValueError:
-                if not isinstance(value, str):
-                    raise TypeError(
-                        f"Argument {name!r} should be 'str' or "
-                        f"convertible to {target_type.__name__!r}"
-                    )
-
-            setattr(self, name, value)
+        else:
+            self._args = allowed_args
+            for name, target_type, _ in allowed_args:
+                value = kwargs.get(name)
+                self.set_arg(name, value, target_type)
 
         self.comment = comment
         self._raw = None
+
+    def set_arg(self, name: str, value: Any, target_type: Optional[Any] = None) -> None:
+        if (value is not None) and (target_type is not None):
+            value = target_type(value)
+
+        setattr(self, name, value)
 
     def __copy__(self):
         kwargs = {arg_name: getattr(self, arg_name) for arg_name, *_ in self._args}
@@ -296,32 +315,37 @@ class SectionEntry(NodeValue):
 
     @classmethod
     def from_line(cls, *args, comment=None):
-        kwargs = {kw[0]: v for kw, v in zip(cls._args, args)}
 
-        entry = cls(comment=comment, **kwargs)
+        allowed_args = cls._args
+        if not allowed_args:
+            allowed_args = FlexibleArgs()
 
-        return entry
+        kwargs = {kw[0]: v for kw, v in zip(allowed_args, args)}
+        return cls(comment=comment, **kwargs)
 
     def __str__(self):
         if self._raw is not None:
             return self._raw
 
-        return_str = ""
-        for name, *_, formatter in self._args:
+        components = []
+        for name, _, formatter in self._args:
             value = getattr(self, name)
             if value is None:
+                # TODO: Think about place holder for required but missing args
+                # components.append("NaN")
                 continue
 
             if not isinstance(value, str) and isinstance(value, Iterable):
                 for v in value:
-                    return_str += f" {formatter(v)}"
+                    components.append(formatter(v))
                 continue
 
-            return_str += f" {formatter(value)}"
+            components.append(formatter(value))
 
-        return_str = self._finish_str(return_str)
+        if self.comment is not None:
+            components.append(f"{Comment._char} {self.comment}")
 
-        return return_str
+        return " ".join(components).rstrip()
 
     def __repr__(self):
         arg_name_repr = ", ".join(
@@ -329,14 +353,6 @@ class SectionEntry(NodeValue):
         )
 
         return f"{type(self).__name__}({arg_name_repr})"
-
-    def _finish_str(self, string):
-        if self.comment is not None:
-            string += f" ; {self.comment}"
-
-        string = string.rstrip()
-
-        return string
 
 
 class PropertyInvoker:
@@ -675,7 +691,7 @@ class AtomsEntry(SectionEntry):
         ("cgnr", int, make_formatter("<5")),
         ("charge", float, make_formatter(">7.4f")),
         ("mass", float, make_formatter("7.3f")),
-        ("typeB", float, make_formatter("<5")),
+        ("typeB", str, make_formatter("<5")),
         ("chargeB", float, make_formatter(">7.4f")),
         ("massB", float, make_formatter("7.3f")),
     ]

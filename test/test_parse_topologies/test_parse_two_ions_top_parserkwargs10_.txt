@@ -2,23 +2,23 @@ include_1            #include "amber99sb-ildn.ff/forcefield.itp"
 
 moleculetype_1       [ moleculetype ]
 
-moleculetype_entry_1  CA     1
+moleculetype_entry_1 CA     1
 
 atoms_1              [ atoms ]
 
-atoms_entry_1         1     C0    1     CA    CA    1      2.0000
+atoms_entry_1        1     C0    1     CA    CA    1      2.0000
 
 moleculetype_2       [ moleculetype ]
 
-moleculetype_entry_2  CL     1
+moleculetype_entry_2 CL     1
 
 system_1             [ system ]
 
-system_entry_1        Two ions
+system_entry_1       Two ions
 
 molecules_1          [ molecules ]
 
-molecules_entry_1     CA      1
+molecules_entry_1    CA                   1
 
-molecules_entry_2     CL      1
+molecules_entry_2    CL                   1
 

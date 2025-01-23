@@ -1,15 +1,17 @@
 import weakref
 from abc import ABC, abstractmethod
 from collections import OrderedDict
-from typing import Optional
+from typing import Any, Callable, Optional
 
 
 def trim_locals(d):
     return {k: v for k, v in d.items() if k not in ("self", "__class__")}
 
 
-def make_formatter(f):
+def make_formatter(f: Optional[str] = None) -> Callable[[Any], str]:
     def formatter(value):
+        if f is None:
+            return f"{value}"
         return f"{value:{f}}"
 
     return formatter
@@ -75,7 +77,7 @@ class Node:
         self,
         *,
         key: Optional[str] = None,
-        value: Optional[NodeValue] = None,
+        value: Optional[Any] = None,
         prev: Optional["Node"] = None,
         next: Optional["Node"] = None,
     ) -> None:

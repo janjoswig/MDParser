@@ -19,7 +19,14 @@ from typing import (
     Union,
 )
 
-from ._base import Node, NodeValue, GenericNodeValue, ensure_proxy, unproxy_node, get_node_path
+from ._base import (
+    Node,
+    NodeValue,
+    GenericNodeValue,
+    ensure_proxy,
+    unproxy_node,
+    get_node_path,
+)
 from . import _gmx_nodes
 
 
@@ -167,7 +174,9 @@ class Topology:
         node.key = key
         self._nodes[key] = node
 
-    def _batch_add_nodes(self, nodes: Iterable[Node], keys: Optional[Iterable[str]] = None) -> None:
+    def _batch_add_nodes(
+        self, nodes: Iterable[Node], keys: Optional[Iterable[str]] = None
+    ) -> None:
         if keys is None:
             keys = []
             for i, node in enumerate(nodes):
@@ -344,7 +353,7 @@ class Topology:
         next_node = block_end.next
         block_start.disconnect(backward=True)
         block_end.disconnect(forward=True)
-        prev.connect(next_node) # type: ignore
+        prev.connect(next_node)  # type: ignore
 
         block_nodes = get_node_path(block_start, block_end)
         for node in block_nodes:
@@ -352,7 +361,12 @@ class Topology:
                 del self._nodes[node.key]
 
     def get_next_node_with_nvtype(
-        self, start: Optional[Node] = None, stop: Optional[Node] = None, nvtype=None, exclude=None, forward=True
+        self,
+        start: Optional[Node] = None,
+        stop: Optional[Node] = None,
+        nvtype=None,
+        exclude=None,
+        forward=True,
     ):
         """Search topology for another node
 
@@ -402,7 +416,10 @@ class Topology:
 
 
 class GromacsTopology(Topology):
-    __node_value_types = {**Topology._Topology__node_value_types, **DEFAULT_GMX_NODE_VALUE_TYPES}  # type: ignore
+    __node_value_types = {
+        **Topology._Topology__node_value_types,
+        **DEFAULT_GMX_NODE_VALUE_TYPES,
+    }  # type: ignore
 
     def __str__(self):
         section_type = self.select_nvtype("section")
@@ -519,7 +536,8 @@ class GromacsTopologyParser:
 
     @staticmethod
     def to_list_of_paths(
-            paths: Optional[Union[StrOrPath, Iterable[StrOrPath]]], resolve: bool = True) -> Optional[List[pathlib.Path]]:
+        paths: Optional[Union[StrOrPath, Iterable[StrOrPath]]], resolve: bool = True
+    ) -> Optional[List[pathlib.Path]]:
         """Convert input to list of pathlib.Path instances"""
 
         if paths is None:
@@ -659,7 +677,7 @@ class GromacsTopologyParser:
         for line in file:
             if line.strip().endswith("\\"):
                 # Resolve multi-line statement
-                line = line[:line.rfind("\\")]
+                line = line[: line.rfind("\\")]
                 previous = f"{previous}{line}"
                 continue
 
@@ -916,10 +934,9 @@ def split_comment(line):
 
 
 def path_in_paths(test_path: pathlib.Path, path_list: List[pathlib.Path]) -> bool:
-
     for compare in path_list:
         compare_parts = compare.parts
-        if test_path.parts[-len(compare_parts):] == compare_parts:
+        if test_path.parts[-len(compare_parts) :] == compare_parts:
             return True
 
     return False

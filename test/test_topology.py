@@ -112,7 +112,6 @@ class TestGromacsTopology:
         return top, node, other
 
     def test_block_insert(self):
-
         top, node, other = self.set_up()
         top.block_insert(1, node, other)
         assert [x.value.value for x in top] == ["1", "4", "5", "2", "3"]

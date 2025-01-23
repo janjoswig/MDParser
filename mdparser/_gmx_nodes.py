@@ -252,7 +252,7 @@ class Include(NodeValue):
 
 class FlexibleArgs:
     def __iter__(self):
-        yield from ((f"a{i}", str, lambda x : x) for i in count(1))
+        yield from ((f"a{i}", str, lambda x: x) for i in count(1))
 
 
 class SectionEntry(NodeValue):
@@ -296,7 +296,13 @@ class SectionEntry(NodeValue):
 
     def set_arg(self, name: str, value: Any, target_type: Optional[Any] = None) -> None:
         if (value is not None) and (target_type is not None):
-            value = target_type(value)
+            try:
+                value = target_type(value)
+            except ValueError:
+                if not isinstance(value, str):
+                    raise TypeError(
+                        f"Cannot convert non-string value {value!r} using {target_type}"
+                    )
 
         setattr(self, name, value)
 
@@ -315,7 +321,6 @@ class SectionEntry(NodeValue):
 
     @classmethod
     def from_line(cls, *args, comment=None):
-
         allowed_args = cls._args
         if not allowed_args:
             allowed_args = FlexibleArgs()

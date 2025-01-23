@@ -191,7 +191,7 @@ def get_node_path(start: Node, end: Node):
     seen_nodes[start] = None
     reached_end = False
     while not reached_end and start.is_forward_connected:
-        start = start.next # type: ignore
+        start = start.next  # type: ignore
         if start in seen_nodes:
             raise ValueError("Could not reach end node")
         seen_nodes[start] = None

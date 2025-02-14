@@ -70,6 +70,18 @@ class GenericNodeValue(NodeValue):
         return f"{type(self).__name__}(value={self.value!r})"
 
 
+class RootNodeValue(NodeValue):
+    """Sentinel value for root nodes"""
+
+    _node_key_name = "root"
+    
+    def __str__(self) -> str:
+        return __repr__()
+
+    def __repr__(self):
+        return f"{type(self).__name__}"
+
+
 class Node:
     __slots__ = ["_prev", "_next", "_key", "value", "__weakref__"]
 

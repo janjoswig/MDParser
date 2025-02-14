@@ -28,351 +28,351 @@ defaults_1           [ defaults ]
 
 comment_12           ; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
 
-defaults_entry_1      1               2               yes             0.5     0.8333
+defaults_entry_1     1               2               yes             0.5     0.8333
 
 atomtypes_1          [ atomtypes ]
 
 comment_13           ; name      at.num  mass     charge ptype  sigma      epsilon
 
-atomtypes_entry_1     Br        35  79.9     0.0    A 3.95559e-01 1.33888e+00 ;  Converted from parm99.dat
+atomtypes_entry_1    Br        35  79.9     0.0    A 3.95559e-01 1.33888e+00 ;  Converted from parm99.dat
 
-atomtypes_entry_2     C         6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_2    C         6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_3     CA        6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_3    CA        6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_4     CB        6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_4    CB        6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_5     CC        6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_5    CC        6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_6     CK        6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_6    CK        6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_7     CM        6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_7    CM        6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_8     CN        6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_8    CN        6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_9     CQ        6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_9    CQ        6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_10    CR        6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_10   CR        6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_11    CT        6   12.01    0.0    A 3.39967e-01 4.57730e-01
+atomtypes_entry_11   CT        6   12.01    0.0    A 3.39967e-01 4.57730e-01
 
-atomtypes_entry_12    CV        6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_12   CV        6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_13    CW        6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_13   CW        6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_14    C*        6   12.01    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_14   C*        6   12.01    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_15    C0        20  40.08    0.0    A 3.05240e-01 1.92376e+00
+atomtypes_entry_15   C0        20  40.08    0.0    A 3.05240e-01 1.92376e+00
 
-atomtypes_entry_16    F         9   19.0     0.0    A 3.11815e-01 2.55224e-01
+atomtypes_entry_16   F         9   19.0     0.0    A 3.11815e-01 2.55224e-01
 
-atomtypes_entry_17    H         1   1.008    0.0    A 1.06908e-01 6.56888e-02
+atomtypes_entry_17   H         1   1.008    0.0    A 1.06908e-01 6.56888e-02
 
-atomtypes_entry_18    HC        1   1.008    0.0    A 2.64953e-01 6.56888e-02
+atomtypes_entry_18   HC        1   1.008    0.0    A 2.64953e-01 6.56888e-02
 
-atomtypes_entry_19    H1        1   1.008    0.0    A 2.47135e-01 6.56888e-02
+atomtypes_entry_19   H1        1   1.008    0.0    A 2.47135e-01 6.56888e-02
 
-atomtypes_entry_20    H2        1   1.008    0.0    A 2.29317e-01 6.56888e-02
+atomtypes_entry_20   H2        1   1.008    0.0    A 2.29317e-01 6.56888e-02
 
-atomtypes_entry_21    H3        1   1.008    0.0    A 2.11499e-01 6.56888e-02
+atomtypes_entry_21   H3        1   1.008    0.0    A 2.11499e-01 6.56888e-02
 
-atomtypes_entry_22    HA        1   1.008    0.0    A 2.59964e-01 6.27600e-02
+atomtypes_entry_22   HA        1   1.008    0.0    A 2.59964e-01 6.27600e-02
 
-atomtypes_entry_23    H4        1   1.008    0.0    A 2.51055e-01 6.27600e-02
+atomtypes_entry_23   H4        1   1.008    0.0    A 2.51055e-01 6.27600e-02
 
-atomtypes_entry_24    H5        1   1.008    0.0    A 2.42146e-01 6.27600e-02
+atomtypes_entry_24   H5        1   1.008    0.0    A 2.42146e-01 6.27600e-02
 
-atomtypes_entry_25    HO        1   1.008    0.0    A 0.00000e+00 0.00000e+00
+atomtypes_entry_25   HO        1   1.008    0.0    A 0.00000e+00 0.00000e+00
 
-atomtypes_entry_26    HS        1   1.008    0.0    A 1.06908e-01 6.56888e-02
+atomtypes_entry_26   HS        1   1.008    0.0    A 1.06908e-01 6.56888e-02
 
-atomtypes_entry_27    HW        1   1.008    0.0    A 0.00000e+00 0.00000e+00
+atomtypes_entry_27   HW        1   1.008    0.0    A 0.00000e+00 0.00000e+00
 
-atomtypes_entry_28    HP        1   1.008    0.0    A 1.95998e-01 6.56888e-02
+atomtypes_entry_28   HP        1   1.008    0.0    A 1.95998e-01 6.56888e-02
 
-atomtypes_entry_29    I         53  126.9    0.0    A 4.18722e-01 1.67360e+00
+atomtypes_entry_29   I         53  126.9    0.0    A 4.18722e-01 1.67360e+00
 
-atomtypes_entry_30    Cl        17  35.45    0.0    A 4.40104e-01 4.18400e-01
+atomtypes_entry_30   Cl        17  35.45    0.0    A 4.40104e-01 4.18400e-01
 
-atomtypes_entry_31    Na        11  22.99    0.0    A 3.32840e-01 1.15897e-02
+atomtypes_entry_31   Na        11  22.99    0.0    A 3.32840e-01 1.15897e-02
 
-atomtypes_entry_32    IB        0   131.0    0.0    A 8.90899e-01 4.18400e-01
+atomtypes_entry_32   IB        0   131.0    0.0    A 8.90899e-01 4.18400e-01
 
-atomtypes_entry_33    MG        12  24.305   0.0    A 1.41225e-01 3.74342e+00
+atomtypes_entry_33   MG        12  24.305   0.0    A 1.41225e-01 3.74342e+00
 
-atomtypes_entry_34    N         7   14.01    0.0    A 3.25000e-01 7.11280e-01
+atomtypes_entry_34   N         7   14.01    0.0    A 3.25000e-01 7.11280e-01
 
-atomtypes_entry_35    NA        7   14.01    0.0    A 3.25000e-01 7.11280e-01
+atomtypes_entry_35   NA        7   14.01    0.0    A 3.25000e-01 7.11280e-01
 
-atomtypes_entry_36    NB        7   14.01    0.0    A 3.25000e-01 7.11280e-01
+atomtypes_entry_36   NB        7   14.01    0.0    A 3.25000e-01 7.11280e-01
 
-atomtypes_entry_37    NC        7   14.01    0.0    A 3.25000e-01 7.11280e-01
+atomtypes_entry_37   NC        7   14.01    0.0    A 3.25000e-01 7.11280e-01
 
-atomtypes_entry_38    N2        7   14.01    0.0    A 3.25000e-01 7.11280e-01
+atomtypes_entry_38   N2        7   14.01    0.0    A 3.25000e-01 7.11280e-01
 
-atomtypes_entry_39    N3        7   14.01    0.0    A 3.25000e-01 7.11280e-01
+atomtypes_entry_39   N3        7   14.01    0.0    A 3.25000e-01 7.11280e-01
 
-atomtypes_entry_40    N*        7   14.01    0.0    A 3.25000e-01 7.11280e-01
+atomtypes_entry_40   N*        7   14.01    0.0    A 3.25000e-01 7.11280e-01
 
-atomtypes_entry_41    O         8   16.0     0.0    A 2.95992e-01 8.78640e-01
+atomtypes_entry_41   O         8   16.0     0.0    A 2.95992e-01 8.78640e-01
 
-atomtypes_entry_42    OW        8   16.0     0.0    A 3.15061e-01 6.36386e-01
+atomtypes_entry_42   OW        8   16.0     0.0    A 3.15061e-01 6.36386e-01
 
-atomtypes_entry_43    OH        8   16.0     0.0    A 3.06647e-01 8.80314e-01
+atomtypes_entry_43   OH        8   16.0     0.0    A 3.06647e-01 8.80314e-01
 
-atomtypes_entry_44    OS        8   16.0     0.0    A 3.00001e-01 7.11280e-01
+atomtypes_entry_44   OS        8   16.0     0.0    A 3.00001e-01 7.11280e-01
 
-atomtypes_entry_45    O2        8   16.0     0.0    A 2.95992e-01 8.78640e-01
+atomtypes_entry_45   O2        8   16.0     0.0    A 2.95992e-01 8.78640e-01
 
-atomtypes_entry_46    P         15  30.97    0.0    A 3.74177e-01 8.36800e-01
+atomtypes_entry_46   P         15  30.97    0.0    A 3.74177e-01 8.36800e-01
 
-atomtypes_entry_47    S         16  32.06    0.0    A 3.56359e-01 1.04600e+00
+atomtypes_entry_47   S         16  32.06    0.0    A 3.56359e-01 1.04600e+00
 
-atomtypes_entry_48    SH        16  32.06    0.0    A 3.56359e-01 1.04600e+00
+atomtypes_entry_48   SH        16  32.06    0.0    A 3.56359e-01 1.04600e+00
 
-atomtypes_entry_49    CU        29  63.55    0.0    A 3.39967e-01 3.59824e-01
+atomtypes_entry_49   CU        29  63.55    0.0    A 3.39967e-01 3.59824e-01
 
-atomtypes_entry_50    K         19  39.1     0.0    A 4.73602e-01 1.37235e-03
+atomtypes_entry_50   K         19  39.1     0.0    A 4.73602e-01 1.37235e-03
 
-atomtypes_entry_51    Rb        37  85.47    0.0    A 5.26699e-01 7.11280e-04
+atomtypes_entry_51   Rb        37  85.47    0.0    A 5.26699e-01 7.11280e-04
 
-atomtypes_entry_52    Cs        55  132.91   0.0    A 6.04920e-01 3.37230e-04
+atomtypes_entry_52   Cs        55  132.91   0.0    A 6.04920e-01 3.37230e-04
 
 comment_14           ; spc water - use only with spc.itp & settles
 
-atomtypes_entry_53    OW_spc    8   15.9994  0.0    A 3.16557e-01 6.50629e-01
+atomtypes_entry_53   OW_spc    8   15.9994  0.0    A 3.16557e-01 6.50629e-01
 
-atomtypes_entry_54    HW_spc    1   1.008    0.0    A 0.00000e+00 0.00000e+00
+atomtypes_entry_54   HW_spc    1   1.008    0.0    A 0.00000e+00 0.00000e+00
 
-atomtypes_entry_55    Li        3   6.94     0.0    A 2.02590e-01 7.65672e-02
+atomtypes_entry_55   Li        3   6.94     0.0    A 2.02590e-01 7.65672e-02
 
-atomtypes_entry_56    Zn        30  65.4     0.0    A 1.95998e-01 5.23000e-02
+atomtypes_entry_56   Zn        30  65.4     0.0    A 1.95998e-01 5.23000e-02
 
 comment_15           ; tip4p-EW
 
-atomtypes_entry_57    HW_tip4pew 1   1.008    0.0    A 0.00000e+00 0.00000e+00
+atomtypes_entry_57   HW_tip4pew 1   1.008    0.0    A 0.00000e+00 0.00000e+00
 
-atomtypes_entry_58    OW_tip4pew 8   16.0     0.0    A 3.16435e-01 6.80946e-01
+atomtypes_entry_58   OW_tip4pew 8   16.0     0.0    A 3.16435e-01 6.80946e-01
 
 comment_16           ; tip4p
 
-atomtypes_entry_59    HW_tip4p  1   1.008    0.0    A 0.00000e+00 0.00000e+00
+atomtypes_entry_59   HW_tip4p  1   1.008    0.0    A 0.00000e+00 0.00000e+00
 
-atomtypes_entry_60    OW_tip4p  8   16.0     0.0    A 3.15365e-01 6.48520e-01
+atomtypes_entry_60   OW_tip4p  8   16.0     0.0    A 3.15365e-01 6.48520e-01
 
 comment_17           ; tip5p
 
-atomtypes_entry_61    HW_tip5p  1   1.008    0.0    A 0.00000e+00 0.00000e+00
+atomtypes_entry_61   HW_tip5p  1   1.008    0.0    A 0.00000e+00 0.00000e+00
 
-atomtypes_entry_62    OW_tip5p  8   16.0     0.0    A 3.12000e-01 6.69440e-01
+atomtypes_entry_62   OW_tip5p  8   16.0     0.0    A 3.12000e-01 6.69440e-01
 
 comment_18           ; dummy defs
 
 comment_19           ; MW=Dummy mass for tip4p/EW/5p water extra point charge
 
-atomtypes_entry_63    MW        0   0.0      0.0    D 0.00000e+00 0.00000e+00
+atomtypes_entry_63   MW        0   0.0      0.0    D 0.00000e+00 0.00000e+00
 
 comment_20           ; Dummy masses for rigid CH3 and NH3 groups
 
-atomtypes_entry_64    MCH3      0   0.0      0.0    A 0.00000e+00 0.00000e+00
+atomtypes_entry_64   MCH3      0   0.0      0.0    A 0.00000e+00 0.00000e+00
 
-atomtypes_entry_65    MNH3      0   0.0      0.0    A 0.00000e+00 0.00000e+00
+atomtypes_entry_65   MNH3      0   0.0      0.0    A 0.00000e+00 0.00000e+00
 
 bondtypes_1          [ bondtypes ]
 
 comment_21           ; i    j  func       b0          kb
 
-bondtypes_entry_1         C     C     1 1.525000e-01 2.594080e+05 ;  new99
+bondtypes_entry_1        C     C     1 1.525000e-01 2.594080e+05 ;  new99
 
-bondtypes_entry_2         C    OS     1 1.323000e-01 3.765600e+05 ;  new99
+bondtypes_entry_2        C    OS     1 1.323000e-01 3.765600e+05 ;  new99
 
-bondtypes_entry_3         C    H4     1 1.080000e-01 3.071056e+05 ;  new99
+bondtypes_entry_3        C    H4     1 1.080000e-01 3.071056e+05 ;  new99
 
-bondtypes_entry_4         C    H5     1 1.080000e-01 3.071056e+05 ;  new99
+bondtypes_entry_4        C    H5     1 1.080000e-01 3.071056e+05 ;  new99
 
-bondtypes_entry_5        CA    OH     1 1.364000e-01 3.765600e+05 ;  new99
+bondtypes_entry_5       CA    OH     1 1.364000e-01 3.765600e+05 ;  new99
 
-bondtypes_entry_6        CM    OS     1 1.240000e-01 4.016640e+05 ;  new99
+bondtypes_entry_6       CM    OS     1 1.240000e-01 4.016640e+05 ;  new99
 
-bondtypes_entry_7        Cl    CT     1 1.766000e-01 1.941376e+05 ;  new99
+bondtypes_entry_7       Cl    CT     1 1.766000e-01 1.941376e+05 ;  new99
 
-bondtypes_entry_8        Br    CT     1 1.944000e-01 1.330512e+05 ;  new99
+bondtypes_entry_8       Br    CT     1 1.944000e-01 1.330512e+05 ;  new99
 
-bondtypes_entry_9         I    CT     1 2.166000e-01 1.238464e+05 ;  new99
+bondtypes_entry_9        I    CT     1 2.166000e-01 1.238464e+05 ;  new99
 
-bondtypes_entry_10        F    CA     1 1.359000e-01 3.230048e+05 ;  new99
+bondtypes_entry_10       F    CA     1 1.359000e-01 3.230048e+05 ;  new99
 
-bondtypes_entry_11       Cl    CA     1 1.727000e-01 1.615024e+05 ;  new99
+bondtypes_entry_11      Cl    CA     1 1.727000e-01 1.615024e+05 ;  new99
 
-bondtypes_entry_12        I    CA     1 2.075000e-01 1.430928e+05 ;  new99
+bondtypes_entry_12       I    CA     1 2.075000e-01 1.430928e+05 ;  new99
 
-bondtypes_entry_13       Br    CA     1 1.890000e-01 1.439296e+05 ;  new99
+bondtypes_entry_13      Br    CA     1 1.890000e-01 1.439296e+05 ;  new99
 
-bondtypes_entry_14       OW    HW     1 9.572000e-02 4.627504e+05 ;  P water
+bondtypes_entry_14      OW    HW     1 9.572000e-02 4.627504e+05 ;  P water
 
-bondtypes_entry_15       HW    HW     1 1.513600e-01 4.627504e+05 ;  P water
+bondtypes_entry_15      HW    HW     1 1.513600e-01 4.627504e+05 ;  P water
 
-bondtypes_entry_16        C    CA     1 1.409000e-01 3.924592e+05 ;  7,(1986),230; TYR
+bondtypes_entry_16       C    CA     1 1.409000e-01 3.924592e+05 ;  7,(1986),230; TYR
 
-bondtypes_entry_17        C    CB     1 1.419000e-01 3.740496e+05 ;  7,(1986),230; GUA
+bondtypes_entry_17       C    CB     1 1.419000e-01 3.740496e+05 ;  7,(1986),230; GUA
 
-bondtypes_entry_18        C    CM     1 1.444000e-01 3.430880e+05 ;  7,(1986),230; THY,URA
+bondtypes_entry_18       C    CM     1 1.444000e-01 3.430880e+05 ;  7,(1986),230; THY,URA
 
-bondtypes_entry_19        C    CT     1 1.522000e-01 2.652656e+05 ;  7,(1986),230; AA
+bondtypes_entry_19       C    CT     1 1.522000e-01 2.652656e+05 ;  7,(1986),230; AA
 
-bondtypes_entry_20        C    N*     1 1.383000e-01 3.548032e+05 ;  7,(1986),230; CYT,URA
+bondtypes_entry_20       C    N*     1 1.383000e-01 3.548032e+05 ;  7,(1986),230; CYT,URA
 
-bondtypes_entry_21        C    NA     1 1.388000e-01 3.497824e+05 ;  7,(1986),230; GUA.URA
+bondtypes_entry_21       C    NA     1 1.388000e-01 3.497824e+05 ;  7,(1986),230; GUA.URA
 
-bondtypes_entry_22        C    NC     1 1.358000e-01 3.824176e+05 ;  7,(1986),230; CYT
+bondtypes_entry_22       C    NC     1 1.358000e-01 3.824176e+05 ;  7,(1986),230; CYT
 
-bondtypes_entry_23        C     O     1 1.229000e-01 4.769760e+05 ;  7,(1986),230; AA,CYT,GUA,THY,URA
+bondtypes_entry_23       C     O     1 1.229000e-01 4.769760e+05 ;  7,(1986),230; AA,CYT,GUA,THY,URA
 
-bondtypes_entry_24        C    O2     1 1.250000e-01 5.489408e+05 ;  7,(1986),230; GLU,ASP
+bondtypes_entry_24       C    O2     1 1.250000e-01 5.489408e+05 ;  7,(1986),230; GLU,ASP
 
-bondtypes_entry_25        C    OH     1 1.364000e-01 3.765600e+05 ;  7,(1986),230; TYR
+bondtypes_entry_25       C    OH     1 1.364000e-01 3.765600e+05 ;  7,(1986),230; TYR
 
-bondtypes_entry_26       CA    CA     1 1.400000e-01 3.924592e+05 ;  7,(1986),230; BENZENE,PHE,TRP,TYR
+bondtypes_entry_26      CA    CA     1 1.400000e-01 3.924592e+05 ;  7,(1986),230; BENZENE,PHE,TRP,TYR
 
-bondtypes_entry_27       CA    CB     1 1.404000e-01 3.924592e+05 ;  7,(1986),230; ADE,TRP
+bondtypes_entry_27      CA    CB     1 1.404000e-01 3.924592e+05 ;  7,(1986),230; ADE,TRP
 
-bondtypes_entry_28       CA    CM     1 1.433000e-01 3.573136e+05 ;  7,(1986),230; CYT
+bondtypes_entry_28      CA    CM     1 1.433000e-01 3.573136e+05 ;  7,(1986),230; CYT
 
-bondtypes_entry_29       CA    CT     1 1.510000e-01 2.652656e+05 ;  7,(1986),230; PHE,TYR
+bondtypes_entry_29      CA    CT     1 1.510000e-01 2.652656e+05 ;  7,(1986),230; PHE,TYR
 
-bondtypes_entry_30       CA    HA     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; PHE,TRP,TYR
+bondtypes_entry_30      CA    HA     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; PHE,TRP,TYR
 
-bondtypes_entry_31       CA    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; no assigned
+bondtypes_entry_31      CA    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; no assigned
 
-bondtypes_entry_32       CA    N2     1 1.340000e-01 4.025008e+05 ;  7,(1986),230; ARG,CYT,GUA
+bondtypes_entry_32      CA    N2     1 1.340000e-01 4.025008e+05 ;  7,(1986),230; ARG,CYT,GUA
 
-bondtypes_entry_33       CA    NA     1 1.381000e-01 3.573136e+05 ;  7,(1986),230; GUA
+bondtypes_entry_33      CA    NA     1 1.381000e-01 3.573136e+05 ;  7,(1986),230; GUA
 
-bondtypes_entry_34       CA    NC     1 1.339000e-01 4.041744e+05 ;  7,(1986),230; ADE,CYT,GUA
+bondtypes_entry_34      CA    NC     1 1.339000e-01 4.041744e+05 ;  7,(1986),230; ADE,CYT,GUA
 
-bondtypes_entry_35       CB    CB     1 1.370000e-01 4.351360e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_35      CB    CB     1 1.370000e-01 4.351360e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_36       CB    N*     1 1.374000e-01 3.648448e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_36      CB    N*     1 1.374000e-01 3.648448e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_37       CB    NB     1 1.391000e-01 3.464352e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_37      CB    NB     1 1.391000e-01 3.464352e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_38       CB    NC     1 1.354000e-01 3.857648e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_38      CB    NC     1 1.354000e-01 3.857648e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_39       CK    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; ADE,GUA
+bondtypes_entry_39      CK    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; ADE,GUA
 
-bondtypes_entry_40       CK    N*     1 1.371000e-01 3.681920e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_40      CK    N*     1 1.371000e-01 3.681920e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_41       CK    NB     1 1.304000e-01 4.426672e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_41      CK    NB     1 1.304000e-01 4.426672e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_42       CM    CM     1 1.350000e-01 4.594032e+05 ;  7,(1986),230; CYT,THY,URA
+bondtypes_entry_42      CM    CM     1 1.350000e-01 4.594032e+05 ;  7,(1986),230; CYT,THY,URA
 
-bondtypes_entry_43       CM    CT     1 1.510000e-01 2.652656e+05 ;  7,(1986),230; THY
+bondtypes_entry_43      CM    CT     1 1.510000e-01 2.652656e+05 ;  7,(1986),230; THY
 
-bondtypes_entry_44       CM    HA     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; CYT,URA
+bondtypes_entry_44      CM    HA     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; CYT,URA
 
-bondtypes_entry_45       CM    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; CYT,URA
+bondtypes_entry_45      CM    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; CYT,URA
 
-bondtypes_entry_46       CM    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; not assigned
+bondtypes_entry_46      CM    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; not assigned
 
-bondtypes_entry_47       CM    N*     1 1.365000e-01 3.748864e+05 ;  7,(1986),230; CYT,THY,URA
+bondtypes_entry_47      CM    N*     1 1.365000e-01 3.748864e+05 ;  7,(1986),230; CYT,THY,URA
 
-bondtypes_entry_48       CQ    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; ADE
+bondtypes_entry_48      CQ    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; ADE
 
-bondtypes_entry_49       CQ    NC     1 1.324000e-01 4.200736e+05 ;  7,(1986),230; ADE
+bondtypes_entry_49      CQ    NC     1 1.324000e-01 4.200736e+05 ;  7,(1986),230; ADE
 
-bondtypes_entry_50       CT    CT     1 1.526000e-01 2.594080e+05 ;  7,(1986),230; AA, SUGARS
+bondtypes_entry_50      CT    CT     1 1.526000e-01 2.594080e+05 ;  7,(1986),230; AA, SUGARS
 
-bondtypes_entry_51       CT    HC     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; AA, SUGARS
+bondtypes_entry_51      CT    HC     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; AA, SUGARS
 
-bondtypes_entry_52       CT    H1     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; AA, RIBOSE
+bondtypes_entry_52      CT    H1     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; AA, RIBOSE
 
-bondtypes_entry_53       CT    H2     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; SUGARS
+bondtypes_entry_53      CT    H2     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; SUGARS
 
-bondtypes_entry_54       CT    H3     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; not assigned
+bondtypes_entry_54      CT    H3     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; not assigned
 
-bondtypes_entry_55       CT    HP     1 1.090000e-01 2.845120e+05 ;  nged from 331; AA-lysine, methyl ammonium cation
+bondtypes_entry_55      CT    HP     1 1.090000e-01 2.845120e+05 ;  nged from 331; AA-lysine, methyl ammonium cation
 
-bondtypes_entry_56       CT    N*     1 1.475000e-01 2.820016e+05 ;  7,(1986),230; ADE,CYT,GUA,THY,URA
+bondtypes_entry_56      CT    N*     1 1.475000e-01 2.820016e+05 ;  7,(1986),230; ADE,CYT,GUA,THY,URA
 
-bondtypes_entry_57       CT    N2     1 1.463000e-01 2.820016e+05 ;  7,(1986),230; ARG
+bondtypes_entry_57      CT    N2     1 1.463000e-01 2.820016e+05 ;  7,(1986),230; ARG
 
-bondtypes_entry_58       CT    OH     1 1.410000e-01 2.677760e+05 ;  7,(1986),230; SUGARS
+bondtypes_entry_58      CT    OH     1 1.410000e-01 2.677760e+05 ;  7,(1986),230; SUGARS
 
-bondtypes_entry_59       CT    OS     1 1.410000e-01 2.677760e+05 ;  7,(1986),230; NUCLEIC ACIDS
+bondtypes_entry_59      CT    OS     1 1.410000e-01 2.677760e+05 ;  7,(1986),230; NUCLEIC ACIDS
 
-bondtypes_entry_60        H    N2     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; ADE,CYT,GUA,ARG
+bondtypes_entry_60       H    N2     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; ADE,CYT,GUA,ARG
 
-bondtypes_entry_61        H    N*     1 1.010000e-01 3.631712e+05 ;  plain unmethylated bases ADE,CYT,GUA,ARG
+bondtypes_entry_61       H    N*     1 1.010000e-01 3.631712e+05 ;  plain unmethylated bases ADE,CYT,GUA,ARG
 
-bondtypes_entry_62        H    NA     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; GUA,URA,HIS
+bondtypes_entry_62       H    NA     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; GUA,URA,HIS
 
-bondtypes_entry_63       HO    OH     1 9.600000e-02 4.627504e+05 ;  7,(1986),230; SUGARS,SER,TYR
+bondtypes_entry_63      HO    OH     1 9.600000e-02 4.627504e+05 ;  7,(1986),230; SUGARS,SER,TYR
 
-bondtypes_entry_64       HO    OS     1 9.600000e-02 4.627504e+05 ;  7,(1986),230; NUCLEOTIDE ENDS
+bondtypes_entry_64      HO    OS     1 9.600000e-02 4.627504e+05 ;  7,(1986),230; NUCLEOTIDE ENDS
 
-bondtypes_entry_65       O2     P     1 1.480000e-01 4.393200e+05 ;  7,(1986),230; NA PHOSPHATES
+bondtypes_entry_65      O2     P     1 1.480000e-01 4.393200e+05 ;  7,(1986),230; NA PHOSPHATES
 
-bondtypes_entry_66       OH     P     1 1.610000e-01 1.924640e+05 ;  7,(1986),230; NA PHOSPHATES
+bondtypes_entry_66      OH     P     1 1.610000e-01 1.924640e+05 ;  7,(1986),230; NA PHOSPHATES
 
-bondtypes_entry_67       OS     P     1 1.610000e-01 1.924640e+05 ;  7,(1986),230; NA PHOSPHATES
+bondtypes_entry_67      OS     P     1 1.610000e-01 1.924640e+05 ;  7,(1986),230; NA PHOSPHATES
 
-bondtypes_entry_68       C*    HC     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes, not needed AA
+bondtypes_entry_68      C*    HC     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes, not needed AA
 
-bondtypes_entry_69        C     N     1 1.335000e-01 4.100320e+05 ;  7,(1986),230; AA
+bondtypes_entry_69       C     N     1 1.335000e-01 4.100320e+05 ;  7,(1986),230; AA
 
-bondtypes_entry_70       C*    CB     1 1.459000e-01 3.246784e+05 ;  7,(1986),230; TRP
+bondtypes_entry_70      C*    CB     1 1.459000e-01 3.246784e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_71       C*    CT     1 1.495000e-01 2.652656e+05 ;  7,(1986),230; TRP
+bondtypes_entry_71      C*    CT     1 1.495000e-01 2.652656e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_72       C*    CW     1 1.352000e-01 4.568928e+05 ;  7,(1986),230; TRP
+bondtypes_entry_72      C*    CW     1 1.352000e-01 4.568928e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_73       CA    CN     1 1.400000e-01 3.924592e+05 ;  7,(1986),230; TRP
+bondtypes_entry_73      CA    CN     1 1.400000e-01 3.924592e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_74       CB    CN     1 1.419000e-01 3.740496e+05 ;  7,(1986),230; TRP
+bondtypes_entry_74      CB    CN     1 1.419000e-01 3.740496e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_75       CC    CT     1 1.504000e-01 2.652656e+05 ;  7,(1986),230; HIS
+bondtypes_entry_75      CC    CT     1 1.504000e-01 2.652656e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_76       CC    CV     1 1.375000e-01 4.284416e+05 ;  7,(1986),230; HIS(delta)
+bondtypes_entry_76      CC    CV     1 1.375000e-01 4.284416e+05 ;  7,(1986),230; HIS(delta)
 
-bondtypes_entry_77       CC    CW     1 1.371000e-01 4.334624e+05 ;  7,(1986),230; HIS(epsilon)
+bondtypes_entry_77      CC    CW     1 1.371000e-01 4.334624e+05 ;  7,(1986),230; HIS(epsilon)
 
-bondtypes_entry_78       CC    NA     1 1.385000e-01 3.531296e+05 ;  7,(1986),230; HIS
+bondtypes_entry_78      CC    NA     1 1.385000e-01 3.531296e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_79       CC    NB     1 1.394000e-01 3.430880e+05 ;  7,(1986),230; HIS
+bondtypes_entry_79      CC    NB     1 1.394000e-01 3.430880e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_80       CN    NA     1 1.380000e-01 3.581504e+05 ;  7,(1986),230; TRP
+bondtypes_entry_80      CN    NA     1 1.380000e-01 3.581504e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_81       CR    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes;HIS
+bondtypes_entry_81      CR    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes;HIS
 
-bondtypes_entry_82       CR    NA     1 1.343000e-01 3.991536e+05 ;  7,(1986),230; HIS
+bondtypes_entry_82      CR    NA     1 1.343000e-01 3.991536e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_83       CR    NB     1 1.335000e-01 4.083584e+05 ;  7,(1986),230; HIS
+bondtypes_entry_83      CR    NB     1 1.335000e-01 4.083584e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_84       CT     N     1 1.449000e-01 2.820016e+05 ;  7,(1986),230; AA
+bondtypes_entry_84      CT     N     1 1.449000e-01 2.820016e+05 ;  7,(1986),230; AA
 
-bondtypes_entry_85       CT    N3     1 1.471000e-01 3.071056e+05 ;  7,(1986),230; LYS
+bondtypes_entry_85      CT    N3     1 1.471000e-01 3.071056e+05 ;  7,(1986),230; LYS
 
-bondtypes_entry_86       CT     S     1 1.810000e-01 1.899536e+05 ;  ged from 222.0 based on dimethylS nmodes
+bondtypes_entry_86      CT     S     1 1.810000e-01 1.899536e+05 ;  ged from 222.0 based on dimethylS nmodes
 
-bondtypes_entry_87       CT    SH     1 1.810000e-01 1.983216e+05 ;  ged from 222.0 based on methanethiol nmodes
+bondtypes_entry_87      CT    SH     1 1.810000e-01 1.983216e+05 ;  ged from 222.0 based on methanethiol nmodes
 
-bondtypes_entry_88       CV    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; HIS
+bondtypes_entry_88      CV    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; HIS
 
-bondtypes_entry_89       CV    NB     1 1.394000e-01 3.430880e+05 ;  7,(1986),230; HIS
+bondtypes_entry_89      CV    NB     1 1.394000e-01 3.430880e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_90       CW    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes;HIS(epsilon,+)
+bondtypes_entry_90      CW    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes;HIS(epsilon,+)
 
-bondtypes_entry_91       CW    NA     1 1.381000e-01 3.573136e+05 ;  7,(1986),230; HIS,TRP
+bondtypes_entry_91      CW    NA     1 1.381000e-01 3.573136e+05 ;  7,(1986),230; HIS,TRP
 
-bondtypes_entry_92        H     N     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; AA
+bondtypes_entry_92       H     N     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; AA
 
-bondtypes_entry_93        H    N3     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; LYS
+bondtypes_entry_93       H    N3     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; LYS
 
-bondtypes_entry_94       HS    SH     1 1.336000e-01 2.292832e+05 ;  7,(1986),230; CYS
+bondtypes_entry_94      HS    SH     1 1.336000e-01 2.292832e+05 ;  7,(1986),230; CYS
 
-bondtypes_entry_95        S     S     1 2.038000e-01 1.389088e+05 ;  7,(1986),230; CYX   (SCHERAGA)
+bondtypes_entry_95       S     S     1 2.038000e-01 1.389088e+05 ;  7,(1986),230; CYX   (SCHERAGA)
 
-bondtypes_entry_96       CT     F     1 1.380000e-01 3.071056e+05 ;  13,(1992),963;CF4; R0=1.332 FOR CHF3
+bondtypes_entry_96      CT     F     1 1.380000e-01 3.071056e+05 ;  13,(1992),963;CF4; R0=1.332 FOR CHF3
 
 constrainttypes_1    [ constrainttypes ]
 
@@ -380,853 +380,853 @@ comment_22           ; this section is implemented manually from bond & angle va
 
 comment_23           ; constraints for rigid CH3 groups
 
-constrainttypes_entry_1   MCH3    CT     2 1.664260e-01
+constrainttypes_entry_1  MCH3    CT     2 1.664260e-01
 
-constrainttypes_entry_2   MCH3     S     2 1.938750e-01
+constrainttypes_entry_2  MCH3     S     2 1.938750e-01
 
-constrainttypes_entry_3   MCH3  MCH3     2 9.216300e-02
+constrainttypes_entry_3  MCH3  MCH3     2 9.216300e-02
 
 comment_24           ; constraints for rigid NH3 groups
 
-constrainttypes_entry_4   MNH3    CT     2 1.582540e-01
+constrainttypes_entry_4  MNH3    CT     2 1.582540e-01
 
-constrainttypes_entry_5   MNH3  MNH3     2 8.022900e-02
+constrainttypes_entry_5  MNH3  MNH3     2 8.022900e-02
 
 comment_25           ; angle-derived constraints for OH and SH groups in proteins
 
 comment_26           ; The constraint A-C is calculated from the angle A-B-C and bonds A-B, B-C.
 
-constrainttypes_entry_6      C    HO     2 1.950740e-01
+constrainttypes_entry_6     C    HO     2 1.950740e-01
 
-constrainttypes_entry_7     CA    HO     2 1.950740e-01
+constrainttypes_entry_7    CA    HO     2 1.950740e-01
 
-constrainttypes_entry_8     CT    HO     2 1.941320e-01
+constrainttypes_entry_8    CT    HO     2 1.941320e-01
 
-constrainttypes_entry_9     CT    HS     2 2.359350e-01
+constrainttypes_entry_9    CT    HS     2 2.359350e-01
 
 angletypes_1         [ angletypes ]
 
 comment_27           ; i    j    k  func       th0       cth
 
-angletypes_entry_1       HW    OW    HW     1 1.045200e+02 8.368000e+02 ;  TIP3P water
+angletypes_entry_1      HW    OW    HW     1 1.045200e+02 8.368000e+02 ;  TIP3P water
 
-angletypes_entry_2       HW    HW    OW     1 1.277400e+02 0.000000e+00 ;  (found in crystallographic water with 3 bonds)
+angletypes_entry_2      HW    HW    OW     1 1.277400e+02 0.000000e+00 ;  (found in crystallographic water with 3 bonds)
 
-angletypes_entry_3        C     C     O     1 1.200000e+02 6.694400e+02 ;  new99
+angletypes_entry_3       C     C     O     1 1.200000e+02 6.694400e+02 ;  new99
 
-angletypes_entry_4        C     C    OH     1 1.200000e+02 6.694400e+02 ;  new99
+angletypes_entry_4       C     C    OH     1 1.200000e+02 6.694400e+02 ;  new99
 
-angletypes_entry_5       CT     C    CT     1 1.170000e+02 5.271840e+02 ;  new99
+angletypes_entry_5      CT     C    CT     1 1.170000e+02 5.271840e+02 ;  new99
 
-angletypes_entry_6       CT     C    OS     1 1.150000e+02 6.694400e+02 ;  new99
+angletypes_entry_6      CT     C    OS     1 1.150000e+02 6.694400e+02 ;  new99
 
-angletypes_entry_7        O     C    OS     1 1.250000e+02 6.694400e+02 ;  new99
+angletypes_entry_7       O     C    OS     1 1.250000e+02 6.694400e+02 ;  new99
 
-angletypes_entry_8       H4     C     C     1 1.200000e+02 4.184000e+02 ;  new99
+angletypes_entry_8      H4     C     C     1 1.200000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_9       H4     C    CM     1 1.150000e+02 4.184000e+02 ;  new99
+angletypes_entry_9      H4     C    CM     1 1.150000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_10      H4     C    CT     1 1.150000e+02 4.184000e+02 ;  new99
+angletypes_entry_10     H4     C    CT     1 1.150000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_11      H4     C     O     1 1.200000e+02 4.184000e+02 ;  new99
+angletypes_entry_11     H4     C     O     1 1.200000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_12      H4     C    OH     1 1.200000e+02 4.184000e+02 ;  new99
+angletypes_entry_12     H4     C    OH     1 1.200000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_13      H5     C     N     1 1.200000e+02 4.184000e+02 ;  new99
+angletypes_entry_13     H5     C     N     1 1.200000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_14      H5     C     O     1 1.190000e+02 4.184000e+02 ;  new99
+angletypes_entry_14     H5     C     O     1 1.190000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_15      H5     C    OH     1 1.070000e+02 4.184000e+02 ;  new99
+angletypes_entry_15     H5     C    OH     1 1.070000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_16      H5     C    OS     1 1.070000e+02 4.184000e+02 ;  new99
+angletypes_entry_16     H5     C    OS     1 1.070000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_17      CA    CA    OH     1 1.200000e+02 5.857600e+02 ;  new99
+angletypes_entry_17     CA    CA    OH     1 1.200000e+02 5.857600e+02 ;  new99
 
-angletypes_entry_18      CA    OH    HO     1 1.130000e+02 4.184000e+02 ;  new99
+angletypes_entry_18     CA    OH    HO     1 1.130000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_19       F    CA    CA     1 1.210000e+02 5.857600e+02 ;  new99
+angletypes_entry_19      F    CA    CA     1 1.210000e+02 5.857600e+02 ;  new99
 
-angletypes_entry_20      Cl    CA    CA     1 1.188000e+02 5.857600e+02 ;  new99
+angletypes_entry_20     Cl    CA    CA     1 1.188000e+02 5.857600e+02 ;  new99
 
-angletypes_entry_21      Br    CA    CA     1 1.188000e+02 5.857600e+02 ;  new99
+angletypes_entry_21     Br    CA    CA     1 1.188000e+02 5.857600e+02 ;  new99
 
-angletypes_entry_22       I    CA    CA     1 1.188000e+02 5.857600e+02 ;  new99
+angletypes_entry_22      I    CA    CA     1 1.188000e+02 5.857600e+02 ;  new99
 
-angletypes_entry_23      CM    CM    OS     1 1.250000e+02 6.694400e+02 ;  new99
+angletypes_entry_23     CM    CM    OS     1 1.250000e+02 6.694400e+02 ;  new99
 
-angletypes_entry_24      H4    CM    OS     1 1.130000e+02 4.184000e+02 ;  new99
+angletypes_entry_24     H4    CM    OS     1 1.130000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_25      HA    CM    HA     1 1.200000e+02 2.928800e+02 ;  new99
+angletypes_entry_25     HA    CM    HA     1 1.200000e+02 2.928800e+02 ;  new99
 
-angletypes_entry_26      HA    CM    CT     1 1.200000e+02 4.184000e+02 ;  new99
+angletypes_entry_26     HA    CM    CT     1 1.200000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_27      H1    CT    CM     1 1.095000e+02 4.184000e+02 ;  new99
+angletypes_entry_27     H1    CT    CM     1 1.095000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_28      HC    CT    CM     1 1.095000e+02 4.184000e+02 ;  new99
+angletypes_entry_28     HC    CT    CM     1 1.095000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_29       C    CT    OS     1 1.095000e+02 5.020800e+02 ;  new99
+angletypes_entry_29      C    CT    OS     1 1.095000e+02 5.020800e+02 ;  new99
 
-angletypes_entry_30      CM    CT    CT     1 1.110000e+02 5.271840e+02 ;  new99
+angletypes_entry_30     CM    CT    CT     1 1.110000e+02 5.271840e+02 ;  new99
 
-angletypes_entry_31      CM    CT    OS     1 1.095000e+02 4.184000e+02 ;  new99
+angletypes_entry_31     CM    CT    OS     1 1.095000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_32      CT    CT    CA     1 1.140000e+02 5.271840e+02 ;  new99
+angletypes_entry_32     CT    CT    CA     1 1.140000e+02 5.271840e+02 ;  new99
 
-angletypes_entry_33      OS    CT    OS     1 1.010000e+02 5.020800e+02 ;  new99
+angletypes_entry_33     OS    CT    OS     1 1.010000e+02 5.020800e+02 ;  new99
 
-angletypes_entry_34       F    CT    CT     1 1.090000e+02 4.184000e+02 ;  new99
+angletypes_entry_34      F    CT    CT     1 1.090000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_35       F    CT    H2     1 1.095000e+02 4.184000e+02 ;  new99
+angletypes_entry_35      F    CT    H2     1 1.095000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_36      Cl    CT    CT     1 1.085000e+02 4.184000e+02 ;  new99
+angletypes_entry_36     Cl    CT    CT     1 1.085000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_37      Cl    CT    H1     1 1.085000e+02 4.184000e+02 ;  new99
+angletypes_entry_37     Cl    CT    H1     1 1.085000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_38      Br    CT    CT     1 1.080000e+02 4.184000e+02 ;  new99
+angletypes_entry_38     Br    CT    CT     1 1.080000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_39      Br    CT    H1     1 1.065000e+02 4.184000e+02 ;  new99
+angletypes_entry_39     Br    CT    H1     1 1.065000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_40       I    CT    CT     1 1.060000e+02 4.184000e+02 ;  new99
+angletypes_entry_40      I    CT    CT     1 1.060000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_41      CB     C    NA     1 1.113000e+02 5.857600e+02 ;  NA
+angletypes_entry_41     CB     C    NA     1 1.113000e+02 5.857600e+02 ;  NA
 
-angletypes_entry_42      CB     C     O     1 1.288000e+02 6.694400e+02 ;
+angletypes_entry_42     CB     C     O     1 1.288000e+02 6.694400e+02 ;
 
-angletypes_entry_43      CM     C    NA     1 1.141000e+02 5.857600e+02 ;
+angletypes_entry_43     CM     C    NA     1 1.141000e+02 5.857600e+02 ;
 
-angletypes_entry_44      CM     C     O     1 1.253000e+02 6.694400e+02 ;
+angletypes_entry_44     CM     C     O     1 1.253000e+02 6.694400e+02 ;
 
-angletypes_entry_45      CT     C     O     1 1.204000e+02 6.694400e+02 ;
+angletypes_entry_45     CT     C     O     1 1.204000e+02 6.694400e+02 ;
 
-angletypes_entry_46      CT     C    O2     1 1.170000e+02 5.857600e+02 ;
+angletypes_entry_46     CT     C    O2     1 1.170000e+02 5.857600e+02 ;
 
-angletypes_entry_47      CT     C    OH     1 1.100000e+02 6.694400e+02 ;  new99
+angletypes_entry_47     CT     C    OH     1 1.100000e+02 6.694400e+02 ;  new99
 
-angletypes_entry_48      N*     C    NA     1 1.154000e+02 5.857600e+02 ;
+angletypes_entry_48     N*     C    NA     1 1.154000e+02 5.857600e+02 ;
 
-angletypes_entry_49      N*     C    NC     1 1.186000e+02 5.857600e+02 ;
+angletypes_entry_49     N*     C    NC     1 1.186000e+02 5.857600e+02 ;
 
-angletypes_entry_50      N*     C     O     1 1.209000e+02 6.694400e+02 ;
+angletypes_entry_50     N*     C     O     1 1.209000e+02 6.694400e+02 ;
 
-angletypes_entry_51      NA     C     O     1 1.206000e+02 6.694400e+02 ;
+angletypes_entry_51     NA     C     O     1 1.206000e+02 6.694400e+02 ;
 
-angletypes_entry_52      NC     C     O     1 1.225000e+02 6.694400e+02 ;
+angletypes_entry_52     NC     C     O     1 1.225000e+02 6.694400e+02 ;
 
-angletypes_entry_53      CT     C     N     1 1.166000e+02 5.857600e+02 ;  AA general
+angletypes_entry_53     CT     C     N     1 1.166000e+02 5.857600e+02 ;  AA general
 
-angletypes_entry_54       N     C     O     1 1.229000e+02 6.694400e+02 ;  AA general
+angletypes_entry_54      N     C     O     1 1.229000e+02 6.694400e+02 ;  AA general
 
-angletypes_entry_55       O     C     O     1 1.260000e+02 6.694400e+02 ;  AA COO- terminal residues
+angletypes_entry_55      O     C     O     1 1.260000e+02 6.694400e+02 ;  AA COO- terminal residues
 
-angletypes_entry_56      O2     C    O2     1 1.260000e+02 6.694400e+02 ;  AA GLU            (SCH JPC 79,2379)
+angletypes_entry_56     O2     C    O2     1 1.260000e+02 6.694400e+02 ;  AA GLU            (SCH JPC 79,2379)
 
-angletypes_entry_57       O     C    OH     1 1.200000e+02 6.694400e+02 ;
+angletypes_entry_57      O     C    OH     1 1.200000e+02 6.694400e+02 ;
 
-angletypes_entry_58      CA     C    CA     1 1.200000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA tyr
+angletypes_entry_58     CA     C    CA     1 1.200000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA tyr
 
-angletypes_entry_59      CA     C    OH     1 1.200000e+02 5.857600e+02 ;  AA tyr
+angletypes_entry_59     CA     C    OH     1 1.200000e+02 5.857600e+02 ;  AA tyr
 
-angletypes_entry_60       C    CA    CA     1 1.200000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes
+angletypes_entry_60      C    CA    CA     1 1.200000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes
 
-angletypes_entry_61      CA    CA    CA     1 1.200000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes
+angletypes_entry_61     CA    CA    CA     1 1.200000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes
 
-angletypes_entry_62      CA    CA    CB     1 1.200000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes
+angletypes_entry_62     CA    CA    CB     1 1.200000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes
 
-angletypes_entry_63      CA    CA    CT     1 1.200000e+02 5.857600e+02 ;
+angletypes_entry_63     CA    CA    CT     1 1.200000e+02 5.857600e+02 ;
 
-angletypes_entry_64      CA    CA    HA     1 1.200000e+02 4.184000e+02 ;  new99
+angletypes_entry_64     CA    CA    HA     1 1.200000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_65      CA    CA    H4     1 1.200000e+02 4.184000e+02 ;  new99
+angletypes_entry_65     CA    CA    H4     1 1.200000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_66      CB    CA    HA     1 1.200000e+02 4.184000e+02 ;  new99
+angletypes_entry_66     CB    CA    HA     1 1.200000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_67      CB    CA    H4     1 1.200000e+02 4.184000e+02 ;  new99
+angletypes_entry_67     CB    CA    H4     1 1.200000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_68      CB    CA    N2     1 1.235000e+02 5.857600e+02 ;
+angletypes_entry_68     CB    CA    N2     1 1.235000e+02 5.857600e+02 ;
 
-angletypes_entry_69      CB    CA    NC     1 1.173000e+02 5.857600e+02 ;
+angletypes_entry_69     CB    CA    NC     1 1.173000e+02 5.857600e+02 ;
 
-angletypes_entry_70      CM    CA    N2     1 1.201000e+02 5.857600e+02 ;
+angletypes_entry_70     CM    CA    N2     1 1.201000e+02 5.857600e+02 ;
 
-angletypes_entry_71      CM    CA    NC     1 1.215000e+02 5.857600e+02 ;
+angletypes_entry_71     CM    CA    NC     1 1.215000e+02 5.857600e+02 ;
 
-angletypes_entry_72      N2    CA    NA     1 1.160000e+02 5.857600e+02 ;
+angletypes_entry_72     N2    CA    NA     1 1.160000e+02 5.857600e+02 ;
 
-angletypes_entry_73      N2    CA    NC     1 1.193000e+02 5.857600e+02 ;
+angletypes_entry_73     N2    CA    NC     1 1.193000e+02 5.857600e+02 ;
 
-angletypes_entry_74      NA    CA    NC     1 1.233000e+02 5.857600e+02 ;
+angletypes_entry_74     NA    CA    NC     1 1.233000e+02 5.857600e+02 ;
 
-angletypes_entry_75       C    CA    HA     1 1.200000e+02 4.184000e+02 ;  new99 tyr
+angletypes_entry_75      C    CA    HA     1 1.200000e+02 4.184000e+02 ;  new99 tyr
 
-angletypes_entry_76      N2    CA    N2     1 1.200000e+02 5.857600e+02 ;  AA arg
+angletypes_entry_76     N2    CA    N2     1 1.200000e+02 5.857600e+02 ;  AA arg
 
-angletypes_entry_77      CN    CA    HA     1 1.200000e+02 4.184000e+02 ;  new99 trp
+angletypes_entry_77     CN    CA    HA     1 1.200000e+02 4.184000e+02 ;  new99 trp
 
-angletypes_entry_78      CA    CA    CN     1 1.200000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
+angletypes_entry_78     CA    CA    CN     1 1.200000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
 
-angletypes_entry_79       C    CB    CB     1 1.192000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; NA gua
+angletypes_entry_79      C    CB    CB     1 1.192000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; NA gua
 
-angletypes_entry_80       C    CB    NB     1 1.300000e+02 5.857600e+02 ;
+angletypes_entry_80      C    CB    NB     1 1.300000e+02 5.857600e+02 ;
 
-angletypes_entry_81      CA    CB    CB     1 1.173000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; NA ade
+angletypes_entry_81     CA    CB    CB     1 1.173000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; NA ade
 
-angletypes_entry_82      CA    CB    NB     1 1.324000e+02 5.857600e+02 ;
+angletypes_entry_82     CA    CB    NB     1 1.324000e+02 5.857600e+02 ;
 
-angletypes_entry_83      CB    CB    N*     1 1.062000e+02 5.857600e+02 ;
+angletypes_entry_83     CB    CB    N*     1 1.062000e+02 5.857600e+02 ;
 
-angletypes_entry_84      CB    CB    NB     1 1.104000e+02 5.857600e+02 ;
+angletypes_entry_84     CB    CB    NB     1 1.104000e+02 5.857600e+02 ;
 
-angletypes_entry_85      CB    CB    NC     1 1.277000e+02 5.857600e+02 ;
+angletypes_entry_85     CB    CB    NC     1 1.277000e+02 5.857600e+02 ;
 
-angletypes_entry_86      N*    CB    NC     1 1.262000e+02 5.857600e+02 ;
+angletypes_entry_86     N*    CB    NC     1 1.262000e+02 5.857600e+02 ;
 
-angletypes_entry_87      C*    CB    CA     1 1.349000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
+angletypes_entry_87     C*    CB    CA     1 1.349000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
 
-angletypes_entry_88      C*    CB    CN     1 1.088000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
+angletypes_entry_88     C*    CB    CN     1 1.088000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
 
-angletypes_entry_89      CA    CB    CN     1 1.162000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
+angletypes_entry_89     CA    CB    CN     1 1.162000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
 
-angletypes_entry_90      H5    CK    N*     1 1.230500e+02 4.184000e+02 ;  new99
+angletypes_entry_90     H5    CK    N*     1 1.230500e+02 4.184000e+02 ;  new99
 
-angletypes_entry_91      H5    CK    NB     1 1.230500e+02 4.184000e+02 ;  new99
+angletypes_entry_91     H5    CK    NB     1 1.230500e+02 4.184000e+02 ;  new99
 
-angletypes_entry_92      N*    CK    NB     1 1.139000e+02 5.857600e+02 ;
+angletypes_entry_92     N*    CK    NB     1 1.139000e+02 5.857600e+02 ;
 
-angletypes_entry_93       C    CM    CM     1 1.207000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; NA thy
+angletypes_entry_93      C    CM    CM     1 1.207000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; NA thy
 
-angletypes_entry_94       C    CM    CT     1 1.197000e+02 5.857600e+02 ;
+angletypes_entry_94      C    CM    CT     1 1.197000e+02 5.857600e+02 ;
 
-angletypes_entry_95       C    CM    HA     1 1.197000e+02 4.184000e+02 ;  new99
+angletypes_entry_95      C    CM    HA     1 1.197000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_96       C    CM    H4     1 1.197000e+02 4.184000e+02 ;  new99
+angletypes_entry_96      C    CM    H4     1 1.197000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_97      CA    CM    CM     1 1.170000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; NA cyt
+angletypes_entry_97     CA    CM    CM     1 1.170000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; NA cyt
 
-angletypes_entry_98      CA    CM    HA     1 1.233000e+02 4.184000e+02 ;  new99
+angletypes_entry_98     CA    CM    HA     1 1.233000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_99      CA    CM    H4     1 1.233000e+02 4.184000e+02 ;  new99
+angletypes_entry_99     CA    CM    H4     1 1.233000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_100     CM    CM    CT     1 1.197000e+02 5.857600e+02 ;
+angletypes_entry_100    CM    CM    CT     1 1.197000e+02 5.857600e+02 ;
 
-angletypes_entry_101     CM    CM    HA     1 1.197000e+02 4.184000e+02 ;  new99
+angletypes_entry_101    CM    CM    HA     1 1.197000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_102     CM    CM    H4     1 1.197000e+02 4.184000e+02 ;  new99
+angletypes_entry_102    CM    CM    H4     1 1.197000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_103     CM    CM    N*     1 1.212000e+02 5.857600e+02 ;
+angletypes_entry_103    CM    CM    N*     1 1.212000e+02 5.857600e+02 ;
 
-angletypes_entry_104     H4    CM    N*     1 1.191000e+02 4.184000e+02 ;  new99
+angletypes_entry_104    H4    CM    N*     1 1.191000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_105     H5    CQ    NC     1 1.154500e+02 4.184000e+02 ;  new99
+angletypes_entry_105    H5    CQ    NC     1 1.154500e+02 4.184000e+02 ;  new99
 
-angletypes_entry_106     NC    CQ    NC     1 1.291000e+02 5.857600e+02 ;
+angletypes_entry_106    NC    CQ    NC     1 1.291000e+02 5.857600e+02 ;
 
-angletypes_entry_107     CM    CT    HC     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
+angletypes_entry_107    CM    CT    HC     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
 
-angletypes_entry_108     CT    CT    CT     1 1.095000e+02 3.347200e+02 ;
+angletypes_entry_108    CT    CT    CT     1 1.095000e+02 3.347200e+02 ;
 
-angletypes_entry_109     CT    CT    HC     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
+angletypes_entry_109    CT    CT    HC     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
 
-angletypes_entry_110     CT    CT    H1     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
+angletypes_entry_110    CT    CT    H1     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
 
-angletypes_entry_111     CT    CT    H2     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
+angletypes_entry_111    CT    CT    H2     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
 
-angletypes_entry_112     CT    CT    HP     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
+angletypes_entry_112    CT    CT    HP     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
 
-angletypes_entry_113     CT    CT    N*     1 1.095000e+02 4.184000e+02 ;
+angletypes_entry_113    CT    CT    N*     1 1.095000e+02 4.184000e+02 ;
 
-angletypes_entry_114     CT    CT    OH     1 1.095000e+02 4.184000e+02 ;
+angletypes_entry_114    CT    CT    OH     1 1.095000e+02 4.184000e+02 ;
 
-angletypes_entry_115     CT    CT    OS     1 1.095000e+02 4.184000e+02 ;
+angletypes_entry_115    CT    CT    OS     1 1.095000e+02 4.184000e+02 ;
 
-angletypes_entry_116     HC    CT    HC     1 1.095000e+02 2.928800e+02 ;
+angletypes_entry_116    HC    CT    HC     1 1.095000e+02 2.928800e+02 ;
 
-angletypes_entry_117     H1    CT    H1     1 1.095000e+02 2.928800e+02 ;
+angletypes_entry_117    H1    CT    H1     1 1.095000e+02 2.928800e+02 ;
 
-angletypes_entry_118     HP    CT    HP     1 1.095000e+02 2.928800e+02 ;  AA lys, ch3nh4+
+angletypes_entry_118    HP    CT    HP     1 1.095000e+02 2.928800e+02 ;  AA lys, ch3nh4+
 
-angletypes_entry_119     H2    CT    N*     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
+angletypes_entry_119    H2    CT    N*     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
 
-angletypes_entry_120     H1    CT    N*     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
+angletypes_entry_120    H1    CT    N*     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
 
-angletypes_entry_121     H1    CT    OH     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
+angletypes_entry_121    H1    CT    OH     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
 
-angletypes_entry_122     H1    CT    OS     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
+angletypes_entry_122    H1    CT    OS     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
 
-angletypes_entry_123     H2    CT    OS     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
+angletypes_entry_123    H2    CT    OS     1 1.095000e+02 4.184000e+02 ;  changed based on NMA nmodes
 
-angletypes_entry_124     N*    CT    OS     1 1.095000e+02 4.184000e+02 ;
+angletypes_entry_124    N*    CT    OS     1 1.095000e+02 4.184000e+02 ;
 
-angletypes_entry_125     H1    CT     N     1 1.095000e+02 4.184000e+02 ;  AA general  changed based on NMA nmodes
+angletypes_entry_125    H1    CT     N     1 1.095000e+02 4.184000e+02 ;  AA general  changed based on NMA nmodes
 
-angletypes_entry_126      C    CT    H1     1 1.095000e+02 4.184000e+02 ;  AA general  changed based on NMA nmodes
+angletypes_entry_126     C    CT    H1     1 1.095000e+02 4.184000e+02 ;  AA general  changed based on NMA nmodes
 
-angletypes_entry_127      C    CT    HP     1 1.095000e+02 4.184000e+02 ;  AA zwitterion  changed based on NMA nmodes
+angletypes_entry_127     C    CT    HP     1 1.095000e+02 4.184000e+02 ;  AA zwitterion  changed based on NMA nmodes
 
-angletypes_entry_128     H1    CT     S     1 1.095000e+02 4.184000e+02 ;  AA cys     changed based on NMA nmodes
+angletypes_entry_128    H1    CT     S     1 1.095000e+02 4.184000e+02 ;  AA cys     changed based on NMA nmodes
 
-angletypes_entry_129     H1    CT    SH     1 1.095000e+02 4.184000e+02 ;  AA cyx     changed based on NMA nmodes
+angletypes_entry_129    H1    CT    SH     1 1.095000e+02 4.184000e+02 ;  AA cyx     changed based on NMA nmodes
 
-angletypes_entry_130     CT    CT     S     1 1.147000e+02 4.184000e+02 ;  AA cyx            (SCHERAGA  JPC 79,1428)
+angletypes_entry_130    CT    CT     S     1 1.147000e+02 4.184000e+02 ;  AA cyx            (SCHERAGA  JPC 79,1428)
 
-angletypes_entry_131     CT    CT    SH     1 1.086000e+02 4.184000e+02 ;  AA cys
+angletypes_entry_131    CT    CT    SH     1 1.086000e+02 4.184000e+02 ;  AA cys
 
-angletypes_entry_132     H2    CT    H2     1 1.095000e+02 2.928800e+02 ;  AA lys
+angletypes_entry_132    H2    CT    H2     1 1.095000e+02 2.928800e+02 ;  AA lys
 
-angletypes_entry_133     H1    CT    N2     1 1.095000e+02 4.184000e+02 ;  AA arg     changed based on NMA nmodes
+angletypes_entry_133    H1    CT    N2     1 1.095000e+02 4.184000e+02 ;  AA arg     changed based on NMA nmodes
 
-angletypes_entry_134     HP    CT    N3     1 1.095000e+02 4.184000e+02 ;  AA lys, ch3nh3+, changed based on NMA nmodes
+angletypes_entry_134    HP    CT    N3     1 1.095000e+02 4.184000e+02 ;  AA lys, ch3nh3+, changed based on NMA nmodes
 
-angletypes_entry_135     CA    CT    CT     1 1.140000e+02 5.271840e+02 ;  AA phe tyr          (SCH JPC  79,2379)
+angletypes_entry_135    CA    CT    CT     1 1.140000e+02 5.271840e+02 ;  AA phe tyr          (SCH JPC  79,2379)
 
-angletypes_entry_136      C    CT    HC     1 1.095000e+02 4.184000e+02 ;  AA gln      changed based on NMA nmodes
+angletypes_entry_136     C    CT    HC     1 1.095000e+02 4.184000e+02 ;  AA gln      changed based on NMA nmodes
 
-angletypes_entry_137      C    CT     N     1 1.101000e+02 5.271840e+02 ;  AA general
+angletypes_entry_137     C    CT     N     1 1.101000e+02 5.271840e+02 ;  AA general
 
-angletypes_entry_138     CT    CT    N2     1 1.112000e+02 6.694400e+02 ;  AA arg             (JCP 76, 1439)
+angletypes_entry_138    CT    CT    N2     1 1.112000e+02 6.694400e+02 ;  AA arg             (JCP 76, 1439)
 
-angletypes_entry_139     CT    CT     N     1 1.097000e+02 6.694400e+02 ;  AA ala, general    (JACS 94, 2657)
+angletypes_entry_139    CT    CT     N     1 1.097000e+02 6.694400e+02 ;  AA ala, general    (JACS 94, 2657)
 
-angletypes_entry_140      C    CT    CT     1 1.111000e+02 5.271840e+02 ;  AA general
+angletypes_entry_140     C    CT    CT     1 1.111000e+02 5.271840e+02 ;  AA general
 
-angletypes_entry_141     CA    CT    HC     1 1.095000e+02 4.184000e+02 ;  AA tyr     changed based on NMA nmodes
+angletypes_entry_141    CA    CT    HC     1 1.095000e+02 4.184000e+02 ;  AA tyr     changed based on NMA nmodes
 
-angletypes_entry_142     CT    CT    N3     1 1.112000e+02 6.694400e+02 ;  AA lys             (JCP 76, 1439)
+angletypes_entry_142    CT    CT    N3     1 1.112000e+02 6.694400e+02 ;  AA lys             (JCP 76, 1439)
 
-angletypes_entry_143     CC    CT    CT     1 1.131000e+02 5.271840e+02 ;  AA his
+angletypes_entry_143    CC    CT    CT     1 1.131000e+02 5.271840e+02 ;  AA his
 
-angletypes_entry_144     CC    CT    HC     1 1.095000e+02 4.184000e+02 ;  AA his     changed based on NMA nmodes
+angletypes_entry_144    CC    CT    HC     1 1.095000e+02 4.184000e+02 ;  AA his     changed based on NMA nmodes
 
-angletypes_entry_145      C    CT    N3     1 1.112000e+02 6.694400e+02 ;  AA amino terminal residues
+angletypes_entry_145     C    CT    N3     1 1.112000e+02 6.694400e+02 ;  AA amino terminal residues
 
-angletypes_entry_146     C*    CT    CT     1 1.156000e+02 5.271840e+02 ;  AA trp
+angletypes_entry_146    C*    CT    CT     1 1.156000e+02 5.271840e+02 ;  AA trp
 
-angletypes_entry_147     C*    CT    HC     1 1.095000e+02 4.184000e+02 ;  AA trp    changed based on NMA nmodes
+angletypes_entry_147    C*    CT    HC     1 1.095000e+02 4.184000e+02 ;  AA trp    changed based on NMA nmodes
 
-angletypes_entry_148     CT    CC    NA     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_148    CT    CC    NA     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_149     CT    CC    CV     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_149    CT    CC    CV     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_150     CT    CC    NB     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_150    CT    CC    NB     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_151     CV    CC    NA     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_151    CV    CC    NA     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_152     CW    CC    NA     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_152    CW    CC    NA     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_153     CW    CC    NB     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_153    CW    CC    NB     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_154     CT    CC    CW     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_154    CT    CC    CW     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_155     H5    CR    NA     1 1.200000e+02 4.184000e+02 ;  new99 his
+angletypes_entry_155    H5    CR    NA     1 1.200000e+02 4.184000e+02 ;  new99 his
 
-angletypes_entry_156     H5    CR    NB     1 1.200000e+02 4.184000e+02 ;  new99 his
+angletypes_entry_156    H5    CR    NB     1 1.200000e+02 4.184000e+02 ;  new99 his
 
-angletypes_entry_157     NA    CR    NA     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_157    NA    CR    NA     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_158     NA    CR    NB     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_158    NA    CR    NB     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_159     CC    CV    H4     1 1.200000e+02 4.184000e+02 ;  new99 his
+angletypes_entry_159    CC    CV    H4     1 1.200000e+02 4.184000e+02 ;  new99 his
 
-angletypes_entry_160     CC    CV    NB     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_160    CC    CV    NB     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_161     H4    CV    NB     1 1.200000e+02 4.184000e+02 ;  new99 his
+angletypes_entry_161    H4    CV    NB     1 1.200000e+02 4.184000e+02 ;  new99 his
 
-angletypes_entry_162     CC    CW    H4     1 1.200000e+02 4.184000e+02 ;  new99 his
+angletypes_entry_162    CC    CW    H4     1 1.200000e+02 4.184000e+02 ;  new99 his
 
-angletypes_entry_163     CC    CW    NA     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_163    CC    CW    NA     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_164     H4    CW    NA     1 1.200000e+02 4.184000e+02 ;  new99 his
+angletypes_entry_164    H4    CW    NA     1 1.200000e+02 4.184000e+02 ;  new99 his
 
-angletypes_entry_165     C*    CW    H4     1 1.200000e+02 4.184000e+02 ;  new99 trp
+angletypes_entry_165    C*    CW    H4     1 1.200000e+02 4.184000e+02 ;  new99 trp
 
-angletypes_entry_166     C*    CW    NA     1 1.087000e+02 5.857600e+02 ;  AA trp
+angletypes_entry_166    C*    CW    NA     1 1.087000e+02 5.857600e+02 ;  AA trp
 
-angletypes_entry_167     CT    C*    CW     1 1.250000e+02 5.857600e+02 ;  AA trp
+angletypes_entry_167    CT    C*    CW     1 1.250000e+02 5.857600e+02 ;  AA trp
 
-angletypes_entry_168     CB    C*    CT     1 1.286000e+02 5.857600e+02 ;  AA trp
+angletypes_entry_168    CB    C*    CT     1 1.286000e+02 5.857600e+02 ;  AA trp
 
-angletypes_entry_169     CB    C*    CW     1 1.064000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
+angletypes_entry_169    CB    C*    CW     1 1.064000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
 
-angletypes_entry_170     CA    CN    NA     1 1.328000e+02 5.857600e+02 ;  AA trp
+angletypes_entry_170    CA    CN    NA     1 1.328000e+02 5.857600e+02 ;  AA trp
 
-angletypes_entry_171     CB    CN    NA     1 1.044000e+02 5.857600e+02 ;  AA trp
+angletypes_entry_171    CB    CN    NA     1 1.044000e+02 5.857600e+02 ;  AA trp
 
-angletypes_entry_172     CA    CN    CB     1 1.227000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
+angletypes_entry_172    CA    CN    CB     1 1.227000e+02 5.271840e+02 ;  changed from 85.0  bsd on C6H6 nmodes; AA trp
 
-angletypes_entry_173      C     N    CT     1 1.219000e+02 4.184000e+02 ;  AA general
+angletypes_entry_173     C     N    CT     1 1.219000e+02 4.184000e+02 ;  AA general
 
-angletypes_entry_174      C     N     H     1 1.200000e+02 4.184000e+02 ;  new99 general, gln, asn,changed based on NMA nmodes
+angletypes_entry_174     C     N     H     1 1.200000e+02 4.184000e+02 ;  new99 general, gln, asn,changed based on NMA nmodes
 
-angletypes_entry_175     CT     N     H     1 1.180400e+02 4.184000e+02 ;  new99 general,     changed based on NMA nmodes
+angletypes_entry_175    CT     N     H     1 1.180400e+02 4.184000e+02 ;  new99 general,     changed based on NMA nmodes
 
-angletypes_entry_176     CT     N    CT     1 1.180000e+02 4.184000e+02 ;  AA pro             (DETAR JACS 99,1232)
+angletypes_entry_176    CT     N    CT     1 1.180000e+02 4.184000e+02 ;  AA pro             (DETAR JACS 99,1232)
 
-angletypes_entry_177      H     N     H     1 1.200000e+02 2.928800e+02 ;  ade,cyt,gua,gln,asn     **
+angletypes_entry_177     H     N     H     1 1.200000e+02 2.928800e+02 ;  ade,cyt,gua,gln,asn     **
 
-angletypes_entry_178      C    N*    CM     1 1.216000e+02 5.857600e+02 ;
+angletypes_entry_178     C    N*    CM     1 1.216000e+02 5.857600e+02 ;
 
-angletypes_entry_179      C    N*    CT     1 1.176000e+02 5.857600e+02 ;
+angletypes_entry_179     C    N*    CT     1 1.176000e+02 5.857600e+02 ;
 
-angletypes_entry_180      C    N*     H     1 1.192000e+02 4.184000e+02 ;  new99
+angletypes_entry_180     C    N*     H     1 1.192000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_181     CB    N*    CK     1 1.054000e+02 5.857600e+02 ;
+angletypes_entry_181    CB    N*    CK     1 1.054000e+02 5.857600e+02 ;
 
-angletypes_entry_182     CB    N*    CT     1 1.258000e+02 5.857600e+02 ;
+angletypes_entry_182    CB    N*    CT     1 1.258000e+02 5.857600e+02 ;
 
-angletypes_entry_183     CB    N*     H     1 1.258000e+02 4.184000e+02 ;  new99
+angletypes_entry_183    CB    N*     H     1 1.258000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_184     CK    N*    CT     1 1.288000e+02 5.857600e+02 ;
+angletypes_entry_184    CK    N*    CT     1 1.288000e+02 5.857600e+02 ;
 
-angletypes_entry_185     CK    N*     H     1 1.288000e+02 4.184000e+02 ;  new99  for unmethylated n.a. bases,chngd bsd NMA nmodes
+angletypes_entry_185    CK    N*     H     1 1.288000e+02 4.184000e+02 ;  new99  for unmethylated n.a. bases,chngd bsd NMA nmodes
 
-angletypes_entry_186     CM    N*    CT     1 1.212000e+02 5.857600e+02 ;
+angletypes_entry_186    CM    N*    CT     1 1.212000e+02 5.857600e+02 ;
 
-angletypes_entry_187     CM    N*     H     1 1.212000e+02 4.184000e+02 ;  new99  for unmethylated n.a. bases,chngd bsd NMA nmodes
+angletypes_entry_187    CM    N*     H     1 1.212000e+02 4.184000e+02 ;  new99  for unmethylated n.a. bases,chngd bsd NMA nmodes
 
-angletypes_entry_188     CA    N2     H     1 1.200000e+02 4.184000e+02 ;  new99
+angletypes_entry_188    CA    N2     H     1 1.200000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_189      H    N2     H     1 1.200000e+02 2.928800e+02 ;
+angletypes_entry_189     H    N2     H     1 1.200000e+02 2.928800e+02 ;
 
-angletypes_entry_190     CT    N2     H     1 1.184000e+02 4.184000e+02 ;  new99 arg
+angletypes_entry_190    CT    N2     H     1 1.184000e+02 4.184000e+02 ;  new99 arg
 
-angletypes_entry_191     CA    N2    CT     1 1.232000e+02 4.184000e+02 ;  AA arg
+angletypes_entry_191    CA    N2    CT     1 1.232000e+02 4.184000e+02 ;  AA arg
 
-angletypes_entry_192     CT    N3     H     1 1.095000e+02 4.184000e+02 ;  AA lys,     changed based on NMA nmodes
+angletypes_entry_192    CT    N3     H     1 1.095000e+02 4.184000e+02 ;  AA lys,     changed based on NMA nmodes
 
-angletypes_entry_193     CT    N3    CT     1 1.095000e+02 4.184000e+02 ;  AA pro/nt
+angletypes_entry_193    CT    N3    CT     1 1.095000e+02 4.184000e+02 ;  AA pro/nt
 
-angletypes_entry_194      H    N3     H     1 1.095000e+02 2.928800e+02 ;  AA lys, AA(end)
+angletypes_entry_194     H    N3     H     1 1.095000e+02 2.928800e+02 ;  AA lys, AA(end)
 
-angletypes_entry_195      C    NA     C     1 1.264000e+02 5.857600e+02 ;
+angletypes_entry_195     C    NA     C     1 1.264000e+02 5.857600e+02 ;
 
-angletypes_entry_196      C    NA    CA     1 1.252000e+02 5.857600e+02 ;
+angletypes_entry_196     C    NA    CA     1 1.252000e+02 5.857600e+02 ;
 
-angletypes_entry_197      C    NA     H     1 1.168000e+02 4.184000e+02 ;  new99
+angletypes_entry_197     C    NA     H     1 1.168000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_198     CA    NA     H     1 1.180000e+02 4.184000e+02 ;  new99
+angletypes_entry_198    CA    NA     H     1 1.180000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_199     CC    NA    CR     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_199    CC    NA    CR     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_200     CC    NA     H     1 1.200000e+02 4.184000e+02 ;  new99 his
+angletypes_entry_200    CC    NA     H     1 1.200000e+02 4.184000e+02 ;  new99 his
 
-angletypes_entry_201     CR    NA    CW     1 1.200000e+02 5.857600e+02 ;  AA his
+angletypes_entry_201    CR    NA    CW     1 1.200000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_202     CR    NA     H     1 1.200000e+02 4.184000e+02 ;  new99 his
+angletypes_entry_202    CR    NA     H     1 1.200000e+02 4.184000e+02 ;  new99 his
 
-angletypes_entry_203     CW    NA     H     1 1.200000e+02 4.184000e+02 ;  new99 his
+angletypes_entry_203    CW    NA     H     1 1.200000e+02 4.184000e+02 ;  new99 his
 
-angletypes_entry_204     CN    NA    CW     1 1.116000e+02 5.857600e+02 ;  AA trp
+angletypes_entry_204    CN    NA    CW     1 1.116000e+02 5.857600e+02 ;  AA trp
 
-angletypes_entry_205     CN    NA     H     1 1.231000e+02 4.184000e+02 ;  new99 trp
+angletypes_entry_205    CN    NA     H     1 1.231000e+02 4.184000e+02 ;  new99 trp
 
-angletypes_entry_206     CB    NB    CK     1 1.038000e+02 5.857600e+02 ;
+angletypes_entry_206    CB    NB    CK     1 1.038000e+02 5.857600e+02 ;
 
-angletypes_entry_207     CC    NB    CR     1 1.170000e+02 5.857600e+02 ;  AA his
+angletypes_entry_207    CC    NB    CR     1 1.170000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_208     CR    NB    CV     1 1.170000e+02 5.857600e+02 ;  AA his
+angletypes_entry_208    CR    NB    CV     1 1.170000e+02 5.857600e+02 ;  AA his
 
-angletypes_entry_209      C    NC    CA     1 1.205000e+02 5.857600e+02 ;
+angletypes_entry_209     C    NC    CA     1 1.205000e+02 5.857600e+02 ;
 
-angletypes_entry_210     CA    NC    CB     1 1.122000e+02 5.857600e+02 ;
+angletypes_entry_210    CA    NC    CB     1 1.122000e+02 5.857600e+02 ;
 
-angletypes_entry_211     CA    NC    CQ     1 1.186000e+02 5.857600e+02 ;
+angletypes_entry_211    CA    NC    CQ     1 1.186000e+02 5.857600e+02 ;
 
-angletypes_entry_212     CB    NC    CQ     1 1.110000e+02 5.857600e+02 ;
+angletypes_entry_212    CB    NC    CQ     1 1.110000e+02 5.857600e+02 ;
 
-angletypes_entry_213      C    OH    HO     1 1.130000e+02 4.184000e+02 ;  new99
+angletypes_entry_213     C    OH    HO     1 1.130000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_214     CT    OH    HO     1 1.085000e+02 4.602400e+02 ;
+angletypes_entry_214    CT    OH    HO     1 1.085000e+02 4.602400e+02 ;
 
-angletypes_entry_215     HO    OH     P     1 1.085000e+02 3.765600e+02 ;
+angletypes_entry_215    HO    OH     P     1 1.085000e+02 3.765600e+02 ;
 
-angletypes_entry_216     CT    OS    CT     1 1.095000e+02 5.020800e+02 ;
+angletypes_entry_216    CT    OS    CT     1 1.095000e+02 5.020800e+02 ;
 
-angletypes_entry_217     CT    OS     P     1 1.205000e+02 8.368000e+02 ;
+angletypes_entry_217    CT    OS     P     1 1.205000e+02 8.368000e+02 ;
 
-angletypes_entry_218      P    OS     P     1 1.205000e+02 8.368000e+02 ;
+angletypes_entry_218     P    OS     P     1 1.205000e+02 8.368000e+02 ;
 
-angletypes_entry_219     O2     P    OH     1 1.082300e+02 3.765600e+02 ;
+angletypes_entry_219    O2     P    OH     1 1.082300e+02 3.765600e+02 ;
 
-angletypes_entry_220     O2     P    O2     1 1.199000e+02 1.171520e+03 ;
+angletypes_entry_220    O2     P    O2     1 1.199000e+02 1.171520e+03 ;
 
-angletypes_entry_221     O2     P    OS     1 1.082300e+02 8.368000e+02 ;
+angletypes_entry_221    O2     P    OS     1 1.082300e+02 8.368000e+02 ;
 
-angletypes_entry_222     OH     P    OS     1 1.026000e+02 3.765600e+02 ;
+angletypes_entry_222    OH     P    OS     1 1.026000e+02 3.765600e+02 ;
 
-angletypes_entry_223     OS     P    OS     1 1.026000e+02 3.765600e+02 ;
+angletypes_entry_223    OS     P    OS     1 1.026000e+02 3.765600e+02 ;
 
-angletypes_entry_224     CT     S    CT     1 9.890000e+01 5.188160e+02 ;  AA met
+angletypes_entry_224    CT     S    CT     1 9.890000e+01 5.188160e+02 ;  AA met
 
-angletypes_entry_225     CT     S     S     1 1.037000e+02 5.690240e+02 ;  AA cyx             (SCHERAGA  JPC 79,1428)
+angletypes_entry_225    CT     S     S     1 1.037000e+02 5.690240e+02 ;  AA cyx             (SCHERAGA  JPC 79,1428)
 
-angletypes_entry_226     CT    SH    HS     1 9.600000e+01 3.598240e+02 ;  changed from 44.0 based on methanethiol nmodes
+angletypes_entry_226    CT    SH    HS     1 9.600000e+01 3.598240e+02 ;  changed from 44.0 based on methanethiol nmodes
 
-angletypes_entry_227     HS    SH    HS     1 9.207000e+01 2.928800e+02 ;  AA cys
+angletypes_entry_227    HS    SH    HS     1 9.207000e+01 2.928800e+02 ;  AA cys
 
-angletypes_entry_228      F    CT     F     1 1.091000e+02 6.443360e+02 ;  JCC,13,(1992),963;
+angletypes_entry_228     F    CT     F     1 1.091000e+02 6.443360e+02 ;  JCC,13,(1992),963;
 
-angletypes_entry_229      F    CT    H1     1 1.095000e+02 4.184000e+02 ;  new99
+angletypes_entry_229     F    CT    H1     1 1.095000e+02 4.184000e+02 ;  new99
 
-angletypes_entry_230      N     C     N     1 1.200000e+02 5.857600e+02 ;  Added for Urea (same as N2-CA-N2) - EJS
+angletypes_entry_230     N     C     N     1 1.200000e+02 5.857600e+02 ;  Added for Urea (same as N2-CA-N2) - EJS
 
 dihedraltypes_1      [ dihedraltypes ]
 
 comment_28           ; i  j   k  l	 func      phase      kd      pn
 
-dihedraltypes_entry_1     CA    CA    CA    OH     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
+dihedraltypes_entry_1    CA    CA    CA    OH     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
 
-dihedraltypes_entry_2     H5     O     C    OH     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
+dihedraltypes_entry_2    H5     O     C    OH     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
 
-dihedraltypes_entry_3     H5     O     C    OS     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
+dihedraltypes_entry_3    H5     O     C    OS     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
 
-dihedraltypes_entry_4     CM    CT    CM    HA     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
+dihedraltypes_entry_4    CM    CT    CM    HA     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
 
-dihedraltypes_entry_5     CA    CA    CA    Br     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
+dihedraltypes_entry_5    CA    CA    CA    Br     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
 
-dihedraltypes_entry_6     CM    H4     C     O     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
+dihedraltypes_entry_6    CM    H4     C     O     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
 
-dihedraltypes_entry_7      C    CT     N     H     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
+dihedraltypes_entry_7     C    CT     N     H     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
 
-dihedraltypes_entry_8      C    CT     N     O     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
+dihedraltypes_entry_8     C    CT     N     O     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  new99
 
-dihedraltypes_entry_9     CB    CK    N*    CT     4 1.800000e+02 4.184000e+00 2.000000e+00 ;
+dihedraltypes_entry_9    CB    CK    N*    CT     4 1.800000e+02 4.184000e+00 2.000000e+00 ;
 
-dihedraltypes_entry_10     CK    CB    N*    CT     4 1.800000e+02 4.184000e+00 2.000000e+00 ;
+dihedraltypes_entry_10    CK    CB    N*    CT     4 1.800000e+02 4.184000e+00 2.000000e+00 ;
 
-dihedraltypes_entry_11      C    CM    N*    CT     4 1.800000e+02 4.184000e+00 2.000000e+00 ;  dac guess, 9/94
+dihedraltypes_entry_11     C    CM    N*    CT     4 1.800000e+02 4.184000e+00 2.000000e+00 ;  dac guess, 9/94
 
-dihedraltypes_entry_12     CT    N*     C    CM     4 1.800000e+02 4.184000e+00 2.000000e+00 ;
+dihedraltypes_entry_12    CT    N*     C    CM     4 1.800000e+02 4.184000e+00 2.000000e+00 ;
 
-dihedraltypes_entry_13     CM     C    CM    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_13    CM     C    CM    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_14     CT     O     C    OH     4 1.800000e+02 4.393200e+01 2.000000e+00 ;
+dihedraltypes_entry_14    CT     O     C    OH     4 1.800000e+02 4.393200e+01 2.000000e+00 ;
 
-dihedraltypes_entry_15     NA    CV    CC    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_15    NA    CV    CC    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_16     NB    CW    CC    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_16    NB    CW    CC    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_17     NA    CW    CC    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_17    NA    CW    CC    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_18     CW    CB    C*    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_18    CW    CB    C*    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_19     CA    CA    CA    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_19    CA    CA    CA    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_20      C    CM    CM    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  dac guess, 9/94
+dihedraltypes_entry_20     C    CM    CM    CT     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  dac guess, 9/94
 
-dihedraltypes_entry_21     NC    CM    CA    N2     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  dac guess, 9/94
+dihedraltypes_entry_21    NC    CM    CA    N2     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  dac guess, 9/94
 
-dihedraltypes_entry_22     CB    NC    CA    N2     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  dac, 10/94
+dihedraltypes_entry_22    CB    NC    CA    N2     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  dac, 10/94
 
-dihedraltypes_entry_23     NA    NC    CA    N2     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  dac, 10/94
+dihedraltypes_entry_23    NA    NC    CA    N2     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  dac, 10/94
 
-dihedraltypes_entry_24     CA    CA     C    OH     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_24    CA    CA     C    OH     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_25     CT    CV    CC    NA     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_25    CT    CV    CC    NA     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_26     CT    CW    CC    NB     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_26    CT    CW    CC    NB     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_27     CT    CW    CC    NA     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_27    CT    CW    CC    NA     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_28     CB    CT    C*    CW     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_28    CB    CT    C*    CW     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_29     CM    N2    CA    NC     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_29    CM    N2    CA    NC     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_30     CB    N2    CA    NC     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_30    CB    N2    CA    NC     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_31     N2    NA    CA    NC     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_31    N2    NA    CA    NC     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_32      N     N     C     O     4 1.800000e+02 4.393200e+01 2.000000e+00 ;  urea
+dihedraltypes_entry_32     N     N     C     O     4 1.800000e+02 4.393200e+01 2.000000e+00 ;  urea
 
-dihedraltypes_entry_33      X    O2     C    O2     4 1.800000e+02 4.393200e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_33     X    O2     C    O2     4 1.800000e+02 4.393200e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_34      X    N2    CA    N2     4 1.800000e+02 4.393200e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_34     X    N2    CA    N2     4 1.800000e+02 4.393200e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_35      X    CT     N    CT     4 1.800000e+02 4.184000e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_35     X    CT     N    CT     4 1.800000e+02 4.184000e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_36      X     X     C     O     4 1.800000e+02 4.393200e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_36     X     X     C     O     4 1.800000e+02 4.393200e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_37      X     X     N     H     4 1.800000e+02 4.184000e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_37     X     X     N     H     4 1.800000e+02 4.184000e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_38      X     X    N2     H     4 1.800000e+02 4.184000e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_38     X     X    N2     H     4 1.800000e+02 4.184000e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_39      X     X    NA     H     4 1.800000e+02 4.184000e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_39     X     X    NA     H     4 1.800000e+02 4.184000e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_40      X     X    CA    HA     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  bsd.on C6H6 nmodes
+dihedraltypes_entry_40     X     X    CA    HA     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  bsd.on C6H6 nmodes
 
-dihedraltypes_entry_41      X     X    CW    H4     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_41     X     X    CW    H4     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_42      X     X    CR    H5     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_42     X     X    CR    H5     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_43      X     X    CV    H4     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_43     X     X    CV    H4     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_44      X     X    CQ    H5     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_44     X     X    CQ    H5     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_45      X     X    CK    H5     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_45     X     X    CK    H5     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_46      X     X    CM    H4     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_46     X     X    CM    H4     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_47      X     X    CM    HA     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
+dihedraltypes_entry_47     X     X    CM    HA     4 1.800000e+02 4.602400e+00 2.000000e+00 ;
 
-dihedraltypes_entry_48      X     X    CA    H4     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  bsd.on C6H6 nmodes
+dihedraltypes_entry_48     X     X    CA    H4     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  bsd.on C6H6 nmodes
 
-dihedraltypes_entry_49      X     X    CA    H5     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  bsd.on C6H6 nmodes
+dihedraltypes_entry_49     X     X    CA    H5     4 1.800000e+02 4.602400e+00 2.000000e+00 ;  bsd.on C6H6 nmodes
 
 dihedraltypes_2      [ dihedraltypes ]
 
 comment_29           ; i   j   k   l	   func
 
-dihedraltypes_entry_50     CT    CT    OS    CT     9 0.000000e+00 1.602470e+00 3.000000e+00 ;
+dihedraltypes_entry_50    CT    CT    OS    CT     9 0.000000e+00 1.602470e+00 3.000000e+00 ;
 
-dihedraltypes_entry_51     CT    CT    OS    CT     9 1.800000e+02 4.184000e-01 2.000000e+00 ;
+dihedraltypes_entry_51    CT    CT    OS    CT     9 1.800000e+02 4.184000e-01 2.000000e+00 ;
 
-dihedraltypes_entry_52      C     N    CT     C     9 0.000000e+00 1.129680e+00 2.000000e+00 ;  new for 99sb
+dihedraltypes_entry_52     C     N    CT     C     9 0.000000e+00 1.129680e+00 2.000000e+00 ;  new for 99sb
 
-dihedraltypes_entry_53      C     N    CT     C     9 0.000000e+00 1.757280e+00 3.000000e+00 ;  new for 99sb
+dihedraltypes_entry_53     C     N    CT     C     9 0.000000e+00 1.757280e+00 3.000000e+00 ;  new for 99sb
 
-dihedraltypes_entry_54      N    CT     C     N     9 1.800000e+02 1.882800e+00 1.000000e+00 ;  new for 99sb
+dihedraltypes_entry_54     N    CT     C     N     9 1.800000e+02 1.882800e+00 1.000000e+00 ;  new for 99sb
 
-dihedraltypes_entry_55      N    CT     C     N     9 1.800000e+02 6.610720e+00 2.000000e+00 ;  new for 99sb
+dihedraltypes_entry_55     N    CT     C     N     9 1.800000e+02 6.610720e+00 2.000000e+00 ;  new for 99sb
 
-dihedraltypes_entry_56      N    CT     C     N     9 1.800000e+02 2.301200e+00 3.000000e+00 ;  new for 99sb
+dihedraltypes_entry_56     N    CT     C     N     9 1.800000e+02 2.301200e+00 3.000000e+00 ;  new for 99sb
 
-dihedraltypes_entry_57     CT    CT     N     C     9 0.000000e+00 8.368000e+00 1.000000e+00 ;  new for 99sb
+dihedraltypes_entry_57    CT    CT     N     C     9 0.000000e+00 8.368000e+00 1.000000e+00 ;  new for 99sb
 
-dihedraltypes_entry_58     CT    CT     N     C     9 0.000000e+00 8.368000e+00 2.000000e+00 ;  new for 99sb
+dihedraltypes_entry_58    CT    CT     N     C     9 0.000000e+00 8.368000e+00 2.000000e+00 ;  new for 99sb
 
-dihedraltypes_entry_59     CT    CT     N     C     9 0.000000e+00 1.673600e+00 3.000000e+00 ;  new for 99sb
+dihedraltypes_entry_59    CT    CT     N     C     9 0.000000e+00 1.673600e+00 3.000000e+00 ;  new for 99sb
 
-dihedraltypes_entry_60     CT    CT     C     N     9 0.000000e+00 8.368000e-01 1.000000e+00 ;  new for 99sb
+dihedraltypes_entry_60    CT    CT     C     N     9 0.000000e+00 8.368000e-01 1.000000e+00 ;  new for 99sb
 
-dihedraltypes_entry_61     CT    CT     C     N     9 0.000000e+00 8.368000e-01 2.000000e+00 ;  new for 99sb
+dihedraltypes_entry_61    CT    CT     C     N     9 0.000000e+00 8.368000e-01 2.000000e+00 ;  new for 99sb
 
-dihedraltypes_entry_62     CT    CT     C     N     9 0.000000e+00 1.673600e+00 3.000000e+00 ;  new for 99sb
+dihedraltypes_entry_62    CT    CT     C     N     9 0.000000e+00 1.673600e+00 3.000000e+00 ;  new for 99sb
 
-dihedraltypes_entry_63      H     N     C     O     9 1.800000e+02 1.046000e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_63     H     N     C     O     9 1.800000e+02 1.046000e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_64      H     N     C     O     9 0.000000e+00 8.368000e+00 1.000000e+00 ;  J.C.cistrans-NMA DE
+dihedraltypes_entry_64     H     N     C     O     9 0.000000e+00 8.368000e+00 1.000000e+00 ;  J.C.cistrans-NMA DE
 
-dihedraltypes_entry_65     CT     S     S    CT     9 0.000000e+00 1.464400e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_65    CT     S     S    CT     9 0.000000e+00 1.464400e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_66     CT     S     S    CT     9 0.000000e+00 2.510400e+00 3.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_66    CT     S     S    CT     9 0.000000e+00 2.510400e+00 3.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_67     OS    CT    CT    OS     9 0.000000e+00 6.025000e-01 3.000000e+00 ;  parm98, TC,PC,PAK
+dihedraltypes_entry_67    OS    CT    CT    OS     9 0.000000e+00 6.025000e-01 3.000000e+00 ;  parm98, TC,PC,PAK
 
-dihedraltypes_entry_68     OS    CT    CT    OS     9 0.000000e+00 4.916200e+00 2.000000e+00 ;  Piotr et al.
+dihedraltypes_entry_68    OS    CT    CT    OS     9 0.000000e+00 4.916200e+00 2.000000e+00 ;  Piotr et al.
 
-dihedraltypes_entry_69     OS    CT    CT    OH     9 0.000000e+00 6.025000e-01 3.000000e+00 ;  parm98, TC,PC,PAK
+dihedraltypes_entry_69    OS    CT    CT    OH     9 0.000000e+00 6.025000e-01 3.000000e+00 ;  parm98, TC,PC,PAK
 
-dihedraltypes_entry_70     OS    CT    CT    OH     9 0.000000e+00 4.916200e+00 2.000000e+00 ;  parm98, TC,PC,PAK
+dihedraltypes_entry_70    OS    CT    CT    OH     9 0.000000e+00 4.916200e+00 2.000000e+00 ;  parm98, TC,PC,PAK
 
-dihedraltypes_entry_71     OH    CT    CT    OH     9 0.000000e+00 6.025000e-01 3.000000e+00 ;  parm98, TC,PC,PAK
+dihedraltypes_entry_71    OH    CT    CT    OH     9 0.000000e+00 6.025000e-01 3.000000e+00 ;  parm98, TC,PC,PAK
 
-dihedraltypes_entry_72     OH    CT    CT    OH     9 0.000000e+00 4.916200e+00 2.000000e+00 ;  parm98, TC,PC,PAK
+dihedraltypes_entry_72    OH    CT    CT    OH     9 0.000000e+00 4.916200e+00 2.000000e+00 ;  parm98, TC,PC,PAK
 
-dihedraltypes_entry_73     OH     P    OS    CT     9 0.000000e+00 1.046000e+00 3.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_73    OH     P    OS    CT     9 0.000000e+00 1.046000e+00 3.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_74     OH     P    OS    CT     9 0.000000e+00 5.020800e+00 2.000000e+00 ;  gg&gt ene.631g*/mp2
+dihedraltypes_entry_74    OH     P    OS    CT     9 0.000000e+00 5.020800e+00 2.000000e+00 ;  gg&gt ene.631g*/mp2
 
-dihedraltypes_entry_75     OS     P    OS    CT     9 0.000000e+00 1.046000e+00 3.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_75    OS     P    OS    CT     9 0.000000e+00 1.046000e+00 3.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_76     OS     P    OS    CT     9 0.000000e+00 5.020800e+00 2.000000e+00 ;  gg&gt ene.631g*/mp2
+dihedraltypes_entry_76    OS     P    OS    CT     9 0.000000e+00 5.020800e+00 2.000000e+00 ;  gg&gt ene.631g*/mp2
 
-dihedraltypes_entry_77     OS    CT    N*    CK     9 0.000000e+00 1.046000e+01 1.000000e+00 ;  parm98, TC,PC,PAK
+dihedraltypes_entry_77    OS    CT    N*    CK     9 0.000000e+00 1.046000e+01 1.000000e+00 ;  parm98, TC,PC,PAK
 
-dihedraltypes_entry_78     OS    CT    N*    CM     9 0.000000e+00 1.046000e+01 1.000000e+00 ;  parm98, TC,PC,PAK
+dihedraltypes_entry_78    OS    CT    N*    CM     9 0.000000e+00 1.046000e+01 1.000000e+00 ;  parm98, TC,PC,PAK
 
-dihedraltypes_entry_79     H1    CT     C     O     9 0.000000e+00 3.347200e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_79    H1    CT     C     O     9 0.000000e+00 3.347200e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_80     H1    CT     C     O     9 1.800000e+02 3.347200e-01 3.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_80    H1    CT     C     O     9 1.800000e+02 3.347200e-01 3.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_81     HC    CT     C     O     9 0.000000e+00 3.347200e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_81    HC    CT     C     O     9 0.000000e+00 3.347200e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_82     HC    CT     C     O     9 1.800000e+02 3.347200e-01 3.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_82    HC    CT     C     O     9 1.800000e+02 3.347200e-01 3.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_83     HC    CT    CT    HC     9 0.000000e+00 6.276000e-01 3.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_83    HC    CT    CT    HC     9 0.000000e+00 6.276000e-01 3.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_84     HC    CT    CT    CT     9 0.000000e+00 6.694400e-01 3.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_84    HC    CT    CT    CT     9 0.000000e+00 6.694400e-01 3.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_85     HC    CT    CM    CM     9 1.800000e+02 1.589920e+00 3.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_85    HC    CT    CM    CM     9 1.800000e+02 1.589920e+00 3.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_86     HC    CT    CM    CM     9 0.000000e+00 4.811600e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_86    HC    CT    CM    CM     9 0.000000e+00 4.811600e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_87     HO    OH    CT    CT     9 0.000000e+00 6.694400e-01 3.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_87    HO    OH    CT    CT     9 0.000000e+00 6.694400e-01 3.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_88     HO    OH    CT    CT     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_88    HO    OH    CT    CT     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_89     HO    OH     C     O     9 1.800000e+02 9.623200e+00 2.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_89    HO    OH     C     O     9 1.800000e+02 9.623200e+00 2.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_90     HO    OH     C     O     9 0.000000e+00 7.949600e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_90    HO    OH     C     O     9 0.000000e+00 7.949600e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_91     CM    CM     C     O     9 1.800000e+02 9.100200e+00 2.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_91    CM    CM     C     O     9 1.800000e+02 9.100200e+00 2.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_92     CM    CM     C     O     9 0.000000e+00 1.255200e+00 3.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_92    CM    CM     C     O     9 0.000000e+00 1.255200e+00 3.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_93     CT    CM    CM    CT     9 1.800000e+02 2.782360e+01 2.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_93    CT    CM    CM    CT     9 1.800000e+02 2.782360e+01 2.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_94     CT    CM    CM    CT     9 1.800000e+02 7.949600e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_94    CT    CM    CM    CT     9 1.800000e+02 7.949600e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_95     CT    CT    CT    CT     9 0.000000e+00 7.531200e-01 3.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_95    CT    CT    CT    CT     9 0.000000e+00 7.531200e-01 3.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_96     CT    CT    CT    CT     9 1.800000e+02 1.046000e+00 2.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_96    CT    CT    CT    CT     9 1.800000e+02 1.046000e+00 2.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_97     CT    CT    CT    CT     9 1.800000e+02 8.368000e-01 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_97    CT    CT    CT    CT     9 1.800000e+02 8.368000e-01 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_98     CT    CT    OS     C     9 0.000000e+00 1.602470e+00 3.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_98    CT    CT    OS     C     9 0.000000e+00 1.602470e+00 3.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_99     CT    CT    OS     C     9 1.800000e+02 3.347200e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_99    CT    CT    OS     C     9 1.800000e+02 3.347200e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_100     CT    OS    CT    OS     9 0.000000e+00 4.184000e-01 3.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_100    CT    OS    CT    OS     9 0.000000e+00 4.184000e-01 3.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_101     CT    OS    CT    OS     9 1.800000e+02 3.556400e+00 2.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_101    CT    OS    CT    OS     9 1.800000e+02 3.556400e+00 2.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_102     CT    OS    CT    OS     9 1.800000e+02 5.648400e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_102    CT    OS    CT    OS     9 1.800000e+02 5.648400e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_103      O     C    OS    CT     9 1.800000e+02 1.129680e+01 2.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_103     O     C    OS    CT     9 1.800000e+02 1.129680e+01 2.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_104      O     C    OS    CT     9 1.800000e+02 5.857600e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_104     O     C    OS    CT     9 1.800000e+02 5.857600e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_105      F    CT    CT     F     9 1.800000e+02 5.020800e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_105     F    CT    CT     F     9 1.800000e+02 5.020800e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_106     Cl    CT    CT    Cl     9 1.800000e+02 1.882800e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_106    Cl    CT    CT    Cl     9 1.800000e+02 1.882800e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_107     Br    CT    CT    Br     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_107    Br    CT    CT    Br     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_108     H1    CT    CT    OS     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_108    H1    CT    CT    OS     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_109     H1    CT    CT    OH     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_109    H1    CT    CT    OH     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_110     H1    CT    CT     F     9 0.000000e+00 7.949600e-01 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_110    H1    CT    CT     F     9 0.000000e+00 7.949600e-01 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_111     H1    CT    CT    Cl     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_111    H1    CT    CT    Cl     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_112     H1    CT    CT    Br     9 0.000000e+00 2.301200e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_112    H1    CT    CT    Br     9 0.000000e+00 2.301200e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_113     HC    CT    CT    OS     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_113    HC    CT    CT    OS     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_114     HC    CT    CT    OH     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_114    HC    CT    CT    OH     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_115     HC    CT    CT     F     9 0.000000e+00 7.949600e-01 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_115    HC    CT    CT     F     9 0.000000e+00 7.949600e-01 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_116     HC    CT    CT    Cl     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_116    HC    CT    CT    Cl     9 0.000000e+00 1.046000e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_117     HC    CT    CT    Br     9 0.000000e+00 2.301200e+00 1.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_117    HC    CT    CT    Br     9 0.000000e+00 2.301200e+00 1.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_118     CT    OS    CT    N*     9 0.000000e+00 1.602470e+00 3.000000e+00 ;  parm98.dat, TC,PC,PAK
+dihedraltypes_entry_118    CT    OS    CT    N*     9 0.000000e+00 1.602470e+00 3.000000e+00 ;  parm98.dat, TC,PC,PAK
 
-dihedraltypes_entry_119     CT    OS    CT    N*     9 0.000000e+00 2.719600e+00 2.000000e+00 ;  Piotr et al.
+dihedraltypes_entry_119    CT    OS    CT    N*     9 0.000000e+00 2.719600e+00 2.000000e+00 ;  Piotr et al.
 
-dihedraltypes_entry_120      X     C     C     X     9 1.800000e+02 1.516700e+01 2.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_120     X     C     C     X     9 1.800000e+02 1.516700e+01 2.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_121      X     C     O     X     9 1.800000e+02 1.171520e+01 2.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_121     X     C     O     X     9 1.800000e+02 1.171520e+01 2.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_122      X     C    OS     X     9 1.800000e+02 1.129680e+01 2.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_122     X     C    OS     X     9 1.800000e+02 1.129680e+01 2.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_123      X    CA    OH     X     9 1.800000e+02 3.765600e+00 2.000000e+00 ;  Junmei et al, 99
+dihedraltypes_entry_123     X    CA    OH     X     9 1.800000e+02 3.765600e+00 2.000000e+00 ;  Junmei et al, 99
 
-dihedraltypes_entry_124      X    CM    OS     X     9 1.800000e+02 4.393200e+00 2.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_124     X    CM    OS     X     9 1.800000e+02 4.393200e+00 2.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_125      X     C    CA     X     9 1.800000e+02 1.516700e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
+dihedraltypes_entry_125     X     C    CA     X     9 1.800000e+02 1.516700e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
 
-dihedraltypes_entry_126      X     C    CB     X     9 1.800000e+02 1.255200e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
+dihedraltypes_entry_126     X     C    CB     X     9 1.800000e+02 1.255200e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
 
-dihedraltypes_entry_127      X     C    CM     X     9 1.800000e+02 9.100200e+00 2.000000e+00 ;  intrpol.bsd.on C6H6
+dihedraltypes_entry_127     X     C    CM     X     9 1.800000e+02 9.100200e+00 2.000000e+00 ;  intrpol.bsd.on C6H6
 
-dihedraltypes_entry_128      X     C    N*     X     9 1.800000e+02 6.066800e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_128     X     C    N*     X     9 1.800000e+02 6.066800e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_129      X     C    NA     X     9 1.800000e+02 5.648400e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_129     X     C    NA     X     9 1.800000e+02 5.648400e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_130      X     C    NC     X     9 1.800000e+02 1.673600e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_130     X     C    NC     X     9 1.800000e+02 1.673600e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_131      X     C    OH     X     9 1.800000e+02 9.623200e+00 2.000000e+00 ;  Junmei et al, 1999
+dihedraltypes_entry_131     X     C    OH     X     9 1.800000e+02 9.623200e+00 2.000000e+00 ;  Junmei et al, 1999
 
-dihedraltypes_entry_132      X     C    CT     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_132     X     C    CT     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_133      X    CA    CA     X     9 1.800000e+02 1.516700e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
+dihedraltypes_entry_133     X    CA    CA     X     9 1.800000e+02 1.516700e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
 
-dihedraltypes_entry_134      X    CA    CB     X     9 1.800000e+02 1.464400e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
+dihedraltypes_entry_134     X    CA    CB     X     9 1.800000e+02 1.464400e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
 
-dihedraltypes_entry_135      X    CA    CM     X     9 1.800000e+02 1.066920e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
+dihedraltypes_entry_135     X    CA    CM     X     9 1.800000e+02 1.066920e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
 
-dihedraltypes_entry_136      X    CA    CT     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_136     X    CA    CT     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_137      X    CA    N2     X     9 1.800000e+02 1.004160e+01 2.000000e+00 ;  reinterpolated 93'
+dihedraltypes_entry_137     X    CA    N2     X     9 1.800000e+02 1.004160e+01 2.000000e+00 ;  reinterpolated 93'
 
-dihedraltypes_entry_138      X    CA    NA     X     9 1.800000e+02 6.276000e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_138     X    CA    NA     X     9 1.800000e+02 6.276000e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_139      X    CA    NC     X     9 1.800000e+02 2.008320e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_139     X    CA    NC     X     9 1.800000e+02 2.008320e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_140      X    CB    CB     X     9 1.800000e+02 2.280280e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
+dihedraltypes_entry_140     X    CB    CB     X     9 1.800000e+02 2.280280e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
 
-dihedraltypes_entry_141      X    CB    N*     X     9 1.800000e+02 6.903600e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_141     X    CB    N*     X     9 1.800000e+02 6.903600e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_142      X    CB    NB     X     9 1.800000e+02 1.066920e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_142     X    CB    NB     X     9 1.800000e+02 1.066920e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_143      X    CB    NC     X     9 1.800000e+02 1.736360e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_143     X    CB    NC     X     9 1.800000e+02 1.736360e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_144      X    CK    N*     X     9 1.800000e+02 7.112800e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_144     X    CK    N*     X     9 1.800000e+02 7.112800e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_145      X    CK    NB     X     9 1.800000e+02 4.184000e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_145     X    CK    NB     X     9 1.800000e+02 4.184000e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_146      X    CM    CM     X     9 1.800000e+02 2.782360e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
+dihedraltypes_entry_146     X    CM    CM     X     9 1.800000e+02 2.782360e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
 
-dihedraltypes_entry_147      X    CM    CT     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_147     X    CM    CT     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_148      X    CM    N*     X     9 1.800000e+02 7.740400e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_148     X    CM    N*     X     9 1.800000e+02 7.740400e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_149      X    CQ    NC     X     9 1.800000e+02 2.845120e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_149     X    CQ    NC     X     9 1.800000e+02 2.845120e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_150      X    CT    CT     X     9 0.000000e+00 6.508400e-01 3.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_150     X    CT    CT     X     9 0.000000e+00 6.508400e-01 3.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_151      X    CT     N     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_151     X    CT     N     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_152      X    CT    N*     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_152     X    CT    N*     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_153      X    CT    N2     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_153     X    CT    N2     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_154      X    CT    OH     X     9 0.000000e+00 6.973300e-01 3.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_154     X    CT    OH     X     9 0.000000e+00 6.973300e-01 3.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_155      X    CT    OS     X     9 0.000000e+00 1.603870e+00 3.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_155     X    CT    OS     X     9 0.000000e+00 1.603870e+00 3.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_156      X    OH     P     X     9 0.000000e+00 1.046000e+00 3.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_156     X    OH     P     X     9 0.000000e+00 1.046000e+00 3.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_157      X    OS     P     X     9 0.000000e+00 1.046000e+00 3.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_157     X    OS     P     X     9 0.000000e+00 1.046000e+00 3.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_158      X     C     N     X     9 1.800000e+02 1.046000e+01 2.000000e+00 ;  AA,NMA
+dihedraltypes_entry_158     X     C     N     X     9 1.800000e+02 1.046000e+01 2.000000e+00 ;  AA,NMA
 
-dihedraltypes_entry_159      X    CT    N3     X     9 0.000000e+00 6.508400e-01 3.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_159     X    CT    N3     X     9 0.000000e+00 6.508400e-01 3.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_160      X    CT     S     X     9 0.000000e+00 1.394670e+00 3.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_160     X    CT     S     X     9 0.000000e+00 1.394670e+00 3.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_161      X    CT    SH     X     9 0.000000e+00 1.046000e+00 3.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_161     X    CT    SH     X     9 0.000000e+00 1.046000e+00 3.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_162      X    C*    CB     X     9 1.800000e+02 7.008200e+00 2.000000e+00 ;  intrpol.bsd.onC6H6aa
+dihedraltypes_entry_162     X    C*    CB     X     9 1.800000e+02 7.008200e+00 2.000000e+00 ;  intrpol.bsd.onC6H6aa
 
-dihedraltypes_entry_163      X    C*    CT     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_163     X    C*    CT     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_164      X    C*    CW     X     9 1.800000e+02 2.730060e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
+dihedraltypes_entry_164     X    C*    CW     X     9 1.800000e+02 2.730060e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
 
-dihedraltypes_entry_165      X    CA    CN     X     9 1.800000e+02 1.516700e+01 2.000000e+00 ;  reinterpolated 93'
+dihedraltypes_entry_165     X    CA    CN     X     9 1.800000e+02 1.516700e+01 2.000000e+00 ;  reinterpolated 93'
 
-dihedraltypes_entry_166      X    CB    CN     X     9 1.800000e+02 1.255200e+01 2.000000e+00 ;  reinterpolated 93'
+dihedraltypes_entry_166     X    CB    CN     X     9 1.800000e+02 1.255200e+01 2.000000e+00 ;  reinterpolated 93'
 
-dihedraltypes_entry_167      X    CC    CT     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_167     X    CC    CT     X     9 0.000000e+00 0.000000e+00 0.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_168      X    CC    CV     X     9 1.800000e+02 2.154760e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
+dihedraltypes_entry_168     X    CC    CV     X     9 1.800000e+02 2.154760e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
 
-dihedraltypes_entry_169      X    CC    CW     X     9 1.800000e+02 2.248900e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
+dihedraltypes_entry_169     X    CC    CW     X     9 1.800000e+02 2.248900e+01 2.000000e+00 ;  intrpol.bsd.on C6H6
 
-dihedraltypes_entry_170      X    CC    NA     X     9 1.800000e+02 5.857600e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_170     X    CC    NA     X     9 1.800000e+02 5.857600e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_171      X    CC    NB     X     9 1.800000e+02 1.004160e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_171     X    CC    NB     X     9 1.800000e+02 1.004160e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_172      X    CN    NA     X     9 1.800000e+02 6.380600e+00 2.000000e+00 ;  reinterpolated 93'
+dihedraltypes_entry_172     X    CN    NA     X     9 1.800000e+02 6.380600e+00 2.000000e+00 ;  reinterpolated 93'
 
-dihedraltypes_entry_173      X    CR    NA     X     9 1.800000e+02 9.727800e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_173     X    CR    NA     X     9 1.800000e+02 9.727800e+00 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_174      X    CR    NB     X     9 1.800000e+02 2.092000e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_174     X    CR    NB     X     9 1.800000e+02 2.092000e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_175      X    CV    NB     X     9 1.800000e+02 1.004160e+01 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_175     X    CV    NB     X     9 1.800000e+02 1.004160e+01 2.000000e+00 ;  JCC,7,(1986),230
 
-dihedraltypes_entry_176      X    CW    NA     X     9 1.800000e+02 6.276000e+00 2.000000e+00 ;  JCC,7,(1986),230
+dihedraltypes_entry_176     X    CW    NA     X     9 1.800000e+02 6.276000e+00 2.000000e+00 ;  JCC,7,(1986),230
 
 comment_30           ; Modified amino acid torsions in Amber99SB-ILDN
 
@@ -1296,47 +1296,47 @@ define_31            #define torsion_ASN_CA_CB_CG_ND2_mult6 0.0        -0.443504
 
 moleculetype_1       [ moleculetype ]
 
-moleculetype_entry_1  Ion     3
+moleculetype_entry_1 Ion     3
 
 atoms_1              [ atoms ]
 
-atoms_entry_1         1     C0    1     CA    CA    1      2.0000  40.080
+atoms_entry_1        1     C0    1     CA    CA    1      2.0000  40.080
 
 moleculetype_2       [ moleculetype ]
 
 comment_34           ; molname	nrexcl
 
-moleculetype_entry_2  SOL     2
+moleculetype_entry_2 SOL     2
 
 atoms_2              [ atoms ]
 
 comment_35           ; id  at type     res nr  res name  at name  cg nr  charge    mass
 
-atoms_entry_2         1     OW    1     SOL   OW    1     -0.8340  16.000
+atoms_entry_2        1     OW    1     SOL   OW    1     -0.8340  16.000
 
-atoms_entry_3         2     HW    1     SOL   HW1   1      0.4170   1.008
+atoms_entry_3        2     HW    1     SOL   HW1   1      0.4170   1.008
 
-atoms_entry_4         3     HW    1     SOL   HW2   1      0.4170   1.008
+atoms_entry_4        3     HW    1     SOL   HW2   1      0.4170   1.008
 
 settles_1            [ settles ]
 
 comment_36           ; OW	funct	doh	dhh
 
-settles_entry_1           1     1 9.572000e-02 1.513900e-01
+settles_entry_1          1     1 9.572000e-02 1.513900e-01
 
 exclusions_1         [ exclusions ]
 
-exclusions_entry_1        1     2     3
+exclusions_entry_1       1     2     3
 
-exclusions_entry_2        2     1     3
+exclusions_entry_2       2     1     3
 
-exclusions_entry_3        3     1     2
+exclusions_entry_3       3     1     2
 
 system_1             [ system ]
 
-system_entry_1        Ion not yet in water
+system_entry_1       Ion not yet in water
 
 molecules_1          [ molecules ]
 
-molecules_entry_1     Ion      1
+molecules_entry_1    Ion                  1
 

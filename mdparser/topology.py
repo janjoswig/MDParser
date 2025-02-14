@@ -23,6 +23,7 @@ from ._base import (
     Node,
     NodeValue,
     GenericNodeValue,
+    RootNodeValue,
     ensure_proxy,
     unproxy_node,
     get_node_path,
@@ -56,7 +57,7 @@ class Topology:
 
     def __init__(self):
         self._nodes = dict()
-        self._hardroot = Node()
+        self._hardroot = Node(value=RootNodeValue())
         self._root = root = weakref.proxy(self._hardroot)
         root.prev = root.next = root
 

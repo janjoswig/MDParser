@@ -6,11 +6,61 @@ from mdparser._base import (
     Node,
     NodeValue,
     GenericNodeValue,
+    RootNodeValue,
     ensure_proxy,
     unproxy_node,
     get_node_path,
 )
 
+
+def find_root(node: Node, max_n: int = 10000, forward: bool = True, strict: bool = True) -> Node:
+    """Look for the root node
+    
+    Note:
+        Depends on the root node having a `RootNodeValue` value.
+    
+    Args:
+        node: node to start from
+    
+    Keyword args:
+        max_n: maximum number of subsequent nodes to check before aborting.
+            Avoids problems with infinite chains.
+        forward: If `True`, search forward.  If `False`, search backward.
+        strict: If `True`, raise an error if the root node is not found. If `False`,
+            returns the last checked node.
+
+    Returns:
+        If successful, returns the root node. Otherwise, returns the last checked node,
+        unless `strict=True`.
+    """
+
+    if forward is True:
+        goto = "next"
+    else:
+        goto = "prev"
+
+    current_node = node
+    iteration = 0
+    while not isinstance(current_node.value, RootNodeValue):
+        current_node = getattr(current_node, goto)
+
+        if current_node is node:
+            if strict:
+                raise RuntimeError("Circular node chain detected without finding root node")
+            return current_node
+
+        if current_node is None:
+            if strict:
+                raise RuntimeError("End of node chain reached without finding root node")
+            return current_node
+    
+        iteration += 1
+        if iteration >= max_n:
+            if strict:
+                raise RuntimeError(f"Maximum number of nodes ({max_n}) reached without finding root node")
+            return current_node
+
+    return current_node
 
 def get_next_node_with_nvtype(
     start: Optional[Node] = None,
@@ -40,12 +90,12 @@ def get_next_node_with_nvtype(
     if start is None:
         if nvtype is None:
             raise ValueError("If `start=None`, a node type must be specified")
-        if topology is None:
+        if top is None:
             raise ValueError("If `start=None`, a topology must be specified")
         start = top._root
 
     if stop is None:
-        if topology is None:
+        if top is None:
             raise ValueError("If `stop=None`, a topology must be specified")
         stop = top._root
 
@@ -53,7 +103,7 @@ def get_next_node_with_nvtype(
         nvtype = type(start.value)
 
     if isinstance(nvtype, str):
-        if topology is None:
+        if top is None:
             raise ValueError("If `nvtype` is of type `str`, a topology must be specified")
         nvtype = top.select_nvtype(nvtype)
 
@@ -109,7 +159,7 @@ def get_last_entry(section_node, top: topology.Topology):
     return current
 
 
-def merge_molecules(name=None, top: topology.Topology):
+def merge_molecules(top: topology.Topology, name=None):
     section_nvtype = top.select_nvtype("section")
     moleculetype_section_nvtype = top.select_nvtype("moleculetype")
     atoms_entry_nvtype = top.select_nvtype("atoms_entry")

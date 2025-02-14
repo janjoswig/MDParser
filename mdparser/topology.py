@@ -391,6 +391,9 @@ class Topology:
         if nvtype is None:
             nvtype = type(start.value)
 
+        if isinstance(nvtype, str):
+            nvtype = self.select_nvtype(nvtype)
+
         if exclude is None:
             exclude = ()
 

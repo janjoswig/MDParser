@@ -1,16 +1,94 @@
 from copy import copy
+from typing import Optional, Tuple, Type, Union
 
 from mdparser import topology
+from mdparser._base import (
+    Node,
+    NodeValue,
+    GenericNodeValue,
+    ensure_proxy,
+    unproxy_node,
+    get_node_path,
+)
 
 
-def get_subsections(top: topology.Topology, section_node):
+def get_next_node_with_nvtype(
+    start: Optional[Node] = None,
+    stop: Optional[Node] = None,
+    nvtype: Optional[Union[str, Type[NodeValue]]] = None,
+    exclude: Optional[Tuple[Type[NodeValue]]] = None,
+    forward: bool = True,
+    top: Optional[topology.Topology] = None,
+):
+    """Search for another node
+
+    Args:
+        start: :obj:`Node` to start from. If `None`, `nvtype`
+            and `top`
+            must be given and search starts at the beginning.
+        stop: :obj:`Node` to stop at.  If `None`, `top`
+            must be given to search until its end.
+        nvtype: Type of node value to search for.
+            If `None`, search for same type as start.
+            If a string, `top` must be given.
+        exclude: Exclude these node types from search.
+        forward: If `True`, search topology forwards.  If `False`,
+            search backwards.
+        top: If not `None`, a topology instance to query in case,
+            `start` or `stop` are `None` or `nvtype` is of type `str`.
+    """
+    if start is None:
+        if nvtype is None:
+            raise ValueError("If `start=None`, a node type must be specified")
+        if topology is None:
+            raise ValueError("If `start=None`, a topology must be specified")
+        start = top._root
+
+    if stop is None:
+        if topology is None:
+            raise ValueError("If `stop=None`, a topology must be specified")
+        stop = top._root
+
+    if nvtype is None:
+        nvtype = type(start.value)
+
+    if isinstance(nvtype, str):
+        if topology is None:
+            raise ValueError("If `nvtype` is of type `str`, a topology must be specified")
+        nvtype = top.select_nvtype(nvtype)
+
+    if exclude is None:
+        exclude = ()
+
+    if forward is True:
+        goto = "next"
+    else:
+        goto = "prev"
+
+    node = getattr(start, goto)
+
+    while unproxy_node(node) is not stop:
+        if not isinstance(node.value, nvtype):
+            node = getattr(node, goto)
+            continue
+
+        if isinstance(node.value, exclude):
+            node = getattr(node, goto)
+            continue
+
+        return unproxy_node(node)
+
+    raise LookupError(f"Node of type {nvtype} not found")
+
+
+def get_subsections(node: Node, top: topology.Topology):
     section_nvtype = top.select_nvtype("section")
     subsection_nvtype = top.select_nvtype("subsection")
 
     subsections = []
-    start = section_node
+    start = node
     while True:
-        next_section = top.get_next_node_with_nvtype(start, nvtype=section_nvtype)
+        next_section = get_next_node_with_nvtype(start, nvtype=section_nvtype, top=top)
 
         if not isinstance(next_section.value, subsection_nvtype):
             break
@@ -21,8 +99,8 @@ def get_subsections(top: topology.Topology, section_node):
     return subsections
 
 
-def get_last_entry(section_node):
-    entry_nvtype = topology.GromacsTopology.select_nvtype("section_entry")
+def get_last_entry(section_node, top: topology.Topology):
+    entry_nvtype = top.select_nvtype("section_entry")
 
     current = section_node
     while isinstance(current.next.value, entry_nvtype):
@@ -31,28 +109,28 @@ def get_last_entry(section_node):
     return current
 
 
-def merge_molecules(top: topology.GromacsTopology, name=None):
-    section_nvtype = topology.GromacsTopology.select_nvtype("section")
-    moleculetype_section_nvtype = topology.GromacsTopology.select_nvtype("moleculetype")
-    atoms_entry_nvtype = topology.GromacsTopology.select_nvtype("atoms_entry")
-    p1term_entry_nvtype = topology.GromacsTopology.select_nvtype("p1_term_entry")
-    p2term_entry_nvtype = topology.GromacsTopology.select_nvtype("p2_term_entry")
-    p3term_entry_nvtype = topology.GromacsTopology.select_nvtype("p3_term_entry")
-    p4term_entry_nvtype = topology.GromacsTopology.select_nvtype("p4_term_entry")
-    virtual_sites1_entry_nvtype = topology.GromacsTopology.select_nvtype(
+def merge_molecules(name=None, top: topology.Topology):
+    section_nvtype = top.select_nvtype("section")
+    moleculetype_section_nvtype = top.select_nvtype("moleculetype")
+    atoms_entry_nvtype = top.select_nvtype("atoms_entry")
+    p1term_entry_nvtype = top.select_nvtype("p1_term_entry")
+    p2term_entry_nvtype = top.select_nvtype("p2_term_entry")
+    p3term_entry_nvtype = top.select_nvtype("p3_term_entry")
+    p4term_entry_nvtype = top.select_nvtype("p4_term_entry")
+    virtual_sites1_entry_nvtype = top.select_nvtype(
         "virtual_sites1_entry"
     )
-    exclusions_entry_nvtype = topology.GromacsTopology.select_nvtype("exclusions_entry")
-    molecules_nvtype = topology.GromacsTopology.select_nvtype("molecules")
-    molecules_entry_nvtype = topology.GromacsTopology.select_nvtype("molecules_entry")
+    exclusions_entry_nvtype = top.select_nvtype("exclusions_entry")
+    molecules_nvtype = top.select_nvtype("molecules")
+    molecules_entry_nvtype = top.select_nvtype("molecules_entry")
 
     moleculetype_section_list = []
 
     moleculetype_section = top._root
     while True:
         try:
-            moleculetype_section = top.get_next_node_with_nvtype(
-                start=moleculetype_section, nvtype=moleculetype_section_nvtype
+            moleculetype_section = get_next_node_with_nvtype(
+                start=moleculetype_section, nvtype=moleculetype_section_nvtype, top=top
             )
         except LookupError:
             break
@@ -62,15 +140,15 @@ def merge_molecules(top: topology.GromacsTopology, name=None):
     if len(moleculetype_section_list) == 0:
         raise LookupError("no moleculetypes found")
 
-    molecules_section = top.get_next_node_with_nvtype(
-        nvtype=molecules_nvtype, forward=False
+    molecules_section = get_next_node_with_nvtype(
+        nvtype=molecules_nvtype, forward=False, top=top
     )
 
     moleculetype_subsection_mapping = {}
     for moleculetype_section in moleculetype_section_list:
         moleculetype_entry = moleculetype_section.next
         key = moleculetype_entry.value.molecule
-        subsection_list = get_subsections(top, moleculetype_section)
+        subsection_list = get_subsections(moleculetype_section, top=top)
         moleculetype_subsection_mapping[key] = subsection_list
 
     if name is None:
@@ -174,11 +252,12 @@ def merge_molecules(top: topology.GromacsTopology, name=None):
         get_last_entry(
             moleculetype_subsection_mapping[
                 moleculetype_section_list[-1].next.value.molecule
-            ][-1]
+            ][-1],
+            top=top
         ),
     )
 
-    top.block_discard(molecules_section.next, get_last_entry(molecules_section))
+    top.block_discard(molecules_section.next, get_last_entry(molecules_section, top=top))
 
     key, value = topology.GromacsTopology.make_node_value(
         "molecules_entry", molecule=name, number=1

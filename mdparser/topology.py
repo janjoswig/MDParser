@@ -360,63 +360,6 @@ class Topology:
             if node.key is not None:
                 del self._nodes[node.key]
 
-    def get_next_node_with_nvtype(
-        self,
-        start: Optional[Node] = None,
-        stop: Optional[Node] = None,
-        nvtype=None,
-        exclude=None,
-        forward=True,
-    ):
-        """Search topology for another node
-
-        Args:
-            start: :obj:`Node` to start from.  If `None`, an `nvtype`
-                must be given and search starts at the beginning.
-            stop: :obj:`Node` to stop at.  If `None`, search until end.
-            nvtype: Type of node value to search for.
-                If `None`, search for same type as start.
-            exclude: Exclude node types from search.
-            forward: If `True`, search topology forwards.  If `False`,
-                search backwards.
-        """
-        if start is None:
-            if nvtype is None:
-                raise ValueError("If start=None, a node type must be specified")
-            start = self._root
-
-        if stop is None:
-            stop = self._root
-
-        if nvtype is None:
-            nvtype = type(start.value)
-
-        if isinstance(nvtype, str):
-            nvtype = self.select_nvtype(nvtype)
-
-        if exclude is None:
-            exclude = ()
-
-        if forward is True:
-            goto = "next"
-        else:
-            goto = "prev"
-
-        node = getattr(start, goto)
-
-        while unproxy_node(node) is not stop:
-            if not isinstance(node.value, nvtype):
-                node = getattr(node, goto)
-                continue
-
-            if isinstance(node.value, exclude):
-                node = getattr(node, goto)
-                continue
-
-            return unproxy_node(node)
-
-        raise LookupError(f"Node of type {nvtype} not found")
-
 
 class GromacsTopology(Topology):
     __node_value_types = {

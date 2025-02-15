@@ -1,7 +1,8 @@
 import weakref
 from abc import ABC, abstractmethod
 from collections import OrderedDict
-from typing import Any, Callable, Optional
+from copy import copy
+from typing import Any, Callable, List, Optional
 
 
 def trim_locals(d):
@@ -97,6 +98,9 @@ class Node:
         self.value = value
         self.prev = prev
         self.next = next
+        
+    def __copy__(self):
+        return Node(key=self.key, value=self.value, prev=self.prev, next=self.next)
 
     @property
     def key(self) -> Optional[str]:
@@ -213,3 +217,15 @@ def get_node_path(start: Node, end: Node):
         return list(seen_nodes.keys())
 
     raise ValueError("Could not reach end node")
+
+
+def copy_nodes(nodes: List[Node]) -> List[Node]:
+    last_node = copy(nodes[0])
+    nodes_copy = [last_node]
+    for node in nodes[1:]:
+        node = copy(node)
+        nodes_copy.append(node)
+        last_node.connect(node)
+        last_node = node
+
+    return nodes_copy

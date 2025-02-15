@@ -26,6 +26,7 @@ from ._base import (
     RootNodeValue,
     ensure_proxy,
     unproxy_node,
+    copy_nodes,
     get_node_path,
 )
 from . import _gmx_nodes
@@ -302,13 +303,17 @@ class Topology:
             node.prev.connect(new_node)
             new_node.connect(node)
 
-    def block_insert(self, index: int, block_start: Node, block_end: Node) -> None:
+    def block_insert(self, index: int, block_start: Node, block_end: Node, copy: bool = True) -> None:
         """Insert block of linked nodes before index"""
 
         if not isinstance(index, int):
             raise ValueError("index must be an integer")
 
         block_nodes = get_node_path(block_start, block_end)
+        if copy:
+            block_nodes = copy_nodes(block_nodes)
+            block_start = block_nodes[0]
+            block_end = block_nodes[-1]
         self._batch_add_nodes(block_nodes)
 
         prev = root = self._root
@@ -327,11 +332,15 @@ class Topology:
         block_end.connect(next_node)
 
     def relative_block_insert(
-        self, node: Node, block_start: Node, block_end: Node, forward: bool = True
+        self, node: Node, block_start: Node, block_end: Node, forward: bool = True, copy: bool = True
     ):
         """Insert block of linked nodes before/after node"""
 
         block_nodes = get_node_path(block_start, block_end)
+        if copy:
+            block_nodes = copy_nodes(block_nodes)
+            block_start = block_nodes[0]
+            block_end = block_nodes[-1]
         self._batch_add_nodes(block_nodes)
 
         if forward is True:

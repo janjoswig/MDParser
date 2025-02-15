@@ -138,8 +138,11 @@ def get_subsections(node: Node, top: topology.Topology):
     subsections = []
     start = node
     while True:
-        next_section = get_next_node_with_nvtype(start, nvtype=section_nvtype, top=top)
-
+        try:
+            next_section = get_next_node_with_nvtype(start, nvtype=section_nvtype, top=top)
+        except LookupError:
+            break
+    
         if not isinstance(next_section.value, subsection_nvtype):
             break
 

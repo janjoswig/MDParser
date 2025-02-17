@@ -440,7 +440,10 @@ class GromacsTopologyParser:
     """Read and write GROMACS topology files
 
     Attributes:
-        ignore_comments: If `True`, skips lines starting with ";"
+        ignore_comments: If `True`, skips lines starting with ";" and truncates
+            lines at ";". If `False`, adds comment nodes for full-line comments
+            and adds comment values for inline comments.
+            Inline comments on lines other than section entries are always ignored.
         preprocess: If `True`, runs once through the file before
             actual parsing to resolve includes. Options `include_local`, and
             `include_shared` have no effect if this is `False`.
@@ -656,6 +659,7 @@ class GromacsTopologyParser:
                 continue
 
             if line.startswith("#define"):
+                line, _ = split_comment(line)  # Comments not supported here
                 line = line.lstrip("#define").lstrip().split(maxsplit=1)
                 if len(line) == 1:
                     node_key, node_value = top.make_node_value("define", line[0], True)
@@ -670,6 +674,7 @@ class GromacsTopologyParser:
                 continue
 
             if line.startswith("#undef"):
+                line, _ = split_comment(line)  # Comments not supported here
                 line = line.lstrip("#undef").lstrip()
                 node_key, node_value = top.make_node_value("define", line, False)
                 top.add(node_key, node_value)
@@ -677,6 +682,7 @@ class GromacsTopologyParser:
                 continue
 
             if line.startswith("#ifdef"):
+                line, _ = split_comment(line)  # Comments not supported here
                 line = line.lstrip("#ifdef").lstrip()
                 active_conditions[line] = True
                 if not self.resolve_conditions:
@@ -685,6 +691,7 @@ class GromacsTopologyParser:
                 continue
 
             if line.startswith("#ifndef"):
+                line, _ = split_comment(line)  # Comments not supported here
                 line = line.lstrip("#ifndef").lstrip()
                 active_conditions[line] = False
                 if not self.resolve_conditions:
@@ -693,6 +700,7 @@ class GromacsTopologyParser:
                 continue
 
             if line.startswith("#else"):
+                line, _ = split_comment(line)  # Comments not supported here
                 last_condition, last_value = next(reversed(active_conditions.items()))
                 active_conditions[last_condition] = not last_value
 
@@ -709,6 +717,7 @@ class GromacsTopologyParser:
                     continue
 
             if line.startswith("#endif"):
+                line, _ = split_comment(line)  # Comments not supported here
                 last_condition, _ = active_conditions.popitem(last=True)
                 if not self.resolve_conditions:
                     node_key, node_value = top.make_node_value(
@@ -745,12 +754,14 @@ class GromacsTopologyParser:
                 continue
 
             if line.startswith("#include"):
+                line, _ = split_comment(line)  # Comments not supported here
                 include = line.strip("#include").lstrip()
                 node_key, node_value = top.make_node_value("include", include)
                 top.add(node_key, node_value)
                 continue
 
             if line.startswith("["):
+                line, _ = split_comment(line)  # Comments not supported here
                 _new_section = line.strip(" []").casefold()
                 nvtype = top.node_value_types.get(_new_section, None)
                 if nvtype is None:

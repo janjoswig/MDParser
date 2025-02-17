@@ -1,5 +1,5 @@
 from copy import copy
-from typing import Optional, Tuple, Type, Union
+from typing import List, Optional, Tuple, Type, Union
 
 from mdparser import topology
 from mdparser._base import (
@@ -13,15 +13,17 @@ from mdparser._base import (
 )
 
 
-def find_root(node: Node, max_n: int = 10000, forward: bool = True, strict: bool = True) -> Node:
+def find_root(
+    node: Node, max_n: int = 10000, forward: bool = True, strict: bool = True
+) -> Node:
     """Look for the root node
-    
+
     Note:
         Depends on the root node having a `RootNodeValue` value.
-    
+
     Args:
         node: node to start from
-    
+
     Keyword args:
         max_n: maximum number of subsequent nodes to check before aborting.
             Avoids problems with infinite chains.
@@ -46,21 +48,28 @@ def find_root(node: Node, max_n: int = 10000, forward: bool = True, strict: bool
 
         if current_node is node:
             if strict:
-                raise RuntimeError("Circular node chain detected without finding root node")
+                raise RuntimeError(
+                    "Circular node chain detected without finding root node"
+                )
             return current_node
 
         if current_node is None:
             if strict:
-                raise RuntimeError("End of node chain reached without finding root node")
+                raise RuntimeError(
+                    "End of node chain reached without finding root node"
+                )
             return current_node
-    
+
         iteration += 1
         if iteration >= max_n:
             if strict:
-                raise RuntimeError(f"Maximum number of nodes ({max_n}) reached without finding root node")
+                raise RuntimeError(
+                    f"Maximum number of nodes ({max_n}) reached without finding root node"
+                )
             return current_node
 
     return current_node
+
 
 def get_next_node_with_nvtype(
     start: Optional[Node] = None,
@@ -104,7 +113,9 @@ def get_next_node_with_nvtype(
 
     if isinstance(nvtype, str):
         if top is None:
-            raise ValueError("If `nvtype` is of type `str`, a topology must be specified")
+            raise ValueError(
+                "If `nvtype` is of type `str`, a topology must be specified"
+            )
         nvtype = top.select_nvtype(nvtype)
 
     if exclude is None:
@@ -139,10 +150,12 @@ def get_subsections(node: Node, top: topology.Topology):
     start = node
     while True:
         try:
-            next_section = get_next_node_with_nvtype(start, nvtype=section_nvtype, top=top)
+            next_section = get_next_node_with_nvtype(
+                start, nvtype=section_nvtype, top=top
+            )
         except LookupError:
             break
-    
+
         if not isinstance(next_section.value, subsection_nvtype):
             break
 
@@ -152,7 +165,19 @@ def get_subsections(node: Node, top: topology.Topology):
     return subsections
 
 
-def get_last_entry(section_node, top: topology.Topology):
+def get_entries(section_node: Node, top: topology.Topology) -> List[Node]:
+    entry_nvtype = top.select_nvtype("section_entry")
+
+    entries = []
+    current = section_node
+    while isinstance(current.next.value, entry_nvtype):
+        current = current.next
+        entries.append(current)
+
+    return entries
+
+
+def get_last_entry(section_node: Node, top: topology.Topology):
     entry_nvtype = top.select_nvtype("section_entry")
 
     current = section_node
@@ -170,9 +195,7 @@ def merge_molecules(top: topology.Topology, name=None):
     p2term_entry_nvtype = top.select_nvtype("p2_term_entry")
     p3term_entry_nvtype = top.select_nvtype("p3_term_entry")
     p4term_entry_nvtype = top.select_nvtype("p4_term_entry")
-    virtual_sites1_entry_nvtype = top.select_nvtype(
-        "virtual_sites1_entry"
-    )
+    virtual_sites1_entry_nvtype = top.select_nvtype("virtual_sites1_entry")
     exclusions_entry_nvtype = top.select_nvtype("exclusions_entry")
     molecules_nvtype = top.select_nvtype("molecules")
     molecules_entry_nvtype = top.select_nvtype("molecules_entry")
@@ -306,11 +329,13 @@ def merge_molecules(top: topology.Topology, name=None):
             moleculetype_subsection_mapping[
                 moleculetype_section_list[-1].next.value.molecule
             ][-1],
-            top=top
+            top=top,
         ),
     )
 
-    top.block_discard(molecules_section.next, get_last_entry(molecules_section, top=top))
+    top.block_discard(
+        molecules_section.next, get_last_entry(molecules_section, top=top)
+    )
 
     key, value = topology.GromacsTopology.make_node_value(
         "molecules_entry", molecule=name, number=1

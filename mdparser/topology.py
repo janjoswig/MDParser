@@ -303,7 +303,9 @@ class Topology:
             node.prev.connect(new_node)
             new_node.connect(node)
 
-    def block_insert(self, index: int, block_start: Node, block_end: Node, copy: bool = True) -> None:
+    def block_insert(
+        self, index: int, block_start: Node, block_end: Node, copy: bool = True
+    ) -> None:
         """Insert block of linked nodes before index"""
 
         if not isinstance(index, int):
@@ -332,7 +334,12 @@ class Topology:
         block_end.connect(next_node)
 
     def relative_block_insert(
-        self, node: Node, block_start: Node, block_end: Node, forward: bool = True, copy: bool = True
+        self,
+        node: Node,
+        block_start: Node,
+        block_end: Node,
+        forward: bool = True,
+        copy: bool = True,
     ):
         """Insert block of linked nodes before/after node"""
 

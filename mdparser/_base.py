@@ -75,7 +75,7 @@ class RootNodeValue(NodeValue):
     """Sentinel value for root nodes"""
 
     _node_key_name = "root"
-    
+
     def __str__(self) -> str:
         return __repr__()
 
@@ -98,7 +98,7 @@ class Node:
         self.value = value
         self.prev = prev
         self.next = next
-        
+
     def __copy__(self):
         return Node(key=self.key, value=self.value, prev=self.prev, next=self.next)
 

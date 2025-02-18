@@ -71,6 +71,50 @@ def find_root(
     return current_node
 
 
+def _prepare_node_search(
+    start: Optional[Node] = None,
+    stop: Optional[Node] = None,
+    nvtype: Optional[Union[str, Type[NodeValue]]] = None,
+    exclude: Optional[Tuple[Type[NodeValue]]] = None,
+    forward: bool = True,
+    top: Optional[topology.Topology] = None,
+):
+    if start is None:
+        if nvtype is None:
+            raise ValueError("If `start=None`, a node type must be specified")
+        if top is None:
+            raise ValueError("If `start=None`, a topology must be specified")
+        start = top._root
+
+    if stop is None:
+        if top is None:
+            raise ValueError("If `stop=None`, a topology must be specified")
+        stop = top._root
+
+    if nvtype is None:
+        assert start is not None
+        if start.value is None:
+            raise ValueError("Start node has no node value to infer nvtype from")
+        nvtype = type(start.value)
+
+    if isinstance(nvtype, str):
+        if top is None:
+            raise ValueError(
+                "If `nvtype` is of type `str`, a topology must be specified"
+            )
+        nvtype = top.select_nvtype(nvtype)
+
+    if exclude is None:
+        exclude = tuple()
+
+    if forward is True:
+        goto = "next"
+    else:
+        goto = "prev"
+
+    return start, stop, nvtype, exclude, goto
+
+
 def get_nodes_with_nvtype(
     start: Optional[Node] = None,
     stop: Optional[Node] = None,
@@ -96,41 +140,13 @@ def get_nodes_with_nvtype(
         top: If not `None`, a topology instance to query in case,
             `start` or `stop` are `None` or `nvtype` is of type `str`.
     """
-    
-    # TODO: Address code duplication with `get_next_nodes_with_nvtype`
-    if start is None:
-        if nvtype is None:
-            raise ValueError("If `start=None`, a node type must be specified")
-        if top is None:
-            raise ValueError("If `start=None`, a topology must be specified")
-        start = top._root
 
-    if stop is None:
-        if top is None:
-            raise ValueError("If `stop=None`, a topology must be specified")
-        stop = top._root
-
-    if nvtype is None:
-        nvtype = type(start.value)
-
-    if isinstance(nvtype, str):
-        if top is None:
-            raise ValueError(
-                "If `nvtype` is of type `str`, a topology must be specified"
-            )
-        nvtype = top.select_nvtype(nvtype)
-
-    if exclude is None:
-        exclude = ()
-
-    if forward is True:
-        goto = "next"
-    else:
-        goto = "prev"
-
-    node = unproxy_node(getattr(start, goto))
+    start, stop, nvtype, exclude, goto = _prepare_node_search(
+        start, stop, nvtype, exclude, forward, top
+    )
 
     found_nodes = []
+    node = unproxy_node(getattr(start, goto))
     while node is not stop:
         if isinstance(node.value, nvtype) and not isinstance(node.value, exclude):
             found_nodes.append(node)
@@ -164,38 +180,12 @@ def get_next_node_with_nvtype(
         top: If not `None`, a topology instance to query in case,
             `start` or `stop` are `None` or `nvtype` is of type `str`.
     """
-    if start is None:
-        if nvtype is None:
-            raise ValueError("If `start=None`, a node type must be specified")
-        if top is None:
-            raise ValueError("If `start=None`, a topology must be specified")
-        start = top._root
 
-    if stop is None:
-        if top is None:
-            raise ValueError("If `stop=None`, a topology must be specified")
-        stop = top._root
-
-    if nvtype is None:
-        nvtype = type(start.value)
-
-    if isinstance(nvtype, str):
-        if top is None:
-            raise ValueError(
-                "If `nvtype` is of type `str`, a topology must be specified"
-            )
-        nvtype = top.select_nvtype(nvtype)
-
-    if exclude is None:
-        exclude = ()
-
-    if forward is True:
-        goto = "next"
-    else:
-        goto = "prev"
+    start, stop, nvtype, exclude, goto = _prepare_node_search(
+        start, stop, nvtype, exclude, forward, top
+    )
 
     node = unproxy_node(getattr(start, goto))
-
     while node is not stop:
         if isinstance(node.value, nvtype) and not isinstance(node.value, exclude):
             return unproxy_node(node)

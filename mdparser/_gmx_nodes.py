@@ -447,9 +447,9 @@ class P1TermEntry(SectionEntry, PropertyInvoker):
 class P2TermEntry(P1TermEntry):
     _node_key_name = "p2_term_entry"
     _args = [
-        ("i", int, make_formatter(">5")),
-        ("j", int, make_formatter(">5")),
-        ("funct", int, make_formatter(">5")),
+        ("i", int, make_formatter("<5")),
+        ("j", int, make_formatter("<5")),
+        ("funct", int, make_formatter("<5")),
         ("c", None, make_formatter("1.6e")),
     ]
 

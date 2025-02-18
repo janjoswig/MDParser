@@ -71,6 +71,74 @@ def find_root(
     return current_node
 
 
+def get_nodes_with_nvtype(
+    start: Optional[Node] = None,
+    stop: Optional[Node] = None,
+    nvtype: Optional[Union[str, Type[NodeValue]]] = None,
+    exclude: Optional[Tuple[Type[NodeValue]]] = None,
+    forward: bool = True,
+    top: Optional[topology.Topology] = None,
+):
+    """Search for nodes of specific type
+
+    Args:
+        start: :obj:`Node` to start from. If `None`, `nvtype`
+            and `top`
+            must be given and search starts at the beginning.
+        stop: :obj:`Node` to stop at.  If `None`, `top`
+            must be given to search until its end.
+        nvtype: Type of node value to search for.
+            If `None`, search for same type as start.
+            If a string, `top` must be given.
+        exclude: Exclude these node types from search.
+        forward: If `True`, search topology forwards.  If `False`,
+            search backwards.
+        top: If not `None`, a topology instance to query in case,
+            `start` or `stop` are `None` or `nvtype` is of type `str`.
+    """
+    
+    # TODO: Address code duplication with `get_next_nodes_with_nvtype`
+    if start is None:
+        if nvtype is None:
+            raise ValueError("If `start=None`, a node type must be specified")
+        if top is None:
+            raise ValueError("If `start=None`, a topology must be specified")
+        start = top._root
+
+    if stop is None:
+        if top is None:
+            raise ValueError("If `stop=None`, a topology must be specified")
+        stop = top._root
+
+    if nvtype is None:
+        nvtype = type(start.value)
+
+    if isinstance(nvtype, str):
+        if top is None:
+            raise ValueError(
+                "If `nvtype` is of type `str`, a topology must be specified"
+            )
+        nvtype = top.select_nvtype(nvtype)
+
+    if exclude is None:
+        exclude = ()
+
+    if forward is True:
+        goto = "next"
+    else:
+        goto = "prev"
+
+    node = unproxy_node(getattr(start, goto))
+
+    found_nodes = []
+    while node is not stop:
+        if isinstance(node.value, nvtype) and not isinstance(node.value, exclude):
+            found_nodes.append(node)
+        node = unproxy_node(getattr(node, goto))
+
+    return found_nodes
+
+
 def get_next_node_with_nvtype(
     start: Optional[Node] = None,
     stop: Optional[Node] = None,
@@ -126,18 +194,12 @@ def get_next_node_with_nvtype(
     else:
         goto = "prev"
 
-    node = getattr(start, goto)
+    node = unproxy_node(getattr(start, goto))
 
-    while unproxy_node(node) is not stop:
-        if not isinstance(node.value, nvtype):
-            node = getattr(node, goto)
-            continue
-
-        if isinstance(node.value, exclude):
-            node = getattr(node, goto)
-            continue
-
-        return unproxy_node(node)
+    while node is not stop:
+        if isinstance(node.value, nvtype) and not isinstance(node.value, exclude):
+            return unproxy_node(node)
+        node = unproxy_node(getattr(node, goto))
 
     raise LookupError(f"Node of type {nvtype} not found")
 

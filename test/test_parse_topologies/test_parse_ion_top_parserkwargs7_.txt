@@ -182,197 +182,197 @@ bondtypes_1          [ bondtypes ]
 
 comment_21           ; i    j  func       b0          kb
 
-bondtypes_entry_1        C     C     1 1.525000e-01 2.594080e+05 ;  new99
+bondtypes_entry_1    C     C     1     1.525000e-01 2.594080e+05 ;  new99
 
-bondtypes_entry_2        C    OS     1 1.323000e-01 3.765600e+05 ;  new99
+bondtypes_entry_2    C     OS    1     1.323000e-01 3.765600e+05 ;  new99
 
-bondtypes_entry_3        C    H4     1 1.080000e-01 3.071056e+05 ;  new99
+bondtypes_entry_3    C     H4    1     1.080000e-01 3.071056e+05 ;  new99
 
-bondtypes_entry_4        C    H5     1 1.080000e-01 3.071056e+05 ;  new99
+bondtypes_entry_4    C     H5    1     1.080000e-01 3.071056e+05 ;  new99
 
-bondtypes_entry_5       CA    OH     1 1.364000e-01 3.765600e+05 ;  new99
+bondtypes_entry_5    CA    OH    1     1.364000e-01 3.765600e+05 ;  new99
 
-bondtypes_entry_6       CM    OS     1 1.240000e-01 4.016640e+05 ;  new99
+bondtypes_entry_6    CM    OS    1     1.240000e-01 4.016640e+05 ;  new99
 
-bondtypes_entry_7       Cl    CT     1 1.766000e-01 1.941376e+05 ;  new99
+bondtypes_entry_7    Cl    CT    1     1.766000e-01 1.941376e+05 ;  new99
 
-bondtypes_entry_8       Br    CT     1 1.944000e-01 1.330512e+05 ;  new99
+bondtypes_entry_8    Br    CT    1     1.944000e-01 1.330512e+05 ;  new99
 
-bondtypes_entry_9        I    CT     1 2.166000e-01 1.238464e+05 ;  new99
+bondtypes_entry_9    I     CT    1     2.166000e-01 1.238464e+05 ;  new99
 
-bondtypes_entry_10       F    CA     1 1.359000e-01 3.230048e+05 ;  new99
+bondtypes_entry_10   F     CA    1     1.359000e-01 3.230048e+05 ;  new99
 
-bondtypes_entry_11      Cl    CA     1 1.727000e-01 1.615024e+05 ;  new99
+bondtypes_entry_11   Cl    CA    1     1.727000e-01 1.615024e+05 ;  new99
 
-bondtypes_entry_12       I    CA     1 2.075000e-01 1.430928e+05 ;  new99
+bondtypes_entry_12   I     CA    1     2.075000e-01 1.430928e+05 ;  new99
 
-bondtypes_entry_13      Br    CA     1 1.890000e-01 1.439296e+05 ;  new99
+bondtypes_entry_13   Br    CA    1     1.890000e-01 1.439296e+05 ;  new99
 
-bondtypes_entry_14      OW    HW     1 9.572000e-02 4.627504e+05 ;  P water
+bondtypes_entry_14   OW    HW    1     9.572000e-02 4.627504e+05 ;  P water
 
-bondtypes_entry_15      HW    HW     1 1.513600e-01 4.627504e+05 ;  P water
+bondtypes_entry_15   HW    HW    1     1.513600e-01 4.627504e+05 ;  P water
 
-bondtypes_entry_16       C    CA     1 1.409000e-01 3.924592e+05 ;  7,(1986),230; TYR
+bondtypes_entry_16   C     CA    1     1.409000e-01 3.924592e+05 ;  7,(1986),230; TYR
 
-bondtypes_entry_17       C    CB     1 1.419000e-01 3.740496e+05 ;  7,(1986),230; GUA
+bondtypes_entry_17   C     CB    1     1.419000e-01 3.740496e+05 ;  7,(1986),230; GUA
 
-bondtypes_entry_18       C    CM     1 1.444000e-01 3.430880e+05 ;  7,(1986),230; THY,URA
+bondtypes_entry_18   C     CM    1     1.444000e-01 3.430880e+05 ;  7,(1986),230; THY,URA
 
-bondtypes_entry_19       C    CT     1 1.522000e-01 2.652656e+05 ;  7,(1986),230; AA
+bondtypes_entry_19   C     CT    1     1.522000e-01 2.652656e+05 ;  7,(1986),230; AA
 
-bondtypes_entry_20       C    N*     1 1.383000e-01 3.548032e+05 ;  7,(1986),230; CYT,URA
+bondtypes_entry_20   C     N*    1     1.383000e-01 3.548032e+05 ;  7,(1986),230; CYT,URA
 
-bondtypes_entry_21       C    NA     1 1.388000e-01 3.497824e+05 ;  7,(1986),230; GUA.URA
+bondtypes_entry_21   C     NA    1     1.388000e-01 3.497824e+05 ;  7,(1986),230; GUA.URA
 
-bondtypes_entry_22       C    NC     1 1.358000e-01 3.824176e+05 ;  7,(1986),230; CYT
+bondtypes_entry_22   C     NC    1     1.358000e-01 3.824176e+05 ;  7,(1986),230; CYT
 
-bondtypes_entry_23       C     O     1 1.229000e-01 4.769760e+05 ;  7,(1986),230; AA,CYT,GUA,THY,URA
+bondtypes_entry_23   C     O     1     1.229000e-01 4.769760e+05 ;  7,(1986),230; AA,CYT,GUA,THY,URA
 
-bondtypes_entry_24       C    O2     1 1.250000e-01 5.489408e+05 ;  7,(1986),230; GLU,ASP
+bondtypes_entry_24   C     O2    1     1.250000e-01 5.489408e+05 ;  7,(1986),230; GLU,ASP
 
-bondtypes_entry_25       C    OH     1 1.364000e-01 3.765600e+05 ;  7,(1986),230; TYR
+bondtypes_entry_25   C     OH    1     1.364000e-01 3.765600e+05 ;  7,(1986),230; TYR
 
-bondtypes_entry_26      CA    CA     1 1.400000e-01 3.924592e+05 ;  7,(1986),230; BENZENE,PHE,TRP,TYR
+bondtypes_entry_26   CA    CA    1     1.400000e-01 3.924592e+05 ;  7,(1986),230; BENZENE,PHE,TRP,TYR
 
-bondtypes_entry_27      CA    CB     1 1.404000e-01 3.924592e+05 ;  7,(1986),230; ADE,TRP
+bondtypes_entry_27   CA    CB    1     1.404000e-01 3.924592e+05 ;  7,(1986),230; ADE,TRP
 
-bondtypes_entry_28      CA    CM     1 1.433000e-01 3.573136e+05 ;  7,(1986),230; CYT
+bondtypes_entry_28   CA    CM    1     1.433000e-01 3.573136e+05 ;  7,(1986),230; CYT
 
-bondtypes_entry_29      CA    CT     1 1.510000e-01 2.652656e+05 ;  7,(1986),230; PHE,TYR
+bondtypes_entry_29   CA    CT    1     1.510000e-01 2.652656e+05 ;  7,(1986),230; PHE,TYR
 
-bondtypes_entry_30      CA    HA     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; PHE,TRP,TYR
+bondtypes_entry_30   CA    HA    1     1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; PHE,TRP,TYR
 
-bondtypes_entry_31      CA    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; no assigned
+bondtypes_entry_31   CA    H4    1     1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; no assigned
 
-bondtypes_entry_32      CA    N2     1 1.340000e-01 4.025008e+05 ;  7,(1986),230; ARG,CYT,GUA
+bondtypes_entry_32   CA    N2    1     1.340000e-01 4.025008e+05 ;  7,(1986),230; ARG,CYT,GUA
 
-bondtypes_entry_33      CA    NA     1 1.381000e-01 3.573136e+05 ;  7,(1986),230; GUA
+bondtypes_entry_33   CA    NA    1     1.381000e-01 3.573136e+05 ;  7,(1986),230; GUA
 
-bondtypes_entry_34      CA    NC     1 1.339000e-01 4.041744e+05 ;  7,(1986),230; ADE,CYT,GUA
+bondtypes_entry_34   CA    NC    1     1.339000e-01 4.041744e+05 ;  7,(1986),230; ADE,CYT,GUA
 
-bondtypes_entry_35      CB    CB     1 1.370000e-01 4.351360e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_35   CB    CB    1     1.370000e-01 4.351360e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_36      CB    N*     1 1.374000e-01 3.648448e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_36   CB    N*    1     1.374000e-01 3.648448e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_37      CB    NB     1 1.391000e-01 3.464352e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_37   CB    NB    1     1.391000e-01 3.464352e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_38      CB    NC     1 1.354000e-01 3.857648e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_38   CB    NC    1     1.354000e-01 3.857648e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_39      CK    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; ADE,GUA
+bondtypes_entry_39   CK    H5    1     1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; ADE,GUA
 
-bondtypes_entry_40      CK    N*     1 1.371000e-01 3.681920e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_40   CK    N*    1     1.371000e-01 3.681920e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_41      CK    NB     1 1.304000e-01 4.426672e+05 ;  7,(1986),230; ADE,GUA
+bondtypes_entry_41   CK    NB    1     1.304000e-01 4.426672e+05 ;  7,(1986),230; ADE,GUA
 
-bondtypes_entry_42      CM    CM     1 1.350000e-01 4.594032e+05 ;  7,(1986),230; CYT,THY,URA
+bondtypes_entry_42   CM    CM    1     1.350000e-01 4.594032e+05 ;  7,(1986),230; CYT,THY,URA
 
-bondtypes_entry_43      CM    CT     1 1.510000e-01 2.652656e+05 ;  7,(1986),230; THY
+bondtypes_entry_43   CM    CT    1     1.510000e-01 2.652656e+05 ;  7,(1986),230; THY
 
-bondtypes_entry_44      CM    HA     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; CYT,URA
+bondtypes_entry_44   CM    HA    1     1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; CYT,URA
 
-bondtypes_entry_45      CM    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; CYT,URA
+bondtypes_entry_45   CM    H4    1     1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; CYT,URA
 
-bondtypes_entry_46      CM    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; not assigned
+bondtypes_entry_46   CM    H5    1     1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; not assigned
 
-bondtypes_entry_47      CM    N*     1 1.365000e-01 3.748864e+05 ;  7,(1986),230; CYT,THY,URA
+bondtypes_entry_47   CM    N*    1     1.365000e-01 3.748864e+05 ;  7,(1986),230; CYT,THY,URA
 
-bondtypes_entry_48      CQ    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; ADE
+bondtypes_entry_48   CQ    H5    1     1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; ADE
 
-bondtypes_entry_49      CQ    NC     1 1.324000e-01 4.200736e+05 ;  7,(1986),230; ADE
+bondtypes_entry_49   CQ    NC    1     1.324000e-01 4.200736e+05 ;  7,(1986),230; ADE
 
-bondtypes_entry_50      CT    CT     1 1.526000e-01 2.594080e+05 ;  7,(1986),230; AA, SUGARS
+bondtypes_entry_50   CT    CT    1     1.526000e-01 2.594080e+05 ;  7,(1986),230; AA, SUGARS
 
-bondtypes_entry_51      CT    HC     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; AA, SUGARS
+bondtypes_entry_51   CT    HC    1     1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; AA, SUGARS
 
-bondtypes_entry_52      CT    H1     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; AA, RIBOSE
+bondtypes_entry_52   CT    H1    1     1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; AA, RIBOSE
 
-bondtypes_entry_53      CT    H2     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; SUGARS
+bondtypes_entry_53   CT    H2    1     1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; SUGARS
 
-bondtypes_entry_54      CT    H3     1 1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; not assigned
+bondtypes_entry_54   CT    H3    1     1.090000e-01 2.845120e+05 ;  ged from 331 bsd on NMA nmodes; not assigned
 
-bondtypes_entry_55      CT    HP     1 1.090000e-01 2.845120e+05 ;  nged from 331; AA-lysine, methyl ammonium cation
+bondtypes_entry_55   CT    HP    1     1.090000e-01 2.845120e+05 ;  nged from 331; AA-lysine, methyl ammonium cation
 
-bondtypes_entry_56      CT    N*     1 1.475000e-01 2.820016e+05 ;  7,(1986),230; ADE,CYT,GUA,THY,URA
+bondtypes_entry_56   CT    N*    1     1.475000e-01 2.820016e+05 ;  7,(1986),230; ADE,CYT,GUA,THY,URA
 
-bondtypes_entry_57      CT    N2     1 1.463000e-01 2.820016e+05 ;  7,(1986),230; ARG
+bondtypes_entry_57   CT    N2    1     1.463000e-01 2.820016e+05 ;  7,(1986),230; ARG
 
-bondtypes_entry_58      CT    OH     1 1.410000e-01 2.677760e+05 ;  7,(1986),230; SUGARS
+bondtypes_entry_58   CT    OH    1     1.410000e-01 2.677760e+05 ;  7,(1986),230; SUGARS
 
-bondtypes_entry_59      CT    OS     1 1.410000e-01 2.677760e+05 ;  7,(1986),230; NUCLEIC ACIDS
+bondtypes_entry_59   CT    OS    1     1.410000e-01 2.677760e+05 ;  7,(1986),230; NUCLEIC ACIDS
 
-bondtypes_entry_60       H    N2     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; ADE,CYT,GUA,ARG
+bondtypes_entry_60   H     N2    1     1.010000e-01 3.631712e+05 ;  7,(1986),230; ADE,CYT,GUA,ARG
 
-bondtypes_entry_61       H    N*     1 1.010000e-01 3.631712e+05 ;  plain unmethylated bases ADE,CYT,GUA,ARG
+bondtypes_entry_61   H     N*    1     1.010000e-01 3.631712e+05 ;  plain unmethylated bases ADE,CYT,GUA,ARG
 
-bondtypes_entry_62       H    NA     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; GUA,URA,HIS
+bondtypes_entry_62   H     NA    1     1.010000e-01 3.631712e+05 ;  7,(1986),230; GUA,URA,HIS
 
-bondtypes_entry_63      HO    OH     1 9.600000e-02 4.627504e+05 ;  7,(1986),230; SUGARS,SER,TYR
+bondtypes_entry_63   HO    OH    1     9.600000e-02 4.627504e+05 ;  7,(1986),230; SUGARS,SER,TYR
 
-bondtypes_entry_64      HO    OS     1 9.600000e-02 4.627504e+05 ;  7,(1986),230; NUCLEOTIDE ENDS
+bondtypes_entry_64   HO    OS    1     9.600000e-02 4.627504e+05 ;  7,(1986),230; NUCLEOTIDE ENDS
 
-bondtypes_entry_65      O2     P     1 1.480000e-01 4.393200e+05 ;  7,(1986),230; NA PHOSPHATES
+bondtypes_entry_65   O2    P     1     1.480000e-01 4.393200e+05 ;  7,(1986),230; NA PHOSPHATES
 
-bondtypes_entry_66      OH     P     1 1.610000e-01 1.924640e+05 ;  7,(1986),230; NA PHOSPHATES
+bondtypes_entry_66   OH    P     1     1.610000e-01 1.924640e+05 ;  7,(1986),230; NA PHOSPHATES
 
-bondtypes_entry_67      OS     P     1 1.610000e-01 1.924640e+05 ;  7,(1986),230; NA PHOSPHATES
+bondtypes_entry_67   OS    P     1     1.610000e-01 1.924640e+05 ;  7,(1986),230; NA PHOSPHATES
 
-bondtypes_entry_68      C*    HC     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes, not needed AA
+bondtypes_entry_68   C*    HC    1     1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes, not needed AA
 
-bondtypes_entry_69       C     N     1 1.335000e-01 4.100320e+05 ;  7,(1986),230; AA
+bondtypes_entry_69   C     N     1     1.335000e-01 4.100320e+05 ;  7,(1986),230; AA
 
-bondtypes_entry_70      C*    CB     1 1.459000e-01 3.246784e+05 ;  7,(1986),230; TRP
+bondtypes_entry_70   C*    CB    1     1.459000e-01 3.246784e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_71      C*    CT     1 1.495000e-01 2.652656e+05 ;  7,(1986),230; TRP
+bondtypes_entry_71   C*    CT    1     1.495000e-01 2.652656e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_72      C*    CW     1 1.352000e-01 4.568928e+05 ;  7,(1986),230; TRP
+bondtypes_entry_72   C*    CW    1     1.352000e-01 4.568928e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_73      CA    CN     1 1.400000e-01 3.924592e+05 ;  7,(1986),230; TRP
+bondtypes_entry_73   CA    CN    1     1.400000e-01 3.924592e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_74      CB    CN     1 1.419000e-01 3.740496e+05 ;  7,(1986),230; TRP
+bondtypes_entry_74   CB    CN    1     1.419000e-01 3.740496e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_75      CC    CT     1 1.504000e-01 2.652656e+05 ;  7,(1986),230; HIS
+bondtypes_entry_75   CC    CT    1     1.504000e-01 2.652656e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_76      CC    CV     1 1.375000e-01 4.284416e+05 ;  7,(1986),230; HIS(delta)
+bondtypes_entry_76   CC    CV    1     1.375000e-01 4.284416e+05 ;  7,(1986),230; HIS(delta)
 
-bondtypes_entry_77      CC    CW     1 1.371000e-01 4.334624e+05 ;  7,(1986),230; HIS(epsilon)
+bondtypes_entry_77   CC    CW    1     1.371000e-01 4.334624e+05 ;  7,(1986),230; HIS(epsilon)
 
-bondtypes_entry_78      CC    NA     1 1.385000e-01 3.531296e+05 ;  7,(1986),230; HIS
+bondtypes_entry_78   CC    NA    1     1.385000e-01 3.531296e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_79      CC    NB     1 1.394000e-01 3.430880e+05 ;  7,(1986),230; HIS
+bondtypes_entry_79   CC    NB    1     1.394000e-01 3.430880e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_80      CN    NA     1 1.380000e-01 3.581504e+05 ;  7,(1986),230; TRP
+bondtypes_entry_80   CN    NA    1     1.380000e-01 3.581504e+05 ;  7,(1986),230; TRP
 
-bondtypes_entry_81      CR    H5     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes;HIS
+bondtypes_entry_81   CR    H5    1     1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes;HIS
 
-bondtypes_entry_82      CR    NA     1 1.343000e-01 3.991536e+05 ;  7,(1986),230; HIS
+bondtypes_entry_82   CR    NA    1     1.343000e-01 3.991536e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_83      CR    NB     1 1.335000e-01 4.083584e+05 ;  7,(1986),230; HIS
+bondtypes_entry_83   CR    NB    1     1.335000e-01 4.083584e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_84      CT     N     1 1.449000e-01 2.820016e+05 ;  7,(1986),230; AA
+bondtypes_entry_84   CT    N     1     1.449000e-01 2.820016e+05 ;  7,(1986),230; AA
 
-bondtypes_entry_85      CT    N3     1 1.471000e-01 3.071056e+05 ;  7,(1986),230; LYS
+bondtypes_entry_85   CT    N3    1     1.471000e-01 3.071056e+05 ;  7,(1986),230; LYS
 
-bondtypes_entry_86      CT     S     1 1.810000e-01 1.899536e+05 ;  ged from 222.0 based on dimethylS nmodes
+bondtypes_entry_86   CT    S     1     1.810000e-01 1.899536e+05 ;  ged from 222.0 based on dimethylS nmodes
 
-bondtypes_entry_87      CT    SH     1 1.810000e-01 1.983216e+05 ;  ged from 222.0 based on methanethiol nmodes
+bondtypes_entry_87   CT    SH    1     1.810000e-01 1.983216e+05 ;  ged from 222.0 based on methanethiol nmodes
 
-bondtypes_entry_88      CV    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; HIS
+bondtypes_entry_88   CV    H4    1     1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes; HIS
 
-bondtypes_entry_89      CV    NB     1 1.394000e-01 3.430880e+05 ;  7,(1986),230; HIS
+bondtypes_entry_89   CV    NB    1     1.394000e-01 3.430880e+05 ;  7,(1986),230; HIS
 
-bondtypes_entry_90      CW    H4     1 1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes;HIS(epsilon,+)
+bondtypes_entry_90   CW    H4    1     1.080000e-01 3.071056e+05 ;  ged from 340. bsd on C6H6 nmodes;HIS(epsilon,+)
 
-bondtypes_entry_91      CW    NA     1 1.381000e-01 3.573136e+05 ;  7,(1986),230; HIS,TRP
+bondtypes_entry_91   CW    NA    1     1.381000e-01 3.573136e+05 ;  7,(1986),230; HIS,TRP
 
-bondtypes_entry_92       H     N     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; AA
+bondtypes_entry_92   H     N     1     1.010000e-01 3.631712e+05 ;  7,(1986),230; AA
 
-bondtypes_entry_93       H    N3     1 1.010000e-01 3.631712e+05 ;  7,(1986),230; LYS
+bondtypes_entry_93   H     N3    1     1.010000e-01 3.631712e+05 ;  7,(1986),230; LYS
 
-bondtypes_entry_94      HS    SH     1 1.336000e-01 2.292832e+05 ;  7,(1986),230; CYS
+bondtypes_entry_94   HS    SH    1     1.336000e-01 2.292832e+05 ;  7,(1986),230; CYS
 
-bondtypes_entry_95       S     S     1 2.038000e-01 1.389088e+05 ;  7,(1986),230; CYX   (SCHERAGA)
+bondtypes_entry_95   S     S     1     2.038000e-01 1.389088e+05 ;  7,(1986),230; CYX   (SCHERAGA)
 
-bondtypes_entry_96      CT     F     1 1.380000e-01 3.071056e+05 ;  13,(1992),963;CF4; R0=1.332 FOR CHF3
+bondtypes_entry_96   CT    F     1     1.380000e-01 3.071056e+05 ;  13,(1992),963;CF4; R0=1.332 FOR CHF3
 
 constrainttypes_1    [ constrainttypes ]
 
@@ -380,29 +380,29 @@ comment_22           ; this section is implemented manually from bond & angle va
 
 comment_23           ; constraints for rigid CH3 groups
 
-constrainttypes_entry_1  MCH3    CT     2 1.664260e-01
+constrainttypes_entry_1 MCH3  CT    2     1.664260e-01
 
-constrainttypes_entry_2  MCH3     S     2 1.938750e-01
+constrainttypes_entry_2 MCH3  S     2     1.938750e-01
 
-constrainttypes_entry_3  MCH3  MCH3     2 9.216300e-02
+constrainttypes_entry_3 MCH3  MCH3  2     9.216300e-02
 
 comment_24           ; constraints for rigid NH3 groups
 
-constrainttypes_entry_4  MNH3    CT     2 1.582540e-01
+constrainttypes_entry_4 MNH3  CT    2     1.582540e-01
 
-constrainttypes_entry_5  MNH3  MNH3     2 8.022900e-02
+constrainttypes_entry_5 MNH3  MNH3  2     8.022900e-02
 
 comment_25           ; angle-derived constraints for OH and SH groups in proteins
 
 comment_26           ; The constraint A-C is calculated from the angle A-B-C and bonds A-B, B-C.
 
-constrainttypes_entry_6     C    HO     2 1.950740e-01
+constrainttypes_entry_6 C     HO    2     1.950740e-01
 
-constrainttypes_entry_7    CA    HO     2 1.950740e-01
+constrainttypes_entry_7 CA    HO    2     1.950740e-01
 
-constrainttypes_entry_8    CT    HO     2 1.941320e-01
+constrainttypes_entry_8 CT    HO    2     1.941320e-01
 
-constrainttypes_entry_9    CT    HS     2 2.359350e-01
+constrainttypes_entry_9 CT    HS    2     2.359350e-01
 
 angletypes_1         [ angletypes ]
 
@@ -1236,63 +1236,63 @@ comment_32           ; so to avoid introducing extra new atom types we list them
 
 comment_33           ; the residues in question:
 
-define_3             #define torsion_ILE_N_CA_CB_CG2_mult1 0.0        0.8158800        1  ; Proteins 78, 1950 (2010)
+define_3             #define torsion_ILE_N_CA_CB_CG2_mult1 0.0        0.8158800        1  
 
-define_4             #define torsion_ILE_N_CA_CB_CG2_mult2 0.0       -3.5396640        2  ; Proteins 78, 1950 (2010)
+define_4             #define torsion_ILE_N_CA_CB_CG2_mult2 0.0       -3.5396640        2  
 
-define_5             #define torsion_LEU_C_CA_CB_CG_mult1 0.0        2.3890640        1  ; Proteins 78, 1950 (2010)
+define_5             #define torsion_LEU_C_CA_CB_CG_mult1 0.0        2.3890640        1  
 
-define_6             #define torsion_LEU_C_CA_CB_CG_mult2 0.0       -1.4978720        2  ; Proteins 78, 1950 (2010)
+define_6             #define torsion_LEU_C_CA_CB_CG_mult2 0.0       -1.4978720        2  
 
-define_7             #define torsion_LEU_C_CA_CB_CG_mult3 0.0        0.5648400        3  ; Proteins 78, 1950 (2010)
+define_7             #define torsion_LEU_C_CA_CB_CG_mult3 0.0        0.5648400        3  
 
-define_8             #define torsion_ASP_N_CA_CB_CG_mult1 0.0       -11.024840        1  ; Proteins 78, 1950 (2010)
+define_8             #define torsion_ASP_N_CA_CB_CG_mult1 0.0       -11.024840        1  
 
-define_9             #define torsion_ASP_N_CA_CB_CG_mult2 0.0        -4.978960        2  ; Proteins 78, 1950 (2010)
+define_9             #define torsion_ASP_N_CA_CB_CG_mult2 0.0        -4.978960        2  
 
-define_10            #define torsion_ASP_N_CA_CB_CG_mult3 0.0        -0.029288        3  ; Proteins 78, 1950 (2010)
+define_10            #define torsion_ASP_N_CA_CB_CG_mult3 0.0        -0.029288        3  
 
-define_11            #define torsion_ASP_N_CA_CB_CG_mult4 0.0         1.769832        4  ; Proteins 78, 1950 (2010)
+define_11            #define torsion_ASP_N_CA_CB_CG_mult4 0.0         1.769832        4  
 
-define_12            #define torsion_ASP_N_CA_CB_CG_mult5 0.0         0.970688        5  ; Proteins 78, 1950 (2010)
+define_12            #define torsion_ASP_N_CA_CB_CG_mult5 0.0         0.970688        5  
 
-define_13            #define torsion_ASP_N_CA_CB_CG_mult6 0.0        -0.891192        6  ; Proteins 78, 1950 (2010)
+define_13            #define torsion_ASP_N_CA_CB_CG_mult6 0.0        -0.891192        6  
 
-define_14            #define torsion_ASP_CA_CB_CG_OD_mult1 0.0         0.0             1  ; Proteins 78, 1950 (2010)
+define_14            #define torsion_ASP_CA_CB_CG_OD_mult1 0.0         0.0             1  
 
-define_15            #define torsion_ASP_CA_CB_CG_OD_mult2 0.0        -1.853512        2  ; Proteins 78, 1950 (2010)
+define_15            #define torsion_ASP_CA_CB_CG_OD_mult2 0.0        -1.853512        2  
 
-define_16            #define torsion_ASP_CA_CB_CG_OD_mult3 0.0         0.0             3  ; Proteins 78, 1950 (2010)
+define_16            #define torsion_ASP_CA_CB_CG_OD_mult3 0.0         0.0             3  
 
-define_17            #define torsion_ASP_CA_CB_CG_OD_mult4 0.0        -0.577392        4  ; Proteins 78, 1950 (2010)
+define_17            #define torsion_ASP_CA_CB_CG_OD_mult4 0.0        -0.577392        4  
 
-define_18            #define torsion_ASP_CA_CB_CG_OD_mult5 0.0         0.0             5  ; Proteins 78, 1950 (2010)
+define_18            #define torsion_ASP_CA_CB_CG_OD_mult5 0.0         0.0             5  
 
-define_19            #define torsion_ASP_CA_CB_CG_OD_mult6 0.0        -0.054392        6  ; Proteins 78, 1950 (2010)
+define_19            #define torsion_ASP_CA_CB_CG_OD_mult6 0.0        -0.054392        6  
 
-define_20            #define torsion_ASN_C_CA_CB_CG_mult1 0.0         2.389064        1  ; Proteins 78, 1950 (2010)
+define_20            #define torsion_ASN_C_CA_CB_CG_mult1 0.0         2.389064        1  
 
-define_21            #define torsion_ASN_C_CA_CB_CG_mult2 0.0        -2.493664        2  ; Proteins 78, 1950 (2010)
+define_21            #define torsion_ASN_C_CA_CB_CG_mult2 0.0        -2.493664        2  
 
-define_22            #define torsion_ASN_C_CA_CB_CG_mult3 0.0         0.493712        3  ; Proteins 78, 1950 (2010)
+define_22            #define torsion_ASN_C_CA_CB_CG_mult3 0.0         0.493712        3  
 
-define_23            #define torsion_ASN_C_CA_CB_CG_mult4 0.0        -1.744728        4  ; Proteins 78, 1950 (2010)
+define_23            #define torsion_ASN_C_CA_CB_CG_mult4 0.0        -1.744728        4  
 
-define_24            #define torsion_ASN_C_CA_CB_CG_mult5 0.0         0.435136        5  ; Proteins 78, 1950 (2010)
+define_24            #define torsion_ASN_C_CA_CB_CG_mult5 0.0         0.435136        5  
 
-define_25            #define torsion_ASN_C_CA_CB_CG_mult6 0.0        -0.422584        6  ; Proteins 78, 1950 (2010)
+define_25            #define torsion_ASN_C_CA_CB_CG_mult6 0.0        -0.422584        6  
 
-define_26            #define torsion_ASN_CA_CB_CG_ND2_mult1 0.0        -4.376464        1  ; Proteins 78, 1950 (2010)
+define_26            #define torsion_ASN_CA_CB_CG_ND2_mult1 0.0        -4.376464        1  
 
-define_27            #define torsion_ASN_CA_CB_CG_ND2_mult2 0.0        -0.757304        2  ; Proteins 78, 1950 (2010)
+define_27            #define torsion_ASN_CA_CB_CG_ND2_mult2 0.0        -0.757304        2  
 
-define_28            #define torsion_ASN_CA_CB_CG_ND2_mult3 0.0        -0.146440        3  ; Proteins 78, 1950 (2010)
+define_28            #define torsion_ASN_CA_CB_CG_ND2_mult3 0.0        -0.146440        3  
 
-define_29            #define torsion_ASN_CA_CB_CG_ND2_mult4 0.0         0.418400        4  ; Proteins 78, 1950 (2010)
+define_29            #define torsion_ASN_CA_CB_CG_ND2_mult4 0.0         0.418400        4  
 
-define_30            #define torsion_ASN_CA_CB_CG_ND2_mult5 0.0         0.543920        5  ; Proteins 78, 1950 (2010)
+define_30            #define torsion_ASN_CA_CB_CG_ND2_mult5 0.0         0.543920        5  
 
-define_31            #define torsion_ASN_CA_CB_CG_ND2_mult6 0.0        -0.443504        6  ; Proteins 78, 1950 (2010)
+define_31            #define torsion_ASN_CA_CB_CG_ND2_mult6 0.0        -0.443504        6  
 
 moleculetype_1       [ moleculetype ]
 

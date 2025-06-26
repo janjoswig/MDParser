@@ -14,7 +14,7 @@ for category, fname in requirements_map.items():
 
 setup(
     name='mdparser',
-    version="0.0.2",
+    version="0.0.3",
     author="Jan-Oliver Joswig",
     author_email="jan.joswig@fu-berlin.de",
     description="Parsers for Molecular Dynamics related file types",

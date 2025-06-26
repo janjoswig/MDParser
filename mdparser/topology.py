@@ -478,7 +478,9 @@ class GromacsTopologyParser:
         include_local: bool = True,
         include_shared: bool = False,
         local_paths: Optional[Union[StrOrPath, Iterable[StrOrPath]]] = None,
+        use_relative_local_paths: bool = True,
         shared_paths: Optional[Union[StrOrPath, Iterable[StrOrPath]]] = None,
+        use_default_shared_paths: bool = True,
         include_blacklist: Optional[Union[StrOrPath, Iterable[StrOrPath]]] = None,
         definitions: Optional[Mapping[str, Any]] = None,
         resolve_conditions: bool = True,
@@ -489,8 +491,10 @@ class GromacsTopologyParser:
         self.preprocess = preprocess
         self.include_local = include_local
         self.local_paths = self.to_list_of_paths(local_paths)
+        self.use_relative_local_paths = use_relative_local_paths
         self.include_shared = include_shared
         self.shared_paths = self.to_list_of_paths(shared_paths)
+        self.use_default_shared_paths = use_default_shared_paths
         self.include_blacklist = self.to_list_of_paths(include_blacklist, resolve=False)
         self.resolve_conditions = resolve_conditions
         self.verbose = verbose
@@ -521,6 +525,8 @@ class GromacsTopologyParser:
         self,
         file: Union[TextIO, Iterable[str]],
         local_paths: Optional[List[pathlib.Path]] = None,
+        use_relative_local_paths: bool = True,
+        use_default_shared_paths: bool = True,
         shared_paths: Optional[List[pathlib.Path]] = None,
         include_blacklist: Optional[List[pathlib.Path]] = None,
     ) -> Iterator[str]:
@@ -532,16 +538,21 @@ class GromacsTopologyParser:
 
         if local_paths is None:
             _local_paths = []
+        else:
+            _local_paths = self.to_list_of_paths(local_paths)
 
+        if use_relative_local_paths:
             try:
-                file_path = pathlib.Path(file.name).parent.absolute()
+                file_path = pathlib.Path(file.name).resolve().parent
             except AttributeError:
                 file_path = pathlib.Path.cwd()
             _local_paths.append(file_path)
 
         if shared_paths is None:
             shared_paths = []
-
+        else:
+            shared_paths = self.to_list_of_paths(shared_paths)
+        if use_default_shared_paths:
             gmx_shared = get_gmx_dir()[1]
             if gmx_shared is not None:
                 shared_paths.append(gmx_shared)
@@ -625,6 +636,8 @@ class GromacsTopologyParser:
                 local_paths=self.local_paths,
                 shared_paths=self.shared_paths,
                 include_blacklist=self.include_blacklist,
+                use_relative_local_paths=self.use_relative_local_paths,
+                use_default_shared_paths=self.use_default_shared_paths,
             )
 
         active_section = None

@@ -450,15 +450,19 @@ class GromacsTopologyParser:
         include_local: If `True`, tries to resolve "#include" statements
             for local files. Local files are searched for relative to paths
             given in `local_paths`.
-        local_paths: List of paths to search for local files. If `None`,
-            uses the directory of the file being read, or the current working
-            directory if reading string input.
+        local_paths: List of paths to search for local files.
+        use_relative_local_paths: If `True`, uses the directory of files being
+            read as local paths or the current working
+            directory if reading string input. This works on top of user
+            supplied `local_paths`.
         include_shared: If `True`, tries to resolve "#include" statements
             for shared files. Shared files are searched for relative to paths
             given in `shared_paths`.
-        shared_paths: List of paths to search for shared files. If `None`,
+        shared_paths: List of paths to search for shared files.
+        use_default_shared_paths: If `True`,
             tries to determine the GROMACS shared directory if there is
-            a valid installation.
+            a valid installation. This works on top of user supplied
+            `shared_paths`.
         include_blacklist: List of file paths (local or shared) to exclude from
             inclusion.
         definitions: Mapping of variable names to values. To replicate the

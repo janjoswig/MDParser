@@ -31,7 +31,11 @@ class TestParseTopologies:
                 {"include_shared": True, "include_blacklist": ["forcefield.itp"]},
                 marks=pytest.mark.needs_gmx,
             ),
-            ("two_ions.top", {}),
+            ("two_ions.top", {"definitions": {"POSRES": True}}),
+            ("two_ions.top", {"include_local": False, "definitions": {"POSRES": True}}),
+            ("two_ions.top", {"use_relative_local_paths": False, "definitions": {"POSRES": True}}),
+            ("two_ions.top", {"use_relative_local_paths": False, "local_paths": ["test_parse_topologies"], "definitions": {"POSRES": True}}),
+            ("two_ions.top", {"include_shared": True, "use_default_shared_paths": False, "resolve_conditions": False}),
         ],
     )
     def test_parse(self, datadir, file_regression, filename, parserkwargs):

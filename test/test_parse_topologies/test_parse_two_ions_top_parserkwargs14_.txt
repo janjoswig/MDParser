@@ -8,9 +8,13 @@ atoms_1              [ atoms ]
 
 atoms_entry_1        1     C0    1     CA    CA    1      2.0000
 
+condition_1          #ifdef POSRES
+
 position_restraints_1 [ position_restraints ]
 
 position_restraints_entry_1     1     1 1.000000e+03 1.000000e+03 1.000000e+03
+
+condition_2          #endif
 
 moleculetype_2       [ moleculetype ]
 
